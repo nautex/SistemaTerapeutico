@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SistemaTerapeutico.Aplicacion.Servicios.Persona;
 using SistemaTerapeutico.Core.Interfaces;
 using SistemaTerapeutico.Infrastucture.Data;
 using SistemaTerapeutico.Infrastucture.Repositorios;
@@ -24,11 +25,17 @@ namespace SistemaTerapeutico.BackEnd.API
         {
             services.AddControllers();
 
-            services.AddTransient<IPersonaRepository, PersonaRepository>();
-
             services.AddDbContext<SISDETContext>(options =>
-                options.UseMySQL(Configuration.GetConnectionString("SISDET"))
+              options.UseMySQL(Configuration.GetConnectionString("SISDET"))
             );
+
+            services.AddScoped<IRepository, Repository>();
+            AgregarServicios(services);
+        }
+
+        private static void AgregarServicios(IServiceCollection services)
+        {
+            services.AddScoped<IObtenerdorPersonasServicio, ObtenedorPersonasServicio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

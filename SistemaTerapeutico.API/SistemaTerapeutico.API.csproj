@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SistemaTerapeutico.Aplicacion\SistemaTerapeutico.Aplicacion.csproj" />
     <ProjectReference Include="..\SistemaTerapeutico.Core\SistemaTerapeutico.Core.csproj" />
     <ProjectReference Include="..\SistemaTerapeutico.Infrastucture\SistemaTerapeutico.Infrastucture.csproj" />
   </ItemGroup>

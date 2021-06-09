@@ -1,39 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SistemaTerapeutico.Core.Entities;
-using SistemaTerapeutico.Core.Interfaces;
-using System.Threading.Tasks;
+using SistemaTerapeutico.Aplicacion.Servicios.Persona;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class PersonaController : Controller
     {
-        private readonly IPersonaRepository _personaRepository;
 
-        public PersonaController(IPersonaRepository pPersonaRepository)
+        private readonly IObtenerdorPersonasServicio _obtenedorPeronasServicios;
+
+        public PersonaController(
+            IObtenerdorPersonasServicio obtenedorPeronasServicios
+        )
         {
-            _personaRepository = pPersonaRepository;
+            _obtenedorPeronasServicios = obtenedorPeronasServicios;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPersonas()
-        {
-            var lPersonas = await _personaRepository.GetPersonas();
-            return Ok(lPersonas);
-        }
+        public IActionResult GetPersonas() => Ok(_obtenedorPeronasServicios.Obtener());
 
-        [HttpGet("{pIdPersona}")]
-        public async Task<IActionResult> GetPersonaById(int pIdPersona)
-        {
-            var lPersona = await _personaRepository.GetPersonaById(pIdPersona);
-            return Ok(lPersona);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> PostPersona(Persona pPersona)
-        {
-            await _personaRepository.InsertPersona(pPersona);
-            return Ok(pPersona);
-        }
     }
 }
