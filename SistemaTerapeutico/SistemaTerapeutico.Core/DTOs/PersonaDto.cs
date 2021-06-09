@@ -17,5 +17,9 @@ namespace SistemaTerapeutico.Core.DTOs
         public string UsuarioRegistro { get; set; }
         public DateTime? FechaModificacion { get; set; }
         public string UsuarioModificacion { get; set; }
+
+        public PersonaDto()
+        {
+        }
     }
 }
