@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,8 @@ namespace SistemaTerapeutico.BackEnd.API
 
             services.AddScoped<IRepository, Repository>();
             AgregarServicios(services);
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         private static void AgregarServicios(IServiceCollection services)
