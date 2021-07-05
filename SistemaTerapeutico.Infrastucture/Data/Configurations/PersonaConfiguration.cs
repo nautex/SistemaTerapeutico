@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SistemaTerapeutico.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
@@ -11,12 +8,14 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Persona> builder)
         {
-            builder.HasKey(e => e.IdPersona)
+            builder.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
             builder.ToTable("persona");
 
-            builder.Property(e => e.IdPersona).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("IdPersona")
+                .HasColumnType("int(11)");
 
             builder.Property(e => e.IdEstado)
                 .HasColumnType("int(11)")
@@ -28,6 +27,10 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 
             builder.Property(e => e.IdTipoPersona)
                 .HasColumnType("int(11)")
+                .HasDefaultValueSql("'NULL'");
+
+            builder.Property(e => e.EsEmpresa)
+                .HasColumnType("bit")
                 .HasDefaultValueSql("'NULL'");
 
             builder.Property(e => e.Nombres)

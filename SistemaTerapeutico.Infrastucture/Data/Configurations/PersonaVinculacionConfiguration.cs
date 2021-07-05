@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SistemaTerapeutico.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
@@ -11,7 +8,7 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<PersonaVinculacion> builder)
         {
-            builder.HasKey(e => new { e.IdPersona, e.IdPersonaVinculo })
+            builder.HasKey(e => new { e.Id, e.IdPersonaVinculo })
                     .HasName("PRIMARY");
 
             builder.ToTable("personavinculacion");
@@ -19,7 +16,9 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
             builder.HasIndex(e => e.IdPersonaVinculo)
                 .HasName("FK_PersonaVinculacion_Persona1");
 
-            builder.Property(e => e.IdPersona).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("IdPersona")
+                .HasColumnType("int(11)");
 
             builder.Property(e => e.IdPersonaVinculo).HasColumnType("int(11)");
 
@@ -41,7 +40,7 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 
             builder.HasOne(d => d.IdPersonaNavigation)
                 .WithMany(p => p.PersonaVinculacionIdPersonaNavigation)
-                .HasForeignKey(d => d.IdPersona)
+                .HasForeignKey(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_PersonaVinculacion_Persona");
 

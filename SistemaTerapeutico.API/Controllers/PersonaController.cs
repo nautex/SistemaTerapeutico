@@ -1,27 +1,63 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SistemaTerapeutico.Aplicacion.Servicios.Persona;
+using SistemaTerapeutico.API.Response;
+using SistemaTerapeutico.Core.DTOs;
+using SistemaTerapeutico.Core.Entities;
+using SistemaTerapeutico.Core.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class PersonaController : Controller
     {
-
-        private readonly IObtenerdorPersonasServicio _obtenedorPeronasServicios;
+        private readonly IPersonaService _personaService;
         private readonly IMapper _mapper;
 
-        public PersonaController(
-            IObtenerdorPersonasServicio obtenedorPeronasServicios
-        )
+        public PersonaController(IPersonaService personaService, IMapper mapper)
         {
-            _obtenedorPeronasServicios = obtenedorPeronasServicios;
-
-            int[] enteros = new int[] { 1, 2, 3, 4 };
+            _personaService = personaService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public IActionResult GetPersonas() => Ok(_obtenedorPeronasServicios.Obtener());
+        public async Task<IActionResult> GetPersonas()
+        {
+            var Personas = await _personaService.GetPersonas();
+            var PersonasDto = _mapper.Map<IEnumerable<PersonaDto>>(Personas);
+            var Response = new ApiResponse<IEnumerable<PersonaDto>>(PersonasDto);
 
+            return Ok(Response);
+        }
+
+        [HttpGet("{pIdPersona}")]
+        public async Task<IActionResult> GetPersonaById(int idPersona)
+        {
+            var Persona = await _personaService.GetPersonaById(idPersona);
+            var PersonaDto = _mapper.Map<PersonaDto>(Persona);
+            var Response = new ApiResponse<PersonaDto>(PersonaDto);
+
+            return Ok(Response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostPersona([FromBody] PersonaDto personaDto)
+        {
+            Persona Persona = _mapper.Map<Persona>(personaDto);
+            await _personaService.AddPersona(Persona);
+            var Response = new ApiResponse<PersonaDto>(personaDto);
+
+            return Ok(Response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostPersonaResumenBasico([FromBody] PersonaParticipanteFichaRegistroDto personaResumenBasicoDto)
+        {
+            int IdPersona = await _personaService.AddPersonaResumenBasico(personaResumenBasicoDto);
+            var Response = new ApiResponse<int>(IdPersona);
+
+            return Ok(Response);
+        }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SistemaTerapeutico.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
@@ -11,7 +8,7 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<PersonaNatural> builder)
         {
-            builder.HasKey(e => e.IdPersona)
+            builder.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
             builder.ToTable("personanatural");
@@ -19,7 +16,9 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
             builder.HasIndex(e => e.IdUbigeoNacimiento)
                 .HasName("FK_PersonaNatural_Ubigeo");
 
-            builder.Property(e => e.IdPersona).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("IdPersona")
+                .HasColumnType("int(11)");
 
             builder.Property(e => e.IdEstado)
                 .HasColumnType("int(11)")
@@ -67,7 +66,7 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 
             builder.HasOne(d => d.IdPersonaNavigation)
                 .WithOne(p => p.PersonaNatural)
-                .HasForeignKey<PersonaNatural>(d => d.IdPersona)
+                .HasForeignKey<PersonaNatural>(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_PersonaNatural_Persona1");
 

@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SistemaTerapeutico.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
@@ -11,12 +8,14 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Catalogo> builder)
         {
-            builder.HasKey(e => e.IdCatalogo)
+            builder.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
             builder.ToTable("catalogo");
 
-            builder.Property(e => e.IdCatalogo).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("IdCatalogo")
+                .HasColumnType("int(11)");
 
             builder.Property(e => e.Abreviado)
                 .HasMaxLength(40)

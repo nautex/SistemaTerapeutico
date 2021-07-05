@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SistemaTerapeutico.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
@@ -11,12 +8,14 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Ubigeo> builder)
         {
-            builder.HasKey(e => e.IdUbigeo)
+            builder.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
             builder.ToTable("ubigeo");
 
-            builder.Property(e => e.IdUbigeo).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("IdUbigeo")
+                .HasColumnType("int(11)");
 
             builder.Property(e => e.Codigo)
                 .HasMaxLength(200)
