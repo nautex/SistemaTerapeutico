@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Infrastucture.Data.Configurations;
 
@@ -25,6 +23,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<PersonaNatural> PersonaNatural { get; set; }
         public virtual DbSet<PersonaVinculacion> PersonaVinculacion { get; set; }
         public virtual DbSet<Ubigeo> Ubigeo { get; set; }
+        public virtual DbSet<Direccion> Direccion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,7 +35,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
             modelBuilder.ApplyConfiguration(new PersonaNaturalConfiguration());
             modelBuilder.ApplyConfiguration(new PersonaVinculacionConfiguration());
             modelBuilder.ApplyConfiguration(new UbigeoConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DireccionConfiguration());
         }
 
     }

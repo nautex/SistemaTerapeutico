@@ -1,4 +1,5 @@
 ﻿using System;
+using SistemaTerapeutico.Core.Enumerators;
 
 namespace SistemaTerapeutico.Core.Entities
 {
@@ -9,12 +10,12 @@ namespace SistemaTerapeutico.Core.Entities
         public string PrimerApellido { get; set; }
         public string SegundoApelldio { get; set; }
         public DateTime? FechaNacimiento { get; set; }
-        public int? IdUbigeoNacimiento { get; set; }
+        public eUbigeo? IdUbigeoNacimiento { get; set; }
         public int? IdSexo { get; set; }
-        public int? IdEstadoCivil { get; set; }
-        public int? IdNacionalidad { get; set; }
-        public int? IdTipoPersona { get; set; }
-        public int? IdEstado { get; set; }
+        public eEstadoCivil? IdEstadoCivil { get; set; }
+        public ePais? IdNacionalidad { get; set; }
+        public eTipoPersona? IdTipoPersona { get; set; }
+        public eEstadoBasico? IdEstado { get; set; }
 
         public virtual Persona IdPersonaNavigation { get; set; }
         public virtual Ubigeo IdUbigeoNacimientoNavigation { get; set; }

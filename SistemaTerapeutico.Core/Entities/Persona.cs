@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SistemaTerapeutico.Core.Enumerators;
 
 namespace SistemaTerapeutico.Core.Entities
 {
@@ -20,7 +21,7 @@ namespace SistemaTerapeutico.Core.Entities
         public int? IdPaisOrigen { get; set; }
         public int IdTipoPersona { get; set; }
         public bool EsEmpresa { get; set; }
-        public EstadoBasico? IdEstado { get; set; }
+        public eEstadoBasico? IdEstado { get; set; }
         public virtual PersonaNatural PersonaNatural { get; set; }
         public virtual ICollection<PersonaContacto> PersonaContacto { get; set; }
         public virtual ICollection<PersonaDireccion> PersonaDireccion { get; set; }

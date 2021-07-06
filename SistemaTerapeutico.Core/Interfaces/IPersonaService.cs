@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 
-namespace SistemaTerapeutico.Core.Services
+namespace SistemaTerapeutico.Core.Interfaces
 {
     public interface IPersonaService
     {

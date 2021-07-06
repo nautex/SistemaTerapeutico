@@ -13,29 +13,20 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 
             builder.ToTable("personadireccion");
 
-            builder.HasIndex(e => e.IdUbigeo)
-                .HasName("FK_PersonaDireccion_Ubigeo");
 
             builder.Property(e => e.Id)
                 .HasColumnName("IdPersona")
                 .HasColumnType("int(11)");
 
-            builder.Property(e => e.Numero).HasColumnType("int(11)");
+            builder.Property(e => e.Numero)
+                .HasColumnType("int(11)");
 
-            builder.Property(e => e.Detalle)
-                .HasMaxLength(400)
+            builder.Property(e => e.IdTipoDireccion)
+                .HasColumnType("int(11)")
                 .HasDefaultValueSql("'NULL'");
 
             builder.Property(e => e.IdEstado)
                 .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.IdUbigeo)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.Referencia)
-                .HasMaxLength(200)
                 .HasDefaultValueSql("'NULL'");
 
             builder.Property(e => e.UsuarioModificacion)
@@ -52,10 +43,6 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_PersonaDireccion_Persona");
 
-            builder.HasOne(d => d.IdUbigeoNavigation)
-                .WithMany(p => p.PersonaDireccion)
-                .HasForeignKey(d => d.IdUbigeo)
-                .HasConstraintName("FK_PersonaDireccion_Ubigeo");
         }
     }
 }
