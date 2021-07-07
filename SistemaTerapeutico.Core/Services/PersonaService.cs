@@ -53,6 +53,16 @@ namespace SistemaTerapeutico.Core.Services
             persona.UsuarioRegistro = "JSOTELO";
 
             await _unitOfWork.PersonaRepository.Add(persona);
+
+            Direccion direccion = new Direccion();
+            direccion.IdUbigeo = eUbigeo.Tacna;
+            direccion.Detalle = personaFichaDto.DireccionDomicilio;
+            direccion.Referencia = "";
+            direccion.IdEstado = eEstadoBasico.Activo;
+            direccion.UsuarioRegistro = "JSOTELO";
+
+            await _unitOfWork.DireccionRepository.Add(direccion);
+
             _unitOfWork.SaveChanges();
 
             PersonaNatural personaNatural = new PersonaNatural();
@@ -70,15 +80,14 @@ namespace SistemaTerapeutico.Core.Services
             personaNatural.IdEstado = eEstadoBasico.Activo;
             personaNatural.UsuarioRegistro = "JSOTELO";
 
-            Direccion direccion = new Direccion();
-            direccion.IdUbigeo = eUbigeo.Tacna;
-            direccion.Detalle = personaFichaDto.DireccionDomicilio;
-            direccion.Referencia = "";
-            direccion.IdEstado = eEstadoBasico.Activo;
-            direccion.UsuarioRegistro = "JSOTELO";
 
             PersonaDireccion personaDireccion = new PersonaDireccion();
             personaDireccion.Id = persona.Id;
+            personaDireccion.IdDireccion = direccion.Id;
+            personaDireccion.Numero = 1;
+            personaDireccion.IdTipoDireccion = eTipoDireccion.Domicilio;
+            personaDireccion.IdEstado = eEstadoBasico.Activo;
+            personaDireccion.UsuarioRegistro = "JSOTELO";
 
             PersonaDocumento personaDocumento = new PersonaDocumento();
             personaDocumento.Id = persona.Id;
@@ -97,7 +106,7 @@ namespace SistemaTerapeutico.Core.Services
             PersonaContacto personaContactoCorreo = new PersonaContacto();
             personaContactoCorreo.Id = persona.Id;
             personaContactoCorreo.IdTipoContacto = 17;
-            personaContactoCorreo.Valor = personaFichaDto.Correo;
+            personaContactoCorreo.Valor = personaFichaDto.CorreoPadre;
             personaContactoCorreo.FechaRegistro = DateTime.Now;
             personaContactoCorreo.UsuarioRegistro = "JSOTELO";
 

@@ -42,4 +42,11 @@
         Apoyo = 30,
         Jefe = 31
     }
+
+    public enum eTipoDireccion
+    {
+        Domicilio = 39,
+        Negocio = 40,
+        Trabajo = 41
+    }
 }

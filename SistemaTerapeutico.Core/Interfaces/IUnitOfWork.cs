@@ -12,6 +12,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         IPersonaNaturalRepository PersonaNaturalRepository { get; }
         IPersonaDocumentoRepository PersonaDocumentoRepository { get; }
         ICatalogoRepository CatalogoRepository { get; }
+        IDireccionRepository DireccionRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
     }
