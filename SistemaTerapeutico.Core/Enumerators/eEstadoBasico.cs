@@ -49,4 +49,16 @@
         Negocio = 40,
         Trabajo = 41
     }
+    public enum eTipoContacto
+    {
+        CelularClaro = 13,
+        CelularMovistar = 14,
+        CelularBitel = 15,
+        CelularEntel = 16,
+        Correo = 17,
+        TelefonoFijo = 18,
+        CuentaFacebook = 19,
+        CuentaInstagram = 20,
+        CuentaTwitter = 21
+    }
 }

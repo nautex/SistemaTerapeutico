@@ -8,11 +8,12 @@ namespace SistemaTerapeutico.Core.Interfaces
         IPersonaRepository PersonaRepository { get; }
         IPersonaVinculacionRepository PersonaVinculacionRepository { get; }
         IPersonaContactoRepository PersonaContactoRepository { get; }
-        IPersonaDireccionRepository PersonaDireccionDireccion { get; }
+        IPersonaDireccionRepository PersonaDireccionRepository { get; }
         IPersonaNaturalRepository PersonaNaturalRepository { get; }
         IPersonaDocumentoRepository PersonaDocumentoRepository { get; }
         ICatalogoRepository CatalogoRepository { get; }
         IDireccionRepository DireccionRepository { get; }
+        IParticipanteRepository ParticipanteRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
     }

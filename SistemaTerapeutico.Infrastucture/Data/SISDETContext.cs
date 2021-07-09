@@ -24,6 +24,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<PersonaVinculacion> PersonaVinculacion { get; set; }
         public virtual DbSet<Ubigeo> Ubigeo { get; set; }
         public virtual DbSet<Direccion> Direccion { get; set; }
+        public virtual DbSet<Participante> Participante { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +37,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
             modelBuilder.ApplyConfiguration(new PersonaVinculacionConfiguration());
             modelBuilder.ApplyConfiguration(new UbigeoConfiguration());
             modelBuilder.ApplyConfiguration(new DireccionConfiguration());
+            modelBuilder.ApplyConfiguration(new ParticipanteConfiguration());
         }
 
     }

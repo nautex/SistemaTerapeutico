@@ -6,8 +6,13 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public partial class Persona : BaseEntity
     {
-        public Persona()
+        public Persona(string usuarioRegistro) : base(usuarioRegistro)
         {
+            Nombres = "";
+            RazonSocial = "";
+            EsEmpresa = false;
+            IdEstado = eEstadoBasico.Activo;
+
             PersonaContacto = new HashSet<PersonaContacto>();
             PersonaDireccion = new HashSet<PersonaDireccion>();
             PersonaDocumento = new HashSet<PersonaDocumento>();

@@ -2,9 +2,10 @@
 
 namespace SistemaTerapeutico.Core.DTOs
 {
-    public class PersonaParticipanteFichaRegistroDto
+    public class ParticipanteFichaRegistroDto
     {
         public DateTime FechaIngreso { get; set; }
+        public int IdTerapeuta { get; set; }
         public int IdTipoDocumento { get; set; }
         public string NumeroDocumento { get; set; }
         public string PrimerNombre { get; set; }

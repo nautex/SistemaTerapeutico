@@ -21,5 +21,6 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
             return await Persona.FirstOrDefaultAsync();
         }
+
     }
 }

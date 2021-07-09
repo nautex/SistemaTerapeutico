@@ -52,7 +52,7 @@ namespace SistemaTerapeutico.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostPersonaResumenBasico([FromBody] PersonaParticipanteFichaRegistroDto personaResumenBasicoDto)
+        public async Task<IActionResult> PostPersonaResumenBasico([FromBody] ParticipanteFichaRegistroDto personaResumenBasicoDto)
         {
             int IdPersona = await _personaService.AddPersonaResumenBasico(personaResumenBasicoDto);
             var Response = new ApiResponse<int>(IdPersona);

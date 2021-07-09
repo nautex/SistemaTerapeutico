@@ -36,92 +36,112 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.PersonaRepository.Delete(idPersona);
         }
-        public async Task<int> AddPersonaParticipanteFichaRegistro(PersonaParticipanteFichaRegistroDto personaFichaDto)
+
+        public async Task<int> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto)
         {
-            if (string.IsNullOrEmpty(personaFichaDto.PrimerNombre) || string.IsNullOrEmpty(personaFichaDto.PrimerApellido))
+            if (string.IsNullOrEmpty(personaDto.PrimerNombre) || string.IsNullOrEmpty(personaDto.PrimerApellido))
             {
-                throw new BusinessException("Por lo menos se debe ingresar el primer nombre  apellido de la persona.");
+                throw new BusinessException("Por lo menos se debe ingresar el primer nombre y apellido de la persona.");
             }
 
-            Persona persona = new Persona();
-            persona.Nombres = personaFichaDto.PrimerApellido + " " + personaFichaDto.SegundoApellido + " " + personaFichaDto.PrimerNombre + " " + personaFichaDto.SegundoNombre;
-            persona.RazonSocial = "";
-            persona.FechaIngreso = personaFichaDto.FechaIngreso;
-            persona.IdPaisOrigen = personaFichaDto.IdPaisOrigen;
-            persona.EsEmpresa = false;
-            persona.IdEstado = eEstadoBasico.Activo;
-            persona.UsuarioRegistro = "JSOTELO";
+            Persona persona = new Persona("JSOTELO")
+            {
+                Nombres = personaDto.PrimerApellido + " " + personaDto.SegundoApellido + " " + personaDto.PrimerNombre + " " + personaDto.SegundoNombre,
+                FechaIngreso = personaDto.FechaIngreso,
+                IdPaisOrigen = personaDto.IdPaisOrigen
+            };
 
             await _unitOfWork.PersonaRepository.Add(persona);
 
-            Direccion direccion = new Direccion();
-            direccion.IdUbigeo = eUbigeo.Tacna;
-            direccion.Detalle = personaFichaDto.DireccionDomicilio;
-            direccion.Referencia = "";
-            direccion.IdEstado = eEstadoBasico.Activo;
-            direccion.UsuarioRegistro = "JSOTELO";
+            PersonaNatural personaNatural = new PersonaNatural("JSOTELO")
+            {
+                Id = persona.Id,
+                PrimerNombre = personaDto.PrimerNombre,
+                SegundoNombre = personaDto.SegundoNombre,
+                PrimerApellido = personaDto.PrimerApellido,
+                SegundoApelldio = personaDto.SegundoApellido,
+                FechaNacimiento = personaDto.FechaNacimiento,
+                IdSexo = (eSexo)personaDto.IdSexo
+            };
 
-            await _unitOfWork.DireccionRepository.Add(direccion);
+            if (!String.IsNullOrEmpty(personaDto.DetalleDireccion))
+            {
+                await AddDireccionPersona(new PersonaDireccionDto
+                {
+                    IdPersona = persona.Id,
+                    IdTipoDireccion = eTipoDireccion.Domicilio,
+                    IdUbigeo = personaDto.IdUbigeoDireccion,
+                    Detalle = personaDto.DetalleDireccion,
+                    Referencia = ""
+                }, "JSOTELO");
+            }
+
+            if (!string.IsNullOrEmpty(personaDto.NumeroDocumento))
+            {
+                PersonaDocumento personaDocumento = new PersonaDocumento("JSOTELO")
+                {
+                    Id = persona.Id,
+                    IdTipoDocumento = personaDto.IdTipoDocumento,
+                    Numero = personaDto.NumeroDocumento
+                };
+
+                await _unitOfWork.PersonaDocumentoRepository.Add(personaDocumento);
+            }
+
+            if (!string.IsNullOrEmpty(personaDto.Celular))
+            {
+                PersonaContacto personaContactoCelular = new PersonaContacto("JSOTELO")
+                {
+                    Id = persona.Id,
+                    IdTipoContacto = eTipoContacto.CelularMovistar,
+                    Valor = personaDto.Celular
+                };
+
+                await _unitOfWork.PersonaContactoRepository.Add(personaContactoCelular);
+            }
+
+            if (!string.IsNullOrEmpty(personaDto.Correo))
+            {
+                PersonaContacto personaContactoCorreo = new PersonaContacto("JSOTELO")
+                {
+                    Id = persona.Id,
+                    IdTipoContacto = eTipoContacto.Correo,
+                    Valor = personaDto.Correo
+                };
+
+                await _unitOfWork.PersonaContactoRepository.Add(personaContactoCorreo);
+            }
 
             _unitOfWork.SaveChanges();
-
-            PersonaNatural personaNatural = new PersonaNatural();
-            personaNatural.Id = persona.Id;
-            personaNatural.PrimerNombre = personaFichaDto.PrimerNombre;
-            personaNatural.SegundoNombre = personaFichaDto.SegundoNombre;
-            personaNatural.PrimerApellido = personaFichaDto.PrimerApellido;
-            personaNatural.SegundoApelldio = personaFichaDto.SegundoApellido;
-            personaNatural.FechaNacimiento = personaFichaDto.FechaNacimiento;
-            personaNatural.IdUbigeoNacimiento = eUbigeo.Tacna;
-            personaNatural.IdSexo = personaFichaDto.IdSexo;
-            personaNatural.IdEstadoCivil = eEstadoCivil.Soltero;
-            personaNatural.IdNacionalidad = ePais.Peru;
-            personaNatural.IdTipoPersona = eTipoPersona.Participante;
-            personaNatural.IdEstado = eEstadoBasico.Activo;
-            personaNatural.UsuarioRegistro = "JSOTELO";
-
-
-            PersonaDireccion personaDireccion = new PersonaDireccion();
-            personaDireccion.Id = persona.Id;
-            personaDireccion.IdDireccion = direccion.Id;
-            personaDireccion.Numero = 1;
-            personaDireccion.IdTipoDireccion = eTipoDireccion.Domicilio;
-            personaDireccion.IdEstado = eEstadoBasico.Activo;
-            personaDireccion.UsuarioRegistro = "JSOTELO";
-
-            PersonaDocumento personaDocumento = new PersonaDocumento();
-            personaDocumento.Id = persona.Id;
-            personaDocumento.IdTipoDocumento = personaFichaDto.IdTipoDocumento;
-            personaDocumento.Numero = personaFichaDto.NumeroDocumento;
-            personaDocumento.FechaRegistro = DateTime.Now;
-            personaDocumento.UsuarioRegistro = "JSOTELO";
-
-            PersonaContacto personaContactoCelular = new PersonaContacto();
-            personaContactoCelular.Id = persona.Id;
-            personaContactoCelular.IdTipoContacto = 13;
-            personaContactoCelular.Valor = personaFichaDto.NumeroCelular;
-            personaContactoCelular.FechaRegistro = DateTime.Now;
-            personaContactoCelular.UsuarioRegistro = "JSOTELO";
-
-            PersonaContacto personaContactoCorreo = new PersonaContacto();
-            personaContactoCorreo.Id = persona.Id;
-            personaContactoCorreo.IdTipoContacto = 17;
-            personaContactoCorreo.Valor = personaFichaDto.CorreoPadre;
-            personaContactoCorreo.FechaRegistro = DateTime.Now;
-            personaContactoCorreo.UsuarioRegistro = "JSOTELO";
-
-            await _unitOfWork.PersonaDocumentoRepository.Add(personaDocumento);
-            await _unitOfWork.PersonaContactoRepository.Add(personaContactoCelular);
-            await _unitOfWork.PersonaContactoRepository.Add(personaContactoCorreo);
-
-            _unitOfWork.SaveChanges();
-
-            //using (var transaction = _unitOfWork..Database.BeginTransaction())
-            //{
-
-            //}
 
             return persona.Id;
+        }
+
+        public async Task AddDireccionPersona(PersonaDireccionDto personaDireccionDto, string usuarioRegistro)
+        {
+            int idDireccion = personaDireccionDto.IdDireccion;
+
+            if (idDireccion == 0)
+            {
+                Direccion direccion = new Direccion(usuarioRegistro);
+                direccion.IdUbigeo = (eUbigeo)personaDireccionDto.IdUbigeo;
+                direccion.Detalle = personaDireccionDto.Detalle;
+                direccion.Referencia = personaDireccionDto.Referencia;
+
+                await _unitOfWork.DireccionRepository.Add(direccion);
+
+                idDireccion = direccion.Id;
+            }
+
+            PersonaDireccion personaDireccion = new PersonaDireccion(usuarioRegistro);
+            personaDireccion.Id = personaDireccionDto.IdPersona;
+            personaDireccion.IdDireccion = idDireccion;
+            personaDireccion.IdTipoDireccion = (eTipoDireccion)personaDireccionDto.IdTipoDireccion;
+            personaDireccion.Numero = _unitOfWork.PersonaDireccionRepository.GetNewNumeroByIdPersona(personaDireccionDto.IdPersona);
+
+            await _unitOfWork.PersonaDireccionRepository.Add(personaDireccion);
+
+            _unitOfWork.SaveChanges();
         }
     }
 }

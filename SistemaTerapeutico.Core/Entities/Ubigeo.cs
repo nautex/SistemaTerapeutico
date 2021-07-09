@@ -4,7 +4,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public partial class Ubigeo : BaseEntity
     {
-        public Ubigeo()
+        public Ubigeo(string usuarioRegistro = "") : base(usuarioRegistro)
         {
             PersonaDireccion = new HashSet<PersonaDireccion>();
             PersonaNatural = new HashSet<PersonaNatural>();

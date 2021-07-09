@@ -12,6 +12,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task AddPersona(Persona persona);
         void UpdatePersona(Persona persona);
         Task DeletePersona(int idPersona);
-        Task<int> AddPersonaParticipanteFichaRegistro(PersonaParticipanteFichaRegistroDto personaResumenBasicoDto);
+        Task<int> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto);
+        Task AddDireccionPersona(PersonaDireccionDto personaDireccionDto, string usuarioRegistro);
     }
 }
