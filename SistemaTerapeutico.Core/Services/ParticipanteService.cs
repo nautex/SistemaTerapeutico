@@ -6,16 +6,14 @@ namespace SistemaTerapeutico.Core.Services
 {
     public class ParticipanteService : IParticipanteService
     {
-        public async Task AddParticipante(Participante participante)
+        private readonly IUnitOfWork _unitOfWork;
+        public ParticipanteService(IUnitOfWork unitOfWork)
         {
-            Participante participante = new Participante("JSOTELO");
-            participante.Id = participanteDto.Id;
-            participante.IdTerapeuta = participanteDto.IdTerapeuta;
-            participante.LugarCasoAccidente = participanteDto.LugarCasoAccidente;
-            participante.DetalleHermanos = participanteDto.DetalleHermanos;
-            participante.TieneDiagnostico = participanteDto.TieneDiagnostico;
-            participante.UsuarioRegistro = "JSOTELO";
-
+            _unitOfWork = unitOfWork;
+        }
+        public Task AddParticipante(Participante participante)
+        {
+            return _unitOfWork.ParticipanteRepository.Add(participante);
         }
     }
 }

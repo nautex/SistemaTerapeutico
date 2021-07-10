@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
-using SistemaTerapeutico.Core.Services;
+using SistemaTerapeutico.Core.Interfaces;
 
 namespace SistemaTerapeutico.API.Controllers
 {
@@ -52,9 +52,9 @@ namespace SistemaTerapeutico.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostPersonaResumenBasico([FromBody] ParticipanteFichaRegistroDto personaResumenBasicoDto)
+        public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto personaNaturalDatosCompletosDto)
         {
-            int IdPersona = await _personaService.AddPersonaResumenBasico(personaResumenBasicoDto);
+            int IdPersona = await _personaService.AddPersonaNaturalDatosCompletos(personaNaturalDatosCompletosDto);
             var Response = new ApiResponse<int>(IdPersona);
 
             return Ok(Response);

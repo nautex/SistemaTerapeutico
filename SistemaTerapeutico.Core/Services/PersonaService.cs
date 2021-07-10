@@ -37,6 +37,13 @@ namespace SistemaTerapeutico.Core.Services
             return _unitOfWork.PersonaRepository.Delete(idPersona);
         }
 
+        //public Task AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto pather)
+        //{
+        //    Task<int> idChild = AddPersonaNaturalDatosCompletos(child);
+        //    Task<int> idMother = AddPersonaNaturalDatosCompletos(mother);
+        //    Task<int> idPather = AddPersonaNaturalDatosCompletos(child);
+        //}
+
         public async Task<int> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto)
         {
             if (string.IsNullOrEmpty(personaDto.PrimerNombre) || string.IsNullOrEmpty(personaDto.PrimerApellido))
@@ -123,21 +130,25 @@ namespace SistemaTerapeutico.Core.Services
 
             if (idDireccion == 0)
             {
-                Direccion direccion = new Direccion(usuarioRegistro);
-                direccion.IdUbigeo = (eUbigeo)personaDireccionDto.IdUbigeo;
-                direccion.Detalle = personaDireccionDto.Detalle;
-                direccion.Referencia = personaDireccionDto.Referencia;
+                Direccion direccion = new Direccion(usuarioRegistro)
+                {
+                    IdUbigeo = (eUbigeo)personaDireccionDto.IdUbigeo,
+                    Detalle = personaDireccionDto.Detalle,
+                    Referencia = personaDireccionDto.Referencia
+                };
 
                 await _unitOfWork.DireccionRepository.Add(direccion);
 
                 idDireccion = direccion.Id;
             }
 
-            PersonaDireccion personaDireccion = new PersonaDireccion(usuarioRegistro);
-            personaDireccion.Id = personaDireccionDto.IdPersona;
-            personaDireccion.IdDireccion = idDireccion;
-            personaDireccion.IdTipoDireccion = (eTipoDireccion)personaDireccionDto.IdTipoDireccion;
-            personaDireccion.Numero = _unitOfWork.PersonaDireccionRepository.GetNewNumeroByIdPersona(personaDireccionDto.IdPersona);
+            PersonaDireccion personaDireccion = new PersonaDireccion(usuarioRegistro)
+            {
+                Id = personaDireccionDto.IdPersona,
+                IdDireccion = idDireccion,
+                IdTipoDireccion = (eTipoDireccion)personaDireccionDto.IdTipoDireccion,
+                Numero = _unitOfWork.PersonaDireccionRepository.GetNewNumeroByIdPersona(personaDireccionDto.IdPersona)
+            };
 
             await _unitOfWork.PersonaDireccionRepository.Add(personaDireccion);
 
