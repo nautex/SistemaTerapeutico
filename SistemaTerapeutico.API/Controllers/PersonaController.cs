@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SistemaTerapeutico.API.Controllers
 {
@@ -22,6 +22,7 @@ namespace SistemaTerapeutico.API.Controllers
         }
 
         [HttpGet]
+        [Route("get")]
         public async Task<IActionResult> GetPersonas()
         {
             var Personas = await _personaService.GetPersonas();
@@ -41,7 +42,7 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(Response);
         }
 
-        [HttpPost]
+        [HttpPost("get1")]
         public async Task<IActionResult> PostPersona([FromBody] PersonaDto personaDto)
         {
             Persona Persona = _mapper.Map<Persona>(personaDto);
@@ -51,7 +52,7 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(Response);
         }
 
-        [HttpPost]
+        [HttpPost("get2")]
         public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto personaNaturalDatosCompletosDto)
         {
             int IdPersona = await _personaService.AddPersonaNaturalDatosCompletos(personaNaturalDatosCompletosDto);
