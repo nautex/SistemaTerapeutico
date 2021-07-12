@@ -2,8 +2,8 @@
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IPersonaDireccionRepository : IBaseRepository<PersonaDireccion>
+    public interface IPersonaDireccionRepository : IBaseRepository<PersonaDireccion>, IBaseRepositoryTwoIds<PersonaDireccion>
     {
-        int GetNewNumeroByIdPersona(int idPersona);
+
     }
 }

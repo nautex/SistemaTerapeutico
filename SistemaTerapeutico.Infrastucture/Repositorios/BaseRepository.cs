@@ -16,7 +16,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
             _context = context;
             _entities = context.Set<T>();
         }
-        public async Task Add(T entity)
+        public virtual async Task Add(T entity)
         {
             await _entities.AddAsync(entity);
         }

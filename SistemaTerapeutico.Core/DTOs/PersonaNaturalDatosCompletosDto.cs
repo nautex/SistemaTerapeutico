@@ -26,6 +26,6 @@ namespace SistemaTerapeutico.Core.DTOs
         public string Celular { get; set; }
         public string Correo { get; set; }
         public string TelefonoFijo { get; set; }
-
+        public string UsuarioRegistro { get; set; }
     }
 }

@@ -25,10 +25,6 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .HasColumnType("int(11)")
                 .HasDefaultValueSql("'NULL'");
 
-            builder.Property(e => e.IdTipoPersona)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
-
             builder.Property(e => e.EsEmpresa)
                 .HasColumnType("bit")
                 .HasDefaultValueSql("'NULL'");

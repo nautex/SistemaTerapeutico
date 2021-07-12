@@ -44,6 +44,16 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
             }
         }
 
+        public void BeginTransaction()
+        {
+            _context.Database.BeginTransaction();
+        }
+
+        public void CommitTransaction()
+        {
+            _context.Database.CommitTransaction();
+        }
+
         public void SaveChanges()
         {
             _context.SaveChanges();

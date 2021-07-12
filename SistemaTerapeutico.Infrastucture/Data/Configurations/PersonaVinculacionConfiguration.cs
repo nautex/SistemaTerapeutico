@@ -38,17 +38,17 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .HasMaxLength(20)
                 .HasDefaultValueSql("'NULL'");
 
-            builder.HasOne(d => d.IdPersonaNavigation)
-                .WithMany(p => p.PersonaVinculacionIdPersonaNavigation)
-                .HasForeignKey(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_PersonaVinculacion_Persona");
+            //builder.HasOne(d => d.IdPersonaNavigation)
+            //    .WithMany(p => p.PersonaVinculacionIdPersonaNavigation)
+            //    .HasForeignKey(d => d.Id)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_PersonaVinculacion_Persona");
 
-            builder.HasOne(d => d.IdPersonaVinculoNavigation)
-                .WithMany(p => p.PersonaVinculacionIdPersonaVinculoNavigation)
-                .HasForeignKey(d => d.IdPersonaVinculo)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_PersonaVinculacion_Persona1");
+            //builder.HasOne(d => d.IdPersonaVinculoNavigation)
+            //    .WithMany(p => p.PersonaVinculacionIdPersonaVinculoNavigation)
+            //    .HasForeignKey(d => d.IdPersonaVinculo)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_PersonaVinculacion_Persona1");
         }
     }
 }

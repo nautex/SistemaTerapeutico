@@ -37,11 +37,17 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .HasMaxLength(20)
                 .HasDefaultValueSql("'NULL'");
 
-            builder.HasOne(d => d.IdPersonaNavigation)
-                .WithMany(p => p.PersonaDireccion)
-                .HasForeignKey(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_PersonaDireccion_Persona");
+            //builder.HasOne(d => d.IdPersonaNavigation)
+            //    .WithMany(p => p.PersonaDireccion)
+            //    .HasForeignKey(d => d.Id)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_PersonaDireccion_Persona");
+
+            //builder.HasOne(d => d.IdDireccionNavigation)
+            //    .WithMany(p => p.PersonaDireccion)
+            //    .HasForeignKey(d => d.Id)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_PersonaDireccion_Persona");
 
         }
     }

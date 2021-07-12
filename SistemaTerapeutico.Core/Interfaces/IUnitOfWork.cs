@@ -16,5 +16,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         IParticipanteRepository ParticipanteRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
+        void BeginTransaction();
+        void CommitTransaction();
     }
 }

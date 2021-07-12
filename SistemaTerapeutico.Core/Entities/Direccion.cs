@@ -6,13 +6,14 @@ namespace SistemaTerapeutico.Core.Entities
     {
         public Direccion(string usuarioRegistro) : base(usuarioRegistro)
         {
-            IdUbigeo = eUbigeo.Tacna;
+            IdUbigeo = EUbigeo.Tacna;
             Referencia = "";
-            IdEstado = eEstadoBasico.Activo;
+            IdEstado = EEstadoBasico.Activo;
         }
-        public eUbigeo? IdUbigeo { get; set; }
+        public int? IdUbigeo { get; set; }
         public string Detalle { get; set; }
         public string Referencia { get; set; }
-        public eEstadoBasico? IdEstado { get; set; }
+        public int? IdEstado { get; set; }
+        //public virtual ICollection<PersonaDireccion> PersonaDireccion { get; set; }
     }
 }

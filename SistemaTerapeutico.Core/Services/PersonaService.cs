@@ -24,9 +24,21 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.PersonaRepository.GetById(idPersona);
         }
-        public Task AddPersona(Persona persona)
+        public async Task<int> AddPersona(Persona persona)
         {
-            return _unitOfWork.PersonaRepository.Add(persona);
+            if (!persona.EsEmpresa && (string.IsNullOrEmpty(persona.Nombres) || persona.Nombres.Length < 3))
+            {
+                throw new BusinessException("El nombre de la pesona debe tener mas de 3 caracteres.");
+            }
+
+            if (persona.EsEmpresa && (string.IsNullOrEmpty(persona.RazonSocial) || persona.RazonSocial.Length < 3))
+            {
+                throw new BusinessException("La razon social de la empresa debe tener mas de 3 caracteres.");
+            }
+
+            await _unitOfWork.PersonaRepository.Add(persona);
+
+            return persona.Id;
         }
         public void UpdatePersona(Persona persona)
         {
@@ -36,51 +48,47 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.PersonaRepository.Delete(idPersona);
         }
-
-        //public Task AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto pather)
-        //{
-        //    Task<int> idChild = AddPersonaNaturalDatosCompletos(child);
-        //    Task<int> idMother = AddPersonaNaturalDatosCompletos(mother);
-        //    Task<int> idPather = AddPersonaNaturalDatosCompletos(child);
-        //}
+        public Task AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto pather)
+        {
+            Task<int> idChild = AddPersonaNaturalDatosCompletos(child);
+            Task<int> idMother = AddPersonaNaturalDatosCompletos(mother);
+            Task<int> idPather = AddPersonaNaturalDatosCompletos(child);
+        }
 
         public async Task<int> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto)
         {
-            if (string.IsNullOrEmpty(personaDto.PrimerNombre) || string.IsNullOrEmpty(personaDto.PrimerApellido))
-            {
-                throw new BusinessException("Por lo menos se debe ingresar el primer nombre y apellido de la persona.");
-            }
+            _unitOfWork.BeginTransaction();
 
-            Persona persona = new Persona("JSOTELO")
+            int idPersona = await AddPersona(new Persona(personaDto.UsuarioRegistro)
             {
                 Nombres = personaDto.PrimerApellido + " " + personaDto.SegundoApellido + " " + personaDto.PrimerNombre + " " + personaDto.SegundoNombre,
                 FechaIngreso = personaDto.FechaIngreso,
                 IdPaisOrigen = personaDto.IdPaisOrigen
-            };
+            });
 
-            await _unitOfWork.PersonaRepository.Add(persona);
-
-            PersonaNatural personaNatural = new PersonaNatural("JSOTELO")
+            await _unitOfWork.PersonaNaturalRepository.Add(new PersonaNatural(personaDto.UsuarioRegistro)
             {
-                Id = persona.Id,
+                Id = idPersona,
                 PrimerNombre = personaDto.PrimerNombre,
                 SegundoNombre = personaDto.SegundoNombre,
                 PrimerApellido = personaDto.PrimerApellido,
                 SegundoApelldio = personaDto.SegundoApellido,
                 FechaNacimiento = personaDto.FechaNacimiento,
-                IdSexo = (eSexo)personaDto.IdSexo
-            };
+                IdSexo = personaDto.IdSexo
+            });
 
             if (!String.IsNullOrEmpty(personaDto.DetalleDireccion))
             {
                 await AddDireccionPersona(new PersonaDireccionDto
                 {
                     IdPersona = persona.Id,
-                    IdTipoDireccion = eTipoDireccion.Domicilio,
+                    IdTipoDireccion = ETipoDireccion.Domicilio,
                     IdUbigeo = personaDto.IdUbigeoDireccion,
                     Detalle = personaDto.DetalleDireccion,
                     Referencia = ""
                 }, "JSOTELO");
+
+
             }
 
             if (!string.IsNullOrEmpty(personaDto.NumeroDocumento))
@@ -93,6 +101,8 @@ namespace SistemaTerapeutico.Core.Services
                 };
 
                 await _unitOfWork.PersonaDocumentoRepository.Add(personaDocumento);
+
+                _unitOfWork.SaveChanges();
             }
 
             if (!string.IsNullOrEmpty(personaDto.Celular))
@@ -100,11 +110,13 @@ namespace SistemaTerapeutico.Core.Services
                 PersonaContacto personaContactoCelular = new PersonaContacto("JSOTELO")
                 {
                     Id = persona.Id,
-                    IdTipoContacto = eTipoContacto.CelularMovistar,
+                    IdTipoContacto = ETipoContacto.CelularMovistar,
                     Valor = personaDto.Celular
                 };
 
                 await _unitOfWork.PersonaContactoRepository.Add(personaContactoCelular);
+
+                _unitOfWork.SaveChanges();
             }
 
             if (!string.IsNullOrEmpty(personaDto.Correo))
@@ -112,14 +124,14 @@ namespace SistemaTerapeutico.Core.Services
                 PersonaContacto personaContactoCorreo = new PersonaContacto("JSOTELO")
                 {
                     Id = persona.Id,
-                    IdTipoContacto = eTipoContacto.Correo,
+                    IdTipoContacto = ETipoContacto.Correo,
                     Valor = personaDto.Correo
                 };
 
                 await _unitOfWork.PersonaContactoRepository.Add(personaContactoCorreo);
-            }
 
-            _unitOfWork.SaveChanges();
+                _unitOfWork.SaveChanges();
+            }
 
             return persona.Id;
         }
@@ -132,12 +144,14 @@ namespace SistemaTerapeutico.Core.Services
             {
                 Direccion direccion = new Direccion(usuarioRegistro)
                 {
-                    IdUbigeo = (eUbigeo)personaDireccionDto.IdUbigeo,
+                    IdUbigeo = personaDireccionDto.IdUbigeo,
                     Detalle = personaDireccionDto.Detalle,
                     Referencia = personaDireccionDto.Referencia
                 };
 
                 await _unitOfWork.DireccionRepository.Add(direccion);
+
+                _unitOfWork.SaveChanges();
 
                 idDireccion = direccion.Id;
             }
@@ -146,8 +160,7 @@ namespace SistemaTerapeutico.Core.Services
             {
                 Id = personaDireccionDto.IdPersona,
                 IdDireccion = idDireccion,
-                IdTipoDireccion = (eTipoDireccion)personaDireccionDto.IdTipoDireccion,
-                Numero = _unitOfWork.PersonaDireccionRepository.GetNewNumeroByIdPersona(personaDireccionDto.IdPersona)
+                IdTipoDireccion = personaDireccionDto.IdTipoDireccion
             };
 
             await _unitOfWork.PersonaDireccionRepository.Add(personaDireccion);

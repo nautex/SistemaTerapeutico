@@ -9,7 +9,7 @@ namespace SistemaTerapeutico.Core.Interfaces
     {
         Task<IEnumerable<Persona>> GetPersonas();
         Task<Persona> GetPersonaById(int idPersona);
-        Task AddPersona(Persona persona);
+        Task<int> AddPersona(Persona persona);
         void UpdatePersona(Persona persona);
         Task DeletePersona(int idPersona);
         Task<int> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto);

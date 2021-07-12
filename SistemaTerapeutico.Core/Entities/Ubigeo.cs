@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace SistemaTerapeutico.Core.Entities
+﻿namespace SistemaTerapeutico.Core.Entities
 {
     public partial class Ubigeo : BaseEntity
     {
         public Ubigeo(string usuarioRegistro = "") : base(usuarioRegistro)
         {
-            PersonaDireccion = new HashSet<PersonaDireccion>();
-            PersonaNatural = new HashSet<PersonaNatural>();
+            //PersonaDireccion = new HashSet<PersonaDireccion>();
+            //PersonaNatural = new HashSet<PersonaNatural>();
         }
 
         public string Codigo { get; set; }
@@ -15,7 +13,7 @@ namespace SistemaTerapeutico.Core.Entities
         public int IdDepartamento { get; set; }
         public string Descripcion { get; set; }
 
-        public virtual ICollection<PersonaDireccion> PersonaDireccion { get; set; }
-        public virtual ICollection<PersonaNatural> PersonaNatural { get; set; }
+        //public virtual ICollection<PersonaDireccion> PersonaDireccion { get; set; }
+        //public virtual ICollection<PersonaNatural> PersonaNatural { get; set; }
     }
 }

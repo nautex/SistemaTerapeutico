@@ -1,8 +1,6 @@
-﻿using FluentValidation;
+﻿using System;
+using FluentValidation;
 using SistemaTerapeutico.Core.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Validators
 {

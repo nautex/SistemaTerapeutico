@@ -64,16 +64,16 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .HasMaxLength(20)
                 .HasDefaultValueSql("'NULL'");
 
-            builder.HasOne(d => d.IdPersonaNavigation)
-                .WithOne(p => p.PersonaNatural)
-                .HasForeignKey<PersonaNatural>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_PersonaNatural_Persona1");
+            //builder.HasOne(d => d.IdPersonaNavigation)
+            //    .WithOne(p => p.PersonaNatural)
+            //    .HasForeignKey<PersonaNatural>(d => d.Id)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_PersonaNatural_Persona1");
 
-            builder.HasOne(d => d.IdUbigeoNacimientoNavigation)
-                .WithMany(p => p.PersonaNatural)
-                .HasForeignKey(d => d.IdUbigeoNacimiento)
-                .HasConstraintName("FK_PersonaNatural_Ubigeo");
+            //builder.HasOne(d => d.IdUbigeoNacimientoNavigation)
+            //    .WithMany(p => p.PersonaNatural)
+            //    .HasForeignKey(d => d.IdUbigeoNacimiento)
+            //    .HasConstraintName("FK_PersonaNatural_Ubigeo");
         }
     }
 }

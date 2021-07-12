@@ -4,10 +4,6 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public class BaseEntity
     {
-        public BaseEntity()
-        {
-            FechaRegistro = DateTime.Now;
-        }
         public BaseEntity(string usuarioRegistro)
         {
             FechaRegistro = DateTime.Now;
