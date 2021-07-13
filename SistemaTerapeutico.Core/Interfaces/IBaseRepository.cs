@@ -9,6 +9,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task<IEnumerable<T>> GetAll();
         Task<T> GetById(int id);
         Task Add(T entity);
+        Task<int> AddReturnId(T entity);
         void Update(T entity);
         Task Delete(int id);
 

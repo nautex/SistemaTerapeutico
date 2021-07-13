@@ -19,10 +19,11 @@ namespace SistemaTerapeutico.Core.DTOs
 
         public int IdTipoDocumento { get; set; }
         public string NumeroDocumento { get; set; }
-
+        public int IdDireccion { get; set; }
         public int IdUbigeoDireccion { get; set; }
         public string DetalleDireccion { get; set; }
-
+        public bool MamaMismaDireccion { get; set; }
+        public bool PapaMismaDireccion { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
         public string TelefonoFijo { get; set; }

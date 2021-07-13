@@ -11,6 +11,7 @@ namespace SistemaTerapeutico.Core.Entities
             RazonSocial = "";
             EsEmpresa = false;
             IdEstado = EEstadoBasico.Activo;
+            IdPaisOrigen = EPais.Peru;
 
             //PersonaContacto = new HashSet<PersonaContacto>();
             //PersonaDireccion = new HashSet<PersonaDireccion>();

@@ -20,6 +20,14 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
             await _entities.AddAsync(entity);
         }
+        public virtual async Task<int> AddReturnId(T entity)
+        {
+            await _entities.AddAsync(entity);
+
+            _context.SaveChanges();
+
+            return entity.Id;
+        }
 
         public async Task Delete(int id)
         {

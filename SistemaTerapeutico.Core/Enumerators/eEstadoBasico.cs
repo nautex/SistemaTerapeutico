@@ -61,4 +61,13 @@
         public static int CuentaInstagram = 20;
         public static int CuentaTwitter = 21;
     }
+    public static class ETipoVinculo
+    {
+        public static int Padre = 43;
+        public static int Madre = 44;
+        public static int Hijo = 45;
+        public static int Tio = 46;
+        public static int Sobrino = 47;
+        public static int Abuelo = 48;
+    }
 }

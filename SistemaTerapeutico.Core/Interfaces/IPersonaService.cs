@@ -12,7 +12,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task<int> AddPersona(Persona persona);
         void UpdatePersona(Persona persona);
         Task DeletePersona(int idPersona);
+        Task<int> AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto dad);
         Task<int> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto);
-        Task AddDireccionPersona(PersonaDireccionDto personaDireccionDto, string usuarioRegistro);
     }
 }

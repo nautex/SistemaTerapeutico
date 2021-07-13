@@ -18,24 +18,20 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .HasColumnType("int(11)");
 
             builder.Property(e => e.IdEstado)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
+                .HasColumnType("int(11)");
 
             builder.Property(e => e.IdPaisOrigen)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
+                .HasColumnType("int(11)");
 
             builder.Property(e => e.EsEmpresa)
-                .HasColumnType("bit")
-                .HasDefaultValueSql("'NULL'");
+                .HasColumnType("bit");
 
             builder.Property(e => e.Nombres)
                 .IsRequired()
                 .HasMaxLength(70);
 
             builder.Property(e => e.RazonSocial)
-                .HasMaxLength(200)
-                .HasDefaultValueSql("'NULL'");
+                .HasMaxLength(200);
 
             builder.Property(e => e.UsuarioModificacion)
                 .HasMaxLength(20)

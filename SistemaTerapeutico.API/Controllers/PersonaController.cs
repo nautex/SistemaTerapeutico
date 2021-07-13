@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SistemaTerapeutico.API.Controllers
 {
@@ -52,11 +52,20 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(Response);
         }
 
-        [HttpPost("get2")]
-        public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto personaNaturalDatosCompletosDto)
+        [HttpPost("{get2}")]
+        public async Task<IActionResult> PostDatosCompletosParticipante([FromBody] PersonaNaturalDatosCompletosDto child, [FromBody] PersonaNaturalDatosCompletosDto mother, [FromBody] PersonaNaturalDatosCompletosDto dad)
         {
-            int IdPersona = await _personaService.AddPersonaNaturalDatosCompletos(personaNaturalDatosCompletosDto);
-            var Response = new ApiResponse<int>(IdPersona);
+            int idChild = await _personaService.AddChildWithParents(child, mother, dad);
+            var Response = new ApiResponse<int>(idChild);
+
+            return Ok(Response);
+        }
+
+        [HttpPost("get3")]
+        public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto persona)
+        {
+            int idChild = await _personaService.AddPersonaNaturalDatosCompletos(persona);
+            var Response = new ApiResponse<int>(idChild);
 
             return Ok(Response);
         }

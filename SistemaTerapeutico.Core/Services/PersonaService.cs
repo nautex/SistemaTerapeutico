@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
@@ -48,18 +47,43 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.PersonaRepository.Delete(idPersona);
         }
-        public Task AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto pather)
+        public async Task<int> AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto dad)
         {
-            Task<int> idChild = AddPersonaNaturalDatosCompletos(child);
-            Task<int> idMother = AddPersonaNaturalDatosCompletos(mother);
-            Task<int> idPather = AddPersonaNaturalDatosCompletos(child);
+            int idChild = await AddPersonaNaturalDatosCompletos(child);
+
+            mother.IdDireccion = child.MamaMismaDireccion ? child.IdDireccion : 0;
+            dad.IdDireccion = child.PapaMismaDireccion ? child.IdDireccion : 0;
+
+            int idMother = await AddPersonaNaturalDatosCompletos(mother);
+            int idDad = await AddPersonaNaturalDatosCompletos(child);
+
+            await _unitOfWork.PersonaVinculacionRepository.Add(new PersonaVinculacion(child.UsuarioRegistro)
+            {
+                Id = idChild,
+                IdPersonaVinculo = idMother,
+                IdTipoVinculo = ETipoVinculo.Madre
+            });
+
+            await _unitOfWork.PersonaVinculacionRepository.Add(new PersonaVinculacion(child.UsuarioRegistro)
+            {
+                Id = idChild,
+                IdPersonaVinculo = idDad,
+                IdTipoVinculo = ETipoVinculo.Padre
+            });
+
+            _unitOfWork.SaveChanges();
+
+            return idChild;
         }
 
         public async Task<int> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto)
         {
+            int idPersona;
+            int? idDireccion = null;
+
             _unitOfWork.BeginTransaction();
 
-            int idPersona = await AddPersona(new Persona(personaDto.UsuarioRegistro)
+            idPersona = await _unitOfWork.PersonaRepository.AddReturnId(new Persona(personaDto.UsuarioRegistro)
             {
                 Nombres = personaDto.PrimerApellido + " " + personaDto.SegundoApellido + " " + personaDto.PrimerNombre + " " + personaDto.SegundoNombre,
                 FechaIngreso = personaDto.FechaIngreso,
@@ -77,95 +101,69 @@ namespace SistemaTerapeutico.Core.Services
                 IdSexo = personaDto.IdSexo
             });
 
-            if (!String.IsNullOrEmpty(personaDto.DetalleDireccion))
+            if (personaDto.IdDireccion > 0)
             {
-                await AddDireccionPersona(new PersonaDireccionDto
+                idDireccion = personaDto.IdDireccion;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(personaDto.DetalleDireccion))
                 {
-                    IdPersona = persona.Id,
+                    idDireccion = await _unitOfWork.DireccionRepository.AddReturnId(new Direccion(personaDto.UsuarioRegistro)
+                    {
+                        Id = idPersona,
+                        IdUbigeo = personaDto.IdUbigeoDireccion,
+                        Detalle = personaDto.DetalleDireccion
+                    });
+                }
+            }
+
+            if (idDireccion != null)
+            {
+                await _unitOfWork.PersonaDireccionRepository.Add(new PersonaDireccion(personaDto.UsuarioRegistro)
+                {
+                    Id = idPersona,
                     IdTipoDireccion = ETipoDireccion.Domicilio,
-                    IdUbigeo = personaDto.IdUbigeoDireccion,
-                    Detalle = personaDto.DetalleDireccion,
-                    Referencia = ""
-                }, "JSOTELO");
-
-
+                    IdDireccion = idDireccion
+                });
             }
 
             if (!string.IsNullOrEmpty(personaDto.NumeroDocumento))
             {
-                PersonaDocumento personaDocumento = new PersonaDocumento("JSOTELO")
+                await _unitOfWork.PersonaDocumentoRepository.Add(new PersonaDocumento(personaDto.UsuarioRegistro)
                 {
-                    Id = persona.Id,
+                    Id = idPersona,
                     IdTipoDocumento = personaDto.IdTipoDocumento,
                     Numero = personaDto.NumeroDocumento
-                };
-
-                await _unitOfWork.PersonaDocumentoRepository.Add(personaDocumento);
-
-                _unitOfWork.SaveChanges();
+                });
             }
 
             if (!string.IsNullOrEmpty(personaDto.Celular))
             {
-                PersonaContacto personaContactoCelular = new PersonaContacto("JSOTELO")
+                await _unitOfWork.PersonaContactoRepository.Add(new PersonaContacto(personaDto.UsuarioRegistro)
                 {
-                    Id = persona.Id,
+                    Id = idPersona,
                     IdTipoContacto = ETipoContacto.CelularMovistar,
                     Valor = personaDto.Celular
-                };
-
-                await _unitOfWork.PersonaContactoRepository.Add(personaContactoCelular);
+                });
 
                 _unitOfWork.SaveChanges();
             }
 
             if (!string.IsNullOrEmpty(personaDto.Correo))
             {
-                PersonaContacto personaContactoCorreo = new PersonaContacto("JSOTELO")
+                await _unitOfWork.PersonaContactoRepository.Add(new PersonaContacto(personaDto.UsuarioRegistro)
                 {
-                    Id = persona.Id,
+                    Id = idPersona,
                     IdTipoContacto = ETipoContacto.Correo,
                     Valor = personaDto.Correo
-                };
-
-                await _unitOfWork.PersonaContactoRepository.Add(personaContactoCorreo);
-
-                _unitOfWork.SaveChanges();
+                });
             }
-
-            return persona.Id;
-        }
-
-        public async Task AddDireccionPersona(PersonaDireccionDto personaDireccionDto, string usuarioRegistro)
-        {
-            int idDireccion = personaDireccionDto.IdDireccion;
-
-            if (idDireccion == 0)
-            {
-                Direccion direccion = new Direccion(usuarioRegistro)
-                {
-                    IdUbigeo = personaDireccionDto.IdUbigeo,
-                    Detalle = personaDireccionDto.Detalle,
-                    Referencia = personaDireccionDto.Referencia
-                };
-
-                await _unitOfWork.DireccionRepository.Add(direccion);
-
-                _unitOfWork.SaveChanges();
-
-                idDireccion = direccion.Id;
-            }
-
-            PersonaDireccion personaDireccion = new PersonaDireccion(usuarioRegistro)
-            {
-                Id = personaDireccionDto.IdPersona,
-                IdDireccion = idDireccion,
-                IdTipoDireccion = personaDireccionDto.IdTipoDireccion
-            };
-
-            await _unitOfWork.PersonaDireccionRepository.Add(personaDireccion);
 
             _unitOfWork.SaveChanges();
+            _unitOfWork.CommitTransaction();
+
+            return idPersona;
         }
     }
 }

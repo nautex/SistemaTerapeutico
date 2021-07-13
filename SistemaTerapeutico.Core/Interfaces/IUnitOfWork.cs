@@ -18,5 +18,6 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task SaveChangesAsync();
         void BeginTransaction();
         void CommitTransaction();
+        void RollbackTransaction();
     }
 }

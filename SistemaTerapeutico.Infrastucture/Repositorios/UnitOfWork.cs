@@ -53,6 +53,10 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
             _context.Database.CommitTransaction();
         }
+        public void RollbackTransaction()
+        {
+            _context.Database.RollbackTransaction();
+        }
 
         public void SaveChanges()
         {
