@@ -1,10 +1,12 @@
-﻿namespace SistemaTerapeutico.Core.Entities
+﻿using SistemaTerapeutico.Core.Enumerators;
+
+namespace SistemaTerapeutico.Core.Entities
 {
     public partial class PersonaVinculacion : BaseEntity
     {
         public PersonaVinculacion(string usuarioRegistro) : base(usuarioRegistro)
         {
-
+            IdEstado = EEstadoBasico.Activo;
         }
         public int IdPersonaVinculo { get; set; }
         public int? IdTipoVinculo { get; set; }

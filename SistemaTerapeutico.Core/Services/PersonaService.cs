@@ -47,36 +47,37 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.PersonaRepository.Delete(idPersona);
         }
-        public async Task<int> AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto dad)
-        {
-            int idChild = await AddPersonaNaturalDatosCompletos(child);
+        //public async Task<int> AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto dad)
+        //{
+        //    int idChild = await AddPersonaNaturalDatosCompletos(child);
 
-            mother.IdDireccion = child.MamaMismaDireccion ? child.IdDireccion : 0;
-            dad.IdDireccion = child.PapaMismaDireccion ? child.IdDireccion : 0;
+        //    //mother.IdDireccion = child.MamaMismaDireccion ? child.IdDireccion : 0;
+        //    //dad.IdDireccion = child.PapaMismaDireccion ? child.IdDireccion : 0;
 
-            int idMother = await AddPersonaNaturalDatosCompletos(mother);
-            int idDad = await AddPersonaNaturalDatosCompletos(child);
+        //    //int idMother = await AddPersonaNaturalDatosCompletos(mother);
+        //    //int idDad = await AddPersonaNaturalDatosCompletos(child);
 
-            await _unitOfWork.PersonaVinculacionRepository.Add(new PersonaVinculacion(child.UsuarioRegistro)
-            {
-                Id = idChild,
-                IdPersonaVinculo = idMother,
-                IdTipoVinculo = ETipoVinculo.Madre
-            });
+        //    //await _unitOfWork.PersonaVinculacionRepository.Add(new PersonaVinculacion(child.UsuarioRegistro)
+        //    //{
+        //    //    Id = idChild,
+        //    //    IdPersonaVinculo = idMother,
+        //    //    IdTipoVinculo = ETipoVinculo.Madre
+        //    //});
 
-            await _unitOfWork.PersonaVinculacionRepository.Add(new PersonaVinculacion(child.UsuarioRegistro)
-            {
-                Id = idChild,
-                IdPersonaVinculo = idDad,
-                IdTipoVinculo = ETipoVinculo.Padre
-            });
+        //    //await _unitOfWork.PersonaVinculacionRepository.Add(new PersonaVinculacion(child.UsuarioRegistro)
+        //    //{
+        //    //    Id = idChild,
+        //    //    IdPersonaVinculo = idDad,
+        //    //    IdTipoVinculo = ETipoVinculo.Padre
+        //    //});
 
-            _unitOfWork.SaveChanges();
+        //    //_unitOfWork.SaveChanges();
 
-            return idChild;
-        }
+        //    //return idChild;
+        //    return 0;
+        //}
 
-        public async Task<int> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto)
+        public async Task<PersonaResponseDto> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto)
         {
             int idPersona;
             int? idDireccion = null;
@@ -120,7 +121,7 @@ namespace SistemaTerapeutico.Core.Services
 
             if (idDireccion != null)
             {
-                await _unitOfWork.PersonaDireccionRepository.Add(new PersonaDireccion(personaDto.UsuarioRegistro)
+                await _unitOfWork.PersonaDireccionRepository.AddGenerateNumero(new PersonaDireccion(personaDto.UsuarioRegistro)
                 {
                     Id = idPersona,
                     IdTipoDireccion = ETipoDireccion.Domicilio,
@@ -140,19 +141,17 @@ namespace SistemaTerapeutico.Core.Services
 
             if (!string.IsNullOrEmpty(personaDto.Celular))
             {
-                await _unitOfWork.PersonaContactoRepository.Add(new PersonaContacto(personaDto.UsuarioRegistro)
+                await _unitOfWork.PersonaContactoRepository.AddGenerateNumero(new PersonaContacto(personaDto.UsuarioRegistro)
                 {
                     Id = idPersona,
                     IdTipoContacto = ETipoContacto.CelularMovistar,
                     Valor = personaDto.Celular
                 });
-
-                _unitOfWork.SaveChanges();
             }
 
             if (!string.IsNullOrEmpty(personaDto.Correo))
             {
-                await _unitOfWork.PersonaContactoRepository.Add(new PersonaContacto(personaDto.UsuarioRegistro)
+                await _unitOfWork.PersonaContactoRepository.AddGenerateNumero(new PersonaContacto(personaDto.UsuarioRegistro)
                 {
                     Id = idPersona,
                     IdTipoContacto = ETipoContacto.Correo,
@@ -163,7 +162,7 @@ namespace SistemaTerapeutico.Core.Services
             _unitOfWork.SaveChanges();
             _unitOfWork.CommitTransaction();
 
-            return idPersona;
+            return new PersonaResponseDto { IdPersona = idPersona, IdDireccion = idDireccion };
         }
     }
 }

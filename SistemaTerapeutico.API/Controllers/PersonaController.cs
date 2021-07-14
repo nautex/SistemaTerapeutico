@@ -13,11 +13,13 @@ namespace SistemaTerapeutico.API.Controllers
     public class PersonaController : Controller
     {
         private readonly IPersonaService _personaService;
+        private readonly IPersonaVinculacionService _personaVinculacionService;
         private readonly IMapper _mapper;
 
-        public PersonaController(IPersonaService personaService, IMapper mapper)
+        public PersonaController(IPersonaService personaService, IPersonaVinculacionService personaVinculacionService, IMapper mapper)
         {
             _personaService = personaService;
+            _personaVinculacionService = personaVinculacionService;
             _mapper = mapper;
         }
 
@@ -52,11 +54,25 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(Response);
         }
 
-        [HttpPost("{get2}")]
-        public async Task<IActionResult> PostDatosCompletosParticipante([FromBody] PersonaNaturalDatosCompletosDto child, [FromBody] PersonaNaturalDatosCompletosDto mother, [FromBody] PersonaNaturalDatosCompletosDto dad)
+        //[HttpPost("{get2}")]
+        //public async Task<IActionResult> PostDatosCompletosParticipante([FromBody] PersonaNaturalDatosCompletosDto child, [FromBody] PersonaNaturalDatosCompletosDto mother, [FromBody] PersonaNaturalDatosCompletosDto dad)
+        //{
+        //    int idChild = await _personaService.AddChildWithParents(child, mother, dad);
+        //    var Response = new ApiResponse<int>(idChild);
+
+        //    return Ok(Response);
+        //}
+        [HttpPost("get2")]
+        public async Task<IActionResult> PostPersonaVinculacion(PersonaVinculacionDto personaVinculacionDto)
         {
-            int idChild = await _personaService.AddChildWithParents(child, mother, dad);
-            var Response = new ApiResponse<int>(idChild);
+            PersonaVinculacion personaVinculacion = new PersonaVinculacion("JSOTELO")
+            {
+                Id = personaVinculacionDto.Id,
+                IdPersonaVinculo = personaVinculacionDto.IdPersonaVinculo,
+                IdTipoVinculo = personaVinculacionDto.IdTipoVinculo
+            };
+            await _personaVinculacionService.AddPersonaVinculacion(personaVinculacion);
+            var Response = new ApiResponse<bool>(true);
 
             return Ok(Response);
         }
@@ -64,8 +80,8 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("get3")]
         public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto persona)
         {
-            int idChild = await _personaService.AddPersonaNaturalDatosCompletos(persona);
-            var Response = new ApiResponse<int>(idChild);
+            PersonaResponseDto personaResponse = await _personaService.AddPersonaNaturalDatosCompletos(persona);
+            var Response = new ApiResponse<PersonaResponseDto>(personaResponse);
 
             return Ok(Response);
         }
