@@ -15,11 +15,13 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
 
         }
-        public override async Task Add(T entity)
+        public async Task AddGenerateNumero(T entity)
         {
             entity.Numero = GetNewNumeroById(entity.Id);
 
             await _entities.AddAsync(entity);
+
+            _context.SaveChanges();
         }
         public async Task DeleteByIds(int id, int numero)
         {
