@@ -40,5 +40,10 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.PersonaDireccionRepository.GetsById(idPersona);
         }
+
+        public Task<PersonaDireccion> GetPersonaDireccionByIds(int idPersona, int numero)
+        {
+            return _unitOfWork.PersonaDireccionRepository.GetByIds(idPersona, numero);
+        }
     }
 }

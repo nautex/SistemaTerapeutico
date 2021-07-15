@@ -14,5 +14,6 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task DeletePersona(int idPersona);
         //Task<int> AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto dad);
         Task<PersonaResponseDto> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto);
+        Task<IEnumerable<Persona>> GetPersonasByNombre(string nombre);
     }
 }

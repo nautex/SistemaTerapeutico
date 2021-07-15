@@ -13,13 +13,11 @@ namespace SistemaTerapeutico.API.Controllers
     public class PersonaController : Controller
     {
         private readonly IPersonaService _personaService;
-        private readonly IPersonaVinculacionService _personaVinculacionService;
         private readonly IMapper _mapper;
 
-        public PersonaController(IPersonaService personaService, IPersonaVinculacionService personaVinculacionService, IMapper mapper)
+        public PersonaController(IPersonaService personaService, IMapper mapper)
         {
             _personaService = personaService;
-            _personaVinculacionService = personaVinculacionService;
             _mapper = mapper;
         }
 
@@ -44,15 +42,6 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(Response);
         }
 
-        [HttpPost("get1")]
-        public async Task<IActionResult> PostPersona([FromBody] PersonaDto personaDto)
-        {
-            Persona Persona = _mapper.Map<Persona>(personaDto);
-            await _personaService.AddPersona(Persona);
-            var Response = new ApiResponse<PersonaDto>(personaDto);
-
-            return Ok(Response);
-        }
 
         //[HttpPost("{get2}")]
         //public async Task<IActionResult> PostDatosCompletosParticipante([FromBody] PersonaNaturalDatosCompletosDto child, [FromBody] PersonaNaturalDatosCompletosDto mother, [FromBody] PersonaNaturalDatosCompletosDto dad)
@@ -62,26 +51,19 @@ namespace SistemaTerapeutico.API.Controllers
 
         //    return Ok(Response);
         //}
-        [HttpPost("get2")]
-        public async Task<IActionResult> PostPersonaVinculacion(PersonaVinculacionDto personaVinculacionDto)
-        {
-            PersonaVinculacion personaVinculacion = new PersonaVinculacion("JSOTELO")
-            {
-                Id = personaVinculacionDto.Id,
-                IdPersonaVinculo = personaVinculacionDto.IdPersonaVinculo,
-                IdTipoVinculo = personaVinculacionDto.IdTipoVinculo
-            };
-            await _personaVinculacionService.AddPersonaVinculacion(personaVinculacion);
-            var Response = new ApiResponse<bool>(true);
-
-            return Ok(Response);
-        }
-
-        [HttpPost("get3")]
+        [HttpPost("PostPersonaNaturalDatosCompletos")]
         public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto persona)
         {
             PersonaResponseDto personaResponse = await _personaService.AddPersonaNaturalDatosCompletos(persona);
             var Response = new ApiResponse<PersonaResponseDto>(personaResponse);
+
+            return Ok(Response);
+        }
+        [HttpGet("GetPersonasByNombres")]
+        public async Task<IActionResult> GetPersonasByNombres(string nombres)
+        {
+            IEnumerable<Persona> listado = await _personaService.GetPersonasByNombre(nombres);
+            var Response = new ApiResponse<IEnumerable<Persona>>(listado);
 
             return Ok(Response);
         }

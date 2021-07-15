@@ -60,6 +60,8 @@ namespace SistemaTerapeutico.BackEnd.API
 
             services.AddTransient<IPersonaService, PersonaService>();
             services.AddTransient<IPersonaVinculacionService, PersonaVinculacionService>();
+            services.AddTransient<IPersonaDocumentoService, PersonaDocumentoService>();
+
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 

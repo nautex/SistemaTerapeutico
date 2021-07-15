@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SistemaTerapeutico.Core.Entities;
@@ -12,14 +13,13 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         public PersonaRepository(SISDETContext context) : base(context)
         {
         }
-        public async Task<Persona> GetPersonaByNumeroDocumento(string numeroDocumento)
+        public async Task<IEnumerable<Persona>> GetPersonasByNombres(string nombres)
         {
-            var Persona = from p in _context.Persona
-                          join pd in _context.PersonaDocumento on p.Id equals pd.Id
-                          where pd.Numero == numeroDocumento
-                          select p;
+            var Personas = from p in _context.Persona
+                           where p.Nombres.Contains(nombres)
+                           select p;
 
-            return await Persona.FirstOrDefaultAsync();
+            return await Personas.ToListAsync();
         }
 
     }

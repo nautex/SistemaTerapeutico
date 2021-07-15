@@ -164,5 +164,9 @@ namespace SistemaTerapeutico.Core.Services
 
             return new PersonaResponseDto { IdPersona = idPersona, IdDireccion = idDireccion };
         }
+        public async Task<IEnumerable<Persona>> GetPersonasByNombre(string nombre)
+        {
+            return await _unitOfWork.PersonaRepository.GetPersonasByNombres(nombre);
+        }
     }
 }
