@@ -120,7 +120,7 @@ namespace SistemaTerapeutico.Core.Services
 
             if (idDireccion != null)
             {
-                await _unitOfWork.PersonaDireccionRepository.AddGenerateNumero(new PersonaDireccion(personaDto.UsuarioRegistro)
+                await _unitOfWork.PersonaDireccionRepository.Add(new PersonaDireccion(personaDto.UsuarioRegistro)
                 {
                     Id = idPersona,
                     IdTipoDireccion = ETipoDireccion.Domicilio,
@@ -140,17 +140,19 @@ namespace SistemaTerapeutico.Core.Services
 
             if (!string.IsNullOrEmpty(personaDto.Celular))
             {
-                await _unitOfWork.PersonaContactoRepository.AddGenerateNumero(new PersonaContacto(personaDto.UsuarioRegistro)
+                await _unitOfWork.PersonaContactoRepository.Add(new PersonaContacto(personaDto.UsuarioRegistro)
                 {
                     Id = idPersona,
                     IdTipoContacto = ETipoContacto.CelularMovistar,
                     Valor = personaDto.Celular
                 });
+
+                _unitOfWork.SaveChanges();
             }
 
             if (!string.IsNullOrEmpty(personaDto.Correo))
             {
-                await _unitOfWork.PersonaContactoRepository.AddGenerateNumero(new PersonaContacto(personaDto.UsuarioRegistro)
+                await _unitOfWork.PersonaContactoRepository.Add(new PersonaContacto(personaDto.UsuarioRegistro)
                 {
                     Id = idPersona,
                     IdTipoContacto = ETipoContacto.Correo,
