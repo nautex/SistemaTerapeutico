@@ -1,3 +1,4 @@
+using System;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +11,6 @@ using SistemaTerapeutico.Core.Services;
 using SistemaTerapeutico.Infrastucture.Data;
 using SistemaTerapeutico.Infrastucture.Filters;
 using SistemaTerapeutico.Infrastucture.Repositorios;
-using System;
 
 namespace SistemaTerapeutico.BackEnd.API
 {
@@ -59,6 +59,9 @@ namespace SistemaTerapeutico.BackEnd.API
             });
 
             services.AddTransient<IPersonaService, PersonaService>();
+            services.AddTransient<IPersonaVinculacionService, PersonaVinculacionService>();
+            services.AddTransient<IPersonaDocumentoService, PersonaDocumentoService>();
+
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 

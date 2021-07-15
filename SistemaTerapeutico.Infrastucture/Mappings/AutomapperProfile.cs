@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Mappings
 {
@@ -13,6 +10,8 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
         {
             CreateMap<Persona, PersonaDto>();
             CreateMap<PersonaDto, Persona>();
+            CreateMap<PersonaVinculacion, PersonaVinculacionDto>();
+            CreateMap<PersonaVinculacionDto, PersonaVinculacion>();
         }
     }
 }

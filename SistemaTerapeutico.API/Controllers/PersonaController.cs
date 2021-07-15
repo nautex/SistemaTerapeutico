@@ -42,30 +42,28 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(Response);
         }
 
-        [HttpPost("get1")]
-        public async Task<IActionResult> PostPersona([FromBody] PersonaDto personaDto)
-        {
-            Persona Persona = _mapper.Map<Persona>(personaDto);
-            await _personaService.AddPersona(Persona);
-            var Response = new ApiResponse<PersonaDto>(personaDto);
 
-            return Ok(Response);
-        }
+        //[HttpPost("{get2}")]
+        //public async Task<IActionResult> PostDatosCompletosParticipante([FromBody] PersonaNaturalDatosCompletosDto child, [FromBody] PersonaNaturalDatosCompletosDto mother, [FromBody] PersonaNaturalDatosCompletosDto dad)
+        //{
+        //    int idChild = await _personaService.AddChildWithParents(child, mother, dad);
+        //    var Response = new ApiResponse<int>(idChild);
 
-        [HttpPost("{get2}")]
-        public async Task<IActionResult> PostDatosCompletosParticipante([FromBody] PersonaNaturalDatosCompletosDto child, [FromBody] PersonaNaturalDatosCompletosDto mother, [FromBody] PersonaNaturalDatosCompletosDto dad)
-        {
-            int idChild = await _personaService.AddChildWithParents(child, mother, dad);
-            var Response = new ApiResponse<int>(idChild);
-
-            return Ok(Response);
-        }
-
-        [HttpPost("get3")]
+        //    return Ok(Response);
+        //}
+        [HttpPost("PostPersonaNaturalDatosCompletos")]
         public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto persona)
         {
-            int idChild = await _personaService.AddPersonaNaturalDatosCompletos(persona);
-            var Response = new ApiResponse<int>(idChild);
+            PersonaResponseDto personaResponse = await _personaService.AddPersonaNaturalDatosCompletos(persona);
+            var Response = new ApiResponse<PersonaResponseDto>(personaResponse);
+
+            return Ok(Response);
+        }
+        [HttpGet("GetPersonasByNombres")]
+        public async Task<IActionResult> GetPersonasByNombres(string nombres)
+        {
+            IEnumerable<Persona> listado = await _personaService.GetPersonasByNombre(nombres);
+            var Response = new ApiResponse<IEnumerable<Persona>>(listado);
 
             return Ok(Response);
         }
