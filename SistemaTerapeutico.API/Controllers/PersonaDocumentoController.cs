@@ -20,9 +20,9 @@ namespace SistemaTerapeutico.API.Controllers
             _mapper = mapper;
         }
         [HttpGet("getPersonaDocumentoByTipoYNumero")]
-        public async Task<IActionResult> getPersonaDocumentoByTipoYNumero(TipoDocumentoNumeroDto tipoDocumentoNumeroDto)
+        public IActionResult getPersonaDocumentoByTipoYNumero(DocumentoTipoNumeroDto tipoDocumentoNumeroDto)
         {
-            var PersonasDocumentos = await _personaDocumentoService.GetPersonasDocumentosByTipoYNumero(tipoDocumentoNumeroDto.IdTipoDocumento, tipoDocumentoNumeroDto.Numero);
+            var PersonasDocumentos = _personaDocumentoService.GetPersonasDocumentosByTipoYNumero(tipoDocumentoNumeroDto.IdTipoDocumento, tipoDocumentoNumeroDto.Numero);
             var Response = new ApiResponse<IEnumerable<PersonaDocumento>>(PersonasDocumentos);
             return Ok(Response);
         }

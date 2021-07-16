@@ -15,48 +15,20 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
         }
 
-        public async Task DeleteByIds(int id, int idPersonaVinculo)
+        public void DeleteByIds(int id, int idPersonaVinculo)
         {
-            PersonaVinculacion entity = await GetByIds(id, idPersonaVinculo);
+            var list = GetAll();
+            PersonaVinculacion entity = list.Where(x => x.Id == id && x.IdPersonaVinculo == idPersonaVinculo).FirstOrDefault();
 
             _context.Remove(entity);
         }
 
-        public async Task DeletesById(int id)
+        public void DeletesById(int id)
         {
-            IEnumerable<PersonaVinculacion> entities = await GetsById(id);
+            var list = GetAll();
+            IEnumerable<PersonaVinculacion> entities = list.Where(x => x.Id == id);
 
             _context.RemoveRange(entities);
-        }
-
-        public async Task<PersonaVinculacion> GetByIds(int id, int idPersonaVinculo)
-        {
-            IQueryable<PersonaVinculacion> listado =
-                from pd in _entities
-                where pd.Id == id && pd.IdPersonaVinculo == idPersonaVinculo
-                select pd;
-
-            return await listado.FirstOrDefaultAsync();
-        }
-
-        public async Task<IEnumerable<PersonaVinculacion>> GetPersonasVinculacionsByIdPersonaVinculo(int idPersonaVinculo)
-        {
-            IQueryable<PersonaVinculacion> listado =
-                from pd in _entities
-                where pd.IdPersonaVinculo == idPersonaVinculo
-                select pd;
-
-            return await listado.ToListAsync();
-        }
-
-        public async Task<IEnumerable<PersonaVinculacion>> GetsById(int id)
-        {
-            IQueryable<PersonaVinculacion> listado =
-                from pd in _entities
-                where pd.Id == id
-                select pd;
-
-            return await listado.ToListAsync();
         }
     }
 }

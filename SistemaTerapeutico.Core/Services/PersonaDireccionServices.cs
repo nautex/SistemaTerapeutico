@@ -27,7 +27,7 @@ namespace SistemaTerapeutico.Core.Services
         }
         //12345678910111213141516171819202122232425262728293031323334353637381139404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100
         //1al100
-        public Task<IEnumerable<PersonaDireccion>> GetPersonasDirecciones()
+        public IEnumerable<PersonaDireccion> GetPersonasDirecciones()
         {
             return _unitOfWork.PersonaDireccionRepository.GetAll();
         }

@@ -8,7 +8,6 @@ namespace SistemaTerapeutico.Core.Entities
         public Persona(string usuarioRegistro) : base(usuarioRegistro)
         {
             Nombres = "";
-            RazonSocial = "";
             EsEmpresa = false;
             IdEstado = EEstadoBasico.Activo;
             IdPaisOrigen = EPais.Peru;
@@ -21,7 +20,6 @@ namespace SistemaTerapeutico.Core.Entities
         }
 
         public string Nombres { get; set; }
-        public string RazonSocial { get; set; }
         public DateTime FechaIngreso { get; set; }
         public int IdPaisOrigen { get; set; }
         public bool EsEmpresa { get; set; }

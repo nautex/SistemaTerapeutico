@@ -30,8 +30,8 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(70);
 
-            builder.Property(e => e.RazonSocial)
-                .HasMaxLength(200);
+            //builder.Property(e => e.RazonSocial)
+            //    .HasMaxLength(200);
 
             builder.Property(e => e.UsuarioModificacion)
                 .HasMaxLength(20)

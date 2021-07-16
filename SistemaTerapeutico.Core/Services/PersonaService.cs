@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
@@ -15,7 +16,7 @@ namespace SistemaTerapeutico.Core.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public Task<IEnumerable<Persona>> GetPersonas()
+        public IEnumerable<Persona> GetPersonas()
         {
             return _unitOfWork.PersonaRepository.GetAll();
         }
@@ -25,14 +26,9 @@ namespace SistemaTerapeutico.Core.Services
         }
         public async Task<int> AddPersona(Persona persona)
         {
-            if (!persona.EsEmpresa && (string.IsNullOrEmpty(persona.Nombres) || persona.Nombres.Length < 3))
+            if ((string.IsNullOrEmpty(persona.Nombres) || persona.Nombres.Length < 3))
             {
-                throw new BusinessException("El nombre de la pesona debe tener mas de 3 caracteres.");
-            }
-
-            if (persona.EsEmpresa && (string.IsNullOrEmpty(persona.RazonSocial) || persona.RazonSocial.Length < 3))
-            {
-                throw new BusinessException("La razon social de la empresa debe tener mas de 3 caracteres.");
+                throw new BusinessException("El nombre de la persona debe tener mas de 3 caracteres.");
             }
 
             await _unitOfWork.PersonaRepository.Add(persona);
@@ -164,9 +160,11 @@ namespace SistemaTerapeutico.Core.Services
 
             return new PersonaResponseDto { IdPersona = idPersona, IdDireccion = idDireccion };
         }
-        public async Task<IEnumerable<Persona>> GetPersonasByNombre(string nombre)
+        public IEnumerable<Persona> GetPersonasByNombre(string nombre)
         {
-            return await _unitOfWork.PersonaRepository.GetPersonasByNombres(nombre);
+            var list = _unitOfWork.PersonaRepository.GetAll();
+
+            return list.Where(x => x.Nombres.Contains(nombre));
         }
     }
 }

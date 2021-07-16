@@ -23,9 +23,9 @@ namespace SistemaTerapeutico.API.Controllers
 
         [HttpGet]
         [Route("get")]
-        public async Task<IActionResult> GetPersonas()
+        public IActionResult GetPersonas()
         {
-            var Personas = await _personaService.GetPersonas();
+            var Personas = _personaService.GetPersonas();
             var PersonasDto = _mapper.Map<IEnumerable<PersonaDto>>(Personas);
             var Response = new ApiResponse<IEnumerable<PersonaDto>>(PersonasDto);
 
@@ -60,9 +60,9 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(Response);
         }
         [HttpGet("GetPersonasByNombres")]
-        public async Task<IActionResult> GetPersonasByNombres(string nombres)
+        public IActionResult GetPersonasByNombres(string nombres)
         {
-            IEnumerable<Persona> listado = await _personaService.GetPersonasByNombre(nombres);
+            IEnumerable<Persona> listado = _personaService.GetPersonasByNombre(nombres);
             var Response = new ApiResponse<IEnumerable<Persona>>(listado);
 
             return Ok(Response);

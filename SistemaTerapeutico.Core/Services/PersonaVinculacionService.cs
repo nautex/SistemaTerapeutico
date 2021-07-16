@@ -29,9 +29,9 @@ namespace SistemaTerapeutico.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<PersonaVinculacion>> GetPersonasVinculaciones()
+        public IEnumerable<PersonaVinculacion> GetPersonasVinculaciones()
         {
-            return await _unitOfWork.PersonaVinculacionRepository.GetAll();
+            return _unitOfWork.PersonaVinculacionRepository.GetAll();
         }
 
         public Task<IEnumerable<PersonaVinculacion>> GetPersonasVinculacionesByIdPersona(int idPersona)

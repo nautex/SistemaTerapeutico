@@ -6,6 +6,5 @@ namespace SistemaTerapeutico.Core.Interfaces
 {
     public interface IPersonaRepository : IBaseRepository<Persona>
     {
-        Task<IEnumerable<Persona>> GetPersonasByNombres(string nombres);
     }
 }

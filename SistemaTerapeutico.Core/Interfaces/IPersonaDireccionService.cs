@@ -10,7 +10,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         void DeletePersonasDireccionesByIdPersona(int idPersona);
         void DeletePersonaDirecccionByIds(int idPersona, int numero);
         Task<PersonaDireccion> GetPersonaDireccionByIds(int idPersona, int numero);
-        Task<IEnumerable<PersonaDireccion>> GetPersonasDirecciones();
+        IEnumerable<PersonaDireccion> GetPersonasDirecciones();
         void UpdatePersonaDireccion(PersonaDireccion personaDireccion);
         Task<IEnumerable<PersonaDireccion>> GetPersonasDireccionesByIdPersona(int idPersona);
     }

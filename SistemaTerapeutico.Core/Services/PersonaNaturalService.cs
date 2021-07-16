@@ -12,7 +12,7 @@ namespace SistemaTerapeutico.Core.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public Task<IEnumerable<PersonaNatural>> GetPersonasNaturales()
+        public IEnumerable<PersonaNatural> GetPersonasNaturales()
         {
             return _unitOfWork.PersonaNaturalRepository.GetAll();
         }

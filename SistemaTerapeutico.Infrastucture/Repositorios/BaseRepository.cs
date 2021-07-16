@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SistemaTerapeutico.Core.Entities;
@@ -35,9 +36,9 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
             _entities.Remove(Entity);
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public IEnumerable<T> GetAll()
         {
-            return await _entities.ToListAsync();
+            return _entities.AsEnumerable();
         }
 
         public Task<T> GetById(int id)

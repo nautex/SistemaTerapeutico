@@ -14,44 +14,19 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
 
         }
-        public async Task<IEnumerable<PersonaDocumento>> GetsById(int id)
+        public void DeletesById(int id)
         {
-            IQueryable<PersonaDocumento> listado =
-                from pd in _entities
-                where pd.Id == id
-                select pd;
-
-            return await listado.ToListAsync();
-        }
-        public async Task DeletesById(int id)
-        {
-            IEnumerable<PersonaDocumento> entities = await GetsById(id);
+            var list = GetAll();
+            IEnumerable<PersonaDocumento> entities = list.Where(x => x.Id == id);
 
             _context.RemoveRange(entities);
         }
-        public async Task<PersonaDocumento> GetByIds(int id, int idTipoDocumento)
+        public void DeleteByIds(int id, int idTipoDocumento)
         {
-            IQueryable<PersonaDocumento> listado =
-                from pd in _entities
-                where pd.Id == id && pd.IdTipoDocumento == idTipoDocumento
-                select pd;
-
-            return await listado.FirstOrDefaultAsync();
-        }
-        public async Task DeleteByIds(int id, int idTipoDocumento)
-        {
-            PersonaDocumento entity = await GetByIds(id, idTipoDocumento);
+            var list = GetAll();
+            PersonaDocumento entity = list.Where(x => x.Id == id && x.IdTipoDocumento == idTipoDocumento).FirstOrDefault();
 
             _context.Remove(entity);
-        }
-        public async Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentosByTipoYNumero(int idTipoDocumento, string numero)
-        {
-            IQueryable<PersonaDocumento> listado =
-                from pd in _entities
-                where pd.IdTipoDocumento == idTipoDocumento && pd.Numero == numero
-                select pd;
-
-            return await listado.ToListAsync();
         }
     }
 }

@@ -13,14 +13,5 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         public PersonaRepository(SISDETContext context) : base(context)
         {
         }
-        public async Task<IEnumerable<Persona>> GetPersonasByNombres(string nombres)
-        {
-            var Personas = from p in _context.Persona
-                           where p.Nombres.Contains(nombres)
-                           select p;
-
-            return await Personas.ToListAsync();
-        }
-
     }
 }

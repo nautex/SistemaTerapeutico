@@ -28,9 +28,9 @@ namespace SistemaTerapeutico.Core.Services
             _unitOfWork.PersonaContactoRepository.DeletesById(idPersona);
         }
 
-        public async Task<IEnumerable<PersonaContacto>> GetPersonasContactos()
+        public IEnumerable<PersonaContacto> GetPersonasContactos()
         {
-            return await _unitOfWork.PersonaContactoRepository.GetAll();
+            return _unitOfWork.PersonaContactoRepository.GetAll();
         }
 
         public async Task<IEnumerable<PersonaContacto>> GetPersonasContactosByIdPersona(int idPersona)

@@ -9,10 +9,10 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task AddPersonaDocumento(PersonaDocumento personaDocumento);
         void DeletePersonasDocumentosByIdPersona(int idPersona);
         void DeletePersonaDocumentoByIds(int idPersona, int idTipoDocumento);
-        Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentos();
+        IEnumerable<PersonaDocumento> GetPersonasDocumentos();
         void UpdatePersonaDocumento(PersonaDocumento personaDocumento);
-        Task<PersonaDocumento> GetPersonaDocumentoByIds(int idPersona, int idTipoDocumento);
-        Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentosByIdPersona(int idPersona);
-        Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentosByTipoYNumero(int idTipoDocumento, string numero);
+        PersonaDocumento GetPersonaDocumentoByIds(int idPersona, int idTipoDocumento);
+        IEnumerable<PersonaDocumento> GetPersonasDocumentosByIdPersona(int idPersona);
+        IEnumerable<PersonaDocumento> GetPersonasDocumentosByTipoYNumero(int idTipoDocumento, string numero);
     }
 }

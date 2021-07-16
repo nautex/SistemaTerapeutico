@@ -9,7 +9,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task AddPersonaVinculacion(PersonaVinculacion personaVinculacion);
         void DeletePersonasVinculacionesByIdPersona(int idPersona);
         void DeletePersonaVinculacionByIds(int idPersona, int idPersonaVinculo);
-        Task<IEnumerable<PersonaVinculacion>> GetPersonasVinculaciones();
+        IEnumerable<PersonaVinculacion> GetPersonasVinculaciones();
         void UpdatePersonaVinculacion(PersonaVinculacion personaVinculacion);
         Task<IEnumerable<PersonaVinculacion>> GetPersonasVinculacionesByIdPersona(int idPersona);
     }

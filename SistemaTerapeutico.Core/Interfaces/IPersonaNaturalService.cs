@@ -6,7 +6,7 @@ namespace SistemaTerapeutico.Core.Interfaces
 {
     public interface IPersonaNaturalService
     {
-        Task<IEnumerable<PersonaNatural>> GetPersonasNaturales();
+        IEnumerable<PersonaNatural> GetPersonasNaturales();
         Task<PersonaNatural> GetPersonaNaturalById(int idPersona);
         Task AddPersonaNatural(PersonaNatural personaNatural);
         void UpdatePersonaNatural(PersonaNatural personaNatural);

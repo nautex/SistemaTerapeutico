@@ -1,6 +1,6 @@
 ﻿namespace SistemaTerapeutico.Core.DTOs
 {
-    public class TipoDocumentoNumeroDto
+    public class DocumentoTipoNumeroDto
     {
         public int IdTipoDocumento { get; set; }
         public string Numero { get; set; }
