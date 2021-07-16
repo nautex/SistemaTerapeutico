@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
@@ -28,12 +27,9 @@ namespace SistemaTerapeutico.Core.Services
             _unitOfWork.PersonaDocumentoRepository.DeletesById(idPersona);
         }
 
-        public PersonaDocumento GetPersonaDocumentoByIds(int idPersona, int idTipoDocumento)
+        public Task<PersonaDocumento> GetPersonaDocumentoByIds(int idPersona, int idTipoDocumento)
         {
-            var listado = _unitOfWork.PersonaDocumentoRepository.GetAll();
-            listado = listado.Where(x => x.Id == idPersona && x.IdTipoDocumento == idTipoDocumento);
-
-            return listado.FirstOrDefault();
+            return _unitOfWork.PersonaDocumentoRepository.GetByIds(idPersona, idTipoDocumento);
         }
 
         public IEnumerable<PersonaDocumento> GetPersonasDocumentos()
@@ -41,20 +37,14 @@ namespace SistemaTerapeutico.Core.Services
             return _unitOfWork.PersonaDocumentoRepository.GetAll();
         }
 
-        public IEnumerable<PersonaDocumento> GetPersonasDocumentosByIdPersona(int idPersona)
+        public Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentosByIdPersona(int idPersona)
         {
-            var listado = _unitOfWork.PersonaDocumentoRepository.GetAll();
-            listado = listado.Where(x => x.Id == idPersona);
-
-            return listado;
+            return _unitOfWork.PersonaDocumentoRepository.GetsById(idPersona);
         }
 
-        public IEnumerable<PersonaDocumento> GetPersonasDocumentosByTipoYNumero(int idTipoDocumento, string numero)
+        public Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentosByTipoYNumero(int idTipoDocumento, string numero)
         {
-            var listado = _unitOfWork.PersonaDocumentoRepository.GetAll();
-            listado = listado.Where(x => x.IdTipoDocumento == idTipoDocumento && x.Numero == numero);
-
-            return listado;
+            return _unitOfWork.PersonaDocumentoRepository.GetPersonasDocumentosByTipoYNumero(idTipoDocumento, numero);
         }
 
         public void UpdatePersonaDocumento(PersonaDocumento personaDocumento)

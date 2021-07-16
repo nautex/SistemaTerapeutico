@@ -11,8 +11,8 @@ namespace SistemaTerapeutico.Core.Interfaces
         void DeletePersonaDocumentoByIds(int idPersona, int idTipoDocumento);
         IEnumerable<PersonaDocumento> GetPersonasDocumentos();
         void UpdatePersonaDocumento(PersonaDocumento personaDocumento);
-        PersonaDocumento GetPersonaDocumentoByIds(int idPersona, int idTipoDocumento);
-        IEnumerable<PersonaDocumento> GetPersonasDocumentosByIdPersona(int idPersona);
-        IEnumerable<PersonaDocumento> GetPersonasDocumentosByTipoYNumero(int idTipoDocumento, string numero);
+        Task<PersonaDocumento> GetPersonaDocumentoByIds(int idPersona, int idTipoDocumento);
+        Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentosByIdPersona(int idPersona);
+        Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentosByTipoYNumero(int idTipoDocumento, string numero);
     }
 }

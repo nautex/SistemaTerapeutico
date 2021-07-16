@@ -14,19 +14,24 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
 
         }
-
-        public void DeleteByIds(int id, int idPersonaVinculo)
+        //123456789101112131415161718192021222324252627282930
+        public async Task<PersonaVinculacion> GetByIds(int id, int idPersonaVinculo)
         {
-            var list = GetAll();
-            PersonaVinculacion entity = list.Where(x => x.Id == id && x.IdPersonaVinculo == idPersonaVinculo).FirstOrDefault();
+            return await _entities.Where(x => x.Id == id && x.IdPersonaVinculo == idPersonaVinculo).FirstOrDefaultAsync();
+        }
+        public async Task<IEnumerable<PersonaVinculacion>> GetsById(int id)
+        {
+            return await _entities.Where(x => x.Id == id).ToListAsync();
+        }
+        public async Task DeleteByIds(int id, int idPersonaVinculo)
+        {
+            PersonaVinculacion entity = await GetByIds(id, idPersonaVinculo);
 
             _context.Remove(entity);
         }
-
-        public void DeletesById(int id)
+        public async Task DeletesById(int id)
         {
-            var list = GetAll();
-            IEnumerable<PersonaVinculacion> entities = list.Where(x => x.Id == id);
+            IEnumerable<PersonaVinculacion> entities = await GetsById(id);
 
             _context.RemoveRange(entities);
         }

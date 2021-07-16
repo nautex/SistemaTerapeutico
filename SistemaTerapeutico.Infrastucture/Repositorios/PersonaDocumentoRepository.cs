@@ -14,19 +14,31 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
 
         }
-        public void DeletesById(int id)
+        public async Task<PersonaDocumento> GetByIds(int id, int idTipoDocumento)
         {
-            var list = GetAll();
-            IEnumerable<PersonaDocumento> entities = list.Where(x => x.Id == id);
-
-            _context.RemoveRange(entities);
+            return await _entities.Where(x => x.Id == id && x.IdTipoDocumento == idTipoDocumento).FirstOrDefaultAsync();
         }
-        public void DeleteByIds(int id, int idTipoDocumento)
+        public async Task<IEnumerable<PersonaDocumento>> GetsById(int id)
         {
-            var list = GetAll();
-            PersonaDocumento entity = list.Where(x => x.Id == id && x.IdTipoDocumento == idTipoDocumento).FirstOrDefault();
+            return await _entities.Where(x => x.Id == id).ToListAsync();
+        }
+        public async Task DeletesById(int id)
+        {
+            IEnumerable<PersonaDocumento> list = await GetsById(id);
 
-            _context.Remove(entity);
+            _context.RemoveRange(list);
+        }
+        public async Task DeleteByIds(int id, int idTipoDocumento)
+        {
+            PersonaDocumento list = await GetByIds(id, idTipoDocumento);
+
+            _context.Remove(list);
+        }
+        public async Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentosByTipoYNumero(int idTipoDocumento, string numero)
+        {
+            var list = await _entities.Where(x => x.IdTipoDocumento == idTipoDocumento && x.Numero == numero).ToListAsync();
+
+            return list;
         }
     }
 }

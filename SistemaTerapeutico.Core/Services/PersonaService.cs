@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
@@ -160,11 +159,9 @@ namespace SistemaTerapeutico.Core.Services
 
             return new PersonaResponseDto { IdPersona = idPersona, IdDireccion = idDireccion };
         }
-        public IEnumerable<Persona> GetPersonasByNombre(string nombre)
+        public async Task<IEnumerable<Persona>> GetPersonasByNombre(string nombre)
         {
-            var list = _unitOfWork.PersonaRepository.GetAll();
-
-            return list.Where(x => x.Nombres.Contains(nombre));
+            return await _unitOfWork.PersonaRepository.GetPersonasByNombre(nombre);
         }
     }
 }

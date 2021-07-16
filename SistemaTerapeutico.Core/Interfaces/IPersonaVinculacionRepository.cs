@@ -6,7 +6,9 @@ namespace SistemaTerapeutico.Core.Interfaces
 {
     public interface IPersonaVinculacionRepository : IBaseRepository<PersonaVinculacion>
     {
-        void DeletesById(int id);
-        void DeleteByIds(int id, int idPersonaVinculo);
+        Task<PersonaVinculacion> GetByIds(int id, int idPersonaVinculo);
+        Task<IEnumerable<PersonaVinculacion>> GetsById(int id);
+        Task DeletesById(int id);
+        Task DeleteByIds(int id, int idPersonaVinculo);
     }
 }
