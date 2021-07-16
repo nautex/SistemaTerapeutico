@@ -41,16 +41,6 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(Response);
         }
-
-
-        //[HttpPost("{get2}")]
-        //public async Task<IActionResult> PostDatosCompletosParticipante([FromBody] PersonaNaturalDatosCompletosDto child, [FromBody] PersonaNaturalDatosCompletosDto mother, [FromBody] PersonaNaturalDatosCompletosDto dad)
-        //{
-        //    int idChild = await _personaService.AddChildWithParents(child, mother, dad);
-        //    var Response = new ApiResponse<int>(idChild);
-
-        //    return Ok(Response);
-        //}
         [HttpPost("PostPersonaNaturalDatosCompletos")]
         public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto persona)
         {

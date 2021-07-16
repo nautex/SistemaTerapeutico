@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.Entities;
+using SistemaTerapeutico.Core.Exceptions;
 using SistemaTerapeutico.Core.Interfaces;
 
 namespace SistemaTerapeutico.Core.Services
@@ -15,6 +16,13 @@ namespace SistemaTerapeutico.Core.Services
         }
         public async Task AddPersonaVinculacion(PersonaVinculacion personaVinculacion)
         {
+            PersonaVinculacion lPersonaVinculacion = await _unitOfWork.PersonaVinculacionRepository.GetByIds(personaVinculacion.Id, personaVinculacion.IdPersonaVinculo);
+
+            if (lPersonaVinculacion != null)
+            {
+                throw new BusinessException("Ya existe una vinculación entre las personas.");
+            }
+
             await _unitOfWork.PersonaVinculacionRepository.Add(personaVinculacion);
 
             _unitOfWork.SaveChanges();

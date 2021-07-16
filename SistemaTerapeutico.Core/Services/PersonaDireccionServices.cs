@@ -16,14 +16,17 @@ namespace SistemaTerapeutico.Core.Services
         public async Task AddPersonaDireccion(PersonaDireccion personaDireccion)
         {
             await _unitOfWork.PersonaDireccionRepository.Add(personaDireccion);
+            _unitOfWork.SaveChanges();
         }
         public void DeletePersonasDireccionesByIdPersona(int idPersona)
         {
             _unitOfWork.PersonaDireccionRepository.DeletesById(idPersona);
+            _unitOfWork.SaveChanges();
         }
         public void DeletePersonaDirecccionByIds(int idPersona, int numero)
         {
             _unitOfWork.PersonaDireccionRepository.DeleteByIds(idPersona, numero);
+            _unitOfWork.SaveChanges();
         }
         //12345678910111213141516171819202122232425262728293031323334353637381139404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100
         //1al100
@@ -35,6 +38,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdatePersonaDireccion(PersonaDireccion personaDireccion)
         {
             _unitOfWork.PersonaDireccionRepository.Update(personaDireccion);
+            _unitOfWork.SaveChanges();
         }
         public Task<IEnumerable<PersonaDireccion>> GetPersonasDireccionesByIdPersona(int idPersona)
         {

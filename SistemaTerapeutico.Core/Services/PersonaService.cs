@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
@@ -30,17 +31,19 @@ namespace SistemaTerapeutico.Core.Services
                 throw new BusinessException("El nombre de la persona debe tener mas de 3 caracteres.");
             }
 
-            await _unitOfWork.PersonaRepository.Add(persona);
+            await _unitOfWork.PersonaRepository.AddReturnId(persona);
 
             return persona.Id;
         }
         public void UpdatePersona(Persona persona)
         {
             _unitOfWork.PersonaRepository.Update(persona);
+            _unitOfWork.SaveChanges();
         }
-        public Task DeletePersona(int idPersona)
+        public async Task DeletePersona(int idPersona)
         {
-            return _unitOfWork.PersonaRepository.Delete(idPersona);
+            await _unitOfWork.PersonaRepository.Delete(idPersona);
+            _unitOfWork.SaveChanges();
         }
         //public async Task<int> AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto dad)
         //{
@@ -76,12 +79,18 @@ namespace SistemaTerapeutico.Core.Services
         {
             int idPersona;
             int? idDireccion = null;
+            string lNombres = personaDto.PrimerApellido + " " + personaDto.SegundoApellido + " " + personaDto.PrimerNombre + " " + personaDto.SegundoNombre;
+
+            if ((string.IsNullOrEmpty(lNombres) || lNombres.Length <= 3))
+            {
+                throw new BusinessException("El nombre de la persona debe tener mas de 3 caracteres.");
+            }
 
             _unitOfWork.BeginTransaction();
 
             idPersona = await _unitOfWork.PersonaRepository.AddReturnId(new Persona(personaDto.UsuarioRegistro)
             {
-                Nombres = personaDto.PrimerApellido + " " + personaDto.SegundoApellido + " " + personaDto.PrimerNombre + " " + personaDto.SegundoNombre,
+                Nombres = lNombres,
                 FechaIngreso = personaDto.FechaIngreso,
                 IdPaisOrigen = personaDto.IdPaisOrigen
             });
