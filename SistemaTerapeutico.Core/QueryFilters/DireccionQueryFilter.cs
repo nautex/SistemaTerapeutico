@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SistemaTerapeutico.Core.DTOs
+namespace SistemaTerapeutico.Core.QueryFilters
 {
-    public class DireccionUbigeoDetalleDto
+    public class DireccionQueryFilter
     {
         public int IdUbigeo { get; set; }
         public string Detalle { get; set; }

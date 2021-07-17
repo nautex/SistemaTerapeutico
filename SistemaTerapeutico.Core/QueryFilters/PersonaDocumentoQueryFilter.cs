@@ -1,6 +1,6 @@
-﻿namespace SistemaTerapeutico.Core.DTOs
+﻿namespace SistemaTerapeutico.Core.QueryFilters
 {
-    public class DocumentoTipoNumeroDto
+    public class PersonaDocumentoQueryFilter
     {
         public int IdTipoDocumento { get; set; }
         public string Numero { get; set; }

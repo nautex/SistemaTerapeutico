@@ -11,9 +11,10 @@ namespace SistemaTerapeutico.Core.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public Task AddParticipante(Participante participante)
+        public async Task AddParticipante(Participante participante)
         {
-            return _unitOfWork.ParticipanteRepository.Add(participante);
+            await _unitOfWork.ParticipanteRepository.Add(participante);
+            _unitOfWork.SaveChanges();
         }
     }
 }

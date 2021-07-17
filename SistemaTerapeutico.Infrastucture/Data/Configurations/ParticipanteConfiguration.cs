@@ -10,6 +10,10 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
         {
             builder.HasKey(x => x.Id)
                 .HasName("PRIMARY");
+
+            builder.Property(x => x.Id)
+                .HasColumnName("IdParticipante");
+            
             builder.ToTable("participante");
             builder.Property(e => e.TieneDiagnostico)
                 .HasColumnType("bit")

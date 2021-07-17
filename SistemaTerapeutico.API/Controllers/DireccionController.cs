@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
-using SistemaTerapeutico.Core.DTOs;
+using SistemaTerapeutico.Core.QueryFilters;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
 
@@ -30,9 +30,9 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(response);
         }
         [HttpGet("GetDireccionByUbigeoYDetalle")]
-        public async Task<IActionResult> GetDireccionByUbigeoYDetalle(DireccionUbigeoDetalleDto direccionUbigeoDetalleDto)
+        public async Task<IActionResult> GetDireccionByUbigeoYDetalle(DireccionQueryFilter direccionQueryFilter)
         {
-            IEnumerable<Direccion> listado = await _direccionService.GetDireccionsByUbigeoYDetalle(direccionUbigeoDetalleDto.IdUbigeo, direccionUbigeoDetalleDto.Detalle);
+            IEnumerable<Direccion> listado = await _direccionService.GetDireccionsByUbigeoYDetalle(direccionQueryFilter.IdUbigeo, direccionQueryFilter.Detalle);
             var response = new ApiResponse<IEnumerable<Direccion>>(listado);
 
             return Ok(response);

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
+using SistemaTerapeutico.Core.QueryFilters;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
@@ -20,9 +21,9 @@ namespace SistemaTerapeutico.API.Controllers
             _mapper = mapper;
         }
         [HttpGet("GetPersonaDocumentoByTipoYNumero")]
-        public async Task<IActionResult> GetPersonaDocumentoByTipoYNumero(DocumentoTipoNumeroDto tipoDocumentoNumeroDto)
+        public async Task<IActionResult> GetPersonaDocumentoByTipoYNumero(PersonaDocumentoQueryFilter personaDocumentoQueryFilter)
         {
-            var PersonasDocumentos = await _personaDocumentoService.GetPersonasDocumentosByTipoYNumero(tipoDocumentoNumeroDto.IdTipoDocumento, tipoDocumentoNumeroDto.Numero);
+            var PersonasDocumentos = await _personaDocumentoService.GetPersonasDocumentosByTipoYNumero(personaDocumentoQueryFilter.IdTipoDocumento, personaDocumentoQueryFilter.Numero);
             var Response = new ApiResponse<IEnumerable<PersonaDocumento>>(PersonasDocumentos);
             return Ok(Response);
         }

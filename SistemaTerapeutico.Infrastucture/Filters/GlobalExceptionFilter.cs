@@ -34,7 +34,7 @@ namespace SistemaTerapeutico.Infrastucture.Filters
                 {
                     Status = 500,
                     Title = "Internal Server Error",
-                    Detail = exception.Message + Environment.NewLine + exception.InnerException != null ? exception.InnerException.Message : ""
+                    Detail = ObtenerDetallesError(exception)
                 };
                 var json = new
                 {
@@ -44,6 +44,21 @@ namespace SistemaTerapeutico.Infrastucture.Filters
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.ExceptionHandled = true;
             }
+        }
+        private string ObtenerDetallesError(Exception xExcepcion)
+        {
+            string Detalles = xExcepcion.Message;
+
+            Exception Excepcion = xExcepcion.InnerException;
+
+            while (Excepcion != null)
+            {
+                Detalles += " - " + Excepcion.Message;
+
+                Excepcion = Excepcion.InnerException;
+            }
+
+            return Detalles;
         }
     }
 }

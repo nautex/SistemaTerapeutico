@@ -31,6 +31,7 @@ namespace SistemaTerapeutico.BackEnd.API
                 options.Filters.Add<GlobalExceptionFilter>();
             });
 
+            services.AddTransient<IParticipanteRepository, ParticipanteRepository>();
             services.AddTransient<IPersonaRepository, PersonaRepository>();
             services.AddTransient<IPersonaDocumentoRepository, PersonaDocumentoRepository>();
             services.AddTransient<IPersonaContactoRepository, PersonaContactoRepository>();
@@ -59,6 +60,7 @@ namespace SistemaTerapeutico.BackEnd.API
                 });
             });
 
+            services.AddTransient<IParticipanteService, ParticipanteService>();
             services.AddTransient<IPersonaService, PersonaService>();
             services.AddTransient<IPersonaVinculacionService, PersonaVinculacionService>();
             services.AddTransient<IPersonaDocumentoService, PersonaDocumentoService>();
