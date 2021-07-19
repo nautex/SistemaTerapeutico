@@ -25,7 +25,7 @@ namespace SistemaTerapeutico.API.Controllers
             PersonaVinculacion personaVinculacion = new PersonaVinculacion("JSOTELO")
             {
                 Id = personaVinculacionDto.Id,
-                IdPersonaVinculo = personaVinculacionDto.IdPersonaVinculo,
+                IdTwo = personaVinculacionDto.IdPersonaVinculo,
                 IdTipoVinculo = personaVinculacionDto.IdTipoVinculo
             };
             await _personaVinculacionService.AddPersonaVinculacion(personaVinculacion);

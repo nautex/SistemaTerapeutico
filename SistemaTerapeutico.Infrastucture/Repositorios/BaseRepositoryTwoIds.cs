@@ -15,17 +15,16 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
 
         }
-        public async Task AddGenerateNumero(T entity)
+        public async Task AddGenerateIdTwo(T entity)
         {
-            entity.Numero = GetNewNumeroById(entity.Id);
-
+            entity.IdTwo = GetNewIdTwoById(entity.Id);
             await _entities.AddAsync(entity);
 
             _context.SaveChanges();
         }
-        public async Task DeleteByIds(int id, int numero)
+        public async Task DeleteByIds(int id, int idTwo)
         {
-            T entity = await GetByIds(id, numero);
+            T entity = await GetByIds(id, idTwo);
 
             _context.Remove(entity);
         }
@@ -37,35 +36,29 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
             _context.RemoveRange(entities);
         }
 
-        public async Task<T> GetByIds(int id, int numero)
+        public async Task<T> GetByIds(int id, int idTwo)
         {
-            IQueryable<T> listado =
-                from pd in _entities
-                where pd.Id == id && pd.Numero == numero
-                select pd;
-
-            return await listado.FirstOrDefaultAsync();
+            return await _entities.Where(x => x.Id == id && x.IdTwo == idTwo).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<T>> GetsById(int id)
         {
-            IQueryable<T> listado =
-                from pd in _entities
-                where pd.Id == id
-                select pd;
-
-            return await listado.ToListAsync();
+            return await _entities.Where(x => x.Id == id).ToListAsync();
         }
-        public int GetNewNumeroById(int id)
+        public async Task<IEnumerable<T>> GetsByIdTwo(int idTwo)
+        {
+            return await _entities.Where(x => x.IdTwo == idTwo).ToListAsync();
+        }
+        public int GetNewIdTwoById(int id)
         {
             IQueryable<NumeroEnteroDto> listado =
                 from pd in _entities
                 where pd.Id == id
-                select new NumeroEnteroDto { Numero = pd.Numero };
+                select new NumeroEnteroDto { Numero = pd.IdTwo };
 
             NumeroEnteroDto item = listado.OrderByDescending(x => x.Numero).FirstOrDefault();
 
-            return item == null ? 1 : item.Numero + 1;
+            return item == null ? 1 : item.Numero++;
         }
 
     }

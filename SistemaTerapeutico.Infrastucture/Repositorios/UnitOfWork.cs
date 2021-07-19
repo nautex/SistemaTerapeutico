@@ -17,6 +17,11 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         private readonly ICatalogoRepository _catalogoRepository;
         private readonly IDireccionRepository _direccionRepository;
         private readonly IParticipanteRepository _participanteRepository;
+        private readonly IAtencionRepository _atencionRepository;
+        private readonly ITerapiaRepository _terapiaRepository;
+        private readonly ITerapiaTerapeutaRepository _terapiaTerapeutaRepository;
+        private readonly IPeriodoTerapiaRepository _periodoTerapiaRepository;
+        private readonly ISesionRepository _sesionRepository;
         public UnitOfWork(SISDETContext context)
         {
             _context = context;
@@ -35,6 +40,16 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         public ICatalogoRepository CatalogoRepository => _catalogoRepository ?? new CatalogoRepository(_context);
         public IDireccionRepository DireccionRepository => _direccionRepository ?? new DireccionRepository(_context);
         public IParticipanteRepository ParticipanteRepository => _participanteRepository ?? new ParticipanteRepository(_context);
+
+        public IAtencionRepository AtencionRepository => _atencionRepository ?? new AtencionRepository(_context);
+
+        public ITerapiaRepository TerapiaRepository => _terapiaRepository ?? new TerapiaRepository(_context);
+
+        public ITerapiaTerapeutaRepository TerapiaTerapeutaRepository => _terapiaTerapeutaRepository ?? new TerapiaTerapeutaRepository(_context);
+
+        public IPeriodoTerapiaRepository PeriodoTerapiaRepository => _periodoTerapiaRepository ?? new PeriodoTerapiaRepository(_context);
+
+        public ISesionRepository SesionRepository => _sesionRepository ?? new SesionRepository(_context);
 
         public void Dispose()
         {

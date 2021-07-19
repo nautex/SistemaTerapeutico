@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.Entities;
@@ -17,7 +16,7 @@ namespace SistemaTerapeutico.Core.Services
         }
         public async Task AddPersonaDocumento(PersonaDocumento personaDocumento)
         {
-            IEnumerable<PersonaDocumento> listado = await _unitOfWork.PersonaDocumentoRepository.GetPersonasDocumentosByTipoYNumero(personaDocumento.IdTipoDocumento, personaDocumento.Numero);
+            IEnumerable<PersonaDocumento> listado = await _unitOfWork.PersonaDocumentoRepository.GetPersonasDocumentosByTipoYNumero(personaDocumento.IdTwo, personaDocumento.Numero);
 
             if (listado.Count() > 0)
             {

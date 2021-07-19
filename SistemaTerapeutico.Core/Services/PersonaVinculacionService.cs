@@ -16,7 +16,7 @@ namespace SistemaTerapeutico.Core.Services
         }
         public async Task AddPersonaVinculacion(PersonaVinculacion personaVinculacion)
         {
-            PersonaVinculacion lPersonaVinculacion = await _unitOfWork.PersonaVinculacionRepository.GetByIds(personaVinculacion.Id, personaVinculacion.IdPersonaVinculo);
+            PersonaVinculacion lPersonaVinculacion = await _unitOfWork.PersonaVinculacionRepository.GetByIds(personaVinculacion.Id, personaVinculacion.IdTwo);
 
             if (lPersonaVinculacion != null)
             {
@@ -24,12 +24,12 @@ namespace SistemaTerapeutico.Core.Services
             }
 
             await _unitOfWork.PersonaVinculacionRepository.Add(personaVinculacion);
-
             _unitOfWork.SaveChanges();
         }
         public void DeletePersonasVinculacionesByIdPersona(int idPersona)
         {
             _unitOfWork.PersonaVinculacionRepository.Delete(idPersona);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeletePersonaVinculacionByIds(int idPersona, int idPersonaVinculo)

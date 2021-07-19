@@ -21,8 +21,7 @@ namespace SistemaTerapeutico.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        [Route("get")]
+        [HttpGet("GetPersonas")]
         public IActionResult GetPersonas()
         {
             var Personas = _personaService.GetPersonas();
@@ -32,7 +31,7 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(Response);
         }
 
-        [HttpGet("{pIdPersona}")]
+        [HttpGet("GetPersonaById")]
         public async Task<IActionResult> GetPersonaById(int idPersona)
         {
             var Persona = await _personaService.GetPersonaById(idPersona);

@@ -8,7 +8,7 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<PersonaContacto> builder)
         {
-            builder.HasKey(e => new { e.Id, e.Numero })
+            builder.HasKey(e => new { e.Id, e.IdTwo })
                     .HasName("PRIMARY");
 
             builder.ToTable("personacontacto");
@@ -17,7 +17,9 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .HasColumnName("IdPersona")
                 .HasColumnType("int(11)");
 
-            builder.Property(e => e.Numero).HasColumnType("int(11)");
+            builder.Property(e => e.IdTwo)
+                .HasColumnName("Numero")
+                .HasColumnType("int(11)");
 
             builder.Property(e => e.IdEstado)
                 .HasColumnType("int(11)")

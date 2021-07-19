@@ -8,19 +8,21 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<PersonaVinculacion> builder)
         {
-            builder.HasKey(e => new { e.Id, e.IdPersonaVinculo })
+            builder.HasKey(e => new { e.Id, e.IdTwo })
                     .HasName("PRIMARY");
 
             builder.ToTable("personavinculacion");
 
-            builder.HasIndex(e => e.IdPersonaVinculo)
+            builder.HasIndex(e => e.IdTwo)
                 .HasName("FK_PersonaVinculacion_Persona1");
 
             builder.Property(e => e.Id)
                 .HasColumnName("IdPersona")
                 .HasColumnType("int(11)");
 
-            builder.Property(e => e.IdPersonaVinculo).HasColumnType("int(11)");
+            builder.Property(e => e.IdTwo)
+                .HasColumnName("IdPersonaVinculo")
+                .HasColumnType("int(11)");
 
             builder.Property(e => e.IdEstado)
                 .HasColumnType("int(11)")
@@ -44,9 +46,9 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
             //    .OnDelete(DeleteBehavior.ClientSetNull)
             //    .HasConstraintName("FK_PersonaVinculacion_Persona");
 
-            //builder.HasOne(d => d.IdPersonaVinculoNavigation)
-            //    .WithMany(p => p.PersonaVinculacionIdPersonaVinculoNavigation)
-            //    .HasForeignKey(d => d.IdPersonaVinculo)
+            //builder.HasOne(d => d.IdTwoNavigation)
+            //    .WithMany(p => p.PersonaVinculacionIdTwoNavigation)
+            //    .HasForeignKey(d => d.IdTwo)
             //    .OnDelete(DeleteBehavior.ClientSetNull)
             //    .HasConstraintName("FK_PersonaVinculacion_Persona1");
         }

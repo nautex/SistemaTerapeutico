@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
-using SistemaTerapeutico.Core.QueryFilters;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Core.QueryFilters;
 
 namespace SistemaTerapeutico.API.Controllers
 {
@@ -28,12 +28,12 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(Response);
         }
         [HttpPost("PostPersonaDocumento")]
-        public async Task<IActionResult> PostPersonaDocumento (PersonaDocumentoDto personaDocumentoDto)
+        public async Task<IActionResult> PostPersonaDocumento(PersonaDocumentoDto personaDocumentoDto)
         {
             PersonaDocumento lPersonaDocumento = new PersonaDocumento(personaDocumentoDto.UsuarioRegistro)
             {
                 Id = personaDocumentoDto.Id,
-                IdTipoDocumento = personaDocumentoDto.IdTipoDocumento,
+                IdTwo = personaDocumentoDto.IdTipoDocumento,
                 Numero = personaDocumentoDto.Numero
             };
             await _personaDocumentoService.AddPersonaDocumento(lPersonaDocumento);

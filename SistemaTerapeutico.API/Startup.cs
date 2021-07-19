@@ -37,6 +37,10 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IPersonaContactoRepository, PersonaContactoRepository>();
             services.AddTransient<IPersonaVinculacionRepository, PersonaVinculacionRepository>();
             services.AddTransient<IDireccionRepository, DireccionRepository>();
+            services.AddTransient<IAtencionRepository, AtencionRepository>();
+            services.AddTransient<ITerapiaRepository, TerapiaRepository>();
+            services.AddTransient<IPeriodoTerapiaRepository, PeriodoTerapiaRepository>();
+            services.AddTransient<ISesionRepository, SesionRepository>();
 
             services.AddDbContext<SISDETContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("SISDET"))
@@ -65,6 +69,10 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IPersonaVinculacionService, PersonaVinculacionService>();
             services.AddTransient<IPersonaDocumentoService, PersonaDocumentoService>();
             services.AddTransient<IDireccionService, DireccionService>();
+            services.AddTransient<IAtencionService, AtencionService>();
+            services.AddTransient<ITerapiaService, TerapiaService>();
+            services.AddTransient<IPeriodoTerapiaService, PeriodoTerapiaService>();
+            services.AddTransient<ISesionService, SesionService>();
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();

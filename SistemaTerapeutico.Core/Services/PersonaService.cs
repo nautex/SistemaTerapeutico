@@ -125,7 +125,7 @@ namespace SistemaTerapeutico.Core.Services
 
             if (idDireccion != null)
             {
-                await _unitOfWork.PersonaDireccionRepository.AddGenerateNumero(new PersonaDireccion(personaDto.UsuarioRegistro)
+                await _unitOfWork.PersonaDireccionRepository.AddGenerateIdTwo(new PersonaDireccion(personaDto.UsuarioRegistro)
                 {
                     Id = idPersona,
                     IdTipoDireccion = ETipoDireccion.Domicilio,
@@ -138,14 +138,14 @@ namespace SistemaTerapeutico.Core.Services
                 await _unitOfWork.PersonaDocumentoRepository.Add(new PersonaDocumento(personaDto.UsuarioRegistro)
                 {
                     Id = idPersona,
-                    IdTipoDocumento = personaDto.IdTipoDocumento,
+                    IdTwo = personaDto.IdTipoDocumento,
                     Numero = personaDto.NumeroDocumento
                 });
             }
 
             if (!string.IsNullOrEmpty(personaDto.Celular))
             {
-                await _unitOfWork.PersonaContactoRepository.AddGenerateNumero(new PersonaContacto(personaDto.UsuarioRegistro)
+                await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(new PersonaContacto(personaDto.UsuarioRegistro)
                 {
                     Id = idPersona,
                     IdTipoContacto = ETipoContacto.CelularMovistar,
@@ -155,7 +155,7 @@ namespace SistemaTerapeutico.Core.Services
 
             if (!string.IsNullOrEmpty(personaDto.Correo))
             {
-                await _unitOfWork.PersonaContactoRepository.AddGenerateNumero(new PersonaContacto(personaDto.UsuarioRegistro)
+                await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(new PersonaContacto(personaDto.UsuarioRegistro)
                 {
                     Id = idPersona,
                     IdTipoContacto = ETipoContacto.Correo,

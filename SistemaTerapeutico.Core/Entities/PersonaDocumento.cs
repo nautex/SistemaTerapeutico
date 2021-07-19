@@ -2,14 +2,13 @@
 
 namespace SistemaTerapeutico.Core.Entities
 {
-    public partial class PersonaDocumento : BaseEntity
+    public partial class PersonaDocumento : BaseEntityTwoIds
     {
         public PersonaDocumento(string usuarioRegistro) : base(usuarioRegistro)
         {
             IdEstado = EEstadoBasico.Activo;
             UsuarioRegistro = usuarioRegistro;
         }
-        public int IdTipoDocumento { get; set; }
         public string Numero { get; set; }
         public int? IdEstado { get; set; }
 

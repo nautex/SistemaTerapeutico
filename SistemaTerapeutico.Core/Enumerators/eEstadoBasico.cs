@@ -70,4 +70,23 @@
         public static int Sobrino = 47;
         public static int Abuelo = 48;
     }
+    public static class ETipoTerapia
+    {
+        public static int Individual = 50;
+        public static int Grupal = 51;
+        public static int Fisica = 52;
+    }
+    public static class ETipoCargoTerapeuta
+    {
+        public static int Titular = 54;
+        public static int Apoyo = 55;
+        public static int Asistente = 56;
+        public static int Auxiliar = 57;
+    }
+    public static class ETipoAsistenciaSesion
+    {
+        public static int Normal = 59;
+        public static int Tarde = 60;
+        public static int Inasistencia = 61;
+    }
 }

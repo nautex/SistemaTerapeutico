@@ -25,7 +25,11 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<Ubigeo> Ubigeo { get; set; }
         public virtual DbSet<Direccion> Direccion { get; set; }
         public virtual DbSet<Participante> Participante { get; set; }
-
+        public virtual DbSet<Atencion> Atencion { get; set; }
+        public virtual DbSet<Terapia> Terapia { get; set; }
+        public virtual DbSet<TerapiaTerapeuta> TerapiaTerapeuta { get; set; }
+        public virtual DbSet<PeriodoTerapia> PeriodoTerapia { get; set; }
+        public virtual DbSet<Sesion> Sesion { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CatalogoConfiguration());
@@ -38,7 +42,11 @@ namespace SistemaTerapeutico.Infrastucture.Data
             modelBuilder.ApplyConfiguration(new UbigeoConfiguration());
             modelBuilder.ApplyConfiguration(new DireccionConfiguration());
             modelBuilder.ApplyConfiguration(new ParticipanteConfiguration());
+            modelBuilder.ApplyConfiguration(new AtencionConfiguration());
+            modelBuilder.ApplyConfiguration(new TerapiaConfiguration());
+            modelBuilder.ApplyConfiguration(new TerapiaTerapeutaConfiguracion());
+            modelBuilder.ApplyConfiguration(new PeriodoTerapiaConfiguration());
+            modelBuilder.ApplyConfiguration(new SesionConfiguration());
         }
-
     }
 }
