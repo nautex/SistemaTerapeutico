@@ -20,6 +20,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         IPeriodoTerapiaRepository PeriodoTerapiaRepository { get; }
         ISesionRepository SesionRepository { get; }
         ISesionCriterioRepository SesionCriterioRepository { get; }
+        ISesionCriterioActividadRepository SesionCriterioActividadRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
         void BeginTransaction();

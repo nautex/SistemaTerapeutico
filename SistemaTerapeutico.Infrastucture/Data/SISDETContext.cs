@@ -31,6 +31,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<PeriodoTerapia> PeriodoTerapia { get; set; }
         public virtual DbSet<Sesion> Sesion { get; set; }
         public virtual DbSet<SesionCriterio> SesionCriterio { get; set; }
+        public virtual DbSet<SesionCriterioActividad> SesionCriterioActividad { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CatalogoConfiguration());
@@ -49,6 +50,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
             modelBuilder.ApplyConfiguration(new PeriodoTerapiaConfiguration());
             modelBuilder.ApplyConfiguration(new SesionConfiguration());
             modelBuilder.ApplyConfiguration(new SesionCriterioConfiguration());
+            modelBuilder.ApplyConfiguration(new SesionCriterioActividadConfiguration());
         }
     }
 }

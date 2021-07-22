@@ -14,7 +14,11 @@ namespace SistemaTerapeutico.API.Controllers
     {
         private readonly ISesionCriterioService _sesionCriterioService;
         private readonly IMapper _mapper;
-
+        public SesionCriterioController(ISesionCriterioService sesionCriterioService, IMapper mapper)
+        {
+            _sesionCriterioService = sesionCriterioService;
+            _mapper = mapper;
+        }
         [HttpGet("GetSesionesCriterios")]
         public IActionResult GetSesionesCriterios()
         {
