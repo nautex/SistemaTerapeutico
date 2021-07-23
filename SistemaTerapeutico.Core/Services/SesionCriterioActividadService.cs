@@ -18,34 +18,33 @@ namespace SistemaTerapeutico.Core.Services
             await _unitOfWork.SesionCriterioActividadRepository.Add(sesionCriterioActividad);
         }
 
-        public void DeletePersonaDirecccionByIds(int idSesionCriterio, int idActividad)
+        public void DeleteSesionCriterioActividadByIds(int idSesionCriterio, int idActividad)
         {
-            _unitOfWork.SesionCriterioRepository.(idSesionCriterio, idActividad);
+            _unitOfWork.SesionCriterioActividadRepository.DeleteByIds(idSesionCriterio, idActividad);
         }
 
         public void DeleteSesionesCriteriosActividadesByIdSesionCriterio(int idSesionCriterio)
         {
-            throw new NotImplementedException();
+            _unitOfWork.SesionCriterioActividadRepository.DeletesById(idSesionCriterio);
         }
 
-        public Task<SesionCriterioActividad> GetSesionCriterioActividadByIds(int idSesionCriterio, int idActividad)
+        public async Task<SesionCriterioActividad> GetSesionCriterioActividadByIds(int idSesionCriterio, int idActividad)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.SesionCriterioActividadRepository.GetByIds(idSesionCriterio, idActividad);
         }
 
         public IEnumerable<SesionCriterioActividad> GetSesionesCriteriosActividades()
         {
-            throw new NotImplementedException();
+            return _unitOfWork.SesionCriterioActividadRepository.GetAll();
         }
-
-        public Task<IEnumerable<SesionCriterioActividad>> GetSesionesCriteriosActividadesByidSesionCriterio(int idSesionCriterio)
+        public async Task<IEnumerable<SesionCriterioActividad>> GetSesionesCriteriosActividadesByidSesionCriterio(int idSesionCriterio)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.SesionCriterioActividadRepository.GetsById(idSesionCriterio);
         }
 
         public void UpdateSesionCriterioActividad(SesionCriterioActividad sesionCriterioActividad)
         {
-            throw new NotImplementedException();
+            _unitOfWork.SesionCriterioActividadRepository.Update(sesionCriterioActividad);
         }
     }
 }

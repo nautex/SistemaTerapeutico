@@ -28,7 +28,8 @@ namespace SistemaTerapeutico.API.Controllers
                 IdPeriodoTerapia = sesionDto.IdPeriodoTerapia,
                 Fecha = sesionDto.Fecha,
                 Observacion = sesionDto.Observacion,
-                IdEstadoAsistencia = sesionDto.IdEstadoAsistencia
+                IdEstadoAsistencia = sesionDto.IdEstadoAsistencia,
+                IdPuntuacion = sesionDto.IdPuntuacion
             };
             var response = new ApiResponse<int>(await _sesionService.AddSesion(sesion));
             return Ok(response);
