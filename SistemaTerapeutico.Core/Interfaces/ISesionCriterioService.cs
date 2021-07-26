@@ -7,10 +7,10 @@ namespace SistemaTerapeutico.Core.Interfaces
     public interface ISesionCriterioService
     {
         IEnumerable<SesionCriterio> GetSesionesCriterios();
-        Task<SesionCriterio> GetSesionCriterioById(int idSesionCriterio);
+        Task<SesionCriterio> GetSesionCriterioByIds(int idSesion, int idObjetivoCriterio);
         Task<int> AddSesionCriterio(SesionCriterio SesionCriterio);
         void UpdateSesionCriterio(SesionCriterio SesionCriterio);
-        Task DeleteSesionCriterio(int idSesionCriterio);
+        Task DeleteSesionCriterioByIds(int idSesion, int idObjetivoCriterio);
         Task<IEnumerable<SesionCriterio>> GetSesionesCriteriosByIdSesion(int idSesion);
     }
 }

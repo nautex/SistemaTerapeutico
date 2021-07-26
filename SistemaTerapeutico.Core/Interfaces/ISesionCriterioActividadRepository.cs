@@ -2,7 +2,7 @@
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface ISesionCriterioActividadRepository : IBaseRepositoryTwoIds<SesionCriterioActividad>
+    public interface ISesionCriterioActividadRepository : IBaseRepositoryThreeIds<SesionCriterioActividad>
     {
     }
 }

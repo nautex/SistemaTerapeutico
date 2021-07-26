@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -33,8 +31,9 @@ namespace SistemaTerapeutico.API.Controllers
         {
             SesionCriterioActividad entity = new SesionCriterioActividad(sesionCriterioActividadDto.UsuarioRegistro)
             {
-                Id = sesionCriterioActividadDto.IdSesionCriterio,
-                IdTwo = sesionCriterioActividadDto.IdActividad,
+                Id = sesionCriterioActividadDto.IdSesion,
+                IdTwo = sesionCriterioActividadDto.IdObjetivoCriterio,
+                IdThree = sesionCriterioActividadDto.IdActividad,
                 Orden = sesionCriterioActividadDto.Orden,
                 DetalleAplicacion = sesionCriterioActividadDto.DetalleAplicacion
             };

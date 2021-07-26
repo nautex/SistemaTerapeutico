@@ -17,14 +17,19 @@ namespace SistemaTerapeutico.Core.Services
             return _unitOfWork.SesionCriterioRepository.AddReturnId(sesionCriterio);
         }
 
-        public async Task DeleteSesionCriterio(int idSesionCriterio)
+        public async Task DeleteSesionCriterioByIds(int idSesion, int idObjetivoCriterio)
         {
-            await _unitOfWork.SesionCriterioRepository.Delete(idSesionCriterio);
+            await _unitOfWork.SesionCriterioRepository.DeleteByIds(idSesion, idObjetivoCriterio);
         }
 
-        public async Task<SesionCriterio> GetSesionCriterioById(int idSesionCriterio)
+        public async Task<SesionCriterio> GetSesionCriterioByIds(int idSesion)
         {
-            return await _unitOfWork.SesionCriterioRepository.GetById(idSesionCriterio);
+            return await _unitOfWork.SesionCriterioRepository.GetById(idSesion);
+        }
+
+        public async Task<SesionCriterio> GetSesionCriterioByIds(int idSesion, int idObjetivoCriterio)
+        {
+            return await _unitOfWork.SesionCriterioRepository.GetByIds(idSesion, idObjetivoCriterio);
         }
 
         public IEnumerable<SesionCriterio> GetSesionesCriterios()

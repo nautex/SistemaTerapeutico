@@ -8,8 +8,9 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<SesionCriterio> builder)
         {
-            builder.HasKey(x => x.Id).HasName("PRIMARY");
-            builder.Property(x => x.Id).HasColumnName("IdSesionCriterio");
+            builder.HasKey(x => new { x.Id, x.IdTwo }).HasName("PRIMARY");
+            builder.Property(x => x.Id).HasColumnName("IdSesion");
+            builder.Property(x => x.IdTwo).HasColumnName("IdObjetivoCriterio");
         }
     }
 }

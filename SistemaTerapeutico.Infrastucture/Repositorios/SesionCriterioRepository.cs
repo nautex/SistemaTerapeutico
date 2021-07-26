@@ -8,7 +8,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class SesionCriterioRepository : BaseRepository<SesionCriterio>, ISesionCriterioRepository
+    public class SesionCriterioRepository : BaseRepositoryTwoIds<SesionCriterio>, ISesionCriterioRepository
     {
         public SesionCriterioRepository(SISDETContext context) : base(context)
         {
@@ -16,7 +16,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         }
         public async Task<IEnumerable<SesionCriterio>> GetSesionesCriteriosByIdSesion(int idSesion)
         {
-            return await _entities.Where(x => x.IdSesion == idSesion).ToListAsync();
+            return await _entities.Where(x => x.Id == idSesion).ToListAsync();
         }
     }
 }

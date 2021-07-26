@@ -20,7 +20,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         }
         public async Task<IEnumerable<Sesion>> GetSesionesByIdPeriodoTerapia(int idPeriodoTerapia)
         {
-            return await _entities.Where(x => x.IdPeriodoTerapia == idPeriodoTerapia).ToListAsync();
+            return await _entities.Where(x => x.IdPeriodo == idPeriodoTerapia).ToListAsync();
         }
     }
 }

@@ -12,10 +12,11 @@ namespace SistemaTerapeutico.Core.Entities
             Observacion = "";
         }
         public int IdTerapia { get; set; }
-        public int IdPeriodoTerapia { get; set; }
+        public int IdPeriodo { get; set; }
         public DateTime Fecha { get; set; }
         public int IdEstadoAsistencia { get; set; }
-        public int IdPuntuacion { get; set; }
+        public int IdPuntuacionCriterio { get; set; }
+        public int IdPuntuacionActividad { get; set; }
         public string Observacion { get; set; }
 
     }

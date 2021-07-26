@@ -32,17 +32,18 @@ namespace SistemaTerapeutico.API.Controllers
         {
             SesionCriterio sesionCriterio = new SesionCriterio(sesionCriterioDto.UsuarioRegistro)
             {
-                IdSesion = sesionCriterioDto.IdSesion,
-                IdObjetivoCriterio = sesionCriterioDto.IdObjetivoCriterio
+                Id = sesionCriterioDto.IdSesion,
+                IdTwo = sesionCriterioDto.IdObjetivoCriterio,
+                IdPuntuacionDetalle = sesionCriterioDto.IdPuntuacionDetalle
             };
             var response = new ApiResponse<int>(await _sesionCriterioService.AddSesionCriterio(sesionCriterio));
             return Ok(response);
         }
-        [HttpGet("GetSesionesByIdSesion")]
-        public async Task<IActionResult> GetSesionesByIdSesion(int idSesion)
+        [HttpGet("GetSesionesCriteriosByIdSesion")]
+        public async Task<IActionResult> GetSesionesCriteriosByIdSesion(int idSesion)
         {
-            var entity = await _sesionCriterioService.GetSesionCriterioById(idSesion);
-            var response = new ApiResponse<SesionCriterio>(entity);
+            var list = await _sesionCriterioService.GetSesionesCriteriosByIdSesion(idSesion);
+            var response = new ApiResponse<IEnumerable<SesionCriterio>>(list);
 
             return Ok(response);
         }

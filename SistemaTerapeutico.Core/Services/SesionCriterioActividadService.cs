@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
@@ -18,28 +17,27 @@ namespace SistemaTerapeutico.Core.Services
             await _unitOfWork.SesionCriterioActividadRepository.Add(sesionCriterioActividad);
         }
 
-        public void DeleteSesionCriterioActividadByIds(int idSesionCriterio, int idActividad)
+        public void DeleteSesionCriterioActividadByIds(int idSesion, int idObjetivoCriterio, int idActividad)
         {
-            _unitOfWork.SesionCriterioActividadRepository.DeleteByIds(idSesionCriterio, idActividad);
+            _unitOfWork.SesionCriterioActividadRepository.DeleteByThreeIds(idSesion, idObjetivoCriterio, idActividad);
+        }
+        public void DeleteSesionesCriteriosActividadesByIdSesion(int idSesion)
+        {
+            _unitOfWork.SesionCriterioActividadRepository.DeletesById(idSesion);
         }
 
-        public void DeleteSesionesCriteriosActividadesByIdSesionCriterio(int idSesionCriterio)
+        public async Task<SesionCriterioActividad> GetSesionCriterioActividadByIds(int idSesion, int idObjetivoCriterio, int idActividad)
         {
-            _unitOfWork.SesionCriterioActividadRepository.DeletesById(idSesionCriterio);
-        }
-
-        public async Task<SesionCriterioActividad> GetSesionCriterioActividadByIds(int idSesionCriterio, int idActividad)
-        {
-            return await _unitOfWork.SesionCriterioActividadRepository.GetByIds(idSesionCriterio, idActividad);
+            return await _unitOfWork.SesionCriterioActividadRepository.GetByThreeIds(idSesion, idObjetivoCriterio, idActividad);
         }
 
         public IEnumerable<SesionCriterioActividad> GetSesionesCriteriosActividades()
         {
             return _unitOfWork.SesionCriterioActividadRepository.GetAll();
         }
-        public async Task<IEnumerable<SesionCriterioActividad>> GetSesionesCriteriosActividadesByidSesionCriterio(int idSesionCriterio)
+        public async Task<IEnumerable<SesionCriterioActividad>> GetSesionesCriteriosActividadesByidSesion(int idSesion)
         {
-            return await _unitOfWork.SesionCriterioActividadRepository.GetsById(idSesionCriterio);
+            return await _unitOfWork.SesionCriterioActividadRepository.GetsById(idSesion);
         }
 
         public void UpdateSesionCriterioActividad(SesionCriterioActividad sesionCriterioActividad)
