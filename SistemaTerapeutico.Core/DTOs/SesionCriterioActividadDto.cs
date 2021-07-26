@@ -7,7 +7,7 @@
         public int IdActividad { get; set; }
         public int Orden { get; set; }
         public string DetalleAplicacion { get; set; }
-        public int Puntuacion { get; set; }
+        public int IdPuntuacionDetalle { get; set; }
         public string UsuarioRegistro { get; set; }
     }
 }

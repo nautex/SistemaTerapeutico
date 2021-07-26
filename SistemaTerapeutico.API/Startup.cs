@@ -1,11 +1,14 @@
 using System;
+using System.Text;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using SistemaTerapeutico.Core.Interfaces;
 using SistemaTerapeutico.Core.Services;
 using SistemaTerapeutico.Infrastucture.Data;
@@ -42,12 +45,33 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IPeriodoTerapiaRepository, PeriodoTerapiaRepository>();
             services.AddTransient<ISesionRepository, SesionRepository>();
             services.AddTransient<ISesionCriterioRepository, SesionCriterioRepository>();
+            services.AddTransient<ITerapiaPeriodoRepository, TerapiaPeriodoRepository>();
+            services.AddTransient<ITerapiaPlanificacionRepository, TerapiaPlanificacionRepository>();
+            services.AddTransient<ITerapiaPlanificacionCriterioRepository, TerapiaPlanificacionCriterioRepository>();
 
             services.AddDbContext<SISDETContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("SISDET"))
             );
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Authentication:Issuer"],
+                    ValidAudience = Configuration["Authentication:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:SecretKey"]))
+                };
+            });
 
             services.AddMvc(options =>
                 options.Filters.Add<ValidationFilter>()
@@ -75,6 +99,9 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IPeriodoTerapiaService, PeriodoTerapiaService>();
             services.AddTransient<ISesionService, SesionService>();
             services.AddTransient<ISesionCriterioService, SesionCriterioService>();
+            services.AddTransient<ITerapiaPeriodoService, TerapiaPeriodoService>();
+            services.AddTransient<ITerapiaPlanificacionService, TerapiaPlanificacionService>();
+            services.AddTransient<ITerapiaPlanificacionCriterioService, TerapiaPlanificacionCriterioService>();
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -100,6 +127,7 @@ namespace SistemaTerapeutico.BackEnd.API
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

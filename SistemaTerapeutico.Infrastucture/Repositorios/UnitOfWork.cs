@@ -24,6 +24,9 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         private readonly ISesionRepository _sesionRepository;
         private readonly ISesionCriterioRepository _sesionCriterioRepository;
         private readonly ISesionCriterioActividadRepository _sesionCriterioActividadRepository;
+        private readonly ITerapiaPeriodoRepository _terapiaPeriodoRepository;
+        private readonly ITerapiaPlanificacionRepository _terapiaPlanificacionRepository;
+        private readonly ITerapiaPlanificacionCriterioRepository _terapiaPlanificacionCriterioRepository;
         public UnitOfWork(SISDETContext context)
         {
             _context = context;
@@ -56,6 +59,12 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         public ISesionCriterioRepository SesionCriterioRepository => _sesionCriterioRepository ?? new SesionCriterioRepository(_context);
 
         public ISesionCriterioActividadRepository SesionCriterioActividadRepository => _sesionCriterioActividadRepository ?? new SesionCriterioActividadRepository(_context);
+
+        public ITerapiaPeriodoRepository TerapiaPeriodoRepository => _terapiaPeriodoRepository ?? new TerapiaPeriodoRepository(_context);
+
+        public ITerapiaPlanificacionRepository TerapiaPlanificacionRepository => _terapiaPlanificacionRepository ?? new TerapiaPlanificacionRepository(_context);
+
+        public ITerapiaPlanificacionCriterioRepository TerapiaPlanificacionCriterioRepository => _terapiaPlanificacionCriterioRepository ?? new TerapiaPlanificacionCriterioRepository(_context);
 
         public void Dispose()
         {

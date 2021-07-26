@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
@@ -9,6 +10,7 @@ using SistemaTerapeutico.Core.Interfaces;
 
 namespace SistemaTerapeutico.API.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class PersonaController : Controller
     {

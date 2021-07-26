@@ -35,7 +35,8 @@ namespace SistemaTerapeutico.API.Controllers
                 IdTwo = sesionCriterioActividadDto.IdObjetivoCriterio,
                 IdThree = sesionCriterioActividadDto.IdActividad,
                 Orden = sesionCriterioActividadDto.Orden,
-                DetalleAplicacion = sesionCriterioActividadDto.DetalleAplicacion
+                DetalleAplicacion = sesionCriterioActividadDto.DetalleAplicacion,
+                IdPuntuacionDetalle = sesionCriterioActividadDto.IdPuntuacionDetalle
             };
             await _sesionCriterioActividadService.AddSesionCriterioActividad(entity);
             var response = new ApiResponse<bool>(true);
