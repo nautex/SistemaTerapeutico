@@ -36,7 +36,7 @@ namespace SistemaTerapeutico.Core.Services
 
         public async Task<IEnumerable<TerapiaPlanificacion>> GetTerapiasPeriodosByIdTerapia(int idTerapia)
         {
-            return await _unitOfWork.TerapiaPlanificacionRepository.GetTerapiasPeriodosByIdTerapia(idTerapia;
+            return await _unitOfWork.TerapiaPlanificacionRepository.GetTerapiasPeriodosByIdTerapia(idTerapia);
         }
 
         public void UpdateTerapiaPlanificacion(TerapiaPlanificacion terapiaPlanificacion)

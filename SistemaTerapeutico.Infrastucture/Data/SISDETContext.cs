@@ -35,6 +35,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<TerapiaPeriodo> TerapiaPeriodo { get; set; }
         public virtual DbSet<TerapiaPlanificacion> TerapiaPlanificacion { get; set; }
         public virtual DbSet<TerapiaPlanificacionCriterio> TerapiaPlanificacionCriterio { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CatalogoConfiguration());
@@ -57,6 +58,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
             modelBuilder.ApplyConfiguration(new TerapiaPeriodoConfiguration());
             modelBuilder.ApplyConfiguration(new TerapiaPlanificacionConfiguration());
             modelBuilder.ApplyConfiguration(new TerapiaPlanificacionCriterioConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
         }
     }
 }
