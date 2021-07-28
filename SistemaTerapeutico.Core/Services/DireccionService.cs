@@ -22,6 +22,7 @@ namespace SistemaTerapeutico.Core.Services
         public async Task DeleteDireccion(int idDireccion)
         {
             await _unitOfWork.DireccionRepository.Delete(idDireccion);
+            _unitOfWork.SaveChanges();
         }
 
         public async Task<Direccion> GetDireccionById(int idDireccion)
@@ -42,6 +43,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdateDireccion(Direccion direccion)
         {
             _unitOfWork.DireccionRepository.Update(direccion);
+            _unitOfWork.SaveChanges();
         }
     }
 }

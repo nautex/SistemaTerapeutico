@@ -15,15 +15,18 @@ namespace SistemaTerapeutico.Core.Services
         public async Task AddSesionCriterioActividad(SesionCriterioActividad sesionCriterioActividad)
         {
             await _unitOfWork.SesionCriterioActividadRepository.Add(sesionCriterioActividad);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteSesionCriterioActividadByIds(int idSesion, int idObjetivoCriterio, int idActividad)
         {
             _unitOfWork.SesionCriterioActividadRepository.DeleteByThreeIds(idSesion, idObjetivoCriterio, idActividad);
+            _unitOfWork.SaveChanges();
         }
         public void DeleteSesionesCriteriosActividadesByIdSesion(int idSesion)
         {
             _unitOfWork.SesionCriterioActividadRepository.DeletesById(idSesion);
+            _unitOfWork.SaveChanges();
         }
 
         public async Task<SesionCriterioActividad> GetSesionCriterioActividadByIds(int idSesion, int idObjetivoCriterio, int idActividad)
@@ -43,6 +46,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdateSesionCriterioActividad(SesionCriterioActividad sesionCriterioActividad)
         {
             _unitOfWork.SesionCriterioActividadRepository.Update(sesionCriterioActividad);
+            _unitOfWork.SaveChanges();
         }
     }
 }

@@ -17,16 +17,23 @@ namespace SistemaTerapeutico.Core.Services
         public async Task AddUsuario(Usuario usuario)
         {
             await _unitOfWork.UsuarioRepository.Add(usuario);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteUsuario(string codigo)
         {
             _unitOfWork.UsuarioRepository.DeleteByCodigo(codigo);
+            _unitOfWork.SaveChanges();
         }
 
         public async Task<Usuario> GetUsuarioByCodigo(string codigo)
         {
             return await _unitOfWork.UsuarioRepository.GetUsuarioByCodigo(codigo);
+        }
+
+        public async Task<Usuario> GetUsuarioByCodigoYClave(string codigo, string clave)
+        {
+            return await _unitOfWork.UsuarioRepository.GetUsuarioByCodigoYClave(codigo, clave);
         }
 
         public IEnumerable<Usuario> GetUsuarios()
@@ -42,6 +49,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdateUsuario(Usuario usuario)
         {
             _unitOfWork.UsuarioRepository.Update(usuario);
+            _unitOfWork.SaveChanges();
         }
     }
 }

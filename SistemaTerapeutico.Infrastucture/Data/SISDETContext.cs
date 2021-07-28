@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Infrastucture.Data.Configurations;
 
@@ -38,27 +39,28 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<Usuario> Usuario { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new CatalogoConfiguration());
-            modelBuilder.ApplyConfiguration(new PersonaConfiguration());
-            modelBuilder.ApplyConfiguration(new PersonaContactoConfiguration());
-            modelBuilder.ApplyConfiguration(new PersonaDireccionConfiguration());
-            modelBuilder.ApplyConfiguration(new PersonaDocumentoConfiguration());
-            modelBuilder.ApplyConfiguration(new PersonaNaturalConfiguration());
-            modelBuilder.ApplyConfiguration(new PersonaVinculacionConfiguration());
-            modelBuilder.ApplyConfiguration(new UbigeoConfiguration());
-            modelBuilder.ApplyConfiguration(new DireccionConfiguration());
-            modelBuilder.ApplyConfiguration(new ParticipanteConfiguration());
-            modelBuilder.ApplyConfiguration(new AtencionConfiguration());
-            modelBuilder.ApplyConfiguration(new TerapiaConfiguration());
-            modelBuilder.ApplyConfiguration(new TerapiaTerapeutaConfiguracion());
-            modelBuilder.ApplyConfiguration(new PeriodoTerapiaConfiguration());
-            modelBuilder.ApplyConfiguration(new SesionConfiguration());
-            modelBuilder.ApplyConfiguration(new SesionCriterioConfiguration());
-            modelBuilder.ApplyConfiguration(new SesionCriterioActividadConfiguration());
-            modelBuilder.ApplyConfiguration(new TerapiaPeriodoConfiguration());
-            modelBuilder.ApplyConfiguration(new TerapiaPlanificacionConfiguration());
-            modelBuilder.ApplyConfiguration(new TerapiaPlanificacionCriterioConfiguration());
-            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //modelBuilder.ApplyConfiguration(new CatalogoConfiguration());
+            //modelBuilder.ApplyConfiguration(new PersonaConfiguration());
+            //modelBuilder.ApplyConfiguration(new PersonaContactoConfiguration());
+            //modelBuilder.ApplyConfiguration(new PersonaDireccionConfiguration());
+            //modelBuilder.ApplyConfiguration(new PersonaDocumentoConfiguration());
+            //modelBuilder.ApplyConfiguration(new PersonaNaturalConfiguration());
+            //modelBuilder.ApplyConfiguration(new PersonaVinculacionConfiguration());
+            //modelBuilder.ApplyConfiguration(new UbigeoConfiguration());
+            //modelBuilder.ApplyConfiguration(new DireccionConfiguration());
+            //modelBuilder.ApplyConfiguration(new ParticipanteConfiguration());
+            //modelBuilder.ApplyConfiguration(new AtencionConfiguration());
+            //modelBuilder.ApplyConfiguration(new TerapiaConfiguration());
+            //modelBuilder.ApplyConfiguration(new TerapiaTerapeutaConfiguracion());
+            //modelBuilder.ApplyConfiguration(new PeriodoTerapiaConfiguration());
+            //modelBuilder.ApplyConfiguration(new SesionConfiguration());
+            //modelBuilder.ApplyConfiguration(new SesionCriterioConfiguration());
+            //modelBuilder.ApplyConfiguration(new SesionCriterioActividadConfiguration());
+            //modelBuilder.ApplyConfiguration(new TerapiaPeriodoConfiguration());
+            //modelBuilder.ApplyConfiguration(new TerapiaPlanificacionConfiguration());
+            //modelBuilder.ApplyConfiguration(new TerapiaPlanificacionCriterioConfiguration());
+            //modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
         }
     }
 }

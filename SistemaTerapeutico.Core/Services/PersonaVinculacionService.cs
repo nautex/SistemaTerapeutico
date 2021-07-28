@@ -34,7 +34,8 @@ namespace SistemaTerapeutico.Core.Services
 
         public void DeletePersonaVinculacionByIds(int idPersona, int idPersonaVinculo)
         {
-            throw new NotImplementedException();
+            _unitOfWork.PersonaVinculacionRepository.DeleteByIds(idPersona, idPersonaVinculo);
+            _unitOfWork.SaveChanges();
         }
 
         public IEnumerable<PersonaVinculacion> GetPersonasVinculaciones()
@@ -42,14 +43,15 @@ namespace SistemaTerapeutico.Core.Services
             return _unitOfWork.PersonaVinculacionRepository.GetAll();
         }
 
-        public Task<IEnumerable<PersonaVinculacion>> GetPersonasVinculacionesByIdPersona(int idPersona)
+        public async Task<IEnumerable<PersonaVinculacion>> GetPersonasVinculacionesByIdPersona(int idPersona)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.PersonaVinculacionRepository.GetsById(idPersona);
         }
 
         public void UpdatePersonaVinculacion(PersonaVinculacion personaVinculacion)
         {
-            throw new NotImplementedException();
+            _unitOfWork.PersonaVinculacionRepository.Update(personaVinculacion);
+            _unitOfWork.SaveChanges();
         }
     }
 }

@@ -89,4 +89,10 @@
         public static int Tarde = 60;
         public static int Inasistencia = 61;
     }
+
+    public static class ERoleType
+    {
+        public static int Administrator = 1;
+        public static int Consumer = 2;
+    }
 }

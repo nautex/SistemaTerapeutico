@@ -17,11 +17,13 @@ namespace SistemaTerapeutico.Core.Services
         public async Task AddTerapiaPeriodo(TerapiaPeriodo terapiaPeriodo)
         {
             await _unitOfWork.TerapiaPeriodoRepository.Add(terapiaPeriodo);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeletePersonaDirecccionByIds(int idTerapia, int idPeriodo)
         {
             _unitOfWork.TerapiaPeriodoRepository.DeleteByIds(idTerapia, idPeriodo);
+            _unitOfWork.SaveChanges();
         }
 
         public async Task<TerapiaPeriodo> GetTerapiaPeriodoByIds(int idTerapia, int idPeriodo)
@@ -42,6 +44,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdateTerapiaPeriodo(TerapiaPeriodo terapiaPeriodo)
         {
             _unitOfWork.TerapiaPeriodoRepository.Update(terapiaPeriodo);
+            _unitOfWork.SaveChanges();
         }
     }
 }

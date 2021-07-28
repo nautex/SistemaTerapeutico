@@ -28,6 +28,11 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
             return await _entities.Where(x => x.Codigo == codigo).FirstOrDefaultAsync();
         }
 
+        public async Task<Usuario> GetUsuarioByCodigoYClave(string codigo, string clave)
+        {
+            return await _entities.Where(x => x.Codigo == codigo && x.Clave == clave).FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<Usuario>> GetUsuariosByIdPersona(int idPersona)
         {
             return await _entities.Where(x => x.Id == idPersona).ToListAsync();

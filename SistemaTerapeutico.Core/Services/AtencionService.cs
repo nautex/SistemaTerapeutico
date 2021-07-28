@@ -20,6 +20,7 @@ namespace SistemaTerapeutico.Core.Services
         public async Task DeleteAtencion(int idAtencion)
         {
             await _unitOfWork.AtencionRepository.Delete(idAtencion);
+            _unitOfWork.SaveChanges();
         }
 
         public Task<Atencion> GetAtencionById(int idAtencion)
@@ -40,6 +41,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdateAtencion(Atencion atencion)
         {
             _unitOfWork.AtencionRepository.Update(atencion);
+            _unitOfWork.SaveChanges();
         }
     }
 }

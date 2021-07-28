@@ -9,6 +9,7 @@ using SistemaTerapeutico.Core.Entities;
 using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using SistemaTerapeutico.Core.Interfaces;
 
 namespace SistemaTerapeutico.API.Controllers
 {
@@ -16,26 +17,32 @@ namespace SistemaTerapeutico.API.Controllers
     public class TokenController : Controller
     {
         private readonly IConfiguration _configuration;
-        public TokenController(IConfiguration configuration)
+        private readonly IUsuarioService _usuarioService;
+        public TokenController(IConfiguration configuration, IUsuarioService usuarioService)
         {
             _configuration = configuration;
+            _usuarioService = usuarioService;
         }
         [HttpPost]
-        public IActionResult Authentication(UserLogin login)
+        public async Task<IActionResult> Authentication(UserLogin login)
         {
-            if (IsValidUser(login))
+            var validation = await IsValidUser(login);
+
+            if (validation.Item1)
             {
-                var token = GenerateToken();
+                var token = GenerateToken(validation.Item2);
                 return Ok(new { token });
             }
 
             return NotFound();
         }
-        private bool IsValidUser(UserLogin login)
+        private async Task<(bool, Usuario)> IsValidUser(UserLogin login)
         {
-            return true;
+            var user = await _usuarioService.GetUsuarioByCodigoYClave(login.User, login.Password);
+
+            return (user != null, user);
         }
-        private string GenerateToken()
+        private string GenerateToken(Usuario usuario)
         {
             //Header
             var _symetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Authentication:SecretKey"]));
@@ -45,7 +52,7 @@ namespace SistemaTerapeutico.API.Controllers
             //Claims
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, "Jorge Sotelo"),
+                new Claim(ClaimTypes.Name, usuario.Codigo),
                 new Claim(ClaimTypes.Email, "jjgeorgeh@gmail.com"),
                 new Claim(ClaimTypes.Role, "Administrator")
             };
@@ -57,7 +64,7 @@ namespace SistemaTerapeutico.API.Controllers
                 _configuration["Authentication:Audience"],
                 claims,
                 DateTime.Now,
-                DateTime.UtcNow.AddMinutes(2)
+                DateTime.UtcNow.AddMinutes(10)
             );
 
             //Signature

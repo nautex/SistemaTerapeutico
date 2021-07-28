@@ -17,21 +17,25 @@ namespace SistemaTerapeutico.Core.Services
         public async Task AddTerapiaPlanificacionCriterio(TerapiaPlanificacionCriterio terapiaPlanificacionCriterio)
         {
             await _unitOfWork.TerapiaPlanificacionCriterioRepository.Add(terapiaPlanificacionCriterio);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteTerapiaPlanificacionCriterioByIds(int idTerapia, int idPeriodo, int idObjetivoCriterio)
         {
             _unitOfWork.TerapiaPlanificacionCriterioRepository.DeleteByThreeIds(idTerapia, idPeriodo, idObjetivoCriterio);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteTerapiasPlanificacionesCriteriosByIdTerapia(int idTerapia)
         {
             _unitOfWork.TerapiaPlanificacionCriterioRepository.DeletesById(idTerapia);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteTerapiasPlanificacionesCriteriosByIdTerapiaYIdPeriodo(int idTerapia, int idPeriodo)
         {
             _unitOfWork.TerapiaPlanificacionCriterioRepository.DeleteByIds(idTerapia, idPeriodo);
+            _unitOfWork.SaveChanges();
         }
 
         public async Task<TerapiaPlanificacionCriterio> GetTerapiaPlanificacionCriterioByIds(int idTerapia, int idPeriodo, int idObjetivoCriterio)
@@ -57,6 +61,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdateTerapiaPlanificacionCriterio(TerapiaPlanificacionCriterio terapiaPlanificacionCriterio)
         {
             _unitOfWork.TerapiaPlanificacionCriterioRepository.Update(terapiaPlanificacionCriterio);
+            _unitOfWork.SaveChanges();
         }
     }
 }

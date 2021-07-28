@@ -16,16 +16,19 @@ namespace SistemaTerapeutico.Core.Services
         public async Task AddTerapiaTerapeuta(TerapiaTerapeuta terapiaTerapeuta)
         {
             await _unitOfWork.TerapiaTerapeutaRepository.Add(terapiaTerapeuta);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteTerapiasTerapeutasByIdAtencion(int idAtencion)
         {
             _unitOfWork.TerapiaTerapeutaRepository.DeletesById(idAtencion);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteTerapiaTerapeutaByIds(int idAtencion, int idTerapeuta)
         {
-            throw new NotImplementedException();
+            _unitOfWork.TerapiaTerapeutaRepository.DeleteByIds(idAtencion, idTerapeuta);
+            _unitOfWork.SaveChanges();
         }
 
         public IEnumerable<TerapiaTerapeuta> GetTerapiasTerapeutas()
@@ -38,14 +41,15 @@ namespace SistemaTerapeutico.Core.Services
             return await _unitOfWork.TerapiaTerapeutaRepository.GetsById(idAtencion);
         }
 
-        public Task<TerapiaTerapeuta> GetTerapiaTerapeutaByIds(int idAtencion, int idTerapeuta)
+        public async Task<TerapiaTerapeuta> GetTerapiaTerapeutaByIds(int idAtencion, int idTerapeuta)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.TerapiaTerapeutaRepository.GetByIds(idAtencion, idTerapeuta);
         }
 
         public void UpdateTerapiaTerapeuta(TerapiaTerapeuta terapiaTerapeuta)
         {
-            throw new NotImplementedException();
+            _unitOfWork.TerapiaTerapeutaRepository.Update(terapiaTerapeuta);
+            _unitOfWork.SaveChanges();
         }
     }
 }

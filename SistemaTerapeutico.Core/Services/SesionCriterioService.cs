@@ -20,6 +20,7 @@ namespace SistemaTerapeutico.Core.Services
         public async Task DeleteSesionCriterioByIds(int idSesion, int idObjetivoCriterio)
         {
             await _unitOfWork.SesionCriterioRepository.DeleteByIds(idSesion, idObjetivoCriterio);
+            _unitOfWork.SaveChanges();
         }
 
         public async Task<SesionCriterio> GetSesionCriterioByIds(int idSesion)
@@ -45,6 +46,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdateSesionCriterio(SesionCriterio sesionCriterio)
         {
             _unitOfWork.SesionCriterioRepository.Update(sesionCriterio);
+            _unitOfWork.SaveChanges();
         }
     }
 }

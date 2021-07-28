@@ -17,9 +17,10 @@ namespace SistemaTerapeutico.Core.Services
             return _unitOfWork.SesionRepository.AddReturnId(Sesion);
         }
 
-        public Task DeleteSesion(int idSesion)
+        public async Task DeleteSesion(int idSesion)
         {
-            return _unitOfWork.SesionRepository.Delete(idSesion);
+            await _unitOfWork.SesionRepository.Delete(idSesion);
+            _unitOfWork.SaveChanges();
         }
 
         public async Task<Sesion> GetSesionById(int idSesion)
@@ -45,6 +46,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdateSesion(Sesion sesion)
         {
             _unitOfWork.SesionRepository.Update(sesion);
+            _unitOfWork.SaveChanges();
         }
     }
 }

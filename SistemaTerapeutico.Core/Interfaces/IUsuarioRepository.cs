@@ -11,5 +11,6 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task<Usuario> GetUsuarioByCodigo(string codigo);
         Task DeleteByCodigo(string codigo);
         Task<IEnumerable<Usuario>> GetUsuariosByIdPersona(int idPersona);
+        Task<Usuario> GetUsuarioByCodigoYClave(string codigo, string clave);
     }
 }

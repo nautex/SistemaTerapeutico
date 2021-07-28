@@ -16,16 +16,19 @@ namespace SistemaTerapeutico.Core.Services
         public async Task AddPersonaContacto(PersonaContacto personaContacto)
         {
             await _unitOfWork.PersonaContactoRepository.Add(personaContacto);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeletePersonaContactoByIds(int idPersona, int numero)
         {
             _unitOfWork.PersonaContactoRepository.DeleteByIds(idPersona, numero);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeletePersonasContactosByIdPersona(int idPersona)
         {
             _unitOfWork.PersonaContactoRepository.DeletesById(idPersona);
+            _unitOfWork.SaveChanges();
         }
 
         public IEnumerable<PersonaContacto> GetPersonasContactos()
@@ -41,6 +44,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdatePersonaContacto(PersonaContacto personaContacto)
         {
             _unitOfWork.PersonaContactoRepository.Update(personaContacto);
+            _unitOfWork.SaveChanges();
         }
     }
 }

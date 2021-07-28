@@ -20,6 +20,7 @@ namespace SistemaTerapeutico.Core.Services
         public async Task DeleteTerapia(int idTerapia)
         {
             await _unitOfWork.TerapiaRepository.Delete(idTerapia);
+            _unitOfWork.SaveChanges();
         }
 
         public Task<Terapia> GetTerapiaById(int idTerapia)
@@ -35,6 +36,7 @@ namespace SistemaTerapeutico.Core.Services
         public void UpdateTerapia(Terapia terapia)
         {
             _unitOfWork.TerapiaRepository.Update(terapia);
+            _unitOfWork.SaveChanges();
         }
         public async Task<IEnumerable<Terapia>> GetTerapiasByIdAtencion(int idAtencion)
         {

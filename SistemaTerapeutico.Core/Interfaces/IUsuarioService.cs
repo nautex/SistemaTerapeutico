@@ -14,5 +14,6 @@ namespace SistemaTerapeutico.Core.Interfaces
         void UpdateUsuario(Usuario usuario);
         void DeleteUsuario(string codigo);
         Task<Usuario> GetUsuarioByCodigo(string codigo);
+        Task<Usuario> GetUsuarioByCodigoYClave(string codigo, string clave);
     }
 }
