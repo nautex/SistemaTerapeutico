@@ -12,8 +12,10 @@ using Microsoft.IdentityModel.Tokens;
 using SistemaTerapeutico.Core.Interfaces;
 using SistemaTerapeutico.Core.Services;
 using SistemaTerapeutico.Infrastucture.Data;
+using SistemaTerapeutico.Infrastucture.Extensions;
 using SistemaTerapeutico.Infrastucture.Filters;
 using SistemaTerapeutico.Infrastucture.Repositorios;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.BackEnd.API
 {
@@ -49,6 +51,9 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<ITerapiaPlanificacionRepository, TerapiaPlanificacionRepository>();
             services.AddTransient<ITerapiaPlanificacionCriterioRepository, TerapiaPlanificacionCriterioRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddSingleton<IPasswordService, PasswordService>();
+
+            services.AddOptions(Configuration);
 
             services.AddDbContext<SISDETContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("SISDET"))

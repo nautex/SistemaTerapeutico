@@ -31,8 +31,4 @@
     <ProjectReference Include="..\SistemaTerapeutico.Core\SistemaTerapeutico.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Options\" />
-  </ItemGroup>
-
 </Project>

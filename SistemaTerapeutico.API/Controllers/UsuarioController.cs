@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
-using SistemaTerapeutico.Core.Enumerators;
 using SistemaTerapeutico.Core.Interfaces;
 
 namespace SistemaTerapeutico.API.Controllers
 {
-    [Authorize(Roles = nameof(ERoleType.Administrator))]
+    //[Authorize(Roles = nameof(ERoleType.Administrator))]
     [Route("[controller]")]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
-        public UsuarioController(IUsuarioService usuarioService, IMapper mapper)
+        private readonly IPasswordService _passwordService;
+        public UsuarioController(IUsuarioService usuarioService, IMapper mapper, IPasswordService passwordService)
         {
             _usuarioService = usuarioService;
             _mapper = mapper;
+            _passwordService = passwordService;
         }
         [HttpPost("PostUsuario")]
         public async Task<IActionResult> PostUsuario(UsuarioDto usuarioDto)
@@ -31,7 +28,7 @@ namespace SistemaTerapeutico.API.Controllers
             {
                 Codigo = usuarioDto.Codigo,
                 Id = usuarioDto.IdPersona,
-                Clave = usuarioDto.Clave
+                Clave = _passwordService.Hash(usuarioDto.Clave)
             };
             await _usuarioService.AddUsuario(entity);
             var response = new ApiResponse<bool>(true);

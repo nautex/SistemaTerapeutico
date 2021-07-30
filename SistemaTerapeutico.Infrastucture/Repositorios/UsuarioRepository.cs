@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SistemaTerapeutico.Core.Entities;
@@ -30,7 +28,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
         public async Task<Usuario> GetUsuarioByCodigoYClave(string codigo, string clave)
         {
-            return await _entities.Where(x => x.Codigo == codigo && x.Clave == clave).FirstOrDefaultAsync();
+            return await _entities.Where(x => x.Codigo == codigo).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Usuario>> GetUsuariosByIdPersona(int idPersona)

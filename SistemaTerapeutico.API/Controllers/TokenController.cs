@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SistemaTerapeutico.Core.Entities;
-using Microsoft.Extensions.Configuration;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using SistemaTerapeutico.Core.Interfaces;
 
 namespace SistemaTerapeutico.API.Controllers
@@ -18,13 +16,15 @@ namespace SistemaTerapeutico.API.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IUsuarioService _usuarioService;
-        public TokenController(IConfiguration configuration, IUsuarioService usuarioService)
+        private readonly IPasswordService _passwordService;
+        public TokenController(IConfiguration configuration, IUsuarioService usuarioService, IPasswordService passwordService)
         {
             _configuration = configuration;
             _usuarioService = usuarioService;
+            _passwordService = passwordService;
         }
         [HttpPost]
-        public async Task<IActionResult> Authentication(UserLogin login)
+        public async Task<IActionResult> Authentication([FromBody] UserLogin login)
         {
             var validation = await IsValidUser(login);
 
@@ -39,8 +39,9 @@ namespace SistemaTerapeutico.API.Controllers
         private async Task<(bool, Usuario)> IsValidUser(UserLogin login)
         {
             var user = await _usuarioService.GetUsuarioByCodigoYClave(login.User, login.Password);
+            var isValid = _passwordService.Check(user.Clave, login.Password);
 
-            return (user != null, user);
+            return (isValid, user);
         }
         private string GenerateToken(Usuario usuario)
         {
