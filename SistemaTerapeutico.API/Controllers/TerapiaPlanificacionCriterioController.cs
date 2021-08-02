@@ -24,7 +24,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostTerapiaPlanificacionCriterio")]
         public async Task<IActionResult> PostTerapiaPlanificacionCriterio(TerapiaPlanificacionCriterioDto terapiaPlanificacionCriterioDto)
         {
-            TerapiaPlanificacionCriterio entity = new TerapiaPlanificacionCriterio(terapiaPlanificacionCriterioDto.UsuarioRegistro)
+            TerapiaPlanificacionCriterio entity = new TerapiaPlanificacionCriterio(terapiaPlanificacionCriterioDto.Usuario)
             {
                 Id = terapiaPlanificacionCriterioDto.IdTerapia,
                 IdTwo = terapiaPlanificacionCriterioDto.IdPeriodo,

@@ -8,13 +8,13 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class PeriodoTerapiaRepository : BaseRepository<PeriodoTerapia>, IPeriodoTerapiaRepository
+    public class PeriodoTerapiaRepository : BaseRepository<Periodo>, IPeriodoTerapiaRepository
     {
         public PeriodoTerapiaRepository(SISDETContext context) : base(context)
         {
 
         }
-        public async Task<IEnumerable<PeriodoTerapia>> GetTerapiasPeriodosByIdTerapia(int idTipo)
+        public async Task<IEnumerable<Periodo>> GetTerapiasPeriodosByIdTerapia(int idTipo)
         {
             return await _entities.Where(x => x.IdTipo == idTipo).ToListAsync();
         }

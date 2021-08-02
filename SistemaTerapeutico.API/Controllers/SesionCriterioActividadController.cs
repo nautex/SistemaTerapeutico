@@ -29,7 +29,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostSesionCriterioActividad")]
         public async Task<IActionResult> PostSesionCriterioActividad(SesionCriterioActividadDto sesionCriterioActividadDto)
         {
-            SesionCriterioActividad entity = new SesionCriterioActividad(sesionCriterioActividadDto.UsuarioRegistro)
+            SesionCriterioActividad entity = new SesionCriterioActividad(sesionCriterioActividadDto.Usuario)
             {
                 Id = sesionCriterioActividadDto.IdSesion,
                 IdTwo = sesionCriterioActividadDto.IdObjetivoCriterio,

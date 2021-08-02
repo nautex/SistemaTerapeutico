@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
@@ -10,7 +9,7 @@ using SistemaTerapeutico.Core.Interfaces;
 
 namespace SistemaTerapeutico.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("[controller]")]
     public class PersonaController : Controller
     {
@@ -57,6 +56,15 @@ namespace SistemaTerapeutico.API.Controllers
             var Response = new ApiResponse<IEnumerable<Persona>>(listado);
 
             return Ok(Response);
+        }
+        [HttpPost("PostPersona")]
+        public async Task<IActionResult> PostPersona(PersonaDto personaDto)
+        {
+            Persona persona = _mapper.Map<Persona>(personaDto);
+            int idPersona = await _personaService.AddPersona(persona);
+            var response = new ApiResponse<int>(idPersona);
+
+            return Ok(response);
         }
     }
 }

@@ -10,8 +10,5 @@ namespace SistemaTerapeutico.Core.Entities
         }
         public int? IdTipoVinculo { get; set; }
         public int? IdEstado { get; set; }
-
-        //public virtual Persona IdPersonaNavigation { get; set; }
-        //public virtual Persona IdPersonaVinculoNavigation { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace SistemaTerapeutico.Core.DTOs
         public int IdTerapia { get; set; }
         public int IdPeriodo { get; set; }
         public string DetalleResultado { get; set; }
-        public string UsuarioRegistro { get; set; }
+        public string Usuario { get; set; }
     }
 }

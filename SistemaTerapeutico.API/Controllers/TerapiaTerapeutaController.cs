@@ -21,7 +21,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostTerapiaTerapeuta")]
         public async Task<IActionResult> PostTerapiaTerapeuta(TerapiaTerapeutaDto xterapiaTerapeutaDto)
         {
-            TerapiaTerapeuta terapiaTerapeuta = new TerapiaTerapeuta(xterapiaTerapeutaDto.UsuarioRegistro)
+            TerapiaTerapeuta terapiaTerapeuta = new TerapiaTerapeuta(xterapiaTerapeutaDto.Usuario)
             {
                 Id = xterapiaTerapeutaDto.IdTerapia,
                 IdTwo = xterapiaTerapeutaDto.IdTerapeuta,

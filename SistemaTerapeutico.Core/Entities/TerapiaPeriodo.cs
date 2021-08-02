@@ -10,7 +10,6 @@ namespace SistemaTerapeutico.Core.Entities
         {
 
         }
-        public int IdEstadoPago { get; set; }
-        public DateTime FechaPago { get; set; }
+        public int IdComprobante { get; set; }
     }
 }

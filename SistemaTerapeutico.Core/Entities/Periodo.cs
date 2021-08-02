@@ -3,9 +3,9 @@ using SistemaTerapeutico.Core.Enumerators;
 
 namespace SistemaTerapeutico.Core.Entities
 {
-    public class PeriodoTerapia : BaseEntity
+    public class Periodo : BaseEntity
     {
-        public PeriodoTerapia(string usuarioRegistro) : base(usuarioRegistro)
+        public Periodo(string usuarioRegistro) : base(usuarioRegistro)
         {
             IdEstado = EEstadoBasico.Activo;
             Observaciones = "";

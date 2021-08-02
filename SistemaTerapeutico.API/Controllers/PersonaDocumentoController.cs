@@ -30,9 +30,9 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostPersonaDocumento")]
         public async Task<IActionResult> PostPersonaDocumento(PersonaDocumentoDto personaDocumentoDto)
         {
-            PersonaDocumento lPersonaDocumento = new PersonaDocumento(personaDocumentoDto.UsuarioRegistro)
+            PersonaDocumento lPersonaDocumento = new PersonaDocumento(personaDocumentoDto.Usuario)
             {
-                Id = personaDocumentoDto.Id,
+                Id = personaDocumentoDto.IdPersona,
                 IdTwo = personaDocumentoDto.IdTipoDocumento,
                 Numero = personaDocumentoDto.Numero
             };

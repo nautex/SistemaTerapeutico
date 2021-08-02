@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -24,12 +22,11 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostTerapiaPeriodo")]
         public async Task<IActionResult> PostTerapiaPeriodo(TerapiaPeriodoDto terapiaPeriodoDto)
         {
-            TerapiaPeriodo entity = new TerapiaPeriodo(terapiaPeriodoDto.UsuarioRegistro)
+            TerapiaPeriodo entity = new TerapiaPeriodo(terapiaPeriodoDto.Usuario)
             {
                 Id = terapiaPeriodoDto.IdTerapia,
                 IdTwo = terapiaPeriodoDto.IdPeriodo,
-                IdEstadoPago = terapiaPeriodoDto.IdEstadoPago,
-                FechaPago = terapiaPeriodoDto.FechaPago
+                IdComprobante = terapiaPeriodoDto.IdComprobante,
             };
             await _terapiaPeriodoService.AddTerapiaPeriodo(entity);
             var response = new ApiResponse<bool>(true);

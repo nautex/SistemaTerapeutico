@@ -4,12 +4,12 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class PeriodoTerapiaConfiguration : IEntityTypeConfiguration<PeriodoTerapia>
+    public class PeriodoConfiguration : IEntityTypeConfiguration<Periodo>
     {
-        public void Configure(EntityTypeBuilder<PeriodoTerapia> builder)
+        public void Configure(EntityTypeBuilder<Periodo> builder)
         {
             builder.HasKey(x => x.Id).HasName("PRIMARY");
-            builder.Property(x => x.Id).HasColumnName("IdPeriodoTerapia");
+            builder.Property(x => x.Id).HasColumnName("IdPeriodo");
         }
     }
 }

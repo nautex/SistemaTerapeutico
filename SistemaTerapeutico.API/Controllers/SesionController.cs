@@ -22,7 +22,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostSesion")]
         public async Task<IActionResult> PostSesion(SesionDto sesionDto)
         {
-            Sesion sesion = new Sesion(sesionDto.UsuarioRegistro)
+            Sesion sesion = new Sesion(sesionDto.Usuario)
             {
                 IdTerapia = sesionDto.IdTerapia,
                 IdPeriodo = sesionDto.IdPeriodo,

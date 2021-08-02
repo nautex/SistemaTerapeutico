@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +20,14 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         }
         public async Task Add(T entity)
         {
+            entity.FechaRegistro = DateTime.Now;
+
             await _entities.AddAsync(entity);
         }
         public async Task<int> AddReturnId(T entity)
         {
+            entity.FechaRegistro = DateTime.Now;
+
             await _entities.AddAsync(entity);
 
             _context.SaveChanges();
@@ -48,6 +53,8 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
         public void Update(T entity)
         {
+            entity.FechaModificacion = DateTime.Now;
+
             _entities.Update(entity);
         }
     }

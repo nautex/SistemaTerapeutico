@@ -21,7 +21,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostAtencion")]
         public async Task<IActionResult> PostAtencion(AtencionDto atencionDto)
         {
-            Atencion lAtencion = new Atencion(atencionDto.UsuarioRegistro)
+            Atencion lAtencion = new Atencion(atencionDto.Usuario)
             {
                 IdParticipante = atencionDto.IdParticipante,
                 FechaInicio = atencionDto.FechaInicio,

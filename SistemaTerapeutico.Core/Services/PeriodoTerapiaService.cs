@@ -12,7 +12,7 @@ namespace SistemaTerapeutico.Core.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<int> AddPeriodoTerapia(PeriodoTerapia periodoTerapia)
+        public async Task<int> AddPeriodoTerapia(Periodo periodoTerapia)
         {
             return await _unitOfWork.PeriodoTerapiaRepository.AddReturnId(periodoTerapia);
         }
@@ -23,22 +23,22 @@ namespace SistemaTerapeutico.Core.Services
             _unitOfWork.SaveChanges();
         }
 
-        public async Task<PeriodoTerapia> GetPeriodoTerapiaById(int idperiodoTerapia)
+        public async Task<Periodo> GetPeriodoTerapiaById(int idperiodoTerapia)
         {
             return await _unitOfWork.PeriodoTerapiaRepository.GetById(idperiodoTerapia);
         }
 
-        public IEnumerable<PeriodoTerapia> GetPeriodosTerapias()
+        public IEnumerable<Periodo> GetPeriodosTerapias()
         {
             return _unitOfWork.PeriodoTerapiaRepository.GetAll();
         }
 
-        public void UpdatePeriodoTerapia(PeriodoTerapia periodoTerapia)
+        public void UpdatePeriodoTerapia(Periodo periodoTerapia)
         {
             _unitOfWork.PeriodoTerapiaRepository.Update(periodoTerapia);
             _unitOfWork.SaveChanges();
         }
-        public Task<IEnumerable<PeriodoTerapia>> GetPeriodosTerapiasByIdTipo(int idTipo)
+        public Task<IEnumerable<Periodo>> GetPeriodosTerapiasByIdTipo(int idTipo)
         {
             return _unitOfWork.PeriodoTerapiaRepository.GetTerapiasPeriodosByIdTerapia(idTipo);
         }

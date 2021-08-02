@@ -20,9 +20,9 @@ namespace SistemaTerapeutico.API.Controllers
             _mapper = mapper;
         }
         [HttpPost("PostPeriodoTerapia")]
-        public async Task<IActionResult> PostPeriodoTerapia(PeriodoTerapiaDto periodoTerapiaDto)
+        public async Task<IActionResult> PostPeriodoTerapia(PeriodoDto periodoTerapiaDto)
         {
-            PeriodoTerapia periodoTerapia = new PeriodoTerapia(periodoTerapiaDto.UsuarioRegistro)
+            Periodo periodoTerapia = new Periodo(periodoTerapiaDto.Usuario)
             {
                 IdTipo = periodoTerapiaDto.IdTipo,
                 Codigo = periodoTerapiaDto.Codigo,
@@ -36,19 +36,19 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetPeriodosTerapias")]
         public IActionResult GetPeriodosTerapias()
         {
-            var response = new ApiResponse<IEnumerable<PeriodoTerapia>>(_periodoTerapiaService.GetPeriodosTerapias());
+            var response = new ApiResponse<IEnumerable<Periodo>>(_periodoTerapiaService.GetPeriodosTerapias());
             return Ok(response);
         }
         [HttpGet("GetPeriodoTerapiaById")]
         public async Task<IActionResult> GetTerapiaById(int idPeriodoTerapia)
         {
-            var response = new ApiResponse<PeriodoTerapia>(await _periodoTerapiaService.GetPeriodoTerapiaById(idPeriodoTerapia));
+            var response = new ApiResponse<Periodo>(await _periodoTerapiaService.GetPeriodoTerapiaById(idPeriodoTerapia));
             return Ok(response);
         }
         [HttpGet("GetPeriodosTerapiasByIdTipo")]
         public async Task<IActionResult> GetPeriodosTerapiasByIdTipo(int idTipo)
         {
-            var response = new ApiResponse<IEnumerable<PeriodoTerapia>>(await _periodoTerapiaService.GetPeriodosTerapiasByIdTipo(idTipo));
+            var response = new ApiResponse<IEnumerable<Periodo>>(await _periodoTerapiaService.GetPeriodosTerapiasByIdTipo(idTipo));
             return Ok(response);
         }
     }

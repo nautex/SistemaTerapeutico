@@ -24,9 +24,9 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostParticipante")]
         public async Task<IActionResult> PostParticipante(ParticipanteDto participanteDto)
         {
-            Participante lParticipante = new Participante(participanteDto.UsuarioRegistro)
+            Participante lParticipante = new Participante(participanteDto.Usuario)
             {
-                Id = participanteDto.Id,
+                Id = participanteDto.IdParticipante,
                 IdTerapeuta = participanteDto.IdTerapeuta,
                 FechaIngreso = participanteDto.FechaIngreso,
                 LugarCasoAccidente = participanteDto.LugarCasoAccidente,
