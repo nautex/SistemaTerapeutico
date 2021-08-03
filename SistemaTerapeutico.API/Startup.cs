@@ -45,7 +45,7 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IDireccionRepository, DireccionRepository>();
             services.AddTransient<IAtencionRepository, AtencionRepository>();
             services.AddTransient<ITerapiaRepository, TerapiaRepository>();
-            services.AddTransient<IPeriodoTerapiaRepository, PeriodoTerapiaRepository>();
+            services.AddTransient<IPeriodoRepository, PeriodoRepository>();
             services.AddTransient<ISesionRepository, SesionRepository>();
             services.AddTransient<ISesionCriterioRepository, SesionCriterioRepository>();
             services.AddTransient<ITerapiaPeriodoRepository, TerapiaPeriodoRepository>();
@@ -103,7 +103,7 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IDireccionService, DireccionService>();
             services.AddTransient<IAtencionService, AtencionService>();
             services.AddTransient<ITerapiaService, TerapiaService>();
-            services.AddTransient<IPeriodoTerapiaService, PeriodoTerapiaService>();
+            services.AddTransient<IPeriodoService, PeriodoService>();
             services.AddTransient<ISesionService, SesionService>();
             services.AddTransient<ISesionCriterioService, SesionCriterioService>();
             services.AddTransient<ITerapiaPeriodoService, TerapiaPeriodoService>();

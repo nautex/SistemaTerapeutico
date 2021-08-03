@@ -11,34 +11,11 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
             builder.HasKey(e => new { e.Id, e.IdTwo })
                     .HasName("PRIMARY");
 
-            builder.ToTable("personavinculacion");
-
-            builder.HasIndex(e => e.IdTwo)
-                .HasName("FK_PersonaVinculacion_Persona1");
-
             builder.Property(e => e.Id)
-                .HasColumnName("IdPersona")
-                .HasColumnType("int(11)");
+                .HasColumnName("IdPersona");
 
             builder.Property(e => e.IdTwo)
-                .HasColumnName("IdPersonaVinculo")
-                .HasColumnType("int(11)");
-
-            builder.Property(e => e.IdEstado)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.IdTipoVinculo)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.UsuarioModificacion)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.UsuarioRegistro)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'NULL'");
+                .HasColumnName("IdPersonaVinculo");
 
             //builder.HasOne(d => d.IdPersonaNavigation)
             //    .WithMany(p => p.PersonaVinculacionIdPersonaNavigation)

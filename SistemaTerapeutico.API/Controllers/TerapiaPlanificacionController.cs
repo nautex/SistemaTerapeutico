@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -24,13 +22,8 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostTerapiaPlanificacion")]
         public async Task<IActionResult> PostTerapiaPlanificacion(TerapiaPlanificacionDto terapiaPlanificacionDto)
         {
-            TerapiaPlanificacion entity = new TerapiaPlanificacion(terapiaPlanificacionDto.Usuario)
-            {
-                Id = terapiaPlanificacionDto.IdTerapia,
-                IdTwo = terapiaPlanificacionDto.IdPeriodo,
-                DetalleResultado = terapiaPlanificacionDto.DetalleResultado
-            };
-            await _terapiaPlanificacionService.AddTerapiaPlanificacion(entity);
+            TerapiaPlanificacion terapiaPlanificacion = _mapper.Map<TerapiaPlanificacion>(terapiaPlanificacionDto);
+            await _terapiaPlanificacionService.AddTerapiaPlanificacion(terapiaPlanificacion);
             var response = new ApiResponse<bool>(true);
 
             return Ok(response);
@@ -38,14 +31,18 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetTerapiasPlanificaciones")]
         public IActionResult GetTerapiasPlanificaciones()
         {
-            var response = new ApiResponse<IEnumerable<TerapiaPlanificacion>>(_terapiaPlanificacionService.GetTerapiasPeriodos());
+            var list = _terapiaPlanificacionService.GetTerapiasPeriodos();
+            var listDto = _mapper.Map<IEnumerable<TerapiaPlanificacionDto>>(list);
+            var response = new ApiResponse<IEnumerable<TerapiaPlanificacionDto>>(listDto);
 
             return Ok(response);
         }
         [HttpGet("GetTerapiaPlanificacionByIds")]
         public async Task<IActionResult> GetTerapiaPlanificacionByIds(int idTerapia, int idPeriodo)
         {
-            var response = new ApiResponse<TerapiaPlanificacion>(await _terapiaPlanificacionService.GetTerapiaPlanificacionByIds(idTerapia, idPeriodo));
+            var list = await _terapiaPlanificacionService.GetTerapiaPlanificacionByIds(idTerapia, idPeriodo);
+            var listDto = _mapper.Map<TerapiaPlanificacionDto>(list);
+            var response = new ApiResponse<TerapiaPlanificacionDto>(listDto);
 
             return Ok(response);
         }

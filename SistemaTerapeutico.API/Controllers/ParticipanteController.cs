@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
@@ -24,16 +21,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostParticipante")]
         public async Task<IActionResult> PostParticipante(ParticipanteDto participanteDto)
         {
-            Participante lParticipante = new Participante(participanteDto.Usuario)
-            {
-                Id = participanteDto.IdParticipante,
-                IdTerapeuta = participanteDto.IdTerapeuta,
-                FechaIngreso = participanteDto.FechaIngreso,
-                LugarCasoAccidente = participanteDto.LugarCasoAccidente,
-                DetalleHermanos = participanteDto.DetalleHermanos,
-                TieneDiagnostico = participanteDto.TieneDiagnostico
-            };
-
+            Participante lParticipante = _mapper.Map<Participante>(participanteDto);
             await _participanteService.AddParticipante(lParticipante);
             var Response = new ApiResponse<bool>(true);
 

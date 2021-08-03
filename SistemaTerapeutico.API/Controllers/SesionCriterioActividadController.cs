@@ -22,23 +22,17 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetSesionesCriteriosActividades")]
         public IActionResult GetSesionesCriteriosActividades()
         {
-            var response = new ApiResponse<IEnumerable<SesionCriterioActividad>>(_sesionCriterioActividadService.GetSesionesCriteriosActividades());
+            var sesionCriterioActividades = _sesionCriterioActividadService.GetSesionesCriteriosActividades();
+            var sesionCriterioActividadesDto = _mapper.Map<IEnumerable<SesionCriterioActividadDto>>(sesionCriterioActividades);
+            var response = new ApiResponse<IEnumerable<SesionCriterioActividadDto>>(sesionCriterioActividadesDto);
 
             return Ok(response);
         }
         [HttpPost("PostSesionCriterioActividad")]
         public async Task<IActionResult> PostSesionCriterioActividad(SesionCriterioActividadDto sesionCriterioActividadDto)
         {
-            SesionCriterioActividad entity = new SesionCriterioActividad(sesionCriterioActividadDto.Usuario)
-            {
-                Id = sesionCriterioActividadDto.IdSesion,
-                IdTwo = sesionCriterioActividadDto.IdObjetivoCriterio,
-                IdThree = sesionCriterioActividadDto.IdActividad,
-                Orden = sesionCriterioActividadDto.Orden,
-                DetalleAplicacion = sesionCriterioActividadDto.DetalleAplicacion,
-                IdPuntuacionDetalle = sesionCriterioActividadDto.IdPuntuacionDetalle
-            };
-            await _sesionCriterioActividadService.AddSesionCriterioActividad(entity);
+            SesionCriterioActividad sesionCriterioActividad = _mapper.Map<SesionCriterioActividad>(sesionCriterioActividadDto);
+            await _sesionCriterioActividadService.AddSesionCriterioActividad(sesionCriterioActividad);
             var response = new ApiResponse<bool>(true);
 
             return Ok(response);

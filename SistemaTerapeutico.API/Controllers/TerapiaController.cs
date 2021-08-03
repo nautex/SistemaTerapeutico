@@ -22,26 +22,27 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostTerapia")]
         public async Task<IActionResult> PostTerapia(TerapiaDto terapiaDto)
         {
-            Terapia lTerapia = new Terapia(terapiaDto.Usuario)
-            {
-                IdAtencion = terapiaDto.IdAtencion,
-                IdTipo = terapiaDto.IdTipo,
-                FechaInicio = terapiaDto.FechaInicio,
-                IdLugar = terapiaDto.IdLugar
-            };
-            var Response = new ApiResponse<int>(await _terapiaService.AddTerapia(lTerapia));
+            Terapia terapia = _mapper.Map<Terapia>(terapiaDto);
+            var Response = new ApiResponse<int>(await _terapiaService.AddTerapia(terapia));
+
             return Ok(Response);
         }
         [HttpGet("GetTerapias")]
         public IActionResult GetTerapias()
         {
-            var response = new ApiResponse<IEnumerable<Terapia>>(_terapiaService.GetTerapias());
+            var list = _terapiaService.GetTerapias();
+            var listDto = _mapper.Map<IEnumerable<TerapiaDto>>(list);
+            var response = new ApiResponse<IEnumerable<TerapiaDto>>(listDto);
+
             return Ok(response);
         }
         [HttpGet("GetTerapiasByIdAtencion")]
         public async Task<IActionResult> GetTerapiasByIdAtencion(int idAtencion)
         {
-            var response = new ApiResponse<IEnumerable<Terapia>>(await _terapiaService.GetTerapiasByIdAtencion(idAtencion));
+            var list = await _terapiaService.GetTerapiasByIdAtencion(idAtencion);
+            var listDto = _mapper.Map<IEnumerable<TerapiaDto>>(list);
+            var response = new ApiResponse<IEnumerable<TerapiaDto>>(listDto);
+
             return Ok(response);
         }
     }

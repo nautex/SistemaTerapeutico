@@ -10,6 +10,6 @@ namespace SistemaTerapeutico.Core.DTOs
         public string LugarCasoAccidente { get; set; }
         public string DetalleHermanos { get; set; }
         public bool TieneDiagnostico { get; set; }
-        public string Usuario { get; set; }
+        public string UsuarioRegistro { get; set; }
     }
 }

@@ -21,13 +21,9 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostAtencion")]
         public async Task<IActionResult> PostAtencion(AtencionDto atencionDto)
         {
-            Atencion lAtencion = new Atencion(atencionDto.Usuario)
-            {
-                IdParticipante = atencionDto.IdParticipante,
-                FechaInicio = atencionDto.FechaInicio,
-                Observaciones = atencionDto.Observaciones
-            };
-            var Response = new ApiResponse<int>(await _atencionService.AddAtencion(lAtencion));
+            Atencion atencion = _mapper.Map<Atencion>(atencionDto);
+            var Response = new ApiResponse<int>(await _atencionService.AddAtencion(atencion));
+
             return Ok(Response);
         }
     }

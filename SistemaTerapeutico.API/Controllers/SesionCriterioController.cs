@@ -23,27 +23,25 @@ namespace SistemaTerapeutico.API.Controllers
         public IActionResult GetSesionesCriterios()
         {
             var list = _sesionCriterioService.GetSesionesCriterios();
-            var response = new ApiResponse<IEnumerable<SesionCriterio>>(list);
+            var listDto = _mapper.Map<IEnumerable<SesionCriterioDto>>(list);
+            var response = new ApiResponse<IEnumerable<SesionCriterioDto>>(listDto);
 
             return Ok(response);
         }
         [HttpPost("PostSesionCriterio")]
         public async Task<IActionResult> PostSesionCriterio(SesionCriterioDto sesionCriterioDto)
         {
-            SesionCriterio sesionCriterio = new SesionCriterio(sesionCriterioDto.Usuario)
-            {
-                Id = sesionCriterioDto.IdSesion,
-                IdTwo = sesionCriterioDto.IdObjetivoCriterio,
-                IdPuntuacionDetalle = sesionCriterioDto.IdPuntuacionDetalle
-            };
+            SesionCriterio sesionCriterio = _mapper.Map<SesionCriterio>(sesionCriterioDto);
             var response = new ApiResponse<int>(await _sesionCriterioService.AddSesionCriterio(sesionCriterio));
+
             return Ok(response);
         }
         [HttpGet("GetSesionesCriteriosByIdSesion")]
         public async Task<IActionResult> GetSesionesCriteriosByIdSesion(int idSesion)
         {
             var list = await _sesionCriterioService.GetSesionesCriteriosByIdSesion(idSesion);
-            var response = new ApiResponse<IEnumerable<SesionCriterio>>(list);
+            var listDto = _mapper.Map<IEnumerable<SesionCriterioDto>>(list);
+            var response = new ApiResponse<IEnumerable<SesionCriterioDto>>(listDto);
 
             return Ok(response);
         }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -24,15 +22,8 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostTerapiaPlanificacionCriterio")]
         public async Task<IActionResult> PostTerapiaPlanificacionCriterio(TerapiaPlanificacionCriterioDto terapiaPlanificacionCriterioDto)
         {
-            TerapiaPlanificacionCriterio entity = new TerapiaPlanificacionCriterio(terapiaPlanificacionCriterioDto.Usuario)
-            {
-                Id = terapiaPlanificacionCriterioDto.IdTerapia,
-                IdTwo = terapiaPlanificacionCriterioDto.IdPeriodo,
-                IdThree = terapiaPlanificacionCriterioDto.IdObjetivoCriterio,
-                Orden = terapiaPlanificacionCriterioDto.Orden,
-                IdPuntuacionDetalle = terapiaPlanificacionCriterioDto.IdPuntuacionDetalle
-            };
-            await _terapiaPlanificacionCriterioService.AddTerapiaPlanificacionCriterio(entity);
+            TerapiaPlanificacionCriterio terapiaPlanificacionCriterio = _mapper.Map<TerapiaPlanificacionCriterio>(terapiaPlanificacionCriterioDto);
+            await _terapiaPlanificacionCriterioService.AddTerapiaPlanificacionCriterio(terapiaPlanificacionCriterio);
             var response = new ApiResponse<bool>(true);
 
             return Ok(response);
@@ -40,14 +31,18 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetTerapiasPlanificacionesCriterios")]
         public IActionResult GetTerapiasPlanificacionesCriterios()
         {
-            var response = new ApiResponse<IEnumerable<TerapiaPlanificacionCriterio>>(_terapiaPlanificacionCriterioService.GetTerapiasPlanificacionesCriterios());
+            var list = _terapiaPlanificacionCriterioService.GetTerapiasPlanificacionesCriterios();
+            var listDto = _mapper.Map<IEnumerable<TerapiaPlanificacionCriterioDto>>(list);
+            var response = new ApiResponse<IEnumerable<TerapiaPlanificacionCriterioDto>>(listDto);
 
             return Ok(response);
         }
         [HttpGet("GetTerapiasPlanificacionesCriteriosByIdTerapiaYIdPeriodo")]
         public async Task<IActionResult> GetTerapiasPlanificacionesCriteriosByIdTerapiaYIdPeriodo(int idTerapia, int idPeriodo)
         {
-            var response = new ApiResponse<IEnumerable<TerapiaPlanificacionCriterio>>(await _terapiaPlanificacionCriterioService.GetTerapiasPlanificacionesCriteriosByIdTerapiaYIdPeriodo(idTerapia, idPeriodo));
+            var list = await _terapiaPlanificacionCriterioService.GetTerapiasPlanificacionesCriteriosByIdTerapiaYIdPeriodo(idTerapia, idPeriodo);
+            var listDto = _mapper.Map<IEnumerable<TerapiaPlanificacionCriterioDto>>(list);
+            var response = new ApiResponse<IEnumerable<TerapiaPlanificacionCriterioDto>>(listDto);
 
             return Ok(response);
         }

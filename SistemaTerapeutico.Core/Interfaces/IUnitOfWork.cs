@@ -17,7 +17,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         IAtencionRepository AtencionRepository { get; }
         ITerapiaRepository TerapiaRepository { get; }
         ITerapiaTerapeutaRepository TerapiaTerapeutaRepository { get; }
-        IPeriodoTerapiaRepository PeriodoTerapiaRepository { get; }
+        IPeriodoRepository PeriodoRepository { get; }
         ISesionRepository SesionRepository { get; }
         ISesionCriterioRepository SesionCriterioRepository { get; }
         ISesionCriterioActividadRepository SesionCriterioActividadRepository { get; }

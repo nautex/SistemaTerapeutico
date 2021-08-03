@@ -61,8 +61,7 @@ namespace SistemaTerapeutico.API.Controllers
         public async Task<IActionResult> PostPersona(PersonaDto personaDto)
         {
             Persona persona = _mapper.Map<Persona>(personaDto);
-            int idPersona = await _personaService.AddPersona(persona);
-            var response = new ApiResponse<int>(idPersona);
+            var response = new ApiResponse<int>(await _personaService.AddPersona(persona));
 
             return Ok(response);
         }

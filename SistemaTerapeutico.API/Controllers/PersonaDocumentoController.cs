@@ -21,23 +21,21 @@ namespace SistemaTerapeutico.API.Controllers
             _mapper = mapper;
         }
         [HttpGet("GetPersonaDocumentoByTipoYNumero")]
-        public async Task<IActionResult> GetPersonaDocumentoByTipoYNumero(PersonaDocumentoQueryFilter personaDocumentoQueryFilter)
+        public async Task<IActionResult> GetPersonaDocumentoByTipoYNumero(PersonaDocumentoQueryFilter queryFilter)
         {
-            var PersonasDocumentos = await _personaDocumentoService.GetPersonasDocumentosByTipoYNumero(personaDocumentoQueryFilter.IdTipoDocumento, personaDocumentoQueryFilter.Numero);
-            var Response = new ApiResponse<IEnumerable<PersonaDocumento>>(PersonasDocumentos);
+            var PersonasDocumentos = await _personaDocumentoService.GetPersonasDocumentosByTipoYNumero(queryFilter.IdTipoDocumento, queryFilter.Numero);
+            IEnumerable<PersonaDocumentoDto> personaDocumentoDtos = _mapper.Map<IEnumerable<PersonaDocumentoDto>>(PersonasDocumentos);
+            var Response = new ApiResponse<IEnumerable<PersonaDocumentoDto>>(personaDocumentoDtos);
+
             return Ok(Response);
         }
         [HttpPost("PostPersonaDocumento")]
         public async Task<IActionResult> PostPersonaDocumento(PersonaDocumentoDto personaDocumentoDto)
         {
-            PersonaDocumento lPersonaDocumento = new PersonaDocumento(personaDocumentoDto.Usuario)
-            {
-                Id = personaDocumentoDto.IdPersona,
-                IdTwo = personaDocumentoDto.IdTipoDocumento,
-                Numero = personaDocumentoDto.Numero
-            };
-            await _personaDocumentoService.AddPersonaDocumento(lPersonaDocumento);
+            PersonaDocumento personaDocumento = _mapper.Map<PersonaDocumento>(personaDocumentoDto);
+            await _personaDocumentoService.AddPersonaDocumento(personaDocumento);
             var Response = new ApiResponse<bool>(true);
+
             return Ok(Response);
         }
     }

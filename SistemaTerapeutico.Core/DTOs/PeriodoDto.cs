@@ -12,6 +12,6 @@ namespace SistemaTerapeutico.Core.DTOs
         public DateTime FechaFin { get; set; }
         public int IdEstado { get; set; }
         public string Observaciones { get; set; }
-        public string Usuario { get; set; }
+        public string UsuarioRegistro { get; set; }
     }
 }

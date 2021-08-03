@@ -11,7 +11,7 @@ namespace SistemaTerapeutico.Core.DTOs
         public int IdTipoPersona { get; set; }
         public bool EsEmpresa { get; set; }
         public int? IdEstado { get; set; }
-        public string Usuario { get; set; }
+        public string UsuarioRegistro { get; set; }
         //public DateTime? FechaModificacion { get; set; }
         //public string UsuarioModificacion { get; set; }
     }

@@ -13,11 +13,6 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 
             builder.Property(x => x.Id)
                 .HasColumnName("IdParticipante");
-            
-            builder.ToTable("participante");
-            builder.Property(e => e.TieneDiagnostico)
-                .HasColumnType("bit")
-                .HasDefaultValueSql("'NULL'");
         }
     }
 }

@@ -12,6 +12,6 @@ namespace SistemaTerapeutico.Core.DTOs
         public int IdPuntuacionCriterio { get; set; }
         public int IdPuntuacionActividad { get; set; }
         public string Observacion { get; set; }
-        public string Usuario { get; set; }
+        public string UsuarioRegistro { get; set; }
     }
 }

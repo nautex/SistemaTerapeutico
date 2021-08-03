@@ -22,13 +22,8 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostTerapiaPeriodo")]
         public async Task<IActionResult> PostTerapiaPeriodo(TerapiaPeriodoDto terapiaPeriodoDto)
         {
-            TerapiaPeriodo entity = new TerapiaPeriodo(terapiaPeriodoDto.Usuario)
-            {
-                Id = terapiaPeriodoDto.IdTerapia,
-                IdTwo = terapiaPeriodoDto.IdPeriodo,
-                IdComprobante = terapiaPeriodoDto.IdComprobante,
-            };
-            await _terapiaPeriodoService.AddTerapiaPeriodo(entity);
+            TerapiaPeriodo terapiaPeriodo = _mapper.Map<TerapiaPeriodo>(terapiaPeriodoDto);
+            await _terapiaPeriodoService.AddTerapiaPeriodo(terapiaPeriodo);
             var response = new ApiResponse<bool>(true);
 
             return Ok(response);
@@ -37,7 +32,8 @@ namespace SistemaTerapeutico.API.Controllers
         public IActionResult GetTerapiasPeriodos()
         {
             var list = _terapiaPeriodoService.GetTerapiasPeriodos();
-            var response = new ApiResponse<IEnumerable<TerapiaPeriodo>>(list);
+            var listDto = _mapper.Map<IEnumerable<TerapiaPeriodoDto>>(list);
+            var response = new ApiResponse<IEnumerable<TerapiaPeriodoDto>>(listDto);
 
             return Ok(response);
         }
@@ -45,7 +41,8 @@ namespace SistemaTerapeutico.API.Controllers
         public async Task<IActionResult> GetTerapiaPeriodoByIds(int idTerapia, int idPeriodo)
         {
             var entity = await _terapiaPeriodoService.GetTerapiaPeriodoByIds(idTerapia, idPeriodo);
-            var response = new ApiResponse<TerapiaPeriodo>(entity);
+            var entityDto = _mapper.Map<TerapiaPeriodoDto>(entity);
+            var response = new ApiResponse<TerapiaPeriodoDto>(entityDto);
 
             return Ok(response);
         }

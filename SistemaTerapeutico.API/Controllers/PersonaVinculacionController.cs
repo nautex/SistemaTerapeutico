@@ -22,12 +22,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostPersonaVinculacion")]
         public async Task<IActionResult> PostPersonaVinculacion(PersonaVinculacionDto personaVinculacionDto)
         {
-            PersonaVinculacion personaVinculacion = new PersonaVinculacion("JSOTELO")
-            {
-                Id = personaVinculacionDto.IdPersona,
-                IdTwo = personaVinculacionDto.IdPersonaVinculo,
-                IdTipoVinculo = personaVinculacionDto.IdTipoVinculo
-            };
+            PersonaVinculacion personaVinculacion = _mapper.Map<PersonaVinculacion>(personaVinculacionDto);
             await _personaVinculacionService.AddPersonaVinculacion(personaVinculacion);
             var Response = new ApiResponse<bool>(true);
 

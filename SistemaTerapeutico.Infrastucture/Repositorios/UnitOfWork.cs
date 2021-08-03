@@ -20,7 +20,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         private readonly IAtencionRepository _atencionRepository;
         private readonly ITerapiaRepository _terapiaRepository;
         private readonly ITerapiaTerapeutaRepository _terapiaTerapeutaRepository;
-        private readonly IPeriodoTerapiaRepository _periodoTerapiaRepository;
+        private readonly IPeriodoRepository _periodoTerapiaRepository;
         private readonly ISesionRepository _sesionRepository;
         private readonly ISesionCriterioRepository _sesionCriterioRepository;
         private readonly ISesionCriterioActividadRepository _sesionCriterioActividadRepository;
@@ -53,7 +53,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
         public ITerapiaTerapeutaRepository TerapiaTerapeutaRepository => _terapiaTerapeutaRepository ?? new TerapiaTerapeutaRepository(_context);
 
-        public IPeriodoTerapiaRepository PeriodoTerapiaRepository => _periodoTerapiaRepository ?? new PeriodoTerapiaRepository(_context);
+        public IPeriodoRepository PeriodoRepository => _periodoTerapiaRepository ?? new PeriodoRepository(_context);
 
         public ISesionRepository SesionRepository => _sesionRepository ?? new SesionRepository(_context);
 

@@ -11,35 +11,12 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
             builder.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
-            builder.ToTable("persona");
-
             builder.Property(e => e.Id)
-                .HasColumnName("IdPersona")
-                .HasColumnType("int(11)");
-
-            builder.Property(e => e.IdEstado)
-                .HasColumnType("int(11)");
-
-            builder.Property(e => e.IdPaisOrigen)
-                .HasColumnType("int(11)");
-
-            builder.Property(e => e.EsEmpresa)
-                .HasColumnType("bit");
+                .HasColumnName("IdPersona");
 
             builder.Property(e => e.Nombres)
                 .IsRequired()
                 .HasMaxLength(70);
-
-            //builder.Property(e => e.RazonSocial)
-            //    .HasMaxLength(200);
-
-            builder.Property(e => e.UsuarioModificacion)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.UsuarioRegistro)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'NULL'");
         }
     }
 }

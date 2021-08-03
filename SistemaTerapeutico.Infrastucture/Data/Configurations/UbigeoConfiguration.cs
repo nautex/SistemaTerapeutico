@@ -11,31 +11,8 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
             builder.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
-            builder.ToTable("ubigeo");
-
             builder.Property(e => e.Id)
-                .HasColumnName("IdUbigeo")
-                .HasColumnType("int(11)");
-
-            builder.Property(e => e.Codigo)
-                .HasMaxLength(200)
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.Descripcion)
-                .HasMaxLength(200)
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.IdDepartamento).HasColumnType("int(11)");
-
-            builder.Property(e => e.IdProvincia).HasColumnType("int(11)");
-
-            builder.Property(e => e.UsuarioModificacion)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.UsuarioRegistro)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'NULL'");
+                .HasColumnName("IdUbigeo");
         }
     }
 }

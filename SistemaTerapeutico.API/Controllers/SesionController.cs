@@ -22,23 +22,18 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostSesion")]
         public async Task<IActionResult> PostSesion(SesionDto sesionDto)
         {
-            Sesion sesion = new Sesion(sesionDto.Usuario)
-            {
-                IdTerapia = sesionDto.IdTerapia,
-                IdPeriodo = sesionDto.IdPeriodo,
-                Fecha = sesionDto.Fecha,
-                Observacion = sesionDto.Observacion,
-                IdEstadoAsistencia = sesionDto.IdEstadoAsistencia,
-                IdPuntuacionCriterio = sesionDto.IdPuntuacionCriterio,
-                IdPuntuacionActividad = sesionDto.IdPuntuacionActividad
-            };
+            Sesion sesion = _mapper.Map<Sesion>(sesionDto);
             var response = new ApiResponse<int>(await _sesionService.AddSesion(sesion));
+
             return Ok(response);
         }
         [HttpGet("GetSesiones")]
         public IActionResult GetSesiones()
         {
-            var response = new ApiResponse<IEnumerable<Sesion>>(_sesionService.GetSesiones());
+            IEnumerable<Sesion> sesiones = _sesionService.GetSesiones();
+            IEnumerable<SesionDto> sesionesDto = _mapper.Map<IEnumerable<SesionDto>>(sesiones);
+            var response = new ApiResponse<IEnumerable<SesionDto>>(sesionesDto);
+
             return Ok(response);
         }
         [HttpGet("GetSesionesByIdTerapia")]

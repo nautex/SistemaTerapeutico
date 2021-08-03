@@ -11,58 +11,8 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
             builder.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
-            builder.ToTable("personanatural");
-
-            builder.HasIndex(e => e.IdUbigeoNacimiento)
-                .HasName("FK_PersonaNatural_Ubigeo");
-
             builder.Property(e => e.Id)
-                .HasColumnName("IdPersona")
-                .HasColumnType("int(11)");
-
-            builder.Property(e => e.IdEstado)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.IdEstadoCivil)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.IdNacionalidad)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.IdSexo)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.IdUbigeoNacimiento)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.PrimerApellido)
-                .HasMaxLength(70)
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.PrimerNombre)
-                .HasMaxLength(70)
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.SegundoApelldio)
-                .HasMaxLength(70)
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.SegundoNombre)
-                .HasMaxLength(70)
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.UsuarioModificacion)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'NULL'");
-
-            builder.Property(e => e.UsuarioRegistro)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'NULL'");
+                .HasColumnName("IdPersona");
 
             //builder.HasOne(d => d.IdPersonaNavigation)
             //    .WithOne(p => p.PersonaNatural)
