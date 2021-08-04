@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
+using SistemaTerapeutico.Core.Views;
 
 namespace SistemaTerapeutico.Infrastucture.Mappings
 {
@@ -75,6 +76,10 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
 
             CreateMap<Direccion, DireccionDto>()
                 .ForMember(dest => dest.IdDireccion, conf => conf.MapFrom(src => src.Id))
+                .ReverseMap();
+
+            CreateMap<PersonaView, PersonaViewDto>()
+                .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
                 .ReverseMap();
         }
     }

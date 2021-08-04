@@ -23,8 +23,7 @@ namespace SistemaTerapeutico.API.Controllers
         public IActionResult GetSesionesCriterios()
         {
             var list = _sesionCriterioService.GetSesionesCriterios();
-            var listDto = _mapper.Map<IEnumerable<SesionCriterioDto>>(list);
-            var response = new ApiResponse<IEnumerable<SesionCriterioDto>>(listDto);
+            var response = new ApiResponse<IEnumerable<SesionCriterioDto>>(list, _mapper);
 
             return Ok(response);
         }
@@ -40,8 +39,7 @@ namespace SistemaTerapeutico.API.Controllers
         public async Task<IActionResult> GetSesionesCriteriosByIdSesion(int idSesion)
         {
             var list = await _sesionCriterioService.GetSesionesCriteriosByIdSesion(idSesion);
-            var listDto = _mapper.Map<IEnumerable<SesionCriterioDto>>(list);
-            var response = new ApiResponse<IEnumerable<SesionCriterioDto>>(listDto);
+            var response = new ApiResponse<IEnumerable<SesionCriterioDto>>(list, _mapper);
 
             return Ok(response);
         }

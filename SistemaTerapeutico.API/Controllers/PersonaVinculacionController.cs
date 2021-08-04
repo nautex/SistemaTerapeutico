@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
@@ -13,7 +14,6 @@ namespace SistemaTerapeutico.API.Controllers
     {
         private readonly IPersonaVinculacionService _personaVinculacionService;
         private readonly IMapper _mapper;
-
         public PersonaVinculacionController(IPersonaVinculacionService personaVinculacionService, IMapper mapper)
         {
             _personaVinculacionService = personaVinculacionService;
@@ -27,6 +27,14 @@ namespace SistemaTerapeutico.API.Controllers
             var Response = new ApiResponse<bool>(true);
 
             return Ok(Response);
+        }
+        [HttpGet("GetPersonasVinculacionesByIdPersona")]
+        public async Task<IActionResult> GetPersonasVinculacionesByIdPersona(int idPersona)
+        {
+            var list = await _personaVinculacionService.GetPersonasVinculacionesByIdPersona(idPersona);
+            var response = new ApiResponse<IEnumerable<PersonaVinculacionDto>>(list, _mapper);
+
+            return Ok(response);
         }
     }
 }

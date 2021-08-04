@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
@@ -25,6 +26,22 @@ namespace SistemaTerapeutico.API.Controllers
             var Response = new ApiResponse<int>(await _atencionService.AddAtencion(atencion));
 
             return Ok(Response);
+        }
+        [HttpGet("GetAtenciones")]
+        public IActionResult GetAtenciones()
+        {
+            var list = _atencionService.GetAtenciones();
+            var response = new ApiResponse<IEnumerable<AtencionDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetLastAtencionByIdParticipante")]
+        public async Task<IActionResult> GetLastAtencionByIdParticipante(int idParticipante)
+        {
+            var list = await _atencionService.GetLastAtencionByIdParticipante(idParticipante);
+            var response = new ApiResponse<AtencionDto>(list, _mapper);
+
+            return Ok(response);
         }
     }
 }

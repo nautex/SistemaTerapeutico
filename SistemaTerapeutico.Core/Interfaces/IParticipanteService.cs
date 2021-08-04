@@ -6,5 +6,6 @@ namespace SistemaTerapeutico.Core.Interfaces
     public interface IParticipanteService
     {
         Task AddParticipante(Participante participante);
+        Task<Participante> GetParticipanteById(int idParticipante);
     }
 }

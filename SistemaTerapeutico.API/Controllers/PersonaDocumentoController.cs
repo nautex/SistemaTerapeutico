@@ -23,11 +23,10 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetPersonaDocumentoByTipoYNumero")]
         public async Task<IActionResult> GetPersonaDocumentoByTipoYNumero(PersonaDocumentoQueryFilter queryFilter)
         {
-            var PersonasDocumentos = await _personaDocumentoService.GetPersonasDocumentosByTipoYNumero(queryFilter.IdTipoDocumento, queryFilter.Numero);
-            IEnumerable<PersonaDocumentoDto> personaDocumentoDtos = _mapper.Map<IEnumerable<PersonaDocumentoDto>>(PersonasDocumentos);
-            var Response = new ApiResponse<IEnumerable<PersonaDocumentoDto>>(personaDocumentoDtos);
+            var entity = await _personaDocumentoService.GetPersonasDocumentosByTipoYNumero(queryFilter.IdTipoDocumento, queryFilter.Numero);
+            var response = new ApiResponse<IEnumerable<PersonaDocumentoDto>>(entity, _mapper);
 
-            return Ok(Response);
+            return Ok(response);
         }
         [HttpPost("PostPersonaDocumento")]
         public async Task<IActionResult> PostPersonaDocumento(PersonaDocumentoDto personaDocumentoDto)
@@ -37,6 +36,14 @@ namespace SistemaTerapeutico.API.Controllers
             var Response = new ApiResponse<bool>(true);
 
             return Ok(Response);
+        }
+        [HttpGet("GetPersonasDocumentosByIdPersona")]
+        public async Task<IActionResult> GetPersonasDocumentosByIdPersona(int idPersona)
+        {
+            var list = await _personaDocumentoService.GetPersonasDocumentosByIdPersona(idPersona);
+            var response = new ApiResponse<IEnumerable<PersonaDocumentoDto>>(list, _mapper);
+
+            return Ok(response);
         }
     }
 }

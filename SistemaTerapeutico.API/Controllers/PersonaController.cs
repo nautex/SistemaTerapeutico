@@ -14,32 +14,32 @@ namespace SistemaTerapeutico.API.Controllers
     public class PersonaController : Controller
     {
         private readonly IPersonaService _personaService;
+        private readonly IPersonaViewService _personaViewService;
         private readonly IMapper _mapper;
 
-        public PersonaController(IPersonaService personaService, IMapper mapper)
+        public PersonaController(IPersonaService personaService, IPersonaViewService personaViewService, IMapper mapper)
         {
             _personaService = personaService;
+            _personaViewService = personaViewService;
             _mapper = mapper;
         }
 
         [HttpGet("GetPersonas")]
         public IActionResult GetPersonas()
         {
-            var Personas = _personaService.GetPersonas();
-            var PersonasDto = _mapper.Map<IEnumerable<PersonaDto>>(Personas);
-            var Response = new ApiResponse<IEnumerable<PersonaDto>>(PersonasDto);
+            var list = _personaService.GetPersonas();
+            var response = new ApiResponse<IEnumerable<PersonaDto>>(list, _mapper);
 
-            return Ok(Response);
+            return Ok(response);
         }
 
         [HttpGet("GetPersonaById")]
         public async Task<IActionResult> GetPersonaById(int idPersona)
         {
-            var Persona = await _personaService.GetPersonaById(idPersona);
-            var PersonaDto = _mapper.Map<PersonaDto>(Persona);
-            var Response = new ApiResponse<PersonaDto>(PersonaDto);
+            var persona = await _personaService.GetPersonaById(idPersona);
+            var response = new ApiResponse<PersonaDto>(persona, _mapper);
 
-            return Ok(Response);
+            return Ok(response);
         }
         [HttpPost("PostPersonaNaturalDatosCompletos")]
         public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto persona)
@@ -52,16 +52,24 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetPersonasByNombres")]
         public async Task<IActionResult> GetPersonasByNombres(string nombres)
         {
-            IEnumerable<Persona> listado = await _personaService.GetPersonasByNombre(nombres);
-            var Response = new ApiResponse<IEnumerable<Persona>>(listado);
+            var list = await _personaService.GetPersonasByNombre(nombres);
+            var response = new ApiResponse<IEnumerable<PersonaDto>>(list, _mapper);
 
-            return Ok(Response);
+            return Ok(response);
         }
         [HttpPost("PostPersona")]
         public async Task<IActionResult> PostPersona(PersonaDto personaDto)
         {
             Persona persona = _mapper.Map<Persona>(personaDto);
             var response = new ApiResponse<int>(await _personaService.AddPersona(persona));
+
+            return Ok(response);
+        }
+        [HttpGet("GetPersonasView")]
+        public IActionResult GetPersonasView()
+        {
+            var list = _personaViewService.GetPersonasView();
+            var response = new ApiResponse<IEnumerable<PersonaViewDto>>(list, _mapper);
 
             return Ok(response);
         }

@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using SistemaTerapeutico.Core.Entities;
+using SistemaTerapeutico.Core.Views;
 
 namespace SistemaTerapeutico.Infrastucture.Data
 {
@@ -36,6 +37,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<TerapiaPlanificacion> TerapiaPlanificacion { get; set; }
         public virtual DbSet<TerapiaPlanificacionCriterio> TerapiaPlanificacionCriterio { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<PersonaView> PersonaView { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

@@ -32,8 +32,7 @@ namespace SistemaTerapeutico.API.Controllers
         public IActionResult GetTerapiasPeriodos()
         {
             var list = _terapiaPeriodoService.GetTerapiasPeriodos();
-            var listDto = _mapper.Map<IEnumerable<TerapiaPeriodoDto>>(list);
-            var response = new ApiResponse<IEnumerable<TerapiaPeriodoDto>>(listDto);
+            var response = new ApiResponse<IEnumerable<TerapiaPeriodoDto>>(list, _mapper);
 
             return Ok(response);
         }
@@ -41,8 +40,7 @@ namespace SistemaTerapeutico.API.Controllers
         public async Task<IActionResult> GetTerapiaPeriodoByIds(int idTerapia, int idPeriodo)
         {
             var entity = await _terapiaPeriodoService.GetTerapiaPeriodoByIds(idTerapia, idPeriodo);
-            var entityDto = _mapper.Map<TerapiaPeriodoDto>(entity);
-            var response = new ApiResponse<TerapiaPeriodoDto>(entityDto);
+            var response = new ApiResponse<TerapiaPeriodoDto>(entity, _mapper);
 
             return Ok(response);
         }

@@ -27,5 +27,13 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(Response);
         }
+        [HttpGet("GetParticipanteById")]
+        public async Task<IActionResult> GetParticipanteById(int idParticipante)
+        {
+            var entity = await _participanteService.GetParticipanteById(idParticipante);
+            var response = new ApiResponse<ParticipanteDto>(entity, _mapper);
+
+            return Ok(response);
+        }
     }
 }

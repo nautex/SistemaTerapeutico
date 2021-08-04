@@ -30,19 +30,25 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetPeriodos")]
         public IActionResult GetPeriodos()
         {
-            var response = new ApiResponse<IEnumerable<Periodo>>(_periodoService.GetPeriodos());
+            var list = _periodoService.GetPeriodos();
+            var response = new ApiResponse<IEnumerable<PeriodoDto>>(list, _mapper);
+
             return Ok(response);
         }
         [HttpGet("GetPeriodoById")]
         public async Task<IActionResult> GetPeriodoById(int idPeriodo)
         {
-            var response = new ApiResponse<Periodo>(await _periodoService.GetPeriodoById(idPeriodo));
+            var entity = await _periodoService.GetPeriodoById(idPeriodo);
+            var response = new ApiResponse<PeriodoDto>(entity, _mapper);
+
             return Ok(response);
         }
         [HttpGet("GetPeriodosByIdTipo")]
         public async Task<IActionResult> GetPeriodosByIdTipo(int idTipo)
         {
-            var response = new ApiResponse<IEnumerable<Periodo>>(await _periodoService.GetPeriodosByIdTipo(idTipo));
+            var list = await _periodoService.GetPeriodosByIdTipo(idTipo);
+            var response = new ApiResponse<IEnumerable<PeriodoDto>>(list, _mapper);
+
             return Ok(response);
         }
     }

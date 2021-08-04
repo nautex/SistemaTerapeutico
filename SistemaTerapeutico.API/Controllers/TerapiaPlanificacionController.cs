@@ -32,17 +32,15 @@ namespace SistemaTerapeutico.API.Controllers
         public IActionResult GetTerapiasPlanificaciones()
         {
             var list = _terapiaPlanificacionService.GetTerapiasPeriodos();
-            var listDto = _mapper.Map<IEnumerable<TerapiaPlanificacionDto>>(list);
-            var response = new ApiResponse<IEnumerable<TerapiaPlanificacionDto>>(listDto);
+            var response = new ApiResponse<IEnumerable<TerapiaPlanificacionDto>>(list, _mapper);
 
             return Ok(response);
         }
         [HttpGet("GetTerapiaPlanificacionByIds")]
         public async Task<IActionResult> GetTerapiaPlanificacionByIds(int idTerapia, int idPeriodo)
         {
-            var list = await _terapiaPlanificacionService.GetTerapiaPlanificacionByIds(idTerapia, idPeriodo);
-            var listDto = _mapper.Map<TerapiaPlanificacionDto>(list);
-            var response = new ApiResponse<TerapiaPlanificacionDto>(listDto);
+            var entity = await _terapiaPlanificacionService.GetTerapiaPlanificacionByIds(idTerapia, idPeriodo);
+            var response = new ApiResponse<TerapiaPlanificacionDto>(entity, _mapper);
 
             return Ok(response);
         }

@@ -30,22 +30,25 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetSesiones")]
         public IActionResult GetSesiones()
         {
-            IEnumerable<Sesion> sesiones = _sesionService.GetSesiones();
-            IEnumerable<SesionDto> sesionesDto = _mapper.Map<IEnumerable<SesionDto>>(sesiones);
-            var response = new ApiResponse<IEnumerable<SesionDto>>(sesionesDto);
+            IEnumerable<Sesion> list = _sesionService.GetSesiones();
+            var response = new ApiResponse<IEnumerable<SesionDto>>(list, _mapper);
 
             return Ok(response);
         }
         [HttpGet("GetSesionesByIdTerapia")]
         public async Task<IActionResult> GetSesionesByIdTerapia(int idTerapia)
         {
-            var response = new ApiResponse<IEnumerable<Sesion>>(await _sesionService.GetSesionesByIdTerapia(idTerapia));
+            var list = await _sesionService.GetSesionesByIdTerapia(idTerapia);
+            var response = new ApiResponse<IEnumerable<SesionDto>>(list, _mapper);
+
             return Ok(response);
         }
         [HttpGet("GetSesionesByIdPeriodoTerapia")]
         public async Task<IActionResult> GetSesionesByIdPeriodoTerapia(int idPeriodoTerapia)
         {
-            var response = new ApiResponse<IEnumerable<Sesion>>(await _sesionService.GetSesionesByIdPeriodoTerapia(idPeriodoTerapia));
+            var list = await _sesionService.GetSesionesByIdPeriodoTerapia(idPeriodoTerapia);
+            var response = new ApiResponse<IEnumerable<SesionDto>>(list, _mapper);
+
             return Ok(response);
         }
     }

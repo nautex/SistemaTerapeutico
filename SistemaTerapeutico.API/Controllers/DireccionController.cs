@@ -23,16 +23,16 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetDirecciones")]
         public IActionResult GetDirecciones()
         {
-            IEnumerable<Direccion> listado = _direccionService.GetDirecciones();
-            var response = new ApiResponse<IEnumerable<Direccion>>(listado);
+            var list = _direccionService.GetDirecciones();
+            var response = new ApiResponse<IEnumerable<DireccionDto>>(list, _mapper);
 
             return Ok(response);
         }
         [HttpGet("GetDireccionByUbigeoYDetalle")]
-        public async Task<IActionResult> GetDireccionByUbigeoYDetalle(DireccionQueryFilter direccionQueryFilter)
+        public async Task<IActionResult> GetDireccionByUbigeoYDetalle(DireccionQueryFilter queryFilter)
         {
-            IEnumerable<Direccion> listado = await _direccionService.GetDireccionsByUbigeoYDetalle(direccionQueryFilter.IdUbigeo, direccionQueryFilter.Detalle);
-            var response = new ApiResponse<IEnumerable<Direccion>>(listado);
+            var list = await _direccionService.GetDireccionsByUbigeoYDetalle(queryFilter.IdUbigeo, queryFilter.Detalle);
+            var response = new ApiResponse<IEnumerable<DireccionDto>>(list, _mapper);
 
             return Ok(response);
         }

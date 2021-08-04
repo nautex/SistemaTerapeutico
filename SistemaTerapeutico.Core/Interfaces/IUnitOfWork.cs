@@ -25,6 +25,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         ITerapiaPlanificacionRepository TerapiaPlanificacionRepository { get; }
         ITerapiaPlanificacionCriterioRepository TerapiaPlanificacionCriterioRepository { get; }
         IUsuarioRepository UsuarioRepository { get; }
+        IPersonaViewRepository PersonaViewRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
         void BeginTransaction();

@@ -22,9 +22,8 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetSesionesCriteriosActividades")]
         public IActionResult GetSesionesCriteriosActividades()
         {
-            var sesionCriterioActividades = _sesionCriterioActividadService.GetSesionesCriteriosActividades();
-            var sesionCriterioActividadesDto = _mapper.Map<IEnumerable<SesionCriterioActividadDto>>(sesionCriterioActividades);
-            var response = new ApiResponse<IEnumerable<SesionCriterioActividadDto>>(sesionCriterioActividadesDto);
+            var list = _sesionCriterioActividadService.GetSesionesCriteriosActividades();
+            var response = new ApiResponse<IEnumerable<SesionCriterioActividadDto>>(list, _mapper);
 
             return Ok(response);
         }

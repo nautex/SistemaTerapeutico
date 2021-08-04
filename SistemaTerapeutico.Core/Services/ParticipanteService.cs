@@ -16,5 +16,9 @@ namespace SistemaTerapeutico.Core.Services
             await _unitOfWork.ParticipanteRepository.Add(participante);
             _unitOfWork.SaveChanges();
         }
+        public Task<Participante> GetParticipanteById(int idParticipante)
+        {
+            return _unitOfWork.ParticipanteRepository.GetById(idParticipante);
+        }
     }
 }
