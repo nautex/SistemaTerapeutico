@@ -81,6 +81,15 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
             CreateMap<PersonaView, PersonaViewDto>()
                 .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
                 .ReverseMap();
+
+            CreateMap<ParticipanteView, ParticipanteViewDto>()
+                .ForMember(dest => dest.IdParticipante, conf => conf.MapFrom(src => src.Id))
+                .ReverseMap();
+
+            CreateMap<AtencionTerapia, AtencionTerapiaDto>()
+                .ForMember(dest => dest.IdAtencion, conf => conf.MapFrom(src => src.Id))
+                .ForMember(dest => dest.IdTerapia, conf => conf.MapFrom(src => src.IdTwo))
+                .ReverseMap();
         }
     }
 }

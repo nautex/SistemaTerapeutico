@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SistemaTerapeutico.Core.Entities
+﻿namespace SistemaTerapeutico.Core.Entities
 {
     public class TerapiaPeriodo : BaseEntityTwoIds
     {
@@ -10,6 +6,7 @@ namespace SistemaTerapeutico.Core.Entities
         {
 
         }
+        public int IdModalidad { get; set; }
         public int IdComprobante { get; set; }
     }
 }

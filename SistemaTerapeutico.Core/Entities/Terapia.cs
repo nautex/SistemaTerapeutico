@@ -13,7 +13,8 @@ namespace SistemaTerapeutico.Core.Entities
         public int IdAtencion { get; set; }
         public int IdTipo { get; set; }
         public DateTime FechaInicio { get; set; }
-        public int IdLugar { get; set; }
+        public int IdModalidad { get; set; }
+        public int IdSalon { get; set; }
         public int IdEstado { get; set; }
         public string Observaciones { get; set; }
     }

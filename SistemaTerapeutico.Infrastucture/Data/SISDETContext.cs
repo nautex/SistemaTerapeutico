@@ -38,6 +38,9 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<TerapiaPlanificacionCriterio> TerapiaPlanificacionCriterio { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<PersonaView> PersonaView { get; set; }
+        public virtual DbSet<ParticipanteView> ParticipanteView { get; set; }
+        public virtual DbSet<AtencionTerapia> AtencionTerapia { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
