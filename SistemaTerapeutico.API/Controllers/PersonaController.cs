@@ -14,13 +14,11 @@ namespace SistemaTerapeutico.API.Controllers
     public class PersonaController : Controller
     {
         private readonly IPersonaService _personaService;
-        private readonly IPersonaViewService _personaViewService;
         private readonly IMapper _mapper;
 
-        public PersonaController(IPersonaService personaService, IPersonaViewService personaViewService, IMapper mapper)
+        public PersonaController(IPersonaService personaService, IMapper mapper)
         {
             _personaService = personaService;
-            _personaViewService = personaViewService;
             _mapper = mapper;
         }
 
@@ -68,7 +66,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetPersonasView")]
         public IActionResult GetPersonasView()
         {
-            var list = _personaViewService.GetPersonasView();
+            var list = _personaService.GetPersonasView();
             var response = new ApiResponse<IEnumerable<PersonaViewDto>>(list, _mapper);
 
             return Ok(response);

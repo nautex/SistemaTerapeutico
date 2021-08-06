@@ -13,12 +13,10 @@ namespace SistemaTerapeutico.API.Controllers
     public class ParticipanteController : Controller
     {
         private readonly IParticipanteService _participanteService;
-        private readonly IParticipanteViewService _participanteViewService;
         private readonly IMapper _mapper;
-        public ParticipanteController(IParticipanteService participanteService, IParticipanteViewService participanteViewService, IMapper mapper)
+        public ParticipanteController(IParticipanteService participanteService, IMapper mapper)
         {
             _participanteService = participanteService;
-            _participanteViewService = participanteViewService;
             _mapper = mapper;
         }
         [HttpPost("PostParticipante")]
@@ -41,7 +39,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetParticipantesView")]
         public IActionResult GetParticipantesView()
         {
-            var list = _participanteViewService.GetParticipantesView();
+            var list = _participanteService.GetParticipantesView();
             var response = new ApiResponse<IEnumerable<ParticipanteViewDto>>(list, _mapper);
 
             return Ok(response);

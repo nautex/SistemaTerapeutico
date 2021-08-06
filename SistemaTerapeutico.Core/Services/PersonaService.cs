@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Enumerators;
 using SistemaTerapeutico.Core.Exceptions;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Core.Views;
 
 namespace SistemaTerapeutico.Core.Services
 {
@@ -172,5 +172,10 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.PersonaRepository.GetPersonasByNombre(nombre);
         }
+        public IEnumerable<PersonaView> GetPersonasView()
+        {
+            return _unitOfWork.PersonaViewRepository.GetAll();
+        }
     }
 }
+//123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100

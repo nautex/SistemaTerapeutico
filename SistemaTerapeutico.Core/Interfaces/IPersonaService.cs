@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
+using SistemaTerapeutico.Core.Views;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
@@ -15,5 +16,6 @@ namespace SistemaTerapeutico.Core.Interfaces
         //Task<int> AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto dad);
         Task<PersonaResponseDto> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto);
         Task<IEnumerable<Persona>> GetPersonasByNombre(string nombre);
+        IEnumerable<PersonaView> GetPersonasView();
     }
 }

@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Core.Views;
 
 namespace SistemaTerapeutico.Core.Services
 {
@@ -19,6 +21,10 @@ namespace SistemaTerapeutico.Core.Services
         public Task<Participante> GetParticipanteById(int idParticipante)
         {
             return _unitOfWork.ParticipanteRepository.GetById(idParticipante);
+        }
+        public IEnumerable<ParticipanteView> GetParticipantesView()
+        {
+            return _unitOfWork.ParticipanteViewRepository.GetAll();
         }
     }
 }
