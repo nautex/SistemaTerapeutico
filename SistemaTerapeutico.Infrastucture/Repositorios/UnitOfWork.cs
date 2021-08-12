@@ -72,8 +72,8 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
         public IUsuarioRepository UsuarioRepository => _usuarioRepository ?? new UsuarioRepository(_context);
 
-        public IPersonaViewRepository PersonaViewRepository => _personaViewRepository ?? new PersonaViewRepository(_context);
-        public IParticipanteViewRepository ParticipanteViewRepository => _participanteViewRepository ?? new ParticipanteViewRepository(_context);
+        public IPersonaViewRepository PersonaViewRepository => _personaViewRepository ?? new PersonaResumenViewRepository(_context);
+        public IParticipanteViewRepository ParticipanteViewRepository => _participanteViewRepository ?? new ParticipanteResumenViewRepository(_context);
 
         public IAtencionTerapiaRepository AtencionTerapiaRepository => _atencionTerapiaRepository ?? new AtencionTerapiaRepository(_context);
 

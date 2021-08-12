@@ -5,6 +5,6 @@ namespace SistemaTerapeutico.Core.Interfaces
 {
     public interface IPersonaViewService
     {
-        IEnumerable<PersonaView> GetPersonasView();
+        IEnumerable<PersonaResumenView> GetPersonasView();
     }
 }

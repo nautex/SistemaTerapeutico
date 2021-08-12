@@ -52,8 +52,8 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<ITerapiaPlanificacionRepository, TerapiaPlanificacionRepository>();
             services.AddTransient<ITerapiaPlanificacionCriterioRepository, TerapiaPlanificacionCriterioRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-            services.AddTransient<IPersonaViewRepository, PersonaViewRepository>();
-            services.AddTransient<IParticipanteViewRepository, ParticipanteViewRepository>();
+            services.AddTransient<IPersonaViewRepository, PersonaResumenViewRepository>();
+            services.AddTransient<IParticipanteViewRepository, ParticipanteResumenViewRepository>();
 
             services.AddSingleton<IPasswordService, PasswordService>();
 
@@ -113,8 +113,6 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<ITerapiaPlanificacionService, TerapiaPlanificacionService>();
             services.AddTransient<ITerapiaPlanificacionCriterioService, TerapiaPlanificacionCriterioService>();
             services.AddTransient<IUsuarioService, UsuarioService>();
-            services.AddTransient<IPersonaViewService, PersonaViewService>();
-            services.AddTransient<IParticipanteViewService, ParticipanteViewService>();
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();

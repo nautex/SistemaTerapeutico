@@ -9,8 +9,7 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
         public void Configure(EntityTypeBuilder<PersonaView> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).HasColumnName("IdPersona");
-            builder.ToTable("vw_listapersonas");
+            builder.ToTable("vw_persona");
         }
     }
 }

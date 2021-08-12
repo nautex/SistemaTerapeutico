@@ -5,6 +5,6 @@ namespace SistemaTerapeutico.Core.Interfaces
 {
     public interface IParticipanteViewService
     {
-        IEnumerable<ParticipanteView> GetParticipantesView();
+        IEnumerable<ParticipanteResumenView> GetParticipantesView();
     }
 }

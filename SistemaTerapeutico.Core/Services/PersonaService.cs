@@ -172,9 +172,28 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.PersonaRepository.GetPersonasByNombre(nombre);
         }
-        public IEnumerable<PersonaView> GetPersonasView()
+        public IEnumerable<PersonaResumenView> GetPersonasView()
         {
             return _unitOfWork.PersonaViewRepository.GetAll();
+        }
+        public Task<PersonaNatural> GetPersonaNaturalById(int idPersona)
+        {
+            return _unitOfWork.PersonaNaturalRepository.GetById(idPersona);
+        }
+        public async Task AddPersonaNatural(PersonaNatural personaNatural)
+        {
+            await _unitOfWork.PersonaNaturalRepository.Add(personaNatural);
+            _unitOfWork.SaveChanges();
+        }
+        public void UpdatePersonaNatural(PersonaNatural personaNatural)
+        {
+            _unitOfWork.PersonaNaturalRepository.Update(personaNatural);
+            _unitOfWork.SaveChanges();
+        }
+        public async Task DeletePersonaNatural(int idPersona)
+        {
+            await _unitOfWork.PersonaNaturalRepository.Delete(idPersona);
+            _unitOfWork.SaveChanges();
         }
     }
 }

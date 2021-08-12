@@ -9,6 +9,6 @@ namespace SistemaTerapeutico.Core.Interfaces
     {
         Task AddParticipante(Participante participante);
         Task<Participante> GetParticipanteById(int idParticipante);
-        IEnumerable<ParticipanteView> GetParticipantesView();
+        IEnumerable<ParticipanteResumenView> GetParticipantesView();
     }
 }

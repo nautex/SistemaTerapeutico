@@ -2,7 +2,7 @@
 
 namespace SistemaTerapeutico.Core.Views
 {
-    public class ParticipanteView : BaseView
+    public class ParticipanteResumenView : BaseView
     {
         public string Nombres { get; set; }
         public DateTime FechaIngreso { get; set; }

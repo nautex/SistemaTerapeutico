@@ -1,13 +1,10 @@
 ﻿using System;
 
-namespace SistemaTerapeutico.Core.Views
+namespace SistemaTerapeutico.Core.DTOs
 {
-    public class PersonaView : BaseView
+    public class PersonaNaturalDto
     {
-        public string Nombres { get; set; }
-        public DateTime FechaIngreso { get; set; }
-        //public int IdPaisOrigen { get; set; }
-        public bool EsEmpresa { get; set; }
+        public int IdPersona { get; set; }
         public string PrimerNombre { get; set; }
         public string SegundoNombre { get; set; }
         public string PrimerApellido { get; set; }
@@ -16,7 +13,7 @@ namespace SistemaTerapeutico.Core.Views
         public int? IdUbigeoNacimiento { get; set; }
         public int? IdSexo { get; set; }
         public int? IdEstadoCivil { get; set; }
-        //public int? IdNacionalidad { get; set; }
+        public int? IdNacionalidad { get; set; }
         public int? IdTipoPersona { get; set; }
         public int? IdEstado { get; set; }
     }

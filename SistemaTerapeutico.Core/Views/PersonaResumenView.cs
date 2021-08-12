@@ -1,15 +1,12 @@
 ﻿using System;
 
-namespace SistemaTerapeutico.Core.DTOs
+namespace SistemaTerapeutico.Core.Views
 {
-    public class PersonaViewDto
+    public class PersonaResumenView : BaseView
     {
-        public int Id { get; set; }
         public string Nombres { get; set; }
-        public int IdTipoDocumento { get; set; }
         public string TipoDocumento { get; set; }
         public string NumeroDocumento { get; set; }
-        public int IdTipoPersona { get; set; }
         public string TipoPersona { get; set; }
         public DateTime? FechaNacimiento { get; set; }
         public string Celular { get; set; }

@@ -71,5 +71,22 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
+        [HttpGet("GetPersonaNaturalById")]
+        public async Task<IActionResult> GetPersonaNaturalById(int idPersona)
+        {
+            var entity = await _personaService.GetPersonaNaturalById(idPersona);
+            var response = new ApiResponse<PersonaNaturalDto>(entity, _mapper);
+
+            return Ok(response);
+        }
+        [HttpPost("PostPersonaNatural")]
+        public async Task<IActionResult> PostPersonaNatural(PersonaNaturalDto personaNaturalDto)
+        {
+            var entity = _mapper.Map<PersonaNatural>(personaNaturalDto);
+            await _personaService.AddPersonaNatural(entity);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
     }
 }

@@ -4,10 +4,9 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class PersonaViewRepository : BaseRepositoryView<PersonaView>, IPersonaViewRepository
+    public class ParticipanteResumenViewRepository : BaseRepositoryView<ParticipanteResumenView>, IParticipanteViewRepository
     {
-
-        public PersonaViewRepository(SISDETContext context) : base(context)
+        public ParticipanteResumenViewRepository(SISDETContext context) : base(context)
         {
 
         }

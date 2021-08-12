@@ -22,7 +22,7 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.ParticipanteRepository.GetById(idParticipante);
         }
-        public IEnumerable<ParticipanteView> GetParticipantesView()
+        public IEnumerable<ParticipanteResumenView> GetParticipantesView()
         {
             return _unitOfWork.ParticipanteViewRepository.GetAll();
         }
