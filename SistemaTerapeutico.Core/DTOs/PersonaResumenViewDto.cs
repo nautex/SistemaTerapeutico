@@ -2,7 +2,7 @@
 
 namespace SistemaTerapeutico.Core.DTOs
 {
-    public class PersonaViewDto
+    public class PersonaResumenViewDto
     {
         public int Id { get; set; }
         public string Nombres { get; set; }

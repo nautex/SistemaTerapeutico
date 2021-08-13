@@ -52,8 +52,9 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<ITerapiaPlanificacionRepository, TerapiaPlanificacionRepository>();
             services.AddTransient<ITerapiaPlanificacionCriterioRepository, TerapiaPlanificacionCriterioRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-            services.AddTransient<IPersonaViewRepository, PersonaResumenViewRepository>();
-            services.AddTransient<IParticipanteViewRepository, ParticipanteResumenViewRepository>();
+            services.AddTransient<IPersonaResumenViewRepository, PersonaResumenViewRepository>();
+            services.AddTransient<IParticipanteResumenViewRepository, ParticipanteResumenViewRepository>();
+            services.AddTransient<IPersonaNaturalViewRepository, PersonaNaturalViewRepository>();
 
             services.AddSingleton<IPasswordService, PasswordService>();
 

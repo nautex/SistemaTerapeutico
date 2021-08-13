@@ -63,19 +63,19 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetPersonasView")]
-        public IActionResult GetPersonasView()
+        [HttpGet("GetPersonasResumenView")]
+        public IActionResult GetPersonasResumenView()
         {
-            var list = _personaService.GetPersonasView();
-            var response = new ApiResponse<IEnumerable<PersonaViewDto>>(list, _mapper);
+            var list = _personaService.GetPersonasResumenView();
+            var response = new ApiResponse<IEnumerable<PersonaResumenViewDto>>(list, _mapper);
 
             return Ok(response);
         }
-        [HttpGet("GetPersonaNaturalById")]
-        public async Task<IActionResult> GetPersonaNaturalById(int idPersona)
+        [HttpGet("GetPersonaNaturalViewById")]
+        public async Task<IActionResult> GetPersonaNaturalViewById(int idPersona)
         {
-            var entity = await _personaService.GetPersonaNaturalById(idPersona);
-            var response = new ApiResponse<PersonaNaturalDto>(entity, _mapper);
+            var entity = await _personaService.GetPersonaNaturalViewById(idPersona);
+            var response = new ApiResponse<PersonaNaturalViewDto>(entity, _mapper);
 
             return Ok(response);
         }

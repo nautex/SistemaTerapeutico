@@ -28,9 +28,10 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         private readonly ITerapiaPlanificacionRepository _terapiaPlanificacionRepository;
         private readonly ITerapiaPlanificacionCriterioRepository _terapiaPlanificacionCriterioRepository;
         private readonly IUsuarioRepository _usuarioRepository;
-        private readonly IPersonaViewRepository _personaViewRepository;
-        private readonly IParticipanteViewRepository _participanteViewRepository;
+        private readonly IPersonaResumenViewRepository _personaViewRepository;
+        private readonly IParticipanteResumenViewRepository _participanteViewRepository;
         private readonly IAtencionTerapiaRepository _atencionTerapiaRepository;
+        private readonly IPersonaNaturalViewRepository _personaNaturalViewRepository;
         public UnitOfWork(SISDETContext context)
         {
             _context = context;
@@ -72,10 +73,12 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
         public IUsuarioRepository UsuarioRepository => _usuarioRepository ?? new UsuarioRepository(_context);
 
-        public IPersonaViewRepository PersonaViewRepository => _personaViewRepository ?? new PersonaResumenViewRepository(_context);
-        public IParticipanteViewRepository ParticipanteViewRepository => _participanteViewRepository ?? new ParticipanteResumenViewRepository(_context);
+        public IPersonaResumenViewRepository PersonaViewRepository => _personaViewRepository ?? new PersonaResumenViewRepository(_context);
+        public IParticipanteResumenViewRepository ParticipanteViewRepository => _participanteViewRepository ?? new ParticipanteResumenViewRepository(_context);
 
         public IAtencionTerapiaRepository AtencionTerapiaRepository => _atencionTerapiaRepository ?? new AtencionTerapiaRepository(_context);
+
+        public IPersonaNaturalViewRepository PersonaNaturalViewRepository => _personaNaturalViewRepository ?? new PersonaNaturalViewRepository(_context);
 
         public void Dispose()
         {

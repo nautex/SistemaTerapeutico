@@ -172,7 +172,7 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.PersonaRepository.GetPersonasByNombre(nombre);
         }
-        public IEnumerable<PersonaResumenView> GetPersonasView()
+        public IEnumerable<PersonaResumenView> GetPersonasResumenView()
         {
             return _unitOfWork.PersonaViewRepository.GetAll();
         }
@@ -194,6 +194,10 @@ namespace SistemaTerapeutico.Core.Services
         {
             await _unitOfWork.PersonaNaturalRepository.Delete(idPersona);
             _unitOfWork.SaveChanges();
+        }
+        public async Task<PersonaNaturalView> GetPersonaNaturalViewById(int idPersona)
+        {
+            return await _unitOfWork.PersonaNaturalViewRepository.GetById(idPersona);
         }
     }
 }

@@ -16,10 +16,11 @@ namespace SistemaTerapeutico.Core.Interfaces
         //Task<int> AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto dad);
         Task<PersonaResponseDto> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto);
         Task<IEnumerable<Persona>> GetPersonasByNombre(string nombre);
-        IEnumerable<PersonaResumenView> GetPersonasView();
+        IEnumerable<PersonaResumenView> GetPersonasResumenView();
         Task<PersonaNatural> GetPersonaNaturalById(int idPersona);
         Task AddPersonaNatural(PersonaNatural personaNatural);
         void UpdatePersonaNatural(PersonaNatural personaNatural);
         Task DeletePersonaNatural(int idPersona);
+        Task<PersonaNaturalView> GetPersonaNaturalViewById(int idPersona);
     }
 }
