@@ -107,6 +107,9 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
             CreateMap<UbigeoView, UbigeoViewDto>()
                 .ReverseMap();
 
+            CreateMap<Catalogo, CatalogoDto>()
+                .ForMember(dest => dest.IdCatalogo, conf => conf.MapFrom(src => src.Id))
+                .ReverseMap();
         }
     }
 }

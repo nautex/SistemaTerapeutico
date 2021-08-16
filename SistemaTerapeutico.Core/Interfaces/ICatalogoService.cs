@@ -4,7 +4,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface ICatalogoRepository : IBaseRepository<Catalogo>
+    public interface ICatalogoService
     {
         Task<IEnumerable<Catalogo>> GetCatalogosByIdPadre(int idPadre);
     }
