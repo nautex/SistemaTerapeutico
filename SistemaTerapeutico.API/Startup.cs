@@ -37,6 +37,8 @@ namespace SistemaTerapeutico.BackEnd.API
                 options.Filters.Add<GlobalExceptionFilter>();
             });
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddTransient<IParticipanteRepository, ParticipanteRepository>();
             services.AddTransient<IPersonaRepository, PersonaRepository>();
             services.AddTransient<IPersonaDocumentoRepository, PersonaDocumentoRepository>();
@@ -55,6 +57,7 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IPersonaResumenViewRepository, PersonaResumenViewRepository>();
             services.AddTransient<IParticipanteResumenViewRepository, ParticipanteResumenViewRepository>();
             services.AddTransient<IPersonaNaturalViewRepository, PersonaNaturalViewRepository>();
+            services.AddTransient<IUbigeoViewRepository, UbigeoViewRepository>();
 
             services.AddSingleton<IPasswordService, PasswordService>();
 
@@ -63,8 +66,6 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddDbContext<SISDETContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("SISDET"))
             );
-
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddAuthentication(options =>
             {
@@ -114,6 +115,7 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<ITerapiaPlanificacionService, TerapiaPlanificacionService>();
             services.AddTransient<ITerapiaPlanificacionCriterioService, TerapiaPlanificacionCriterioService>();
             services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddTransient<IUbigeoViewService, UbigeoViewService>();
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();

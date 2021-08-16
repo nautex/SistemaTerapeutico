@@ -9,6 +9,9 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
     {
         public AutomapperProfile()
         {
+            CreateMap<Lista, ListaDto>()
+                .ReverseMap();
+
             CreateMap<Persona, PersonaDto>()
                 .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
                 .ReverseMap();
@@ -95,8 +98,15 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
                 .ForMember(dest => dest.IdTerapia, conf => conf.MapFrom(src => src.IdTwo))
                 .ReverseMap();
 
+            CreateMap<Lista, ListaDto>()
+                .ReverseMap();
+
             CreateMap<PersonaNaturalView, PersonaNaturalViewDto>()
                 .ReverseMap();
+
+            CreateMap<UbigeoView, UbigeoViewDto>()
+                .ReverseMap();
+
         }
     }
 }

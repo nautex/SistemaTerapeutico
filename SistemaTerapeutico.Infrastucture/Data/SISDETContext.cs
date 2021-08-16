@@ -41,6 +41,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<ParticipanteResumenView> ParticipanteView { get; set; }
         public virtual DbSet<AtencionTerapia> AtencionTerapia { get; set; }
         public virtual DbSet<PersonaNaturalView> PersonaNaturalView { get; set; }
+        public virtual DbSet<UbigeoView> UbigeoView { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
