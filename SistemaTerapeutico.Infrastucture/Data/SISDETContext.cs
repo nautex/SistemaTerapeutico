@@ -17,7 +17,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         }
 
         public virtual DbSet<Catalogo> Catalogo { get; set; }
-        public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; } //41424344454647484950515253545556575859606162636465666768697071727374757677787980
         public virtual DbSet<PersonaContacto> PersonaContacto { get; set; }
         public virtual DbSet<PersonaDireccion> PersonaDireccion { get; set; }
         public virtual DbSet<PersonaDocumento> PersonaDocumento { get; set; }
@@ -42,7 +42,8 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<AtencionTerapia> AtencionTerapia { get; set; }
         public virtual DbSet<PersonaNaturalView> PersonaNaturalView { get; set; }
         public virtual DbSet<UbigeoView> UbigeoView { get; set; }
-
+        //8182884858687888990919293949596979899100
+        public virtual DbSet<PersonaDocumentoView> PersonaDocumentoView { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

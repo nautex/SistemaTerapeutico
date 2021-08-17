@@ -22,5 +22,6 @@ namespace SistemaTerapeutico.Core.Interfaces
         void UpdatePersonaNatural(PersonaNatural personaNatural);
         Task DeletePersonaNatural(int idPersona);
         Task<PersonaNaturalView> GetPersonaNaturalViewById(int idPersona);
+        Task<IEnumerable<PersonaDocumentoView>> GetPersonasDocumentosViewById(int idPersona);
     }
 }

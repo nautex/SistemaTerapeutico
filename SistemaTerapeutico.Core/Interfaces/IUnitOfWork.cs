@@ -30,6 +30,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         IAtencionTerapiaRepository AtencionTerapiaRepository { get; }
         IPersonaNaturalViewRepository PersonaNaturalViewRepository { get; }
         IUbigeoViewRepository UbigeoViewRepository { get; }
+        IPersonaDocumentoViewRepository PersonaDocumentoViewRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
         void BeginTransaction();

@@ -33,6 +33,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         private readonly IAtencionTerapiaRepository _atencionTerapiaRepository;
         private readonly IPersonaNaturalViewRepository _personaNaturalViewRepository;
         private readonly IUbigeoViewRepository _ubigeoViewRepository;
+        private readonly IPersonaDocumentoViewRepository _personaDocumentoViewRepository;
         public UnitOfWork(SISDETContext context)
         {
             _context = context;
@@ -82,6 +83,8 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         public IPersonaNaturalViewRepository PersonaNaturalViewRepository => _personaNaturalViewRepository ?? new PersonaNaturalViewRepository(_context);
 
         public IUbigeoViewRepository UbigeoViewRepository => _ubigeoViewRepository ?? new UbigeoViewRepository(_context);
+
+        public IPersonaDocumentoViewRepository PersonaDocumentoViewRepository => _personaDocumentoViewRepository ?? new PersonaDocumentoViewRepository(_context);
 
         public void Dispose()
         {

@@ -110,6 +110,9 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
             CreateMap<Catalogo, CatalogoDto>()
                 .ForMember(dest => dest.IdCatalogo, conf => conf.MapFrom(src => src.Id))
                 .ReverseMap();
+
+            CreateMap<PersonaDocumentoView, PersonaDocumentoViewDto>()
+                .ReverseMap();
         }
     }
 }
