@@ -15,9 +15,13 @@ namespace SistemaTerapeutico.Core.DTOs
         public string SegundoApellido { get; set; }
         public DateTime? FechaNacimiento { get; set; }
         public int? IdPais { get; set; }
+        public string Pais { get; set; }
         public int? IdDepartamento { get; set; }
+        public string Departamento { get; set; }
         public int? IdProvincia { get; set; }
+        public string Provincia { get; set; }
         public int? IdUbigeoNacimiento { get; set; }
+        public string UbigeoNacimiento { get; set; }
         public int? IdSexo { get; set; }
         public int? IdEstadoCivil { get; set; }
         //public int? IdNacionalidad { get; set; }
