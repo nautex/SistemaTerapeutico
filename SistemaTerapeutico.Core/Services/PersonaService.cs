@@ -199,9 +199,9 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.PersonaNaturalViewRepository.GetById(idPersona);
         }
-        public async Task<IEnumerable<PersonaDocumentoView>> GetPersonasDocumentosViewById(int idPersona)
+        public async Task<IEnumerable<PersonaDocumentoView>> GetPersonasDocumentosViewByIdPersona(int idPersona)
         {
-            return await _unitOfWork.PersonaDocumentoViewRepository.GetPersonasDocumentosById(idPersona);
+            return await _unitOfWork.PersonaDocumentoViewRepository.GetPersonasDocumentosByIdPersona(idPersona);
         }
     }
 }

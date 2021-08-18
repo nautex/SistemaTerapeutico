@@ -13,6 +13,9 @@ namespace SistemaTerapeutico.Core.Views
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
         public DateTime? FechaNacimiento { get; set; }
+        public int? IdPais { get; set; }
+        public int? IdDepartamento { get; set; }
+        public int? IdProvincia { get; set; }
         public int? IdUbigeoNacimiento { get; set; }
         public int? IdSexo { get; set; }
         public int? IdEstadoCivil { get; set; }

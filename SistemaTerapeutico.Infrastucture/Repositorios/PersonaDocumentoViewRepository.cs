@@ -14,9 +14,9 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
 
         }
-        public async Task<IEnumerable<PersonaDocumentoView>> GetPersonasDocumentosById(int idPersona)
+        public async Task<IEnumerable<PersonaDocumentoView>> GetPersonasDocumentosByIdPersona(int idPersona)
         {
-            return await _entities.Where(x => x.Id == idPersona).ToListAsync();
+            return await _entities.Where(x => x.IdPersona == idPersona).ToListAsync();
         }
     }
 }

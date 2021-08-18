@@ -6,6 +6,6 @@ namespace SistemaTerapeutico.Core.Interfaces
 {
     public interface IPersonaDocumentoViewRepository : IBaseRepositoryView<PersonaDocumentoView>
     {
-        Task<IEnumerable<PersonaDocumentoView>> GetPersonasDocumentosById(int idPersona);
+        Task<IEnumerable<PersonaDocumentoView>> GetPersonasDocumentosByIdPersona(int idPersona);
     }
 }

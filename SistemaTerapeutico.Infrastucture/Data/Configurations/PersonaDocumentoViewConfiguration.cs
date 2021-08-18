@@ -9,7 +9,6 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
         public void Configure(EntityTypeBuilder<PersonaDocumentoView> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).HasColumnName("IdPersona");
             builder.ToTable("vw_personadocumento");
         }
     }

@@ -88,10 +88,10 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetPersonasDocumentosViewById")]
-        public async Task<IActionResult> GetPersonasDocumentosViewById(int idPersona)
+        [HttpGet("GetPersonasDocumentosViewByIdPersona")]
+        public async Task<IActionResult> GetPersonasDocumentosViewByIdPersona(int idPersona)
         {
-            var list = await _personaService.GetPersonasDocumentosViewById(idPersona);
+            var list = await _personaService.GetPersonasDocumentosViewByIdPersona(idPersona);
             var response = new ApiResponse<IEnumerable<PersonaDocumentoViewDto>>(list, _mapper);
 
             return Ok(response);
