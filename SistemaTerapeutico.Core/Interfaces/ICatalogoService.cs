@@ -7,5 +7,6 @@ namespace SistemaTerapeutico.Core.Interfaces
     public interface ICatalogoService
     {
         Task<IEnumerable<Catalogo>> GetCatalogosByIdPadre(int idPadre);
+        Task<IEnumerable<Lista>> GetCatalogosByIdPadreInLista(int idPadre);
     }
 }

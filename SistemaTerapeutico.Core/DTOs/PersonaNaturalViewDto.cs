@@ -23,9 +23,11 @@ namespace SistemaTerapeutico.Core.DTOs
         public int? IdUbigeoNacimiento { get; set; }
         public string UbigeoNacimiento { get; set; }
         public int? IdSexo { get; set; }
+        public string Sexo { get; set; }
         public int? IdEstadoCivil { get; set; }
-        //public int? IdNacionalidad { get; set; }
+        public string EstadoCivil { get; set; }
         public int? IdTipoPersona { get; set; }
+        public string TipoPersona { get; set; }
         public int? IdEstado { get; set; }
     }
 }

@@ -18,5 +18,13 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
             return await _entities.Where(x => x.IdPadre == idPadre).OrderBy(x => x.Orden).ToListAsync();
         }
+        public async Task<IEnumerable<Lista>> GetCatalogosByIdPadreInLista(int idPadre)
+        {
+            var query = from f in _context.Catalogo
+                        where f.IdPadre == idPadre
+                        select new Lista { Id = f.Id, Descripcion = f.Descripcion };
+
+            return await query.OrderBy(x => x.Descripcion).ToListAsync();
+        }
     }
 }

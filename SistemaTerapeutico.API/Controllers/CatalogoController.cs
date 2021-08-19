@@ -27,5 +27,13 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
+        [HttpGet("GetCatalogosByIdPadreInLista")]
+        public async Task<IActionResult> GetCatalogosByIdPadreInLista(int idPadre)
+        {
+            var list = await _catalogoService.GetCatalogosByIdPadreInLista(idPadre);
+            var response = new ApiResponse<IEnumerable<ListaDto>>(list, _mapper);
+
+            return Ok(response);
+        }
     }
 }

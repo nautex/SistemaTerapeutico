@@ -12,9 +12,13 @@ namespace SistemaTerapeutico.Core.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public Task<IEnumerable<Catalogo>> GetCatalogosByIdPadre(int idPadre)
+        public async Task<IEnumerable<Catalogo>> GetCatalogosByIdPadre(int idPadre)
         {
-            return _unitOfWork.CatalogoRepository.GetCatalogosByIdPadre(idPadre);
+            return await _unitOfWork.CatalogoRepository.GetCatalogosByIdPadre(idPadre);
+        }
+        public async Task<IEnumerable<Lista>> GetCatalogosByIdPadreInLista(int idPadre)
+        {
+            return await _unitOfWork.CatalogoRepository.GetCatalogosByIdPadreInLista(idPadre);
         }
     }
 }

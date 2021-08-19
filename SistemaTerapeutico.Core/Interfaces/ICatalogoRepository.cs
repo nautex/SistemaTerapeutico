@@ -7,5 +7,6 @@ namespace SistemaTerapeutico.Core.Interfaces
     public interface ICatalogoRepository : IBaseRepository<Catalogo>
     {
         Task<IEnumerable<Catalogo>> GetCatalogosByIdPadre(int idPadre);
+        Task<IEnumerable<Lista>> GetCatalogosByIdPadreInLista(int idPadre);
     }
 }
