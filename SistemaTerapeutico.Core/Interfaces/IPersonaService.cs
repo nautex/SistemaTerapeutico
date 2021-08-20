@@ -23,5 +23,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task DeletePersonaNatural(int idPersona);
         Task<PersonaNaturalView> GetPersonaNaturalViewById(int idPersona);
         Task<IEnumerable<PersonaDocumentoView>> GetPersonasDocumentosViewByIdPersona(int idPersona);
+        Task<IEnumerable<PersonaContactoView>> GetPersonasContactosViewByIdPersona(int idPersona);
+        Task<IEnumerable<PersonaDireccionView>> GetPersonasDireccionesViewByIdPersona(int idPersona);
     }
 }

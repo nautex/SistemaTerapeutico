@@ -42,8 +42,10 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<AtencionTerapia> AtencionTerapia { get; set; }
         public virtual DbSet<PersonaNaturalView> PersonaNaturalView { get; set; }
         public virtual DbSet<UbigeoView> UbigeoView { get; set; }
+        public virtual DbSet<PersonaContactoView> PersonaContactoView { get; set; }
         //8182884858687888990919293949596979899100
         public virtual DbSet<PersonaDocumentoView> PersonaDocumentoView { get; set; }
+        public virtual DbSet<PersonaDireccionView> PersonaDireccionView { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

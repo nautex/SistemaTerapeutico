@@ -96,5 +96,21 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
+        [HttpGet("GetPersonasContactosViewByIdPersona")]
+        public async Task<IActionResult> GetPersonasContactosViewByIdPersona(int idPersona)
+        {
+            var list = await _personaService.GetPersonasContactosViewByIdPersona(idPersona);
+            var response = new ApiResponse<IEnumerable<PersonaContactoViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetPersonasDireccionesViewByIdPersona")]
+        public async Task<IActionResult> GetPersonasDireccionesViewByIdPersona(int idPersona)
+        {
+            var list = await _personaService.GetPersonasDireccionesViewByIdPersona(idPersona);
+            var response = new ApiResponse<IEnumerable<PersonaDireccionViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
     }
 }

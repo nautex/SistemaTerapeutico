@@ -113,6 +113,12 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
 
             CreateMap<PersonaDocumentoView, PersonaDocumentoViewDto>()
                 .ReverseMap();
+
+            CreateMap<PersonaContactoView, PersonaContactoViewDto>()
+                .ReverseMap();
+
+            CreateMap<PersonaDireccionView, PersonaDireccionViewDto>()
+                .ReverseMap();
         }
     }
 }
