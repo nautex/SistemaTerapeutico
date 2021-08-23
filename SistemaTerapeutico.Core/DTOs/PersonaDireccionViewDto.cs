@@ -2,7 +2,7 @@
 {
     public class PersonaDireccionViewDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int IdPersona { get; set; }
         public int Numero { get; set; }
         public int IdTipoDireccion { get; set; }
