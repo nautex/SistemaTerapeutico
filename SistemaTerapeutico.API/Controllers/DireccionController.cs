@@ -28,11 +28,11 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetDireccionByUbigeoYDetalle")]
-        public async Task<IActionResult> GetDireccionByUbigeoYDetalle(DireccionQueryFilter queryFilter)
+        [HttpGet("GetDireccionesViewByUbigeoYDetalle")]
+        public IActionResult GetDireccionesViewByUbigeoYDetalle(DireccionQueryFilter queryFilter)
         {
-            var list = await _direccionService.GetDireccionsByUbigeoYDetalle(queryFilter.IdUbigeo, queryFilter.Detalle);
-            var response = new ApiResponse<IEnumerable<DireccionDto>>(list, _mapper);
+            var list = _direccionService.GetDireccionesViewByUbigeoYDetalle(queryFilter.IdUbigeo, queryFilter.Detalle);
+            var response = new ApiResponse<IEnumerable<DireccionViewDto>>(list, _mapper);
 
             return Ok(response);
         }

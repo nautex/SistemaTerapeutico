@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Core.Views;
 
 namespace SistemaTerapeutico.Core.Services
 {
@@ -35,9 +36,21 @@ namespace SistemaTerapeutico.Core.Services
             return _unitOfWork.DireccionRepository.GetAll();
         }
 
-        public async Task<IEnumerable<Direccion>> GetDireccionsByUbigeoYDetalle(int idUbigeo, string detalle)
+        public IEnumerable<DireccionView> GetDireccionesViewByUbigeoYDetalle(int idUbigeo, string detalle)
         {
-            return await _unitOfWork.DireccionRepository.GetDireccionesByUbigeoYDetalle(idUbigeo, detalle);
+            IEnumerable<DireccionView> list = _unitOfWork.DireccionViewRepository.GetAll();
+
+            if (idUbigeo > 0)
+            {
+                list = list.Where(x => x.IdUbigeo == idUbigeo);
+            }
+
+            if (!String.IsNullOrEmpty(detalle))
+            {
+                list = list.Where(x => x.Detalle.Contains(detalle));
+            }
+
+            return list.ToList();
         }
 
         public void UpdateDireccion(Direccion direccion)

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.Entities;
+using SistemaTerapeutico.Core.Views;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
@@ -13,6 +12,6 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task<int> AddDireccion(Direccion direccion);
         void UpdateDireccion(Direccion direccion);
         Task DeleteDireccion(int idDireccion);
-        Task<IEnumerable<Direccion>> GetDireccionsByUbigeoYDetalle(int idUbigeo, string detalle);
+        IEnumerable<DireccionView> GetDireccionesViewByUbigeoYDetalle(int idUbigeo, string detalle);
     }
 }
