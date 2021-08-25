@@ -121,7 +121,6 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
                 .ReverseMap();
 
             CreateMap<DireccionView, DireccionViewDto>()
-                .ForMember(dest => dest.IdDireccion, conf => conf.MapFrom(src => src.Id))
                 .ReverseMap();
         }
     }

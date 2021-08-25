@@ -2,7 +2,7 @@
 {
     public class DireccionViewDto
     {
-        public int IdDireccion { get; set; }
+        public int Id { get; set; }
         public int IdUbigeo { get; set; }
         public int? IdPais { get; set; }
         public string Pais { get; set; }
