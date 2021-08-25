@@ -47,7 +47,7 @@ namespace SistemaTerapeutico.Core.Services
 
             if (!String.IsNullOrEmpty(detalle))
             {
-                list = list.Where(x => x.Detalle.Contains(detalle));
+                list = list.Where(x => x.Detalle.ToLower().Contains(detalle.ToLower()));
             }
 
             return list.ToList();
