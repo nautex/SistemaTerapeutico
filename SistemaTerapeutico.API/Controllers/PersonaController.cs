@@ -112,5 +112,13 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
+        [HttpGet("GetPersonasVinculacionesViewByIdPersona")]
+        public async Task<IActionResult> GetPersonasVinculacionesViewByIdPersona(int idPersona)
+        {
+            var list = await _personaService.GetPersonasVinculacionesViewByIdPersona(idPersona);
+            var response = new ApiResponse<IEnumerable<PersonaVinculacionViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
     }
 }

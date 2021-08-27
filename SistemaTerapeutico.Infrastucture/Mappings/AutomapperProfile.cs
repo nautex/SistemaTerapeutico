@@ -122,6 +122,9 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
 
             CreateMap<DireccionView, DireccionViewDto>()
                 .ReverseMap();
+
+            CreateMap<PersonaVinculacionView, PersonaVinculacionViewDto>()
+                .ReverseMap();
         }
     }
 }
