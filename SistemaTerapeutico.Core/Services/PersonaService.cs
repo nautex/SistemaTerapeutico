@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
@@ -216,6 +217,22 @@ namespace SistemaTerapeutico.Core.Services
         public async Task<IEnumerable<PersonaVinculacionView>> GetPersonasVinculacionesViewByIdPersona(int idPersona)
         {
             return await _unitOfWork.PersonaVinculacionViewRepository.GetPersonasVinculacionesViewByIdPersona(idPersona);
+        }
+        public IEnumerable<PersonaDocumentoView> GetPersonasDocumentosViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
+        {
+            var list = _unitOfWork.PersonaDocumentoViewRepository.GetAll();
+
+            if (!string.IsNullOrEmpty(numeroDocumento))
+            {
+                list = list.Where(x => x.Numero.ToLower().Contains(numeroDocumento.ToLower()));
+            }
+
+            if (!string.IsNullOrEmpty(nombres))
+            {
+                list = list.Where(x => x.Nombres.ToLower().Contains(nombres.ToLower()));
+            }
+
+            return list.ToList();
         }
     }
 }

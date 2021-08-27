@@ -120,5 +120,13 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
+        [HttpGet("GetPersonasDocumentosViewByNumeroDocumentoYNombres")]
+        public IActionResult GetPersonasDocumentosViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
+        {
+            var list = _personaService.GetPersonasDocumentosViewByNumeroDocumentoYNombres(numeroDocumento, nombres);
+            var response = new ApiResponse<IEnumerable<PersonaDocumentoViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
     }
 }
