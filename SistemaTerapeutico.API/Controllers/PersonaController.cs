@@ -47,6 +47,20 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(Response);
         }
+        [HttpPost("PostPersonaNaturalWithDetails")]
+        public IActionResult PostPersonaNaturalWithDetails([FromBody] PersonaNaturalWDDto personaDto)
+        {
+            Persona persona = _mapper.Map<Persona>(personaDto);
+            PersonaNatural personaNatural = _mapper.Map<PersonaNatural>(personaDto);
+            List<PersonaDireccion> personaDireccion = _mapper.Map<List<PersonaDireccion>>(personaDto.PersonaDireccion);
+            List<PersonaDocumento> personaDocumento = _mapper.Map<List<PersonaDocumento>>(personaDto.PersonaDocumento);
+            List<PersonaContacto> personaContacto = _mapper.Map<List<PersonaContacto>>(personaDto.PersonaContacto);
+            List<PersonaVinculacion> personaVinculacion = _mapper.Map<List<PersonaVinculacion>>(personaDto.PersonaVinculacion);
+
+            var Response = new ApiResponse<bool>(true);
+
+            return Ok(Response);
+        }
         [HttpGet("GetPersonasByNombres")]
         public async Task<IActionResult> GetPersonasByNombres(string nombres)
         {

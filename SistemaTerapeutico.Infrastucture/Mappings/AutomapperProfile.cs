@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Views;
@@ -124,6 +125,24 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
                 .ReverseMap();
 
             CreateMap<PersonaVinculacionView, PersonaVinculacionViewDto>()
+                .ReverseMap();
+
+            CreateMap<Persona, PersonaNaturalWDDto>()
+                .ReverseMap();
+
+            CreateMap<PersonaNatural, PersonaNaturalWDDto>()
+                .ReverseMap();
+
+            CreateMap<PersonaDireccion, PersonaDireccionViewDto>()
+                .ReverseMap();
+
+            CreateMap<PersonaDocumento, PersonaDocumentoViewDto>()
+                .ReverseMap();
+
+            CreateMap<PersonaContacto, PersonaContactoViewDto>()
+                .ReverseMap();
+
+            CreateMap<PersonaVinculacion, PersonaVinculacionViewDto>()
                 .ReverseMap();
         }
     }
