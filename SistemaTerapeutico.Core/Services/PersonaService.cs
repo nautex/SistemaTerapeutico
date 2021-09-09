@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.DTOs;
@@ -78,21 +79,109 @@ namespace SistemaTerapeutico.Core.Services
 
         public async Task<PersonaResponseDto> AddPersonaNaturalWithDetails(Persona persona)
         {
-            int idPersona;
+            int idPersona = 0;
             int? idDireccion = null;
 
-            _unitOfWork.BeginTransaction();
+            //_unitOfWork.BeginTransaction();
 
             if (persona.Id == 0)
             {
                 idPersona = await _unitOfWork.PersonaRepository.AddReturnId(persona);
+                await _unitOfWork.PersonaNaturalRepository.AddReturnId(persona.PersonaNatural);
             }
             else
             {
                 idPersona = persona.Id;
-                persona.UsuarioRegistro = "JSOTELO";
-                persona.UsuarioModificacion = "JSOTELO";
                 _unitOfWork.PersonaRepository.Update(persona);
+                PersonaNatural personaNatural = await _unitOfWork.PersonaNaturalRepository.GetById(persona.Id);
+
+                if (personaNatural == null)
+                {
+                    await _unitOfWork.PersonaNaturalRepository.Add(persona.PersonaNatural);
+                }
+                else
+                {
+                    _unitOfWork.PersonaNaturalRepository.Update(persona.PersonaNatural);
+                }
+            }
+
+            foreach (var item in persona.PersonaDireccion)
+            {
+                if (item.IdDireccion == 0)
+                {
+                    if (!string.IsNullOrEmpty(item.Detalle))
+                    {
+                        item.IdDireccion = await _unitOfWork.DireccionRepository.AddReturnId(new Direccion()
+                        {
+                            IdUbigeo = item.IdUbigeo,
+                            Detalle = item.Detalle,
+                            Referencia = item.Referencia,
+                            IdEstado = EEstadoBasico.Activo,
+                            UsuarioRegistro = "JSOTELO",
+                        });
+                    }
+                }
+
+                if (item.Id == 0)
+                {
+                    await _unitOfWork.PersonaDireccionRepository.AddGenerateIdTwo(new PersonaDireccion()
+                    {
+                        Id = persona.Id,
+                        IdTipoDireccion = item.IdTipoDireccion,
+                        IdDireccion = item.IdDireccion,
+                        IdEstado = EEstadoBasico.Activo,
+                    });
+                }
+                else
+                {
+                    PersonaDireccion personaDireccion = await _unitOfWork.PersonaDireccionRepository.GetByIds(persona.Id, item.Numero);
+
+                    personaDireccion.IdTipoDireccion = item.IdTipoDireccion;
+                    personaDireccion.IdDireccion = item.IdDireccion;
+                    personaDireccion.FechaModificacion = DateTime.Now;
+                    personaDireccion.UsuarioModificacion = "JSOTELO";
+
+                    _unitOfWork.PersonaDireccionRepository.Update(personaDireccion);
+                }
+            }
+
+            for (int i = 0; i < persona.PersonaDocumento.Count(); i++)
+            {
+                if (persona.PersonaDocumento[i].Id == 0)
+                {
+                    persona.PersonaDocumento[i].Id = persona.Id;
+                    await _unitOfWork.PersonaDocumentoRepository.AddReturnId(persona.PersonaDocumento[i]);
+                }
+                else
+                {
+                    _unitOfWork.PersonaDocumentoRepository.Update(persona.PersonaDocumento[i]);
+                }
+            }
+
+            for (int i = 0; i < persona.PersonaContacto.Count(); i++)
+            {
+                if (persona.PersonaContacto[i].Id == 0)
+                {
+                    persona.PersonaContacto[i].Id = persona.Id;
+                    await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(persona.PersonaContacto[i]);
+                }
+                else
+                {
+                    _unitOfWork.PersonaContactoRepository.Update(persona.PersonaContacto[i]);
+                }
+            }
+
+            for (int i = 0; i < persona.PersonaVinculacion.Count(); i++)
+            {
+                if (persona.PersonaVinculacion[i].Id == 0)
+                {
+                    persona.PersonaVinculacion[i].Id = persona.Id;
+                    await _unitOfWork.PersonaVinculacionRepository.AddReturnId(persona.PersonaVinculacion[i]);
+                }
+                else
+                {
+                    _unitOfWork.PersonaVinculacionRepository.Update(persona.PersonaVinculacion[i]);
+                }
             }
 
             //PersonaNatural personaNatural = await _unitOfWork.PersonaNaturalRepository.GetById(idPersona);
@@ -173,8 +262,8 @@ namespace SistemaTerapeutico.Core.Services
             //    });
             //}
 
-            _unitOfWork.SaveChanges();
-            _unitOfWork.CommitTransaction();
+            //_unitOfWork.SaveChanges();
+            //_unitOfWork.CommitTransaction();
 
             return new PersonaResponseDto { IdPersona = idPersona, IdDireccion = idDireccion };
         }

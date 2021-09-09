@@ -7,6 +7,7 @@ namespace SistemaTerapeutico.Core.Entities
     {
         public PersonaNatural()
         {
+            Id = 0;
             PrimerNombre = "";
             SegundoNombre = "";
             PrimerApellido = "";
@@ -21,7 +22,7 @@ namespace SistemaTerapeutico.Core.Entities
         public string PrimerNombre { get; set; }
         public string SegundoNombre { get; set; }
         public string PrimerApellido { get; set; }
-        public string SegundoApellido { get; set; }
+        public string SegundoApellido { get; set; } 
         public DateTime? FechaNacimiento { get; set; }
         public int? IdUbigeoNacimiento { get; set; }
         public int? IdSexo { get; set; }
@@ -30,7 +31,7 @@ namespace SistemaTerapeutico.Core.Entities
         public int? IdTipoPersona { get; set; }
         public int? IdEstado { get; set; }
 
-        public virtual Persona Persona { get; set; }
+        //public virtual Persona Persona { get; set; }
         //public virtual Ubigeo IdUbigeoNacimientoNavigation { get; set; }
     }
 }

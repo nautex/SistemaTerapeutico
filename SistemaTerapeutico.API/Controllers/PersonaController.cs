@@ -51,7 +51,7 @@ namespace SistemaTerapeutico.API.Controllers
         public async Task<IActionResult> PostPersonaNaturalUpdateWithDetails([FromBody] PersonaNaturalWDDto personaDto)
         {
             Persona persona = _mapper.Map<Persona>(personaDto);
-            PersonaNatural personaNatural = _mapper.Map<PersonaNatural>(personaDto);
+            //PersonaNatural personaNatural = _mapper.Map<PersonaNatural>(personaDto);
             //List<PersonaDireccion> personaDireccion = _mapper.Map<List<PersonaDireccion>>(personaDto.PersonaDireccion);
             //List<PersonaDocumento> personaDocumento = _mapper.Map<List<PersonaDocumento>>(personaDto.PersonaDocumento);
             //List<PersonaContacto> personaContacto = _mapper.Map<List<PersonaContacto>>(personaDto.PersonaContacto);

@@ -8,7 +8,7 @@ namespace SistemaTerapeutico.Core.DTOs
         public string PrimerNombre { get; set; }
         public string SegundoNombre { get; set; }
         public string PrimerApellido { get; set; }
-        public string SegundoApelldio { get; set; }
+        public string SegundoApellido { get; set; }
         public DateTime? FechaNacimiento { get; set; }
         public int? IdUbigeoNacimiento { get; set; }
         public int? IdSexo { get; set; }

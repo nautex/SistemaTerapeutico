@@ -15,10 +15,13 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .HasColumnName("IdPersona")
                 .ValueGeneratedNever();
 
+            //builder.Ignore(e => e.IsNewRow);
+            //builder.Ignore(e => e.IsUpdated);
+
             //builder.HasOne(d => d.Id)
             //    .WithOne(p => p.PersonaNatural);
 
-            
+
 
             //builder.HasOne(d => d.IdUbigeoNacimientoNavigation)
             //    .WithMany(p => p.PersonaNatural)

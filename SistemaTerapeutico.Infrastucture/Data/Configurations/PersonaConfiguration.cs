@@ -19,25 +19,25 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(70);
 
-            builder.HasOne(f => f.PersonaNatural)
-                .WithOne()
-                .HasForeignKey<Persona>(f => f.Id);
+            //builder.HasOne(f => f.PersonaNatural)
+            //    .WithOne()
+            //    .HasForeignKey<Persona>(f => f.Id);
 
-            builder.HasMany(f => f.PersonaDireccion)
-                .WithOne()
-                .HasForeignKey(f => f.Id);
+            //builder.HasMany(f => f.PersonaDireccion)
+            //    .WithOne()
+            //    .HasForeignKey(f => f.Id);
 
-            builder.HasMany(f => f.PersonaDocumento)
-                .WithOne()
-                .HasForeignKey(f => f.Id);
+            //builder.HasMany(f => f.PersonaDocumento)
+            //    .WithOne()
+            //    .HasForeignKey(f => f.Id);
 
-            builder.HasMany(f => f.PersonaContacto)
-                .WithOne()
-                .HasForeignKey(f => f.Id);
+            //builder.HasMany(f => f.PersonaContacto)
+            //    .WithOne()
+            //    .HasForeignKey(f => f.Id);
 
-            builder.HasMany(f => f.PersonaVinculacion)
-                .WithOne()
-                .HasForeignKey(f => f.Id);
+            //builder.HasMany(f => f.PersonaVinculacion)
+            //    .WithOne()
+            //    .HasForeignKey(f => f.Id);
         }
     }
 }

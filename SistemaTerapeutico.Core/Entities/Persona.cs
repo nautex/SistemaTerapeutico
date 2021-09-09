@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SistemaTerapeutico.Core.Enumerators;
+using SistemaTerapeutico.Core.Views;
 
 namespace SistemaTerapeutico.Core.Entities
 {
@@ -14,7 +15,7 @@ namespace SistemaTerapeutico.Core.Entities
             IdPaisOrigen = EPais.Peru;
 
             PersonaContacto = new List<PersonaContacto>();
-            PersonaDireccion = new List<PersonaDireccion>();
+            PersonaDireccion = new List<PersonaDireccionView>();
             PersonaDocumento = new List<PersonaDocumento>();
             PersonaVinculacion = new List<PersonaVinculacion>();
 
@@ -27,10 +28,10 @@ namespace SistemaTerapeutico.Core.Entities
         public bool EsEmpresa { get; set; }
         public int IdEstado { get; set; }
         public virtual PersonaNatural PersonaNatural { get; set; }
-        public virtual ICollection<PersonaContacto> PersonaContacto { get; set; }
-        public virtual ICollection<PersonaDireccion> PersonaDireccion { get; set; }
-        public virtual ICollection<PersonaDocumento> PersonaDocumento { get; set; }
-        public virtual ICollection<PersonaVinculacion> PersonaVinculacion { get; set; }
+        public virtual List<PersonaContacto> PersonaContacto { get; set; }
+        public virtual List<PersonaDireccionView> PersonaDireccion { get; set; }
+        public virtual List<PersonaDocumento> PersonaDocumento { get; set; }
+        public virtual List<PersonaVinculacion> PersonaVinculacion { get; set; }
         //public List<PersonaVinculacion> PersonaVinculacionIdPersonaVinculoNavigation { get; set; }
     }
 }
