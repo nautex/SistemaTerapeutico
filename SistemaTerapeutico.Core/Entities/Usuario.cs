@@ -7,7 +7,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public class Usuario : BaseEntity
     {
-        public Usuario(string usuarioRegistro) : base(usuarioRegistro)
+        public Usuario()
         {
             FechaVencimientoClave = DateTime.Now.AddMonths(3);
             IdEstado = EEstadoBasico.Activo;

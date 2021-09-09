@@ -4,7 +4,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public class Participante : BaseEntity
     {
-        public Participante(string usuarioRegistro) : base(usuarioRegistro)
+        public Participante()
         {
 
         }

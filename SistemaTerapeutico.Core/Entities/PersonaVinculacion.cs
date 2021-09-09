@@ -4,7 +4,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public partial class PersonaVinculacion : BaseEntityTwoIds
     {
-        public PersonaVinculacion(string usuarioRegistro) : base(usuarioRegistro)
+        public PersonaVinculacion()
         {
             IdEstado = EEstadoBasico.Activo;
         }

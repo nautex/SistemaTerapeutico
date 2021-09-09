@@ -2,7 +2,7 @@
 {
     public class SesionCriterioActividad : BaseEntityThreeIds
     {
-        public SesionCriterioActividad(string usuarioRegistro) : base(usuarioRegistro)
+        public SesionCriterioActividad()
         {
             DetalleAplicacion = "";
         }

@@ -12,13 +12,13 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                     .HasName("PRIMARY");
 
             builder.Property(e => e.Id)
-                .HasColumnName("IdPersona");
+                .HasColumnName("IdPersona")
+                .ValueGeneratedNever();
 
-            //builder.HasOne(d => d.IdPersonaNavigation)
-            //    .WithOne(p => p.PersonaNatural)
-            //    .HasForeignKey<PersonaNatural>(d => d.Id)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FK_PersonaNatural_Persona1");
+            //builder.HasOne(d => d.Id)
+            //    .WithOne(p => p.PersonaNatural);
+
+            
 
             //builder.HasOne(d => d.IdUbigeoNacimientoNavigation)
             //    .WithMany(p => p.PersonaNatural)

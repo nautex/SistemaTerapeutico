@@ -2,7 +2,7 @@
 {
     public class BaseEntityThreeIds : BaseEntityTwoIds
     {
-        public BaseEntityThreeIds(string usuarioRegistro) : base(usuarioRegistro)
+        public BaseEntityThreeIds()
         {
 
         }

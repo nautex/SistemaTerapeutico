@@ -39,24 +39,25 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpPost("PostPersonaNaturalDatosCompletos")]
-        public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto persona)
-        {
-            PersonaResponseDto personaResponse = await _personaService.AddPersonaNaturalDatosCompletos(persona);
-            var Response = new ApiResponse<PersonaResponseDto>(personaResponse);
+        //[HttpPost("PostPersonaNaturalDatosCompletos")]
+        //public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto persona)
+        //{
+        //    PersonaResponseDto personaResponse = await _personaService.AddPersonaNaturalDatosCompletos(persona);
+        //    var Response = new ApiResponse<PersonaResponseDto>(personaResponse);
 
-            return Ok(Response);
-        }
-        [HttpPost("PostPersonaNaturalWithDetails")]
-        public IActionResult PostPersonaNaturalWithDetails([FromBody] PersonaNaturalWDDto personaDto)
+        //    return Ok(Response);
+        //}
+        [HttpPost("PostPersonaNaturalUpdateWithDetails")]
+        public async Task<IActionResult> PostPersonaNaturalUpdateWithDetails([FromBody] PersonaNaturalWDDto personaDto)
         {
             Persona persona = _mapper.Map<Persona>(personaDto);
             PersonaNatural personaNatural = _mapper.Map<PersonaNatural>(personaDto);
-            List<PersonaDireccion> personaDireccion = _mapper.Map<List<PersonaDireccion>>(personaDto.PersonaDireccion);
-            List<PersonaDocumento> personaDocumento = _mapper.Map<List<PersonaDocumento>>(personaDto.PersonaDocumento);
-            List<PersonaContacto> personaContacto = _mapper.Map<List<PersonaContacto>>(personaDto.PersonaContacto);
-            List<PersonaVinculacion> personaVinculacion = _mapper.Map<List<PersonaVinculacion>>(personaDto.PersonaVinculacion);
-
+            //List<PersonaDireccion> personaDireccion = _mapper.Map<List<PersonaDireccion>>(personaDto.PersonaDireccion);
+            //List<PersonaDocumento> personaDocumento = _mapper.Map<List<PersonaDocumento>>(personaDto.PersonaDocumento);
+            //List<PersonaContacto> personaContacto = _mapper.Map<List<PersonaContacto>>(personaDto.PersonaContacto);
+            //List<PersonaVinculacion> personaVinculacion = _mapper.Map<List<PersonaVinculacion>>(personaDto.PersonaVinculacion);
+            persona.PersonaNatural = _mapper.Map<PersonaNatural>(personaDto);
+            await _personaService.AddPersonaNaturalWithDetails(persona);
             var Response = new ApiResponse<bool>(true);
 
             return Ok(Response);

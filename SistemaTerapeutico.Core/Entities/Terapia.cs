@@ -5,7 +5,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public class Terapia : BaseEntity
     {
-        public Terapia(string usuarioRegistro) : base(usuarioRegistro)
+        public Terapia()
         {
             IdTipo = ETipoTerapia.Individual;
             FechaInicio = DateTime.Now;

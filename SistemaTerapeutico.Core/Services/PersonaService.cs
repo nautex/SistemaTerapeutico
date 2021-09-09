@@ -76,93 +76,102 @@ namespace SistemaTerapeutico.Core.Services
         //    return 0;
         //}
 
-        public async Task<PersonaResponseDto> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto)
+        public async Task<PersonaResponseDto> AddPersonaNaturalWithDetails(Persona persona)
         {
             int idPersona;
             int? idDireccion = null;
-            string lNombres = personaDto.PrimerApellido + " " + personaDto.SegundoApellido + " " + personaDto.PrimerNombre + " " + personaDto.SegundoNombre;
-
-            if ((string.IsNullOrEmpty(lNombres) || lNombres.Length <= 3))
-            {
-                throw new BusinessException("El nombre de la persona debe tener mas de 3 caracteres.");
-            }
 
             _unitOfWork.BeginTransaction();
 
-            idPersona = await _unitOfWork.PersonaRepository.AddReturnId(new Persona(personaDto.UsuarioRegistro)
+            if (persona.Id == 0)
             {
-                Nombres = lNombres,
-                FechaIngreso = personaDto.FechaIngreso,
-                IdPaisOrigen = personaDto.IdPaisOrigen
-            });
-
-            await _unitOfWork.PersonaNaturalRepository.Add(new PersonaNatural(personaDto.UsuarioRegistro)
-            {
-                Id = idPersona,
-                PrimerNombre = personaDto.PrimerNombre,
-                SegundoNombre = personaDto.SegundoNombre,
-                PrimerApellido = personaDto.PrimerApellido,
-                SegundoApelldio = personaDto.SegundoApellido,
-                FechaNacimiento = personaDto.FechaNacimiento,
-                IdSexo = personaDto.IdSexo
-            });
-
-            if (personaDto.IdDireccion > 0)
-            {
-                idDireccion = personaDto.IdDireccion;
+                idPersona = await _unitOfWork.PersonaRepository.AddReturnId(persona);
             }
             else
             {
-                if (!string.IsNullOrEmpty(personaDto.DetalleDireccion))
-                {
-                    idDireccion = await _unitOfWork.DireccionRepository.AddReturnId(new Direccion(personaDto.UsuarioRegistro)
-                    {
-                        Id = idPersona,
-                        IdUbigeo = personaDto.IdUbigeoDireccion,
-                        Detalle = personaDto.DetalleDireccion
-                    });
-                }
+                idPersona = persona.Id;
+                persona.UsuarioRegistro = "JSOTELO";
+                persona.UsuarioModificacion = "JSOTELO";
+                _unitOfWork.PersonaRepository.Update(persona);
             }
 
-            if (idDireccion != null)
-            {
-                await _unitOfWork.PersonaDireccionRepository.AddGenerateIdTwo(new PersonaDireccion(personaDto.UsuarioRegistro)
-                {
-                    Id = idPersona,
-                    IdTipoDireccion = ETipoDireccion.Domicilio,
-                    IdDireccion = idDireccion
-                });
-            }
+            //PersonaNatural personaNatural = await _unitOfWork.PersonaNaturalRepository.GetById(idPersona);
 
-            if (!string.IsNullOrEmpty(personaDto.NumeroDocumento))
-            {
-                await _unitOfWork.PersonaDocumentoRepository.Add(new PersonaDocumento(personaDto.UsuarioRegistro)
-                {
-                    Id = idPersona,
-                    IdTwo = personaDto.IdTipoDocumento,
-                    Numero = personaDto.NumeroDocumento
-                });
-            }
+            //if (personaNatural.Id == 0)
+            //{
+            //    await _unitOfWork.PersonaNaturalRepository.Add(new PersonaNatural()
+            //    {
+            //        Id = idPersona,
+            //        PrimerNombre = persona.PersonaNatural.PrimerNombre,
+            //        SegundoNombre = persona.PersonaNatural.SegundoNombre,
+            //        PrimerApellido = persona.PersonaNatural.PrimerApellido,
+            //        SegundoApellido = persona.PersonaNatural.SegundoApellido,
+            //        FechaNacimiento = persona.PersonaNatural.FechaNacimiento,
+            //        IdSexo = persona.PersonaNatural.IdSexo,
+            //    });
+            //}
+            //else
+            //{
 
-            if (!string.IsNullOrEmpty(personaDto.Celular))
-            {
-                await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(new PersonaContacto(personaDto.UsuarioRegistro)
-                {
-                    Id = idPersona,
-                    IdTipoContacto = ETipoContacto.CelularMovistar,
-                    Valor = personaDto.Celular
-                });
-            }
+            //}
 
-            if (!string.IsNullOrEmpty(personaDto.Correo))
-            {
-                await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(new PersonaContacto(personaDto.UsuarioRegistro)
-                {
-                    Id = idPersona,
-                    IdTipoContacto = ETipoContacto.Correo,
-                    Valor = personaDto.Correo
-                });
-            }
+
+            //if (personaDto.IdDireccion > 0)
+            //{
+            //    idDireccion = personaDto.IdDireccion;
+            //}
+            //else
+            //{
+            //    if (!string.IsNullOrEmpty(personaDto.DetalleDireccion))
+            //    {
+            //        idDireccion = await _unitOfWork.DireccionRepository.AddReturnId(new Direccion()
+            //        {
+            //            Id = idPersona,
+            //            IdUbigeo = personaDto.IdUbigeoDireccion,
+            //            Detalle = personaDto.DetalleDireccion
+            //        });
+            //    }
+            //}
+
+            //if (idDireccion != null)
+            //{
+            //    await _unitOfWork.PersonaDireccionRepository.AddGenerateIdTwo(new PersonaDireccion()
+            //    {
+            //        Id = idPersona,
+            //        IdTipoDireccion = ETipoDireccion.Domicilio,
+            //        IdDireccion = idDireccion
+            //    });
+            //}
+
+            //if (!string.IsNullOrEmpty(personaDto.NumeroDocumento))
+            //{
+            //    await _unitOfWork.PersonaDocumentoRepository.Add(new PersonaDocumento()
+            //    {
+            //        Id = idPersona,
+            //        IdTwo = personaDto.IdTipoDocumento,
+            //        Numero = personaDto.NumeroDocumento
+            //    });
+            //}
+
+            //if (!string.IsNullOrEmpty(personaDto.Celular))
+            //{
+            //    await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(new PersonaContacto()
+            //    {
+            //        Id = idPersona,
+            //        IdTipoContacto = ETipoContacto.CelularMovistar,
+            //        Valor = personaDto.Celular
+            //    });
+            //}
+
+            //if (!string.IsNullOrEmpty(personaDto.Correo))
+            //{
+            //    await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(new PersonaContacto()
+            //    {
+            //        Id = idPersona,
+            //        IdTipoContacto = ETipoContacto.Correo,
+            //        Valor = personaDto.Correo
+            //    });
+            //}
 
             _unitOfWork.SaveChanges();
             _unitOfWork.CommitTransaction();

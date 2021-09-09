@@ -2,7 +2,7 @@
 {
     public class TerapiaPeriodo : BaseEntityTwoIds
     {
-        public TerapiaPeriodo(string usuarioRegistro) : base(usuarioRegistro)
+        public TerapiaPeriodo()
         {
 
         }

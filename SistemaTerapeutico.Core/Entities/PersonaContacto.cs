@@ -4,9 +4,8 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public partial class PersonaContacto : BaseEntityTwoIds
     {
-        public PersonaContacto(string usuarioRegistro) : base(usuarioRegistro)
+        public PersonaContacto()
         {
-            UsuarioRegistro = usuarioRegistro;
             IdEstado = EEstadoBasico.Activo;
         }
         public int? IdTipoContacto { get; set; }

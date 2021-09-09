@@ -24,7 +24,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpPost("PostUsuario")]
         public async Task<IActionResult> PostUsuario(UsuarioDto usuarioDto)
         {
-            Usuario entity = new Usuario(usuarioDto.UsuarioRegistro)
+            Usuario entity = new Usuario()
             {
                 Codigo = usuarioDto.Codigo,
                 Id = usuarioDto.IdPersona,

@@ -5,7 +5,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public class Sesion : BaseEntity
     {
-        public Sesion(string usuarioRegistro) : base(usuarioRegistro)
+        public Sesion()
         {
             Fecha = DateTime.Now;
             IdEstadoAsistencia = ETipoAsistenciaSesion.Normal;

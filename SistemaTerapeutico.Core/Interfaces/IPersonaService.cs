@@ -14,7 +14,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         void UpdatePersona(Persona persona);
         Task DeletePersona(int idPersona);
         //Task<int> AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto dad);
-        Task<PersonaResponseDto> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto);
+        //Task<PersonaResponseDto> AddPersonaNaturalDatosCompletos(PersonaNaturalDatosCompletosDto personaDto);
         Task<IEnumerable<Persona>> GetPersonasByNombre(string nombre);
         IEnumerable<PersonaResumenView> GetPersonasResumenView();
         Task<PersonaNatural> GetPersonaNaturalById(int idPersona);
@@ -27,5 +27,6 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task<IEnumerable<PersonaDireccionView>> GetPersonasDireccionesViewByIdPersona(int idPersona);
         Task<IEnumerable<PersonaVinculacionView>> GetPersonasVinculacionesViewByIdPersona(int idPersona);
         IEnumerable<PersonaDocumentoView> GetPersonasDocumentosViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres);
+        Task<PersonaResponseDto> AddPersonaNaturalWithDetails(Persona persona);
     }
 }

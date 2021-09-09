@@ -134,15 +134,23 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
                 .ReverseMap();
 
             CreateMap<PersonaDireccion, PersonaDireccionViewDto>()
+                .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.IdTwo))
                 .ReverseMap();
 
             CreateMap<PersonaDocumento, PersonaDocumentoViewDto>()
+                .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
+                .ForMember(dest => dest.IdTipoDocumento, conf => conf.MapFrom(src => src.IdTwo))
                 .ReverseMap();
 
             CreateMap<PersonaContacto, PersonaContactoViewDto>()
+                .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.IdTwo))
                 .ReverseMap();
 
             CreateMap<PersonaVinculacion, PersonaVinculacionViewDto>()
+                .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
+                .ForMember(dest => dest.IdPersonaVinculo, conf => conf.MapFrom(src => src.IdTwo))
                 .ReverseMap();
         }
     }

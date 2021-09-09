@@ -4,7 +4,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public partial class PersonaDireccion : BaseEntityTwoIds
     {
-        public PersonaDireccion(string usuarioRegistro) : base(usuarioRegistro)
+        public PersonaDireccion()
         {
             IdTipoDireccion = ETipoDireccion.Domicilio;
             IdEstado = EEstadoBasico.Activo;

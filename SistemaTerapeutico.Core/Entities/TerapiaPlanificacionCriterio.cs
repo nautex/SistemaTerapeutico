@@ -6,7 +6,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public class TerapiaPlanificacionCriterio : BaseEntityThreeIds
     {
-        public TerapiaPlanificacionCriterio(string usuarioRegistro) : base(usuarioRegistro)
+        public TerapiaPlanificacionCriterio()
         {
 
         }

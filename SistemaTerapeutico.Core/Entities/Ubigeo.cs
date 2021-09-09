@@ -2,7 +2,7 @@
 {
     public partial class Ubigeo : BaseEntity
     {
-        public Ubigeo(string usuarioRegistro = "") : base(usuarioRegistro)
+        public Ubigeo()
         {
             //PersonaDireccion = new HashSet<PersonaDireccion>();
             //PersonaNatural = new HashSet<PersonaNatural>();

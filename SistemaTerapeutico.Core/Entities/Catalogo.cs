@@ -2,7 +2,7 @@
 {
     public partial class Catalogo : BaseEntity
     {
-        public Catalogo(string usuarioRegistro) : base(usuarioRegistro)
+        public Catalogo()
         {
         }
         public string Codigo { get; set; }

@@ -12,10 +12,12 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                     .HasName("PRIMARY");
 
             builder.Property(e => e.Id)
-                .HasColumnName("IdPersona");
+                .HasColumnName("IdPersona")
+                .ValueGeneratedNever();
 
             builder.Property(e => e.IdTwo)
-                .HasColumnName("Numero");
+                .HasColumnName("Numero")
+                .ValueGeneratedNever();
 
             //builder.HasOne(d => d.IdPersonaNavigation)
             //    .WithMany(p => p.PersonaContacto)

@@ -5,7 +5,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public class TerapiaTerapeuta : BaseEntityTwoIds
     {
-        public TerapiaTerapeuta(string usuarioRegistro) : base(usuarioRegistro)
+        public TerapiaTerapeuta()
         {
             IdTipoCargo = ETipoCargoTerapeuta.Titular;
             FechaInicio = DateTime.Now;

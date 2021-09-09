@@ -4,7 +4,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public class Direccion : BaseEntity
     {
-        public Direccion(string usuarioRegistro) : base(usuarioRegistro)
+        public Direccion()
         {
             IdUbigeo = EUbigeo.Tacna;
             Referencia = "";

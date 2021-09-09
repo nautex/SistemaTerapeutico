@@ -5,7 +5,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public class Atencion : BaseEntity
     {
-        public Atencion(string usuarioRegistro) : base(usuarioRegistro)
+        public Atencion()
         {
             Observaciones = "";
             IdEstado = EEstadoBasico.Activo;

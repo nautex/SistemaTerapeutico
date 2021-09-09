@@ -5,7 +5,7 @@ namespace SistemaTerapeutico.Core.Entities
 {
     public class Periodo : BaseEntity
     {
-        public Periodo(string usuarioRegistro) : base(usuarioRegistro)
+        public Periodo()
         {
             IdEstado = EEstadoBasico.Activo;
             Observaciones = "";
