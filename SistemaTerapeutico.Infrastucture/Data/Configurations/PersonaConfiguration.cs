@@ -12,12 +12,17 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                 .HasName("PRIMARY");
 
             builder.Property(e => e.Id)
-                .HasColumnName("IdPersona")
-                .ValueGeneratedNever();
+                .HasColumnName("IdPersona");
 
             builder.Property(e => e.Nombres)
                 .IsRequired()
                 .HasMaxLength(70);
+
+            builder.Ignore(e => e.PersonaNatural);
+            builder.Ignore(e => e.PersonaDireccion);
+            builder.Ignore(e => e.PersonaDocumento);
+            builder.Ignore(e => e.PersonaContacto);
+            builder.Ignore(e => e.PersonaVinculacion);
 
             //builder.HasOne(f => f.PersonaNatural)
             //    .WithOne()

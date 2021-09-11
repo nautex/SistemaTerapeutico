@@ -24,6 +24,14 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
             await _entities.AddAsync(entity);
         }
+        public async Task AddAndSave(T entity)
+        {
+            entity.FechaRegistro = DateTime.Now;
+
+            await _entities.AddAsync(entity);
+
+            _context.SaveChanges();
+        }
         public async Task<int> AddReturnId(T entity)
         {
             entity.FechaRegistro = DateTime.Now;
@@ -40,7 +48,12 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
             var Entity = await GetById(id);
             _entities.Remove(Entity);
         }
-
+        public async Task DeleteAndSave(int id)
+        {
+            var Entity = await GetById(id);
+            _entities.Remove(Entity);
+            _context.SaveChanges();
+        }
         public IEnumerable<T> GetAll()
         {
             return _entities.AsEnumerable();
@@ -56,6 +69,14 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
             entity.FechaModificacion = DateTime.Now;
 
             _entities.Update(entity);
+        }
+        public void UpdateAndSave(T entity)
+        {
+            entity.FechaModificacion = DateTime.Now;
+
+            _entities.Update(entity);
+
+            _context.SaveChanges();
         }
     }
 }

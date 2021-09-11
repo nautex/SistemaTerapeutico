@@ -81,27 +81,39 @@ namespace SistemaTerapeutico.Core.Services
         {
             int idPersona = 0;
             int? idDireccion = null;
+            string usuario = "JSOTELO";
 
             //_unitOfWork.BeginTransaction();
 
             if (persona.Id == 0)
             {
+                persona.UsuarioRegistro = usuario;
+
                 idPersona = await _unitOfWork.PersonaRepository.AddReturnId(persona);
-                await _unitOfWork.PersonaNaturalRepository.AddReturnId(persona.PersonaNatural);
+                persona.PersonaNatural.Id = idPersona;
+                persona.PersonaNatural.UsuarioRegistro = usuario;
+
+                await _unitOfWork.PersonaNaturalRepository.AddAndSave(persona.PersonaNatural);
             }
             else
             {
                 idPersona = persona.Id;
-                _unitOfWork.PersonaRepository.Update(persona);
-                PersonaNatural personaNatural = await _unitOfWork.PersonaNaturalRepository.GetById(persona.Id);
+                persona.UsuarioModificacion = usuario;
+                _unitOfWork.PersonaRepository.UpdateAndSave(persona);
+
+                PersonaNatural personaNatural = await _unitOfWork.PersonaNaturalRepository.GetById(idPersona);
 
                 if (personaNatural == null)
                 {
-                    await _unitOfWork.PersonaNaturalRepository.Add(persona.PersonaNatural);
+                    persona.PersonaNatural.Id = idPersona;
+                    persona.PersonaNatural.UsuarioRegistro = usuario;
+
+                    await _unitOfWork.PersonaNaturalRepository.AddAndSave(persona.PersonaNatural);
                 }
                 else
                 {
-                    _unitOfWork.PersonaNaturalRepository.Update(persona.PersonaNatural);
+                    persona.PersonaNatural.UsuarioModificacion = usuario;
+                    _unitOfWork.PersonaNaturalRepository.UpdateAndSave(persona.PersonaNatural);
                 }
             }
 
@@ -117,70 +129,95 @@ namespace SistemaTerapeutico.Core.Services
                             Detalle = item.Detalle,
                             Referencia = item.Referencia,
                             IdEstado = EEstadoBasico.Activo,
-                            UsuarioRegistro = "JSOTELO",
+                            UsuarioRegistro = usuario,
                         });
                     }
+                }
+                else
+                {
+                    _unitOfWork.DireccionRepository.UpdateAndSave(new Direccion()
+                    {
+                        Id = item.IdDireccion,
+                        Detalle = item.Detalle,
+                        Referencia = item.Referencia,
+                        UsuarioModificacion = usuario,
+                    });
                 }
 
                 if (item.Id == 0)
                 {
                     await _unitOfWork.PersonaDireccionRepository.AddGenerateIdTwo(new PersonaDireccion()
                     {
-                        Id = persona.Id,
+                        Id = idPersona,
                         IdTipoDireccion = item.IdTipoDireccion,
                         IdDireccion = item.IdDireccion,
                         IdEstado = EEstadoBasico.Activo,
+                        UsuarioRegistro = usuario,
                     });
                 }
                 else
                 {
-                    PersonaDireccion personaDireccion = await _unitOfWork.PersonaDireccionRepository.GetByIds(persona.Id, item.Numero);
+                    PersonaDireccion personaDireccion = await _unitOfWork.PersonaDireccionRepository.GetByIds(idPersona, item.Numero);
 
                     personaDireccion.IdTipoDireccion = item.IdTipoDireccion;
                     personaDireccion.IdDireccion = item.IdDireccion;
-                    personaDireccion.FechaModificacion = DateTime.Now;
-                    personaDireccion.UsuarioModificacion = "JSOTELO";
+                    personaDireccion.UsuarioModificacion = usuario;
 
-                    _unitOfWork.PersonaDireccionRepository.Update(personaDireccion);
+                    _unitOfWork.PersonaDireccionRepository.UpdateAndSave(personaDireccion);
                 }
             }
 
-            for (int i = 0; i < persona.PersonaDocumento.Count(); i++)
+            foreach (var item in persona.PersonaDocumento)
             {
-                if (persona.PersonaDocumento[i].Id == 0)
+                if (item.Id == 0)
                 {
-                    persona.PersonaDocumento[i].Id = persona.Id;
-                    await _unitOfWork.PersonaDocumentoRepository.AddReturnId(persona.PersonaDocumento[i]);
+                    if (!String.IsNullOrEmpty(item.Numero))
+                    {
+                        item.Id = idPersona;
+                        item.UsuarioRegistro = usuario;
+                        await _unitOfWork.PersonaDocumentoRepository.AddAndSave(item);
+                    }
                 }
                 else
                 {
-                    _unitOfWork.PersonaDocumentoRepository.Update(persona.PersonaDocumento[i]);
+                    item.UsuarioModificacion = usuario;
+                    _unitOfWork.PersonaDocumentoRepository.UpdateAndSave(item);
                 }
             }
 
-            for (int i = 0; i < persona.PersonaContacto.Count(); i++)
+            foreach (var item in persona.PersonaContacto)
             {
-                if (persona.PersonaContacto[i].Id == 0)
+                if (item.Id == 0)
                 {
-                    persona.PersonaContacto[i].Id = persona.Id;
-                    await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(persona.PersonaContacto[i]);
+                    if (!String.IsNullOrEmpty(item.Valor))
+                    {
+                        item.Id = idPersona;
+                        item.UsuarioRegistro = usuario;
+                        await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(item);
+                    }
                 }
                 else
                 {
-                    _unitOfWork.PersonaContactoRepository.Update(persona.PersonaContacto[i]);
+                    item.UsuarioModificacion = usuario;
+                    _unitOfWork.PersonaContactoRepository.UpdateAndSave(item);
                 }
             }
 
-            for (int i = 0; i < persona.PersonaVinculacion.Count(); i++)
+            foreach (var item in persona.PersonaVinculacion)
             {
-                if (persona.PersonaVinculacion[i].Id == 0)
+                if (item.Id == 0)
                 {
-                    persona.PersonaVinculacion[i].Id = persona.Id;
-                    await _unitOfWork.PersonaVinculacionRepository.AddReturnId(persona.PersonaVinculacion[i]);
+                    if (item.IdTwo > 0)
+                    {
+                        item.Id = idPersona;
+                        item.UsuarioRegistro = usuario;
+                        await _unitOfWork.PersonaVinculacionRepository.AddReturnId(item);
+                    }
                 }
                 else
                 {
-                    _unitOfWork.PersonaVinculacionRepository.Update(persona.PersonaVinculacion[i]);
+                    item.UsuarioModificacion = usuario;
+                    _unitOfWork.PersonaVinculacionRepository.UpdateAndSave(item);
                 }
             }
 
