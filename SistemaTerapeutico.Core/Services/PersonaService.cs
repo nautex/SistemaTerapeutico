@@ -112,26 +112,29 @@ namespace SistemaTerapeutico.Core.Services
                     });
                 }
 
-                if (item.Id == 0)
+                if (item.IdDireccion > 0)
                 {
-                    await _unitOfWork.PersonaDireccionRepository.AddGenerateIdTwo(new PersonaDireccion()
+                    if (item.Id == 0)
                     {
-                        Id = idPersona,
-                        IdTipoDireccion = item.IdTipoDireccion,
-                        IdDireccion = item.IdDireccion,
-                        IdEstado = EEstadoBasico.Activo,
-                        UsuarioRegistro = usuario,
-                    });
-                }
-                else
-                {
-                    PersonaDireccion personaDireccion = await _unitOfWork.PersonaDireccionRepository.GetByIds(idPersona, item.Numero);
+                        await _unitOfWork.PersonaDireccionRepository.AddGenerateIdTwo(new PersonaDireccion()
+                        {
+                            Id = idPersona,
+                            IdTipoDireccion = item.IdTipoDireccion,
+                            IdDireccion = item.IdDireccion,
+                            IdEstado = EEstadoBasico.Activo,
+                            UsuarioRegistro = usuario,
+                        });
+                    }
+                    else
+                    {
+                        PersonaDireccion personaDireccion = await _unitOfWork.PersonaDireccionRepository.GetByIds(idPersona, item.Numero);
 
-                    personaDireccion.IdTipoDireccion = item.IdTipoDireccion;
-                    personaDireccion.IdDireccion = item.IdDireccion;
-                    personaDireccion.UsuarioModificacion = usuario;
+                        personaDireccion.IdTipoDireccion = item.IdTipoDireccion;
+                        personaDireccion.IdDireccion = item.IdDireccion;
+                        personaDireccion.UsuarioModificacion = usuario;
 
-                    _unitOfWork.PersonaDireccionRepository.UpdateAndSave(personaDireccion);
+                        _unitOfWork.PersonaDireccionRepository.UpdateAndSave(personaDireccion);
+                    }
                 }
             }
 
@@ -183,7 +186,7 @@ namespace SistemaTerapeutico.Core.Services
             {
                 if (item.Id == 0)
                 {
-                    if (item.IdTwo > 0)
+                    if (item.IdPersonaVinculo > 0)
                     {
                         item.Id = idPersona;
                         item.UsuarioRegistro = usuario;
@@ -272,19 +275,19 @@ namespace SistemaTerapeutico.Core.Services
         }
         public async Task DeletePersonaDireccion(int idPersona, int numero)
         {
-            await _unitOfWork.PersonaDireccionRepository.DeleteByIds(idPersona, numero);
+            await _unitOfWork.PersonaDireccionRepository.DeleteByIdsAndSave(idPersona, numero);
         }
         public async Task DeletePersonaDocumento(int idPersona, int numero)
         {
-            await _unitOfWork.PersonaDocumentoRepository.DeleteByIds(idPersona, numero);
+            await _unitOfWork.PersonaDocumentoRepository.DeleteByIdsAndSave(idPersona, numero);
         }
         public async Task DeletePersonaContacto(int idPersona, int numero)
         {
-            await _unitOfWork.PersonaContactoRepository.DeleteByIds(idPersona, numero);
+            await _unitOfWork.PersonaContactoRepository.DeleteByIdsAndSave(idPersona, numero);
         }
         public async Task DeletePersonaVinculacion(int idPersona, int numero)
         {
-            await _unitOfWork.PersonaVinculacionRepository.DeleteByIds(idPersona, numero);
+            await _unitOfWork.PersonaVinculacionRepository.DeleteByIdsAndSave(idPersona, numero);
         }
     }
 }

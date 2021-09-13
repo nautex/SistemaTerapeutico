@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         }
         public async Task AddGenerateIdTwo(T entity)
         {
+            entity.FechaRegistro = DateTime.Now;
             entity.IdTwo = GetNewIdTwoById(entity.Id);
             await _entities.AddAsync(entity);
 
@@ -28,12 +30,24 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
             _context.Remove(entity);
         }
+        public async Task DeleteByIdsAndSave(int id, int idTwo)
+        {
+            T entity = await GetByIds(id, idTwo);
+            _context.Remove(entity);
+            _context.SaveChanges();
+        }
 
         public async Task DeletesById(int id)
         {
             IEnumerable<T> entities = await GetsById(id);
 
             _context.RemoveRange(entities);
+        }
+        public async Task DeletesByIdAndSave(int id)
+        {
+            IEnumerable<T> entities = await GetsById(id);
+            _context.RemoveRange(entities);
+            _context.SaveChanges();
         }
 
         public async Task<T> GetByIds(int id, int idTwo)
@@ -58,7 +72,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
             NumeroEnteroDto item = listado.OrderByDescending(x => x.Numero).FirstOrDefault();
 
-            return item == null ? 1 : item.Numero++;
+            return item == null ? 1 : ++item.Numero;
         }
 
     }
