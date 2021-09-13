@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Enumerators;
 using SistemaTerapeutico.Core.Exceptions;
@@ -47,40 +46,9 @@ namespace SistemaTerapeutico.Core.Services
             await _unitOfWork.PersonaRepository.Delete(idPersona);
             _unitOfWork.SaveChanges();
         }
-        //public async Task<int> AddChildWithParents(PersonaNaturalDatosCompletosDto child, PersonaNaturalDatosCompletosDto mother, PersonaNaturalDatosCompletosDto dad)
-        //{
-        //    int idChild = await AddPersonaNaturalDatosCompletos(child);
-
-        //    //mother.IdDireccion = child.MamaMismaDireccion ? child.IdDireccion : 0;
-        //    //dad.IdDireccion = child.PapaMismaDireccion ? child.IdDireccion : 0;
-
-        //    //int idMother = await AddPersonaNaturalDatosCompletos(mother);
-        //    //int idDad = await AddPersonaNaturalDatosCompletos(child);
-
-        //    //await _unitOfWork.PersonaVinculacionRepository.Add(new PersonaVinculacion(child.UsuarioRegistro)
-        //    //{
-        //    //    Id = idChild,
-        //    //    IdPersonaVinculo = idMother,
-        //    //    IdTipoVinculo = ETipoVinculo.Madre
-        //    //});
-
-        //    //await _unitOfWork.PersonaVinculacionRepository.Add(new PersonaVinculacion(child.UsuarioRegistro)
-        //    //{
-        //    //    Id = idChild,
-        //    //    IdPersonaVinculo = idDad,
-        //    //    IdTipoVinculo = ETipoVinculo.Padre
-        //    //});
-
-        //    //_unitOfWork.SaveChanges();
-
-        //    //return idChild;
-        //    return 0;
-        //}
-
-        public async Task<PersonaResponseDto> AddPersonaNaturalWithDetails(Persona persona)
+        public async Task<int> AddPersonaNaturalWithDetails(Persona persona)
         {
             int idPersona = 0;
-            int? idDireccion = null;
             string usuario = "JSOTELO";
 
             //_unitOfWork.BeginTransaction();
@@ -171,17 +139,21 @@ namespace SistemaTerapeutico.Core.Services
             {
                 if (item.Id == 0)
                 {
-                    if (!String.IsNullOrEmpty(item.Numero))
+                    if (!String.IsNullOrEmpty(item.NumeroDocumento))
                     {
                         item.Id = idPersona;
                         item.UsuarioRegistro = usuario;
-                        await _unitOfWork.PersonaDocumentoRepository.AddAndSave(item);
+                        await _unitOfWork.PersonaDocumentoRepository.AddGenerateIdTwo(item);
                     }
                 }
                 else
                 {
-                    item.UsuarioModificacion = usuario;
-                    _unitOfWork.PersonaDocumentoRepository.UpdateAndSave(item);
+                    PersonaDocumento personaDocumento = await _unitOfWork.PersonaDocumentoRepository.GetByIds(idPersona, item.IdTwo);
+
+                    personaDocumento.IdTipoDocumento = item.IdTipoDocumento;
+                    personaDocumento.NumeroDocumento = item.NumeroDocumento;
+                    personaDocumento.UsuarioModificacion = usuario;
+                    _unitOfWork.PersonaDocumentoRepository.UpdateAndSave(personaDocumento);
                 }
             }
 
@@ -198,8 +170,12 @@ namespace SistemaTerapeutico.Core.Services
                 }
                 else
                 {
-                    item.UsuarioModificacion = usuario;
-                    _unitOfWork.PersonaContactoRepository.UpdateAndSave(item);
+                    PersonaContacto personaContacto = await _unitOfWork.PersonaContactoRepository.GetByIds(idPersona, item.IdTwo);
+
+                    personaContacto.IdTipoContacto = item.IdTipoContacto;
+                    personaContacto.Valor = item.Valor;
+                    personaContacto.UsuarioModificacion = usuario;
+                    _unitOfWork.PersonaContactoRepository.UpdateAndSave(personaContacto);
                 }
             }
 
@@ -211,98 +187,23 @@ namespace SistemaTerapeutico.Core.Services
                     {
                         item.Id = idPersona;
                         item.UsuarioRegistro = usuario;
-                        await _unitOfWork.PersonaVinculacionRepository.AddReturnId(item);
+                        await _unitOfWork.PersonaVinculacionRepository.AddGenerateIdTwo(item);
                     }
                 }
                 else
                 {
-                    item.UsuarioModificacion = usuario;
+                    PersonaVinculacion personaVinculacion = await _unitOfWork.PersonaVinculacionRepository.GetByIds(idPersona, item.IdTwo);
+                    personaVinculacion.IdPersonaVinculo = item.IdPersonaVinculo;
+                    personaVinculacion.IdTipoVinculo = item.IdTipoVinculo;
+                    personaVinculacion.UsuarioModificacion = usuario;
                     _unitOfWork.PersonaVinculacionRepository.UpdateAndSave(item);
                 }
             }
 
-            //PersonaNatural personaNatural = await _unitOfWork.PersonaNaturalRepository.GetById(idPersona);
-
-            //if (personaNatural.Id == 0)
-            //{
-            //    await _unitOfWork.PersonaNaturalRepository.Add(new PersonaNatural()
-            //    {
-            //        Id = idPersona,
-            //        PrimerNombre = persona.PersonaNatural.PrimerNombre,
-            //        SegundoNombre = persona.PersonaNatural.SegundoNombre,
-            //        PrimerApellido = persona.PersonaNatural.PrimerApellido,
-            //        SegundoApellido = persona.PersonaNatural.SegundoApellido,
-            //        FechaNacimiento = persona.PersonaNatural.FechaNacimiento,
-            //        IdSexo = persona.PersonaNatural.IdSexo,
-            //    });
-            //}
-            //else
-            //{
-
-            //}
-
-
-            //if (personaDto.IdDireccion > 0)
-            //{
-            //    idDireccion = personaDto.IdDireccion;
-            //}
-            //else
-            //{
-            //    if (!string.IsNullOrEmpty(personaDto.DetalleDireccion))
-            //    {
-            //        idDireccion = await _unitOfWork.DireccionRepository.AddReturnId(new Direccion()
-            //        {
-            //            Id = idPersona,
-            //            IdUbigeo = personaDto.IdUbigeoDireccion,
-            //            Detalle = personaDto.DetalleDireccion
-            //        });
-            //    }
-            //}
-
-            //if (idDireccion != null)
-            //{
-            //    await _unitOfWork.PersonaDireccionRepository.AddGenerateIdTwo(new PersonaDireccion()
-            //    {
-            //        Id = idPersona,
-            //        IdTipoDireccion = ETipoDireccion.Domicilio,
-            //        IdDireccion = idDireccion
-            //    });
-            //}
-
-            //if (!string.IsNullOrEmpty(personaDto.NumeroDocumento))
-            //{
-            //    await _unitOfWork.PersonaDocumentoRepository.Add(new PersonaDocumento()
-            //    {
-            //        Id = idPersona,
-            //        IdTwo = personaDto.IdTipoDocumento,
-            //        Numero = personaDto.NumeroDocumento
-            //    });
-            //}
-
-            //if (!string.IsNullOrEmpty(personaDto.Celular))
-            //{
-            //    await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(new PersonaContacto()
-            //    {
-            //        Id = idPersona,
-            //        IdTipoContacto = ETipoContacto.CelularMovistar,
-            //        Valor = personaDto.Celular
-            //    });
-            //}
-
-            //if (!string.IsNullOrEmpty(personaDto.Correo))
-            //{
-            //    await _unitOfWork.PersonaContactoRepository.AddGenerateIdTwo(new PersonaContacto()
-            //    {
-            //        Id = idPersona,
-            //        IdTipoContacto = ETipoContacto.Correo,
-            //        Valor = personaDto.Correo
-            //    });
-            //}
-
             //_unitOfWork.SaveChanges();
             //_unitOfWork.CommitTransaction();
 
-            return new PersonaResponseDto { IdPersona = idPersona, IdDireccion = idDireccion };
+            return idPersona;
         }
         public async Task<IEnumerable<Persona>> GetPersonasByNombre(string nombre)
         {
@@ -353,13 +254,13 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.PersonaVinculacionViewRepository.GetPersonasVinculacionesViewByIdPersona(idPersona);
         }
-        public IEnumerable<PersonaDocumentoView> GetPersonasDocumentosViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
+        public IEnumerable<PersonaResumenBasicoView> GetPersonaResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
         {
-            var list = _unitOfWork.PersonaDocumentoViewRepository.GetAll();
+            var list = _unitOfWork.PersonaResumenBasicoViewRepository.GetAll();
 
             if (!string.IsNullOrEmpty(numeroDocumento))
             {
-                list = list.Where(x => x.Numero.ToLower().Contains(numeroDocumento.ToLower()));
+                list = list.Where(x => x.NumeroDocumento.ToLower().Contains(numeroDocumento.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(nombres))
@@ -368,6 +269,22 @@ namespace SistemaTerapeutico.Core.Services
             }
 
             return list.ToList();
+        }
+        public async Task DeletePersonaDireccion(int idPersona, int numero)
+        {
+            await _unitOfWork.PersonaDireccionRepository.DeleteByIds(idPersona, numero);
+        }
+        public async Task DeletePersonaDocumento(int idPersona, int numero)
+        {
+            await _unitOfWork.PersonaDocumentoRepository.DeleteByIds(idPersona, numero);
+        }
+        public async Task DeletePersonaContacto(int idPersona, int numero)
+        {
+            await _unitOfWork.PersonaContactoRepository.DeleteByIds(idPersona, numero);
+        }
+        public async Task DeletePersonaVinculacion(int idPersona, int numero)
+        {
+            await _unitOfWork.PersonaVinculacionRepository.DeleteByIds(idPersona, numero);
         }
     }
 }

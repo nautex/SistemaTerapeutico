@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Exceptions;
@@ -32,9 +31,9 @@ namespace SistemaTerapeutico.Core.Services
             _unitOfWork.SaveChanges();
         }
 
-        public void DeletePersonaVinculacionByIds(int idPersona, int idPersonaVinculo)
+        public void DeletePersonaVinculacionByIds(int idPersona, int numero)
         {
-            _unitOfWork.PersonaVinculacionRepository.DeleteByIds(idPersona, idPersonaVinculo);
+            _unitOfWork.PersonaVinculacionRepository.DeleteByIds(idPersona, numero);
             _unitOfWork.SaveChanges();
         }
 

@@ -48,6 +48,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<PersonaDireccionView> PersonaDireccionView { get; set; }
         public virtual DbSet<DireccionView> DireccionView { get; set; }
         public virtual DbSet<PersonaVinculacionView> PersonaVinculacionView { get; set; }
+        public virtual DbSet<PersonaResumenBasicoView> PersonaResumenBasicoView { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

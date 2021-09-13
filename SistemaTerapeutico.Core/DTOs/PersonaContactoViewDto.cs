@@ -1,4 +1,6 @@
-﻿namespace SistemaTerapeutico.Core.DTOs
+﻿using System;
+
+namespace SistemaTerapeutico.Core.DTOs
 {
     public class PersonaContactoViewDto
     {
@@ -10,5 +12,9 @@
         public string TipoContacto { get; set; }
         public string Valor { get; set; }
         public int IdEstado { get; set; }
+        public DateTime? FechaRegistro { get; set; }
+        public string UsuarioRegistro { get; set; }
+        public DateTime? FechaModificacion { get; set; }
+        public string UsuarioModificacion { get; set; }
     }
 }

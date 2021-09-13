@@ -8,7 +8,8 @@ namespace SistemaTerapeutico.Core.Entities
         {
             IdEstado = EEstadoBasico.Activo;
         }
-        public string Numero { get; set; }
+        public int IdTipoDocumento { get; set; }
+        public string NumeroDocumento { get; set; }
         public int? IdEstado { get; set; }
 
         //public virtual Persona IdPersonaNavigation { get; set; }

@@ -39,26 +39,13 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        //[HttpPost("PostPersonaNaturalDatosCompletos")]
-        //public async Task<IActionResult> PostPersonaNaturalDatosCompletos([FromBody] PersonaNaturalDatosCompletosDto persona)
-        //{
-        //    PersonaResponseDto personaResponse = await _personaService.AddPersonaNaturalDatosCompletos(persona);
-        //    var Response = new ApiResponse<PersonaResponseDto>(personaResponse);
-
-        //    return Ok(Response);
-        //}
         [HttpPost("PostPersonaNaturalUpdateWithDetails")]
         public async Task<IActionResult> PostPersonaNaturalUpdateWithDetails([FromBody] PersonaNaturalWDDto personaDto)
         {
             Persona persona = _mapper.Map<Persona>(personaDto);
-            //PersonaNatural personaNatural = _mapper.Map<PersonaNatural>(personaDto);
-            //List<PersonaDireccion> personaDireccion = _mapper.Map<List<PersonaDireccion>>(personaDto.PersonaDireccion);
-            //List<PersonaDocumento> personaDocumento = _mapper.Map<List<PersonaDocumento>>(personaDto.PersonaDocumento);
-            //List<PersonaContacto> personaContacto = _mapper.Map<List<PersonaContacto>>(personaDto.PersonaContacto);
-            //List<PersonaVinculacion> personaVinculacion = _mapper.Map<List<PersonaVinculacion>>(personaDto.PersonaVinculacion);
             persona.PersonaNatural = _mapper.Map<PersonaNatural>(personaDto);
-            await _personaService.AddPersonaNaturalWithDetails(persona);
-            var Response = new ApiResponse<bool>(true);
+            int idPersona = await _personaService.AddPersonaNaturalWithDetails(persona);
+            var Response = new ApiResponse<int>(idPersona);
 
             return Ok(Response);
         }
@@ -135,11 +122,43 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetPersonasDocumentosViewByNumeroDocumentoYNombres")]
-        public IActionResult GetPersonasDocumentosViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
+        [HttpGet("GetPersonaResumenBasicoViewByNumeroDocumentoYNombres")]
+        public IActionResult GetPersonaResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
         {
-            var list = _personaService.GetPersonasDocumentosViewByNumeroDocumentoYNombres(numeroDocumento, nombres);
-            var response = new ApiResponse<IEnumerable<PersonaDocumentoViewDto>>(list, _mapper);
+            var list = _personaService.GetPersonaResumenBasicoViewByNumeroDocumentoYNombres(numeroDocumento, nombres);
+            var response = new ApiResponse<IEnumerable<PersonaResumenBasicoViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpDelete("DeletePersonaDireccion")]
+        public async Task<IActionResult> DeletePersonaDireccion(int idPersona, int numero)
+        {
+            await _personaService.DeletePersonaDireccion(idPersona, numero);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpDelete("DeletePersonaDocumento")]
+        public async Task<IActionResult> DeletePersonaDocumento(int idPersona, int numero)
+        {
+            await _personaService.DeletePersonaDocumento(idPersona, numero);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpDelete("DeletePersonaContacto")]
+        public async Task<IActionResult> DeletePersonaContacto(int idPersona, int numero)
+        {
+            await _personaService.DeletePersonaContacto(idPersona, numero);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpDelete("DeletePersonaVinculacion")]
+        public async Task<IActionResult> DeletePersonaVinculacion(int idPersona, int numero)
+        {
+            await _personaService.DeletePersonaVinculacion(idPersona, numero);
+            var response = new ApiResponse<bool>(true);
 
             return Ok(response);
         }

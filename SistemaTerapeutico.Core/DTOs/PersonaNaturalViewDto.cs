@@ -29,5 +29,9 @@ namespace SistemaTerapeutico.Core.DTOs
         public int? IdTipoPersona { get; set; }
         public string TipoPersona { get; set; }
         public int? IdEstado { get; set; }
+        public DateTime? FechaRegistro { get; set; }
+        public string UsuarioRegistro { get; set; }
+        public DateTime? FechaModificacion { get; set; }
+        public string UsuarioModificacion { get; set; }
     }
 }

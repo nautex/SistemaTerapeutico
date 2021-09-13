@@ -23,7 +23,7 @@ namespace SistemaTerapeutico.API.Controllers
         [HttpGet("GetPersonaDocumentoByTipoYNumero")]
         public async Task<IActionResult> GetPersonaDocumentoByTipoYNumero(PersonaDocumentoQueryFilter queryFilter)
         {
-            var entity = await _personaDocumentoService.GetPersonasDocumentosByTipoYNumero(queryFilter.IdTipoDocumento, queryFilter.Numero);
+            var entity = await _personaDocumentoService.GetPersonasDocumentosByTipoYNumero(queryFilter.IdTipoDocumento, queryFilter.NumeroDocumento);
             var response = new ApiResponse<IEnumerable<PersonaDocumentoDto>>(entity, _mapper);
 
             return Ok(response);

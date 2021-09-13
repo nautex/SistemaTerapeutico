@@ -1,9 +1,10 @@
-﻿namespace SistemaTerapeutico.Core.Views
+﻿namespace SistemaTerapeutico.Core.DTOs
 {
-    public class PersonaDocumentoView : BaseViewEntity
+    public class PersonaResumenBasicoViewDto
     {
+        public int Id { get; set; }
         public int IdPersona { get; set; }
-        public int Numero { get; set; }
+        public string Nombres { get; set; }
         public int? IdTipoDocumento { get; set; }
         public string TipoDocumento { get; set; }
         public string NumeroDocumento { get; set; }

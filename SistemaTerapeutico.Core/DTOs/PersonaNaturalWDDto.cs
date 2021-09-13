@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaTerapeutico.Core.DTOs
 {
@@ -30,6 +29,10 @@ namespace SistemaTerapeutico.Core.DTOs
         public int? IdTipoPersona { get; set; }
         public string TipoPersona { get; set; }
         public int? IdEstado { get; set; }
+        public DateTime? FechaRegistro { get; set; }
+        public string UsuarioRegistro { get; set; }
+        public DateTime? FechaModificacion { get; set; }
+        public string UsuarioModificacion { get; set; }
         public List<PersonaDireccionViewDto> PersonaDireccion { get; set; }
         public List<PersonaDocumentoViewDto> PersonaDocumento { get; set; }
         public List<PersonaContactoViewDto> PersonaContacto { get; set; }

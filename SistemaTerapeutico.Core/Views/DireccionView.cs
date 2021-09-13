@@ -1,6 +1,6 @@
 ﻿namespace SistemaTerapeutico.Core.Views
 {
-    public class DireccionView : BaseView
+    public class DireccionView : BaseViewEntity
     {
         public int IdUbigeo { get; set; }
         public int? IdPais { get; set; }

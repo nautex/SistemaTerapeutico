@@ -12,8 +12,7 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
                     .HasName("PRIMARY");
 
             builder.Property(e => e.Id)
-                .HasColumnName("IdPersona")
-                .ValueGeneratedNever();
+                .HasColumnName("IdPersona");
 
             //builder.Ignore(e => e.IsNewRow);
             //builder.Ignore(e => e.IsUpdated);

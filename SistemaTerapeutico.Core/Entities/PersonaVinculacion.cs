@@ -8,6 +8,7 @@ namespace SistemaTerapeutico.Core.Entities
         {
             IdEstado = EEstadoBasico.Activo;
         }
+        public int IdPersonaVinculo { get; set; }
         public int? IdTipoVinculo { get; set; }
         public int? IdEstado { get; set; }
     }

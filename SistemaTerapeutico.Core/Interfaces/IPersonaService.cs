@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Views;
 
@@ -26,7 +25,11 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task<IEnumerable<PersonaContactoView>> GetPersonasContactosViewByIdPersona(int idPersona);
         Task<IEnumerable<PersonaDireccionView>> GetPersonasDireccionesViewByIdPersona(int idPersona);
         Task<IEnumerable<PersonaVinculacionView>> GetPersonasVinculacionesViewByIdPersona(int idPersona);
-        IEnumerable<PersonaDocumentoView> GetPersonasDocumentosViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres);
-        Task<PersonaResponseDto> AddPersonaNaturalWithDetails(Persona persona);
+        IEnumerable<PersonaResumenBasicoView> GetPersonaResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres);
+        Task<int> AddPersonaNaturalWithDetails(Persona persona);
+        Task DeletePersonaDireccion(int idPersona, int numero);
+        Task DeletePersonaDocumento(int idPersona, int numero);
+        Task DeletePersonaContacto(int idPersona, int numero);
+        Task DeletePersonaVinculacion(int idPersona, int numero);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SistemaTerapeutico.Core.DTOs
+﻿using System;
+
+namespace SistemaTerapeutico.Core.DTOs
 {
     public class PersonaDireccionViewDto
     {
@@ -13,5 +15,9 @@
         public string ResumenUbigeo { get; set; }
         public string Detalle { get; set; }
         public string Referencia { get; set; }
+        public DateTime? FechaRegistro { get; set; }
+        public string UsuarioRegistro { get; set; }
+        public DateTime? FechaModificacion { get; set; }
+        public string UsuarioModificacion { get; set; }
     }
 }

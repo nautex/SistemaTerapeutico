@@ -61,7 +61,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
         public Task<T> GetById(int id)
         {
-            return _entities.FirstOrDefaultAsync(x => x.Id == id);
+            return _entities.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public void Update(T entity)
@@ -74,6 +74,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
             entity.FechaModificacion = DateTime.Now;
 
+            //_context.Entry(entity).State = EntityState.Modified;
             _entities.Update(entity);
 
             _context.SaveChanges();

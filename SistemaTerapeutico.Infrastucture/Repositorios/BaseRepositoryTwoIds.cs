@@ -38,16 +38,16 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
         public async Task<T> GetByIds(int id, int idTwo)
         {
-            return await _entities.Where(x => x.Id == id && x.IdTwo == idTwo).FirstOrDefaultAsync();
+            return await _entities.Where(x => x.Id == id && x.IdTwo == idTwo).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<T>> GetsById(int id)
         {
-            return await _entities.Where(x => x.Id == id).ToListAsync();
+            return await _entities.Where(x => x.Id == id).AsNoTracking().ToListAsync();
         }
         public async Task<IEnumerable<T>> GetsByIdTwo(int idTwo)
         {
-            return await _entities.Where(x => x.IdTwo == idTwo).ToListAsync();
+            return await _entities.Where(x => x.IdTwo == idTwo).AsNoTracking().ToListAsync();
         }
         public int GetNewIdTwoById(int id)
         {

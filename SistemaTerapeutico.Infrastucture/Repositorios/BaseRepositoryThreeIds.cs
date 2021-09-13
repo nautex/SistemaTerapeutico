@@ -22,7 +22,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
         public async Task<T> GetByThreeIds(int id, int idTwo, int idThree)
         {
-            return await _entities.Where(x => x.Id == id && x.IdTwo == idTwo && x.IdThree == idThree).FirstOrDefaultAsync();
+            return await _entities.Where(x => x.Id == id && x.IdTwo == idTwo && x.IdThree == idThree).AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }

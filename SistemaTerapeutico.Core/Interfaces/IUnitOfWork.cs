@@ -35,6 +35,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         IPersonaDireccionViewRepository PersonaDireccionViewRepository { get; }
         IDireccionViewRepository DireccionViewRepository { get; }
         IPersonaVinculacionViewRepository PersonaVinculacionViewRepository { get; }
+        IPersonaResumenBasicoViewRepository PersonaResumenBasicoViewRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
         void BeginTransaction();

@@ -3,6 +3,6 @@
     public class PersonaDocumentoQueryFilter
     {
         public int IdTipoDocumento { get; set; }
-        public string Numero { get; set; }
+        public string NumeroDocumento { get; set; }
     }
 }
