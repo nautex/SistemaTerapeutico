@@ -16,7 +16,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         }
         public async Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentosByTipoYNumero(int idTipoDocumento, string numeroDocumento)
         {
-            var list = await _entities.Where(x => x.IdTwo == idTipoDocumento && x.NumeroDocumento == numeroDocumento).ToListAsync();
+            var list = await _entities.Where(x => x.IdTipoDocumento == idTipoDocumento && x.NumeroDocumento == numeroDocumento).ToListAsync();
 
             return list;
         }

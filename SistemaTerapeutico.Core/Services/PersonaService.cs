@@ -59,6 +59,7 @@ namespace SistemaTerapeutico.Core.Services
 
                 idPersona = await _unitOfWork.PersonaRepository.AddReturnId(persona);
                 persona.PersonaNatural.Id = idPersona;
+                persona.IdEstado = EEstadoBasico.Activo;
                 persona.PersonaNatural.UsuarioRegistro = usuario;
 
                 await _unitOfWork.PersonaNaturalRepository.AddAndSave(persona.PersonaNatural);
@@ -66,6 +67,8 @@ namespace SistemaTerapeutico.Core.Services
             else
             {
                 idPersona = persona.Id;
+                persona.FechaRegistro = persona.FechaRegistro == null ? DateTime.Now : persona.FechaRegistro;
+                persona.UsuarioRegistro = persona.UsuarioRegistro == null ? usuario : persona.UsuarioRegistro;
                 persona.UsuarioModificacion = usuario;
                 _unitOfWork.PersonaRepository.UpdateAndSave(persona);
 
