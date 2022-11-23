@@ -35,13 +35,5 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetTerapiasByIdAtencion")]
-        public async Task<IActionResult> GetTerapiasByIdAtencion(int idAtencion)
-        {
-            var list = await _terapiaService.GetTerapiasByIdAtencion(idAtencion);
-            var response = new ApiResponse<IEnumerable<TerapiaDto>>(list, _mapper);
-
-            return Ok(response);
-        }
     }
 }

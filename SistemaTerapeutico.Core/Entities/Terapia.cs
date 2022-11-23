@@ -10,7 +10,6 @@ namespace SistemaTerapeutico.Core.Entities
             IdTipo = ETipoTerapia.Individual;
             FechaInicio = DateTime.Now;
         }
-        public int IdAtencion { get; set; }
         public int IdTipo { get; set; }
         public DateTime FechaInicio { get; set; }
         public int IdModalidad { get; set; }

@@ -38,9 +38,5 @@ namespace SistemaTerapeutico.Core.Services
             _unitOfWork.TerapiaRepository.Update(terapia);
             _unitOfWork.SaveChanges();
         }
-        public async Task<IEnumerable<Terapia>> GetTerapiasByIdAtencion(int idAtencion)
-        {
-            return await _unitOfWork.TerapiaRepository.GetTerapiasByIdAtencion(idAtencion);
-        }
     }
 }

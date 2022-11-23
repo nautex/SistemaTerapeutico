@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -31,6 +32,12 @@ namespace SistemaTerapeutico.API.Controllers
             if (validation.Item1)
             {
                 var token = GenerateToken(validation.Item2);
+
+                Response.Cookies.Append(key: "jwt", value: token, new CookieOptions
+                {
+                    HttpOnly = true
+                });
+
                 return Ok(new { token });
             }
 

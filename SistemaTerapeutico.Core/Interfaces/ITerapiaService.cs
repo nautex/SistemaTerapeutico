@@ -11,6 +11,5 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task<int> AddTerapia(Terapia Terapia);
         void UpdateTerapia(Terapia Terapia);
         Task DeleteTerapia(int idTerapia);
-        Task<IEnumerable<Terapia>> GetTerapiasByIdAtencion(int idAtencion);
     }
 }

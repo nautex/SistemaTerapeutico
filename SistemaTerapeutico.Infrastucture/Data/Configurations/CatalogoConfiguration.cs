@@ -8,6 +8,8 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Catalogo> builder)
         {
+            builder.ToTable("Catalogo");
+
             builder.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
