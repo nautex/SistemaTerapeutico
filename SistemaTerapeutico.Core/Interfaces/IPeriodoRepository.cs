@@ -4,7 +4,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IPeriodoRepository : IBaseRepository<Periodo>
+    public interface IPeriodoRepository : IBaseEntityRepository<Periodo>
     {
         Task<IEnumerable<Periodo>> GetPeriodosByIdTipo(int idTipo);
     }

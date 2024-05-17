@@ -10,7 +10,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class TerapiaPlanificacionCriterioRepository : BaseRepositoryThreeIds<TerapiaPlanificacionCriterio>, ITerapiaPlanificacionCriterioRepository
+    public class TerapiaPlanificacionCriterioRepository : BaseEntityThreeIdsRepository<TerapiaPlanificacionCriterio>, ITerapiaPlanificacionCriterioRepository
     {
         public TerapiaPlanificacionCriterioRepository(SISDETContext context) : base(context)
         {

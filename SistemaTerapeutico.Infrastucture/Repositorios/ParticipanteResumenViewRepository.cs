@@ -4,7 +4,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class ParticipanteResumenViewRepository : BaseRepositoryView<ParticipanteResumenView>, IParticipanteResumenViewRepository
+    public class ParticipanteResumenViewRepository : BaseRepository<ParticipanteResumenView>, IParticipanteResumenViewRepository
     {
         public ParticipanteResumenViewRepository(SISDETContext context) : base(context)
         {

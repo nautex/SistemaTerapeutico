@@ -8,7 +8,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class PeriodoRepository : BaseRepository<Periodo>, IPeriodoRepository
+    public class PeriodoRepository : BaseEntityRepository<Periodo>, IPeriodoRepository
     {
         public PeriodoRepository(SISDETContext context) : base(context)
         {

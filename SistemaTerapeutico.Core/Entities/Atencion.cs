@@ -10,8 +10,9 @@ namespace SistemaTerapeutico.Core.Entities
             Observaciones = "";
             IdEstado = EEstadoBasico.Activo;
         }
-        public int IdParticipante { get; set; }
-        public DateTime FechaInicio { get; set; }
+        public int? IdPersona { get; set; }
+        public int IdTipoServicio { get; set; }
+        public DateTime Fecha { get; set; }
         public string Observaciones { get; set; }
         public int IdEstado { get; set; }
     }

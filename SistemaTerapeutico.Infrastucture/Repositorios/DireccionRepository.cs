@@ -8,7 +8,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class DireccionRepository : BaseRepository<Direccion>, IDireccionRepository
+    public class DireccionRepository : BaseEntityRepository<Direccion>, IDireccionRepository
     {
         public DireccionRepository(SISDETContext context) : base(context)
         {

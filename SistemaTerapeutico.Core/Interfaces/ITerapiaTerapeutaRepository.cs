@@ -2,7 +2,7 @@
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface ITerapiaTerapeutaRepository : IBaseRepositoryTwoIds<TerapiaTerapeuta>
+    public interface ITerapiaTerapeutaRepository : IBaseEntity2IdsRepository<TerapiaTerapeuta>
     {
 
     }

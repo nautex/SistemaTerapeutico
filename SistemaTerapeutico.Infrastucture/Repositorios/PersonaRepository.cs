@@ -8,7 +8,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class PersonaRepository : BaseRepository<Persona>, IPersonaRepository
+    public class PersonaRepository : BaseEntityRepository<Persona>, IPersonaRepository
     {
         public PersonaRepository(SISDETContext context) : base(context)
         {
@@ -18,6 +18,14 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
             var list = await _entities.Where(x => x.Nombres.Contains(nombre)).ToListAsync();
 
             return list;
+        }
+        public async Task<IEnumerable<Lista>> GetPersonsByTypeAndName(int idType, string name)
+        {
+            var query = from f in _context.PersonaNaturalView
+                        where f.IdTipoPersona == idType
+                        select new Lista { Id = f.Id, Descripcion = f.Nombres };
+
+            return await query.OrderBy(x => x.Descripcion).ToListAsync();
         }
     }
 }

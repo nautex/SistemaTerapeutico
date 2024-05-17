@@ -2,7 +2,7 @@
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IPersonaNaturalRepository : IBaseRepository<PersonaNatural>
+    public interface IPersonaNaturalRepository : IBaseEntityRepository<PersonaNatural>
     {
     }
 }

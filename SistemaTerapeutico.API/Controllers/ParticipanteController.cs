@@ -6,6 +6,9 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Core.Services;
+using SistemaTerapeutico.Core.Views;
+using SistemaTerapeutico.Infrastucture.Repositorios;
 
 namespace SistemaTerapeutico.API.Controllers
 {
@@ -36,13 +39,71 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetParticipantesView")]
-        public IActionResult GetParticipantesView()
+        [HttpGet("GetsParticipantesResumenView")]
+        public IActionResult GetsParticipantesResumenView()
         {
-            var list = _participanteService.GetParticipantesView();
-            var response = new ApiResponse<IEnumerable<ParticipanteViewDto>>(list, _mapper);
+            var list = _participanteService.GetsParticipantesResumenView();
+            var response = new ApiResponse<IEnumerable<ParticipanteResumenViewDto>>(list, _mapper);
 
             return Ok(response);
+        }
+        [HttpGet("GetsParticipantesResumenViewByMemberOrRelative")]
+        public IActionResult GetsParticipantesResumenViewByMemberOrRelative(string member, string relative)
+        {
+            var list = _participanteService.GetsParticipantesResumenViewByMemberOrRelative(member, relative);
+            var response = new ApiResponse<IEnumerable<ParticipanteResumenViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetsParticipanteAlergiaViewById")]
+        public async Task<IActionResult> GetsParticipanteAlergiaViewById(int idParticipante)
+        {
+            var list = await _participanteService.GetsParticipanteAlergiaViewById(idParticipante);
+            var response = new ApiResponse<IEnumerable<ParticipanteAlergiaViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetsParticipantePersonaAutorizadaViewById")]
+        public async Task<IActionResult> GetsParticipantePersonaAutorizadaViewById(int idParticipante)
+        {
+            var list = await _participanteService.GetsParticipantePersonaAutorizadaViewById(idParticipante);
+            var response = new ApiResponse<IEnumerable<ParticipantePersonaAutorizadaViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetParticipanteViewById")]
+        public async Task<IActionResult> GetParticipanteViewById(int idParticipante)
+        {
+            var list = await _participanteService.GetParticipanteViewById(idParticipante);
+            var response = new ApiResponse<ParticipanteViewDto>(list, _mapper);
+
+            return Ok(response);
+        }
+
+        [HttpDelete("DeleteParticipanteAlergia")]
+        public async Task<IActionResult> DeleteParticipanteAlergia(int idParticipante, int numero)
+        {
+            await _participanteService.DeleteParticipanteAlergia(idParticipante, numero);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpDelete("DeleteParticipantePersonaAutorizada")]
+        public async Task<IActionResult> DeleteParticipantePersonaAutorizada(int idParticipante, int numero)
+        {
+            await _participanteService.DeleteParticipantePersonaAutorizada(idParticipante, numero);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpPost("AddUpdateParticipanteWithDetails")]
+        public async Task<IActionResult> AddUpdateParticipanteWithDetails([FromBody] ParticipanteDto participanteDto)
+        {
+            Participante participante = _mapper.Map<Participante>(participanteDto);
+            int idParticipante = await _participanteService.AddUpdateParticipanteWithDetails(participante);
+            var Response = new ApiResponse<int>(idParticipante);
+
+            return Ok(Response);
         }
     }
 }

@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
 using SistemaTerapeutico.Core.Views;
 using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class BaseRepositoryView<T> : IBaseRepositoryView<T> where T : BaseView
+    public class BaseRepositoryView<T> : IBaseRepositoryView<T> where T : BaseEntity
     {
         protected readonly SISDETContext _context;
         protected DbSet<T> _entities;

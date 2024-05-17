@@ -10,6 +10,10 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
         {
             builder.HasKey(x => x.Id).HasName("PRIMARY");
             builder.Property(x => x.Id).HasColumnName("IdTerapia");
+
+            builder.Ignore(e => e.TerapiaHorario);
+            builder.Ignore(e => e.TerapiaTerapeuta);
+            builder.Ignore(e => e.TerapiaParticipante);
         }
     }
 }

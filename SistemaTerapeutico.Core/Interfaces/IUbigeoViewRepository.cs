@@ -5,7 +5,7 @@ using SistemaTerapeutico.Core.Views;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IUbigeoViewRepository : IBaseRepositoryView<UbigeoView>
+    public interface IUbigeoViewRepository : IBaseRepository<UbigeoView>
     {
         Task<IEnumerable<Lista>> GetPaises();
         Task<IEnumerable<Lista>> GetDepartamentosByIdPais(int idPais);

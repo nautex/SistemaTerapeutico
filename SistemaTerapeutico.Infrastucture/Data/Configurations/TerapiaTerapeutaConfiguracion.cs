@@ -4,13 +4,12 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class TerapiaTerapeutaConfiguracion : IEntityTypeConfiguration<TerapiaTerapeuta>
+    public class TerapiaTerapeutaConfiguracion : BaseEntity2IdsConfiguration<TerapiaTerapeuta>, IEntityTypeConfiguration<TerapiaTerapeuta>
     {
-        public void Configure(EntityTypeBuilder<TerapiaTerapeuta> builder)
+        public override void Configure(EntityTypeBuilder<TerapiaTerapeuta> builder)
         {
-            builder.HasKey(x => new { x.Id, x.IdTwo }).HasName("PRIMARY");
+            base.Configure(builder);
             builder.Property(x => x.Id).HasColumnName("IdTerapia");
-            builder.Property(x => x.IdTwo).HasColumnName("IdTerapeuta");
         }
     }
 }

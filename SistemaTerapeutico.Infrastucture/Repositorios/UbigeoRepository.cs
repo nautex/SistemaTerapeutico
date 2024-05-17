@@ -4,7 +4,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class UbigeoRepository : BaseRepository<Ubigeo>, IUbigeoRepository
+    public class UbigeoRepository : BaseEntityRepository<Ubigeo>, IUbigeoRepository
     {
         public UbigeoRepository(SISDETContext _context) : base(_context)
         {

@@ -8,7 +8,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class SesionCriterioRepository : BaseRepositoryTwoIds<SesionCriterio>, ISesionCriterioRepository
+    public class SesionCriterioRepository : BaseEntityTwoIdsRepository<SesionCriterio>, ISesionCriterioRepository
     {
         public SesionCriterioRepository(SISDETContext context) : base(context)
         {

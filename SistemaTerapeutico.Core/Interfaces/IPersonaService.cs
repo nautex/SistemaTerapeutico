@@ -25,7 +25,9 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task<IEnumerable<PersonaContactoView>> GetPersonasContactosViewByIdPersona(int idPersona);
         Task<IEnumerable<PersonaDireccionView>> GetPersonasDireccionesViewByIdPersona(int idPersona);
         Task<IEnumerable<PersonaVinculacionView>> GetPersonasVinculacionesViewByIdPersona(int idPersona);
-        IEnumerable<PersonaResumenBasicoView> GetPersonaResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres);
+        IEnumerable<PersonaResumenBasicoView> GetPersonasResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres);
+        IEnumerable<PersonaResumenView> GetPersonasResumenViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres);
+        IEnumerable<Lista> GetsListPersonByTypeAndName(int idType, string name);
         Task<int> AddPersonaNaturalWithDetails(Persona persona);
         Task DeletePersonaDireccion(int idPersona, int numero);
         Task DeletePersonaDocumento(int idPersona, int numero);

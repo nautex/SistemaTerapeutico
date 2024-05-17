@@ -5,7 +5,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IDireccionRepository : IBaseRepository<Direccion>
+    public interface IDireccionRepository : IBaseEntityRepository<Direccion>
     {
         Task<IEnumerable<Direccion>> GetDireccionesByUbigeoYDetalle(int idUbigeo, string detalle);
     }

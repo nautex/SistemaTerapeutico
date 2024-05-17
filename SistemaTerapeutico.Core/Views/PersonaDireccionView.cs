@@ -1,6 +1,8 @@
-﻿namespace SistemaTerapeutico.Core.Views
+﻿using SistemaTerapeutico.Core.Entities;
+
+namespace SistemaTerapeutico.Core.Views
 {
-    public class PersonaDireccionView : BaseViewEntity
+    public class PersonaDireccionView : BaseEntity
     {
         public int IdPersona { get; set; }
         public int Numero { get; set; }

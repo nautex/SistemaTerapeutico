@@ -6,7 +6,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface ITerapiaPlanificacionCriterioRepository : IBaseRepositoryThreeIds<TerapiaPlanificacionCriterio>
+    public interface ITerapiaPlanificacionCriterioRepository : IBaseEntityThreeIdsRepository<TerapiaPlanificacionCriterio>
     {
         void DeleteTerapiasPlanificacionesCriteriosByIdTerapiaYIdPeriodo(int idTerapia, int idPeriodo);
         Task<IEnumerable<TerapiaPlanificacionCriterio>> GetTerapiasPlanificacionesCriteriosByIdTerapia(int idTerapia);

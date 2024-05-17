@@ -70,11 +70,10 @@
         public static int Sobrino = 47;
         public static int Abuelo = 48;
     }
-    public static class ETipoTerapia
+    public static class EModalidadTerapia
     {
-        public static int Individual = 50;
-        public static int Grupal = 51;
-        public static int Fisica = 52;
+        public static int Presencial = 1;
+        public static int Virtual = 2;
     }
     public static class ETipoCargoTerapeuta
     {
@@ -94,5 +93,10 @@
     {
         public static int Administrator = 1;
         public static int Consumer = 2;
+    }
+    public class ETipoServicio
+    {
+        public static int TerapiaIndivual = 1;
+        public static int TerapiaGrupal = 2;
     }
 }

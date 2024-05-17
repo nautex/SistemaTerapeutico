@@ -8,7 +8,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class CatalogoRepository : BaseRepository<Catalogo>, ICatalogoRepository
+    public class CatalogoRepository : BaseEntityRepository<Catalogo>, ICatalogoRepository
     {
         public CatalogoRepository(SISDETContext _context) : base(_context)
         {
@@ -22,9 +22,9 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
             var query = from f in _context.Catalogo
                         where f.IdPadre == idPadre
-                        select new Lista { Id = f.Id, Descripcion = f.Descripcion };
+                        select new Lista { Id = f.Id, Descripcion = f.Descripcion, Orden = f.Orden };
 
-            return await query.OrderBy(x => x.Descripcion).ToListAsync();
+            return await query.OrderBy(x => x.Orden).ToListAsync();
         }
     }
 }

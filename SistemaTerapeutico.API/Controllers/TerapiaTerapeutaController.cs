@@ -19,7 +19,7 @@ namespace SistemaTerapeutico.API.Controllers
             _mapper = mapper;
         }
         [HttpPost("PostTerapiaTerapeuta")]
-        public async Task<IActionResult> PostTerapiaTerapeuta(TerapiaTerapeutaDto terapiaTerapeutaDto)
+        public async Task<IActionResult> PostTerapiaTerapeuta(TerapiaTerapeutaViewDto terapiaTerapeutaDto)
         {
             TerapiaTerapeuta terapiaTerapeuta = _mapper.Map<TerapiaTerapeuta>(terapiaTerapeutaDto);
             await _terapiaTerapeutaService.AddTerapiaTerapeuta(terapiaTerapeuta);

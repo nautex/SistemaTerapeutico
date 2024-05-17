@@ -15,18 +15,13 @@ namespace SistemaTerapeutico.Core.Interfaces
         IDireccionRepository DireccionRepository { get; }
         IParticipanteRepository ParticipanteRepository { get; }
         IAtencionRepository AtencionRepository { get; }
-        ITerapiaRepository TerapiaRepository { get; }
-        ITerapiaTerapeutaRepository TerapiaTerapeutaRepository { get; }
         IPeriodoRepository PeriodoRepository { get; }
         ISesionRepository SesionRepository { get; }
         ISesionCriterioRepository SesionCriterioRepository { get; }
         ISesionCriterioActividadRepository SesionCriterioActividadRepository { get; }
-        ITerapiaPeriodoRepository TerapiaPeriodoRepository { get; }
-        ITerapiaPlanificacionRepository TerapiaPlanificacionRepository { get; }
-        ITerapiaPlanificacionCriterioRepository TerapiaPlanificacionCriterioRepository { get; }
         IUsuarioRepository UsuarioRepository { get; }
-        IPersonaResumenViewRepository PersonaViewRepository { get; }
-        IParticipanteResumenViewRepository ParticipanteViewRepository { get; }
+        IPersonaResumenViewRepository PersonaResumenViewRepository { get; }
+        IParticipanteResumenViewRepository ParticipanteResumenViewRepository { get; }
         IAtencionTerapiaRepository AtencionTerapiaRepository { get; }
         IPersonaNaturalViewRepository PersonaNaturalViewRepository { get; }
         IUbigeoViewRepository UbigeoViewRepository { get; }
@@ -36,6 +31,27 @@ namespace SistemaTerapeutico.Core.Interfaces
         IDireccionViewRepository DireccionViewRepository { get; }
         IPersonaVinculacionViewRepository PersonaVinculacionViewRepository { get; }
         IPersonaResumenBasicoViewRepository PersonaResumenBasicoViewRepository { get; }
+        IParticipanteAlergiaRepository ParticipanteAlergiaRepository { get; }
+        IParticipanteAlergiaViewRepository ParticipanteAlergiaViewRepository { get; }
+        IParticipantePersonaAutorizadaRepository ParticipantePersonaAutorizadaRepository { get; }
+        IParticipantePersonaAutorizadaViewRepository ParticipantePersonaAutorizadaViewRepository { get; }
+        IParticipanteViewRepository ParticipanteViewRepository { get; }
+        ITerapiaRepository TerapiaRepository { get; }
+        ITerapiaViewRepository TerapiaViewRepository { get; }
+        ITerapiaTerapeutaRepository TerapiaTerapeutaRepository { get; }
+        ITerapiaPeriodoRepository TerapiaPeriodoRepository { get; }
+        ITerapiaPlanificacionRepository TerapiaPlanificacionRepository { get; }
+        ITerapiaPlanificacionCriterioRepository TerapiaPlanificacionCriterioRepository { get; }
+        ITerapiaHorarioRepository TerapiaHorarioRepository { get; }
+        ITerapiaHorarioViewRepository TerapiaHorarioViewRepository { get; }
+        ITerapiaTerapeutaViewRepository TerapiaTerapeutaViewRepository { get; }
+        ITerapiaResumenViewRepository TerapiaResumenViewRepository { get; }
+        ITerapiaParticipanteRepository TerapiaParticipanteRepository { get; }
+        ITerapiaParticipanteViewRepository TerapiaParticipanteViewRepository { get; }
+        ILocalViewRepository LocalViewRepository { get; }
+        ISalonViewRepository SalonViewRepository { get; }
+        ITarifaViewRepository TarifaViewRepository { get; }
+        IServicioRepository ServicioRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
         void BeginTransaction();

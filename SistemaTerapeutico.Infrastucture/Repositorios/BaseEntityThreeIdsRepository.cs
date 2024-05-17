@@ -7,9 +7,9 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class BaseRepositoryThreeIds<T> : BaseRepositoryTwoIds<T>, IBaseRepositoryThreeIds<T> where T : BaseEntityThreeIds
+    public class BaseEntityThreeIdsRepository<T> : BaseEntityTwoIdsRepository<T>, IBaseEntityThreeIdsRepository<T> where T : BaseEntityThreeIds
     {
-        public BaseRepositoryThreeIds(SISDETContext context) : base(context)
+        public BaseEntityThreeIdsRepository(SISDETContext context) : base(context)
         {
 
         }

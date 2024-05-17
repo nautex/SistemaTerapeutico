@@ -122,11 +122,20 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetPersonaResumenBasicoViewByNumeroDocumentoYNombres")]
-        public IActionResult GetPersonaResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
+        [HttpGet("GetPersonasResumenBasicoViewByNumeroDocumentoYNombres")]
+        public IActionResult GetPersonasResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
         {
-            var list = _personaService.GetPersonaResumenBasicoViewByNumeroDocumentoYNombres(numeroDocumento, nombres);
+            var list = _personaService.GetPersonasResumenBasicoViewByNumeroDocumentoYNombres(numeroDocumento, nombres);
             var response = new ApiResponse<IEnumerable<PersonaResumenBasicoViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+
+        [HttpGet("GetPersonasResumenViewByNumeroDocumentoYNombres")]
+        public IActionResult GetPersonasResumenViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
+        {
+            var list = _personaService.GetPersonasResumenViewByNumeroDocumentoYNombres(numeroDocumento, nombres);
+            var response = new ApiResponse<IEnumerable<PersonaResumenViewDto>>(list, _mapper);
 
             return Ok(response);
         }
@@ -159,6 +168,14 @@ namespace SistemaTerapeutico.API.Controllers
         {
             await _personaService.DeletePersonaVinculacion(idPersona, numero);
             var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpGet("GetsListPersonByTypeAndName")]
+        public IActionResult GetsListPersonByTypeAndName(int idType, string name)
+        {
+            var list = _personaService.GetsListPersonByTypeAndName(idType, name);
+            var response = new ApiResponse<IEnumerable<ListaDto>>(list, _mapper);
 
             return Ok(response);
         }

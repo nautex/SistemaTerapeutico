@@ -1,6 +1,8 @@
-﻿namespace SistemaTerapeutico.Core.Views
+﻿using SistemaTerapeutico.Core.Entities;
+
+namespace SistemaTerapeutico.Core.Views
 {
-    public class PersonaResumenBasicoView : BaseView
+    public class PersonaResumenBasicoView : Base
     {
         public int IdPersona { get; set; }
         public string Nombres { get; set; }

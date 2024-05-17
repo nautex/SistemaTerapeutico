@@ -3,8 +3,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IAtencionRepository : IBaseRepository<Atencion>
+    public interface IAtencionRepository : IBaseEntityRepository<Atencion>
     {
-        Task<Atencion> GetLastAtencionByIdParticipante(int idParticipante);
     }
 }

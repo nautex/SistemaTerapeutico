@@ -4,7 +4,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IBaseRepositoryTwoIds<T> : IBaseRepository<T> where T : BaseEntityTwoIds
+    public interface IBaseEntityTwoIdsRepository<T> : IBaseEntityRepository<T> where T : BaseEntityTwoIds
     {
         Task AddGenerateIdTwo(T entity);
         Task DeleteByIds(int id, int idTwo);

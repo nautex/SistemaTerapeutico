@@ -11,6 +11,5 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task<int> AddAtencion(Atencion Atencion);
         void UpdateAtencion(Atencion Atencion);
         Task DeleteAtencion(int idAtencion);
-        Task<Atencion> GetLastAtencionByIdParticipante(int idParticipante);
     }
 }

@@ -4,7 +4,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IPersonaDocumentoRepository : IBaseRepositoryTwoIds<PersonaDocumento>
+    public interface IPersonaDocumentoRepository : IBaseEntityTwoIdsRepository<PersonaDocumento>
     {
         Task<IEnumerable<PersonaDocumento>> GetPersonasDocumentosByTipoYNumero(int idTipoDocumento, string numeroDocumento);
     }

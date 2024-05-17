@@ -13,6 +13,9 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 
             builder.Property(x => x.Id)
                 .HasColumnName("IdParticipante");
+
+            builder.Ignore(e => e.ParticipanteAlergia);
+            builder.Ignore(e => e.ParticipantePersonaAutorizada);
         }
     }
 }

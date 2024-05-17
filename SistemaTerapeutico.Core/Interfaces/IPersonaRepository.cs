@@ -4,7 +4,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IPersonaRepository : IBaseRepository<Persona>
+    public interface IPersonaRepository : IBaseEntityRepository<Persona>
     {
         Task<IEnumerable<Persona>> GetPersonasByNombre(string nombre);
     }

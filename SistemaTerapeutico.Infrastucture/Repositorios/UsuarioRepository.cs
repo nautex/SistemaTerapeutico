@@ -8,7 +8,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class UsuarioRepository : BaseRepository<Usuario>, IUsuarioRepository
+    public class UsuarioRepository : BaseEntityRepository<Usuario>, IUsuarioRepository
     {
         public UsuarioRepository(SISDETContext context) : base(context)
         {

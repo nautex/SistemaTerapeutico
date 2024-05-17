@@ -59,6 +59,12 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IPersonaNaturalViewRepository, PersonaNaturalViewRepository>();
             services.AddTransient<IUbigeoViewRepository, UbigeoViewRepository>();
             services.AddTransient<ICatalogoRepository, CatalogoRepository>();
+            services.AddTransient<ILocalViewRepository, LocalViewRepository>();
+            services.AddTransient<ISalonViewRepository, SalonViewRepository>();
+            services.AddTransient<ITarifaViewRepository, TarifaViewRepository>();
+            services.AddTransient<ITerapiaHorarioRepository, TerapiaHorarioRepository>();
+            services.AddTransient<ITerapiaTerapeutaRepository, TerapiaTerapeutaRepository>();
+            services.AddTransient<ITerapiaParticipanteRepository, TerapiaParticipanteRepository>();
 
             services.AddSingleton<IPasswordService, PasswordService>();
 
@@ -118,8 +124,11 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IUbigeoViewService, UbigeoViewService>();
             services.AddTransient<ICatalogoService, CatalogoService>();
+            services.AddTransient<ILocalService, LocalService>();
+            services.AddTransient<ISalonService, SalonService>();
+            services.AddTransient<IServicioService, ServicioService>();
 
-            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(IBaseEntityRepository<>), typeof(BaseEntityRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddSwaggerGen(config =>

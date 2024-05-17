@@ -29,9 +29,7 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
                 .ForMember(dest => dest.IdAtencion, conf => conf.MapFrom(src => src.Id))
                 .ReverseMap();
 
-            CreateMap<Participante, ParticipanteDto>()
-                .ForMember(dest => dest.IdParticipante, conf => conf.MapFrom(src => src.Id))
-                .ReverseMap();
+            CreateMap<Participante, ParticipanteDto>().ReverseMap();
 
             CreateMap<Periodo, PeriodoDto>()
                 .ForMember(dest => dest.IdPeriodo, conf => conf.MapFrom(src => src.Id))
@@ -57,10 +55,6 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
                 .ForMember(dest => dest.IdSesion, conf => conf.MapFrom(src => src.Id))
                 .ReverseMap();
 
-            CreateMap<Terapia, TerapiaDto>()
-                .ForMember(dest => dest.IdTerapia, conf => conf.MapFrom(src => src.Id))
-                .ReverseMap();
-
             CreateMap<TerapiaPeriodo, TerapiaPeriodoDto>()
                 .ForMember(dest => dest.IdTerapia, conf => conf.MapFrom(src => src.Id))
                 .ForMember(dest => dest.IdPeriodo, conf => conf.MapFrom(src => src.IdTwo))
@@ -77,11 +71,6 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
                 .ForMember(dest => dest.IdObjetivoCriterio, conf => conf.MapFrom(src => src.IdThree))
                 .ReverseMap();
 
-            CreateMap<TerapiaTerapeuta, TerapiaTerapeutaDto>()
-                .ForMember(dest => dest.IdTerapia, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.IdTerapeuta, conf => conf.MapFrom(src => src.IdTwo))
-                .ReverseMap();
-
             CreateMap<Direccion, DireccionDto>()
                 .ForMember(dest => dest.IdDireccion, conf => conf.MapFrom(src => src.Id))
                 .ReverseMap();
@@ -89,8 +78,7 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
             CreateMap<PersonaResumenView, PersonaResumenViewDto>()
                 .ReverseMap();
 
-            CreateMap<ParticipanteResumenView, ParticipanteViewDto>()
-                .ForMember(dest => dest.IdParticipante, conf => conf.MapFrom(src => src.Id))
+            CreateMap<ParticipanteResumenView, ParticipanteResumenViewDto>()
                 .ReverseMap();
 
             CreateMap<AtencionTerapia, AtencionTerapiaDto>()
@@ -152,8 +140,26 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
                 .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.IdTwo))
                 .ReverseMap();
 
-            CreateMap<PersonaResumenBasicoView, PersonaResumenBasicoViewDto>()
-                .ReverseMap();
+            CreateMap<PersonaResumenBasicoView, PersonaResumenBasicoViewDto>().ReverseMap();
+            CreateMap<ParticipanteResumenView, ParticipanteResumenViewDto>().ReverseMap();
+            CreateMap<ParticipanteAlergiaView, ParticipanteAlergiaViewDto>().ReverseMap();
+            CreateMap<ParticipantePersonaAutorizadaView, ParticipantePersonaAutorizadaViewDto>().ReverseMap();
+            CreateMap<ParticipanteView, ParticipanteViewDto>().ReverseMap();
+
+            CreateMap<TerapiaView, TerapiaViewDto>().ReverseMap();
+            CreateMap<TerapiaResumenView, TerapiaResumenViewDto>().ReverseMap();
+            CreateMap<TerapiaTerapeutaView, TerapiaTerapeutaViewDto>().ReverseMap();
+            CreateMap<TerapiaHorarioView, TerapiaHorarioViewDto>().ReverseMap();
+            CreateMap<TerapiaParticipanteView, TerapiaParticipanteViewDto>().ReverseMap();
+            CreateMap<TerapiaParticipante, TerapiaParticipanteViewDto>().ReverseMap();
+
+            CreateMap<LocalView, LocalViewDto>().ReverseMap();
+
+            CreateMap<SalonView, SalonViewDto>().ReverseMap();
+
+            CreateMap<TarifaView, TarifaViewDto>().ReverseMap();
+
+            CreateMap<Servicio, ServicioDto>().ReverseMap();
         }
     }
 }

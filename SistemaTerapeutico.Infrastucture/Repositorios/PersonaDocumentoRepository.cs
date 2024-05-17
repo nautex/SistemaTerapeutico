@@ -8,7 +8,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class PersonaDocumentoRepository : BaseRepositoryTwoIds<PersonaDocumento>, IPersonaDocumentoRepository
+    public class PersonaDocumentoRepository : BaseEntityTwoIdsRepository<PersonaDocumento>, IPersonaDocumentoRepository
     {
         public PersonaDocumentoRepository(SISDETContext _context) : base(_context)
         {

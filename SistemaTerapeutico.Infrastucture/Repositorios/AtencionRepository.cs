@@ -7,17 +7,11 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class AtencionRepository : BaseRepository<Atencion>, IAtencionRepository
+    public class AtencionRepository : BaseEntityRepository<Atencion>, IAtencionRepository
     {
         public AtencionRepository(SISDETContext context) : base(context)
         {
 
-        }
-        public async Task<Atencion> GetLastAtencionByIdParticipante(int idParticipante)
-        {
-            Atencion entity = await _entities.Where(x => x.IdParticipante == idParticipante).OrderByDescending(x => x.FechaInicio).FirstOrDefaultAsync();
-
-            return entity;
         }
     }
 }

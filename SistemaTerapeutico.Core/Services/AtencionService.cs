@@ -16,28 +16,19 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.AtencionRepository.AddReturnId(atencion);
         }
-
         public async Task DeleteAtencion(int idAtencion)
         {
             await _unitOfWork.AtencionRepository.Delete(idAtencion);
             _unitOfWork.SaveChanges();
         }
-
         public Task<Atencion> GetAtencionById(int idAtencion)
         {
             return _unitOfWork.AtencionRepository.GetById(idAtencion);
         }
-
         public IEnumerable<Atencion> GetAtenciones()
         {
             return _unitOfWork.AtencionRepository.GetAll();
         }
-
-        public Task<Atencion> GetLastAtencionByIdParticipante(int idParticipante)
-        {
-            return _unitOfWork.AtencionRepository.GetLastAtencionByIdParticipante(idParticipante);
-        }
-
         public void UpdateAtencion(Atencion atencion)
         {
             _unitOfWork.AtencionRepository.Update(atencion);

@@ -9,7 +9,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class UbigeoViewRepository : BaseRepositoryView<UbigeoView>, IUbigeoViewRepository
+    public class UbigeoViewRepository : BaseRepository<UbigeoView>, IUbigeoViewRepository
     {
         public UbigeoViewRepository(SISDETContext context) : base(context)
         {

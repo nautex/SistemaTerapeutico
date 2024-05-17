@@ -35,13 +35,5 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetLastAtencionByIdParticipante")]
-        public async Task<IActionResult> GetLastAtencionByIdParticipante(int idParticipante)
-        {
-            var list = await _atencionService.GetLastAtencionByIdParticipante(idParticipante);
-            var response = new ApiResponse<AtencionDto>(list, _mapper);
-
-            return Ok(response);
-        }
     }
 }

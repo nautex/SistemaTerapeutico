@@ -1,6 +1,8 @@
-﻿namespace SistemaTerapeutico.Core.Views
+﻿using SistemaTerapeutico.Core.Entities;
+
+namespace SistemaTerapeutico.Core.Views
 {
-    public class UbigeoView : BaseView
+    public class UbigeoView : Base
     {
         public string Codigo { get; set; }
         public string Descripcion { get; set; }

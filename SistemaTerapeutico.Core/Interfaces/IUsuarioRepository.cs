@@ -6,7 +6,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IUsuarioRepository : IBaseRepository<Usuario>
+    public interface IUsuarioRepository : IBaseEntityRepository<Usuario>
     {
         Task<Usuario> GetUsuarioByCodigo(string codigo);
         Task DeleteByCodigo(string codigo);

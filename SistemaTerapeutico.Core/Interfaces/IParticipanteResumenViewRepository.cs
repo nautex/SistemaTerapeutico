@@ -2,7 +2,7 @@
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IParticipanteResumenViewRepository : IBaseRepositoryView<ParticipanteResumenView>
+    public interface IParticipanteResumenViewRepository : IBaseRepository<ParticipanteResumenView>
     {
 
     }

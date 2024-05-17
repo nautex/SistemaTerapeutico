@@ -8,7 +8,7 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class SesionRepository : BaseRepository<Sesion>, ISesionRepository
+    public class SesionRepository : BaseEntityRepository<Sesion>, ISesionRepository
     {
         public SesionRepository(SISDETContext context) : base(context)
         {

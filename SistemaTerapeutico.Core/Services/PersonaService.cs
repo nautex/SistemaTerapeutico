@@ -109,6 +109,7 @@ namespace SistemaTerapeutico.Core.Services
                     _unitOfWork.DireccionRepository.UpdateAndSave(new Direccion()
                     {
                         Id = item.IdDireccion,
+                        IdUbigeo = item.IdUbigeo,
                         Detalle = item.Detalle,
                         Referencia = item.Referencia,
                         UsuarioModificacion = usuario,
@@ -217,7 +218,7 @@ namespace SistemaTerapeutico.Core.Services
         }
         public IEnumerable<PersonaResumenView> GetPersonasResumenView()
         {
-            return _unitOfWork.PersonaViewRepository.GetAll();
+            return _unitOfWork.PersonaResumenViewRepository.GetAll();
         }
         public Task<PersonaNatural> GetPersonaNaturalById(int idPersona)
         {
@@ -260,13 +261,47 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.PersonaVinculacionViewRepository.GetPersonasVinculacionesViewByIdPersona(idPersona);
         }
-        public IEnumerable<PersonaResumenBasicoView> GetPersonaResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
+        public IEnumerable<PersonaResumenBasicoView> GetPersonasResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
         {
             var list = _unitOfWork.PersonaResumenBasicoViewRepository.GetAll();
 
             if (!string.IsNullOrEmpty(numeroDocumento))
             {
                 list = list.Where(x => x.NumeroDocumento.ToLower().Contains(numeroDocumento.ToLower()));
+            }
+
+            if (!string.IsNullOrEmpty(nombres))
+            {
+                list = list.Where(x => x.Nombres.ToLower().Contains(nombres.ToLower()));
+            }
+
+            return list.ToList();
+        }
+        public IEnumerable<Lista> GetsListPersonByTypeAndName(int idType, string name)
+        {
+            var list = _unitOfWork.PersonaNaturalViewRepository.GetAll();
+
+            if (idType >= 0)
+            {
+                list = list.Where(x => x.IdTipoPersona == idType);
+            }
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                list = list.Where(x => x.Nombres.ToLower().Contains(name.ToLower()));
+            }
+
+            var query = from f in list.ToList() select new Lista { Id = f.Id, Descripcion = f.Nombres };
+
+            return query;
+        }
+        public IEnumerable<PersonaResumenView> GetPersonasResumenViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
+        {
+            var list = _unitOfWork.PersonaResumenViewRepository.GetAll();
+
+            if (!string.IsNullOrEmpty(numeroDocumento))
+            {
+                list = list.Where(x => x.NumeroDocumento.Contains(numeroDocumento));
             }
 
             if (!string.IsNullOrEmpty(nombres))

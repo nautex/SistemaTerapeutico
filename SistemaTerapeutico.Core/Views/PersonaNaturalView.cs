@@ -1,8 +1,9 @@
-﻿using System;
+﻿using SistemaTerapeutico.Core.Entities;
+using System;
 
 namespace SistemaTerapeutico.Core.Views
 {
-    public class PersonaNaturalView : BaseViewEntity
+    public class PersonaNaturalView : BaseEntity
     {
         public string Nombres { get; set; }
         public DateTime FechaIngreso { get; set; }
