@@ -11,9 +11,8 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<TerapiaPeriodo> builder)
         {
-            builder.HasKey(x => new { x.Id, x.IdTwo }).HasName("PRIMARY");
-            builder.Property(x => x.Id).HasColumnName("IdTerapia");
-            builder.Property(x => x.IdTwo).HasColumnName("IdPeriodo");
+            builder.HasKey(x => new { x.Id });
+            builder.Property(x => x.Id).HasColumnName("IdTerapiaPeriodo");
         }
     }
 }

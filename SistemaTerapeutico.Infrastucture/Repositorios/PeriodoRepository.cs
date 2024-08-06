@@ -14,9 +14,9 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         {
 
         }
-        public async Task<IEnumerable<Periodo>> GetPeriodosByIdTipo(int idTipo)
+        public async Task<IEnumerable<Periodo>> GetPeriodosByIdTipo(int idTipoTerapia)
         {
-            return await _entities.Where(x => x.IdTipo == idTipo).ToListAsync();
+            return await _entities.Where(x => x.IdTipoTerapia == idTipoTerapia).ToListAsync();
         }
     }
 }

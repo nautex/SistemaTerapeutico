@@ -22,6 +22,10 @@ namespace SistemaTerapeutico.Core.Views
         public int MinutosSesion { get; set; }
         public int IdSalon { get; set; }
         public string Salon { get; set; }
+        public int? IdTerapeuta { get; set; }
+        public string Terapeuta { get; set; }
+        public int? IdParticipante { get; set; }
+        public string Participante { get; set; }
         public int IdEstado { get; set; }
         public string Estado { get; set; }
         public string Observaciones { get; set; }

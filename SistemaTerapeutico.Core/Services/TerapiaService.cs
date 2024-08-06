@@ -52,13 +52,13 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.TerapiaViewRepository.GetById(idTerapia);
         }
-        public IEnumerable<TerapiaResumenView> GetsTerapiaResumenViewByLocalOrMemberOrTherapist(string local, string member, string therapist)
+        public IEnumerable<TerapiaResumenView> GetsTerapiaResumenViewByIdLocalOrMemberOrTherapist(int idLocal, string member, string therapist, int idEstado)
         {
             var list =  _unitOfWork.TerapiaResumenViewRepository.GetAll();
 
-            if (!string.IsNullOrEmpty(local))
+            if (idLocal > 0)
             {
-                list = list.Where(x => x.Local.ToLower().Contains(local.ToLower()));
+                list = list.Where(x => x.IdLocal == idLocal);
             }
 
             if (!string.IsNullOrEmpty(member))
@@ -68,7 +68,12 @@ namespace SistemaTerapeutico.Core.Services
 
             if (!string.IsNullOrEmpty(therapist))
             {
-                list = list.Where(x => x.Terapeutas.ToLower().Contains(therapist.ToLower()));
+                list = list.Where(x => x.Terapeuta.ToLower().Contains(therapist.ToLower()));
+            }
+
+            if (idEstado > 0)
+            {
+                list = list.Where(x => x.IdEstado == idEstado);
             }
 
             return list.ToList();
@@ -77,13 +82,28 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.TerapiaHorarioViewRepository.GetsById(idTerapia);
         }
+        public async Task<IEnumerable<TerapiaHorarioView>> GetsTerapiaHorarioViewByWeekDay(int idTerapia, int weekDay)
+        {
+            var list = await _unitOfWork.TerapiaHorarioViewRepository.GetsById(idTerapia);
+
+            list = list.Where(x => x.DiaSemana == weekDay);
+
+            return list.ToList();
+        }
         public async Task<IEnumerable<TerapiaTerapeutaView>> GetsTerapiaTerapeutaView(int idTerapia)
         {
             return await _unitOfWork.TerapiaTerapeutaViewRepository.GetsById(idTerapia);
         }
-        public async Task<IEnumerable<TerapiaParticipanteView>> GetsTerapiaParticipanteView(int idTerapia)
+        public async Task<IEnumerable<TerapiaParticipanteView>> GetsTerapiaParticipanteView(int idTerapia, int idEstado)
         {
-            return await _unitOfWork.TerapiaParticipanteViewRepository.GetsById(idTerapia);
+            var list = await _unitOfWork.TerapiaParticipanteViewRepository.GetsById(idTerapia);
+
+            if (idEstado > 0)
+            {
+                list = list.Where(x => x.IdEstado == idEstado);
+            }
+
+            return list.ToList();
         }
         public async Task DeleteTerapiaHorario(int idTerapia, int numero)
         {
@@ -101,26 +121,27 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.TerapiaParticipanteRepository.GetByIds(idTerapia, numero);
         }
-        public async Task<int> AddUpdateIndividualTherapyWithDetails(TerapiaDto terapiaDto)
+        public async Task<int> AddUpdateTherapyWithDetails(TerapiaDto terapiaDto)
         {
             int id = 0;
             string usuario = "JSOTELO";
 
-            Terapia terapia = new Terapia()
-            {
-                IdLocal = terapiaDto.IdLocal,
-                IdTarifa = terapiaDto.IdTarifa,
-                FechaInicio = terapiaDto.FechaInicio,
-                IdModalidad = terapiaDto.IdModalidad,
-                SesionesMes = terapiaDto.SesionesMes,
-                MinutosSesion = terapiaDto.MinutosSesion,
-                IdSalon = terapiaDto.IdSalon,
-                IdEstado = terapiaDto.IdEstado,
-                Observaciones = terapiaDto.Observaciones == null ? "" : terapiaDto.Observaciones,
-            };
-
             if (terapiaDto.Id == 0)
             {
+                Terapia terapia = new Terapia()
+                {
+                    IdLocal = terapiaDto.IdLocal,
+                    IdTipo = terapiaDto.IdTipo,
+                    IdTarifa = terapiaDto.IdTarifa,
+                    FechaInicio = terapiaDto.FechaInicio,
+                    IdModalidad = terapiaDto.IdModalidad,
+                    SesionesMes = terapiaDto.SesionesMes,
+                    MinutosSesion = terapiaDto.MinutosSesion,
+                    IdSalon = terapiaDto.IdSalon,
+                    IdEstado = terapiaDto.IdEstado,
+                    Observaciones = terapiaDto.Observaciones == null ? "" : terapiaDto.Observaciones,
+                };
+
                 int idAtencion = await _unitOfWork.AtencionRepository.AddReturnId(new Atencion()
                 {
                     IdPersona = 0,
@@ -160,10 +181,22 @@ namespace SistemaTerapeutico.Core.Services
                         IdTwo = id,
                     });
                 }
-                
-                terapia.FechaRegistro = terapiaDto.FechaRegistro == null ? DateTime.Now : terapiaDto.FechaRegistro;
-                terapia.UsuarioRegistro = terapiaDto.UsuarioRegistro == null ? usuario : terapiaDto.UsuarioRegistro;
+
+                Terapia terapia = await _unitOfWork.TerapiaRepository.GetById(id);
+
+                terapia.IdLocal = terapiaDto.IdLocal;
+                terapia.IdTipo = terapiaDto.IdTipo;
+                terapia.IdTarifa = terapiaDto.IdTarifa;
+                terapia.FechaInicio = terapiaDto.FechaInicio;
+                terapia.IdModalidad = terapiaDto.IdModalidad;
+                terapia.SesionesMes = terapiaDto.SesionesMes;
+                terapia.MinutosSesion = terapiaDto.MinutosSesion;
+                terapia.IdSalon = terapiaDto.IdSalon;
+                terapia.IdEstado = terapiaDto.IdEstado;
+                terapia.Observaciones = terapiaDto.Observaciones == null ? "" : terapiaDto.Observaciones;
+                terapia.FechaModificacion = DateTime.Now;
                 terapia.UsuarioModificacion = usuario;
+
                 _unitOfWork.TerapiaRepository.UpdateAndSave(terapia);
             }
 
@@ -188,6 +221,7 @@ namespace SistemaTerapeutico.Core.Services
 
                     terapiaHorario.DiaSemana = item.DiaSemana;
                     terapiaHorario.HoraInicio = TimeSpan.Parse(item.HoraInicio);
+                    terapiaHorario.FechaModificacion = DateTime.Now;
                     terapiaHorario.UsuarioModificacion = usuario;
 
                     _unitOfWork.TerapiaHorarioRepository.UpdateAndSave(terapiaHorario);
@@ -221,6 +255,7 @@ namespace SistemaTerapeutico.Core.Services
                     terapiaTerapeuta.FechaInicio = item.FechaInicio;
                     terapiaTerapeuta.FechaFin = item.FechaFin;
                     terapiaTerapeuta.IdEstado = item.IdEstado;
+                    terapiaTerapeuta.FechaModificacion = DateTime.Now;
                     terapiaTerapeuta.UsuarioModificacion = usuario;
 
                     _unitOfWork.TerapiaTerapeutaRepository.UpdateAndSave(terapiaTerapeuta);
@@ -244,12 +279,11 @@ namespace SistemaTerapeutico.Core.Services
                 }
                 else
                 {
-                    var ee = await _unitOfWork.TerapiaParticipanteRepository.GetByIds(id, item.Numero);
-
                     TerapiaParticipante terapiaParticipante = await _unitOfWork.TerapiaParticipanteRepository.GetByIds(id, item.Numero);
 
                     terapiaParticipante.IdParticipante = item.IdParticipante;
                     terapiaParticipante.IdEstado = item.IdEstado;
+                    terapiaParticipante.FechaModificacion = DateTime.Now;
                     terapiaParticipante.UsuarioModificacion = usuario;
 
                     _unitOfWork.TerapiaParticipanteRepository.UpdateAndSave(terapiaParticipante);
@@ -257,6 +291,111 @@ namespace SistemaTerapeutico.Core.Services
             }
 
             return id;
+        }
+        public IEnumerable<TerapiaParticipanteResumenView> GetsTerapiaParticipanteResumenView(int idTipoTerapia, int idEstado)
+        {
+            var list = _unitOfWork.TerapiaParticipanteResumenViewRepository.GetAll();
+
+            if (idTipoTerapia > 0)
+            {
+                list = list.Where(x => x.IdTipoTerapia == idTipoTerapia || x.IdTipoTerapiaPadre == idTipoTerapia);
+            }
+            if (idEstado > 0)
+            {
+                list = list.Where(x => x.IdEstado == idEstado);
+            }
+
+            return list.ToList();
+        }
+        public async Task<TerapiaPeriodoResumenView> GetTerapiaPeriodoResumenView(int idTerapiaPeriodo)
+        {
+            return await _unitOfWork.TerapiaPeriodoResumenViewRepository.GetById(idTerapiaPeriodo);
+        }
+        public IEnumerable<TerapiaPeriodoResumenView> GetsTerapiaPeriodoResumenView(int idPeriodo, int idTipoTerapia, string participante, int idTerapeuta, string terapeuta, int idEstado)
+        {
+            var list = _unitOfWork.TerapiaPeriodoResumenViewRepository.GetAll();
+
+            if (idPeriodo > 0)
+            {
+                list = list.Where(x => x.IdPeriodo == idPeriodo);
+            }
+            if (idTipoTerapia > 0)
+            {
+                list = list.Where(x => x.IdTipoTerapia == idTipoTerapia);
+            }
+            if (!string.IsNullOrEmpty(participante))
+            {
+                list = list.Where(x => x.Participante.ToLower().Contains(participante.ToLower()));
+            }
+            if (idTerapeuta > 0)
+            {
+                list = list.Where(x => x.IdTerapeuta == idTerapeuta);
+            }
+            if (!string.IsNullOrEmpty(terapeuta))
+            {
+                list = list.Where(x => x.Terapeuta.ToLower().Contains(terapeuta.ToLower()));
+            }
+            if (idEstado > 0)
+            {
+                list = list.Where(x => x.IdEstado == idEstado);
+            }
+
+            return list.ToList();
+        }
+        public async Task<int> AddTerapiaPeriodo(int idPeriodo, int idTerapia, int numero, int idTarifa)
+        {
+            int id = 0;
+            string usuario = "JSOTELO";
+
+            IEnumerable<TerapiaPeriodo> terapiaPeriodo = await _unitOfWork.TerapiaPeriodoRepository.GetTerapiasPeriodosByIdPeriodoAndIdTerapiaAndNumero(idPeriodo, idTerapia, numero);
+
+            if (terapiaPeriodo.Count() == 0)
+            {
+                id = await _unitOfWork.TerapiaPeriodoRepository.AddReturnId(new TerapiaPeriodo()
+                {
+                    IdTerapia = idTerapia,
+                    Numero = numero,
+                    IdPeriodo = idPeriodo,
+                    IdTarifa = idTarifa,
+                    IdEstado = EEstadoBasico.Activo,
+                    FechaRegistro = DateTime.Now,
+                    UsuarioRegistro = usuario,
+                });
+            }
+
+            return id;
+        }
+        public async Task AnnulTerapiaPeriodo(int idTerapiaPeriodo)
+        {
+            TerapiaPeriodo terapiaPeriodo = await _unitOfWork.TerapiaPeriodoRepository.GetById(idTerapiaPeriodo);
+
+            terapiaPeriodo.IdEstado = EEstadoBasico.Anulado;
+
+            _unitOfWork.TerapiaPeriodoRepository.UpdateAndSave(terapiaPeriodo);
+        }
+        public async Task ActiveTerapiaPeriodo(int idTerapiaPeriodo)
+        {
+            TerapiaPeriodo terapiaPeriodo = await _unitOfWork.TerapiaPeriodoRepository.GetById(idTerapiaPeriodo);
+
+            terapiaPeriodo.IdEstado = EEstadoBasico.Activo;
+
+            _unitOfWork.TerapiaPeriodoRepository.UpdateAndSave(terapiaPeriodo);
+        }
+        public async Task AnnulTerapia(int idTerapia)
+        {
+            Terapia entity = await _unitOfWork.TerapiaRepository.GetById(idTerapia);
+
+            entity.IdEstado = EEstadoBasico.Anulado;
+
+            _unitOfWork.TerapiaRepository.UpdateAndSave(entity);
+        }
+        public async Task ActiveTerapia(int idTerapia)
+        {
+            Terapia entity = await _unitOfWork.TerapiaRepository.GetById(idTerapia);
+
+            entity.IdEstado = EEstadoBasico.Activo;
+
+            _unitOfWork.TerapiaRepository.UpdateAndSave(entity);
         }
     }
 }

@@ -5,6 +5,7 @@ using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Interfaces;
 using SistemaTerapeutico.Core.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SistemaTerapeutico.API.Controllers
 {
@@ -34,11 +35,11 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetsTarifa")]
-        public IActionResult GetsTarifa()
+        [HttpGet("GetTarifaView")]
+        public async Task<IActionResult> GetTarifaView(int idTarifa)
         {
-            var list = _servicioService.GetsTarifa();
-            var response = new ApiResponse<IEnumerable<TarifaViewDto>>(list, _mapper);
+            var list = await _servicioService.GetTarifaView(idTarifa);
+            var response = new ApiResponse<TarifaViewDto>(list, _mapper);
 
             return Ok(response);
         }
@@ -50,13 +51,37 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetsTarifaByIdServicioOrIdLocalOrSesionesMes")]
-        public IActionResult GetsTarifaByIdServicioOrIdLocalOrSesionesMes(int idServicio, int idLocal, int idTipo, int sesionesMes)
+        [HttpGet("GetsTarifaView")]
+        public IActionResult GetsTarifaView(int idServicio, int idLocal, int idTipo, int sesionesMes, int idEstado)
         {
-            var list = _servicioService.GetsTarifaByIdServicioOrIdLocalOrIdTipoOrSesionesMes(idServicio, idLocal, idTipo, sesionesMes);
+            var list = _servicioService.GetsTarifaView(idServicio, idLocal, idTipo, sesionesMes, idEstado);
             var response = new ApiResponse<IEnumerable<TarifaViewDto>>(list, _mapper);
 
             return Ok(response);
+        }
+        [HttpPost("AnnulTarifa")]
+        public async Task<IActionResult> AnnulTarifa(int idTarifa)
+        {
+            await _servicioService.AnnulTarifa(idTarifa);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpPost("ActiveTarifa")]
+        public async Task<IActionResult> ActiveTarifa(int idTarifa)
+        {
+            await _servicioService.ActiveTarifa(idTarifa);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpPost("AddUpdateTarifa")]
+        public async Task<IActionResult> AddUpdateTarifa([FromBody] TarifaViewDto tarifaViewDto)
+        {
+            int id = await _servicioService.AddUpdateTarifa(tarifaViewDto);
+            var Response = new ApiResponse<int>(id);
+
+            return Ok(Response);
         }
     }
 }

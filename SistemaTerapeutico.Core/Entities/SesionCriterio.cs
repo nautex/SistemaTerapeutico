@@ -1,11 +1,12 @@
 ﻿namespace SistemaTerapeutico.Core.Entities
 {
-    public class SesionCriterio : BaseEntityTwoIds
+    public class SesionCriterio : BaseEntity2Ids
     {
         public SesionCriterio()
         {
 
         }
-        public int IdPuntuacionDetalle { get; set; }
+        public int IdAreaObjetivoCriterio { get; set; }
+        public int IdPuntuacionGrupo { get; set; }
     }
 }

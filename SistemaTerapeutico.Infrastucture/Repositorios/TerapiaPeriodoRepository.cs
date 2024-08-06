@@ -10,15 +10,15 @@ using SistemaTerapeutico.Infrastucture.Data;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class TerapiaPeriodoRepository : BaseEntityTwoIdsRepository<TerapiaPeriodo>, ITerapiaPeriodoRepository
+    public class TerapiaPeriodoRepository : BaseEntityRepository<TerapiaPeriodo>, ITerapiaPeriodoRepository
     {
         public TerapiaPeriodoRepository(SISDETContext context) : base(context)
         {
 
         }
-        public async Task<IEnumerable<TerapiaPeriodo>> GetTerapiasPeriodosByIdTerapia(int idTerapia)
+        public async Task<IEnumerable<TerapiaPeriodo>> GetTerapiasPeriodosByIdPeriodoAndIdTerapiaAndNumero(int idPeriodo, int idTerapia, int numero)
         {
-            return await _entities.Where(x => x.Id == idTerapia).ToListAsync();
+            return await _entities.Where(x => x.IdPeriodo == idPeriodo && x.IdTerapia == idTerapia && x.Numero == numero ).ToListAsync();
         }
     }
 }

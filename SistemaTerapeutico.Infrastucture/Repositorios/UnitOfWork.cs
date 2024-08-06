@@ -22,12 +22,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         private readonly ITerapiaRepository _terapiaRepository;
         private readonly ITerapiaTerapeutaRepository _terapiaTerapeutaRepository;
         private readonly IPeriodoRepository _periodoTerapiaRepository;
-        private readonly ISesionRepository _sesionRepository;
-        private readonly ISesionCriterioRepository _sesionCriterioRepository;
-        private readonly ISesionCriterioActividadRepository _sesionCriterioActividadRepository;
         private readonly ITerapiaPeriodoRepository _terapiaPeriodoRepository;
-        private readonly ITerapiaPlanificacionRepository _terapiaPlanificacionRepository;
-        private readonly ITerapiaPlanificacionCriterioRepository _terapiaPlanificacionCriterioRepository;
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IPersonaResumenViewRepository _personaResumenViewRepository;
         private readonly IParticipanteResumenViewRepository _participanteResumenViewRepository;
@@ -56,6 +51,32 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         private readonly ISalonViewRepository _salonViewRepository;
         private readonly ITarifaViewRepository _tarifaViewRepository;
         private readonly IServicioRepository _servicioRepository;
+        private readonly ITerapiaParticipanteResumenViewRepository _terapiaParticipanteResumenViewRepository;
+        private readonly ITerapiaPeriodoResumenViewRepository _terapiaPeriodoResumenViewRepository;
+        private readonly IPeriodoViewRepository _periodoViewRepository;
+        private readonly ISesionRepository _sesionRepository;
+        private readonly ISesionViewRepository _sesionViewRepository;
+        private readonly ISesionResumenViewRepository _sesionResumenViewRepository;
+        private readonly ISesionTerapeutaRepository _sesionTerapeutaRepository;
+        private readonly ISesionTerapeutaViewRepository _sesionTerapeutaViewRepository;
+        private readonly ITarifaRepository _tarifaRepository;
+        private readonly ISesionCriterioRepository _sesionCriterioRepository;
+        private readonly ISesionCriterioActividadRepository _sesionCriterioActividadRepository;
+        private readonly ISesionCriterioViewRepository _sesionCriterioViewRepository;
+
+        private readonly IModeloRepository _modeloRepository;
+        private readonly IAreaRepository _areaRepository;
+        private readonly IAreaObjetivoRepository _areaObjetivoRepository;
+        private readonly IAreaObjetivoCriterioRepository _areaObjetivoCriterioRepository;
+
+        private readonly IAreaObjetivoCriterioViewRepository _areaObjetivoCriterioViewRepository;
+        private readonly ITerapiaPlanRepository _terapiaPlanRepository;
+        private readonly ITerapiaPlanViewRepository _terapiaPlanViewRepository;
+        private readonly ITerapiaPlanAreaRepository _terapiaPlanAreaRepository;
+        private readonly ITerapiaPlanAreaViewRepository _terapiaPlanAreaViewRepository;
+        private readonly ITerapiaPlanResumenViewRepository _terapiaPlanResumenViewRepository;
+
+        private readonly IPuntuacionGrupoRepository _puntuacionGrupoRepository;
         public UnitOfWork(SISDETContext context)
         {
             _context = context;
@@ -73,12 +94,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         public ITerapiaRepository TerapiaRepository => _terapiaRepository ?? new TerapiaRepository(_context);
         public ITerapiaTerapeutaRepository TerapiaTerapeutaRepository => _terapiaTerapeutaRepository ?? new TerapiaTerapeutaRepository(_context);
         public IPeriodoRepository PeriodoRepository => _periodoTerapiaRepository ?? new PeriodoRepository(_context);
-        public ISesionRepository SesionRepository => _sesionRepository ?? new SesionRepository(_context);
-        public ISesionCriterioRepository SesionCriterioRepository => _sesionCriterioRepository ?? new SesionCriterioRepository(_context);
-        public ISesionCriterioActividadRepository SesionCriterioActividadRepository => _sesionCriterioActividadRepository ?? new SesionCriterioActividadRepository(_context);
         public ITerapiaPeriodoRepository TerapiaPeriodoRepository => _terapiaPeriodoRepository ?? new TerapiaPeriodoRepository(_context);
-        public ITerapiaPlanificacionRepository TerapiaPlanificacionRepository => _terapiaPlanificacionRepository ?? new TerapiaPlanificacionRepository(_context);
-        public ITerapiaPlanificacionCriterioRepository TerapiaPlanificacionCriterioRepository => _terapiaPlanificacionCriterioRepository ?? new TerapiaPlanificacionCriterioRepository(_context);
         public IUsuarioRepository UsuarioRepository => _usuarioRepository ?? new UsuarioRepository(_context);
         public IPersonaResumenViewRepository PersonaResumenViewRepository => _personaResumenViewRepository ?? new PersonaResumenViewRepository(_context);
         public IParticipanteResumenViewRepository ParticipanteResumenViewRepository => _participanteResumenViewRepository ?? new ParticipanteResumenViewRepository(_context);
@@ -107,6 +123,29 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         public ISalonViewRepository SalonViewRepository => _salonViewRepository ?? new SalonViewRepository(_context);
         public ITarifaViewRepository TarifaViewRepository => _tarifaViewRepository ?? new TarifaViewRepository(_context);
         public IServicioRepository ServicioRepository => _servicioRepository ?? new ServicioRepository(_context);
+        public ITerapiaParticipanteResumenViewRepository TerapiaParticipanteResumenViewRepository => _terapiaParticipanteResumenViewRepository ?? new TerapiaParticipanteResumenViewRepository(_context);
+        public ITerapiaPeriodoResumenViewRepository TerapiaPeriodoResumenViewRepository => _terapiaPeriodoResumenViewRepository ?? new TerapiaPeriodoResumenViewRepository(_context);
+        public IPeriodoViewRepository PeriodoViewRepository => _periodoViewRepository ?? new PeriodoViewRepository(_context);
+        public ISesionRepository SesionRepository => _sesionRepository ?? new SesionRepository(_context);
+        public ISesionViewRepository SesionViewRepository => _sesionViewRepository ?? new SesionViewRepository(_context);
+        public ISesionResumenViewRepository SesionResumenViewRepository => _sesionResumenViewRepository ?? new SesionResumenViewRepository(_context);
+        public ISesionTerapeutaRepository SesionTerapeutaRepository => _sesionTerapeutaRepository ?? new SesionTerapeutaRepository(_context);
+        public ISesionTerapeutaViewRepository SesionTerapeutaViewRepository => _sesionTerapeutaViewRepository ?? new SesionTerapeutaViewRepository(_context);
+        public ITarifaRepository TarifaRepository => _tarifaRepository ?? new TarifaRepository(_context);
+        public ISesionCriterioRepository SesionCriterioRepository => _sesionCriterioRepository ?? new SesionCriterioRepository(_context);
+        public ISesionCriterioActividadRepository SesionCriterioActividadRepository => _sesionCriterioActividadRepository ?? new SesionCriterioActividadRepository(_context);
+        public ISesionCriterioViewRepository SesionCriterioViewRepository => _sesionCriterioViewRepository ?? new SesionCriterioViewRepository(_context);
+        public IModeloRepository ModeloRepository => _modeloRepository ?? new ModeloRepository(_context);
+        public IAreaRepository AreaRepository => _areaRepository ?? new AreaRepository(_context);
+        public IAreaObjetivoRepository AreaObjetivoRepository => _areaObjetivoRepository ?? new AreaObjetivoRepository(_context);
+        public IAreaObjetivoCriterioRepository AreaObjetivoCriterioRepository => _areaObjetivoCriterioRepository ?? new AreaObjetivoCriterioRepository(_context);
+        public IAreaObjetivoCriterioViewRepository AreaObjetivoCriterioViewRepository => _areaObjetivoCriterioViewRepository ?? new AreaObjetivoCriterioViewRepository(_context);
+        public ITerapiaPlanRepository TerapiaPlanRepository => _terapiaPlanRepository ?? new TerapiaPlanRepository(_context);
+        public ITerapiaPlanViewRepository TerapiaPlanViewRepository => _terapiaPlanViewRepository ?? new TerapiaPlanViewRepository(_context);
+        public ITerapiaPlanAreaRepository TerapiaPlanAreaRepository => _terapiaPlanAreaRepository ?? new TerapiaPlanAreaRepository(_context);
+        public ITerapiaPlanAreaViewRepository TerapiaPlanAreaViewRepository => _terapiaPlanAreaViewRepository ?? new TerapiaPlanAreaViewRepository(_context);
+        public ITerapiaPlanResumenViewRepository TerapiaPlanResumenViewRepository => _terapiaPlanResumenViewRepository ?? new TerapiaPlanResumenViewRepository(_context);
+        public IPuntuacionGrupoRepository PuntuacionGrupoRepository => _puntuacionGrupoRepository ?? new PuntuacionGrupoRepository(_context);
         public void Dispose()
         {
             if (_context != null)

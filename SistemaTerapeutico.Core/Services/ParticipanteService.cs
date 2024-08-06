@@ -73,8 +73,7 @@ namespace SistemaTerapeutico.Core.Services
             else
             {
                 id = participante.Id;
-                participante.FechaRegistro = participante.FechaRegistro == null ? DateTime.Now : participante.FechaRegistro;
-                participante.UsuarioRegistro = participante.UsuarioRegistro == null ? usuario : participante.UsuarioRegistro;
+                participante.FechaModificacion = DateTime.Now;
                 participante.UsuarioModificacion = usuario;
                 _unitOfWork.ParticipanteRepository.UpdateAndSave(participante);
             }
@@ -100,6 +99,7 @@ namespace SistemaTerapeutico.Core.Services
 
                     participanteAlergia.IdTipoAlergia = item.IdTipoAlergia;
                     participanteAlergia.Detalle = item.Detalle;
+                    participanteAlergia.FechaModificacion = DateTime.Now;
                     participanteAlergia.UsuarioModificacion = usuario;
 
                     _unitOfWork.ParticipanteAlergiaRepository.UpdateAndSave(participanteAlergia);
@@ -125,6 +125,7 @@ namespace SistemaTerapeutico.Core.Services
                     ParticipantePersonaAutorizada participantePersonaAutorizada = await _unitOfWork.ParticipantePersonaAutorizadaRepository.GetByIds(id, item.Numero);
 
                     participantePersonaAutorizada.IdPersona = item.IdPersona;
+                    participantePersonaAutorizada.FechaModificacion = DateTime.Now;
                     participantePersonaAutorizada.UsuarioModificacion = usuario;
 
                     _unitOfWork.ParticipantePersonaAutorizadaRepository.UpdateAndSave(participantePersonaAutorizada);

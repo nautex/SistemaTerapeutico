@@ -1,10 +1,12 @@
-﻿namespace SistemaTerapeutico.Core.DTOs
+﻿using SistemaTerapeutico.Core.Entities;
+
+namespace SistemaTerapeutico.Core.DTOs
 {
-    public class TerapiaPeriodoDto
+    public class TerapiaPeriodoDto : BaseEntity
     {
         public int IdTerapia { get; set; }
+        public int Numero { get; set; }
         public int IdPeriodo { get; set; }
-        public int IdComprobante { get; set; }
-        public string UsuarioRegistro { get; set; }
+        public int IdEstado { get; set; }
     }
 }

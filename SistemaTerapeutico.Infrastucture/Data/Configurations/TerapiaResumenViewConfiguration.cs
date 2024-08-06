@@ -13,7 +13,6 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.ToTable("vw_terapiaresumen");
-            builder.Property(x => x.Id).HasColumnName("IdTerapia");
         }
     }
 }

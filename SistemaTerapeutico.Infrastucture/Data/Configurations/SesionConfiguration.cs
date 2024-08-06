@@ -10,6 +10,8 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
         {
             builder.HasKey(x => x.Id).HasName("PRIMARY");
             builder.Property(x => x.Id).HasColumnName("IdSesion");
+            builder.Ignore(e => e.SesionTerapeuta);
+            builder.Ignore(e => e.SesionCriterio);
         }
     }
 }

@@ -50,9 +50,8 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IPeriodoRepository, PeriodoRepository>();
             services.AddTransient<ISesionRepository, SesionRepository>();
             services.AddTransient<ISesionCriterioRepository, SesionCriterioRepository>();
+            services.AddTransient<ISesionCriterioViewRepository, SesionCriterioViewRepository>();
             services.AddTransient<ITerapiaPeriodoRepository, TerapiaPeriodoRepository>();
-            services.AddTransient<ITerapiaPlanificacionRepository, TerapiaPlanificacionRepository>();
-            services.AddTransient<ITerapiaPlanificacionCriterioRepository, TerapiaPlanificacionCriterioRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IPersonaResumenViewRepository, PersonaResumenViewRepository>();
             services.AddTransient<IParticipanteResumenViewRepository, ParticipanteResumenViewRepository>();
@@ -65,6 +64,17 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<ITerapiaHorarioRepository, TerapiaHorarioRepository>();
             services.AddTransient<ITerapiaTerapeutaRepository, TerapiaTerapeutaRepository>();
             services.AddTransient<ITerapiaParticipanteRepository, TerapiaParticipanteRepository>();
+            services.AddTransient<ITerapiaParticipanteResumenViewRepository, TerapiaParticipanteResumenViewRepository>();
+            services.AddTransient<ITerapiaPeriodoResumenViewRepository, TerapiaPeriodoResumenViewRepository>();
+            services.AddTransient<ITarifaRepository, TarifaRepository>();
+            services.AddTransient<IAreaObjetivoCriterioViewRepository, AreaObjetivoCriterioViewRepository>();
+            services.AddTransient<ITerapiaPlanRepository, TerapiaPlanRepository>();
+            services.AddTransient<ITerapiaPlanViewRepository, TerapiaPlanViewRepository>();
+            services.AddTransient<ITerapiaPlanResumenViewRepository, TerapiaPlanResumenViewRepository>();
+            services.AddTransient<ITerapiaPlanAreaRepository, TerapiaPlanAreaRepository>();
+            services.AddTransient<ITerapiaPlanAreaViewRepository, TerapiaPlanAreaViewRepository>();
+            services.AddTransient<IModeloRepository, ModeloRepository>();
+            services.AddTransient<IPuntuacionGrupoRepository, PuntuacionGrupoRepository>();
 
             services.AddSingleton<IPasswordService, PasswordService>();
 
@@ -115,18 +125,17 @@ namespace SistemaTerapeutico.BackEnd.API
             services.AddTransient<IDireccionService, DireccionService>();
             services.AddTransient<IAtencionService, AtencionService>();
             services.AddTransient<ITerapiaService, TerapiaService>();
+            services.AddTransient<ITerapiaPlanService, TerapiaPlanService>();
             services.AddTransient<IPeriodoService, PeriodoService>();
             services.AddTransient<ISesionService, SesionService>();
-            services.AddTransient<ISesionCriterioService, SesionCriterioService>();
-            services.AddTransient<ITerapiaPeriodoService, TerapiaPeriodoService>();
-            services.AddTransient<ITerapiaPlanificacionService, TerapiaPlanificacionService>();
-            services.AddTransient<ITerapiaPlanificacionCriterioService, TerapiaPlanificacionCriterioService>();
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IUbigeoViewService, UbigeoViewService>();
             services.AddTransient<ICatalogoService, CatalogoService>();
             services.AddTransient<ILocalService, LocalService>();
             services.AddTransient<ISalonService, SalonService>();
             services.AddTransient<IServicioService, ServicioService>();
+            services.AddTransient<IModeloService, ModeloService>();
+            services.AddTransient<IPuntuacionService, PuntuacionService>();
 
             services.AddScoped(typeof(IBaseEntityRepository<>), typeof(BaseEntityRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();

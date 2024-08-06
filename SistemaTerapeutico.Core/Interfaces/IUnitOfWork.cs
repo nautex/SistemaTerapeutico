@@ -16,9 +16,6 @@ namespace SistemaTerapeutico.Core.Interfaces
         IParticipanteRepository ParticipanteRepository { get; }
         IAtencionRepository AtencionRepository { get; }
         IPeriodoRepository PeriodoRepository { get; }
-        ISesionRepository SesionRepository { get; }
-        ISesionCriterioRepository SesionCriterioRepository { get; }
-        ISesionCriterioActividadRepository SesionCriterioActividadRepository { get; }
         IUsuarioRepository UsuarioRepository { get; }
         IPersonaResumenViewRepository PersonaResumenViewRepository { get; }
         IParticipanteResumenViewRepository ParticipanteResumenViewRepository { get; }
@@ -40,18 +37,39 @@ namespace SistemaTerapeutico.Core.Interfaces
         ITerapiaViewRepository TerapiaViewRepository { get; }
         ITerapiaTerapeutaRepository TerapiaTerapeutaRepository { get; }
         ITerapiaPeriodoRepository TerapiaPeriodoRepository { get; }
-        ITerapiaPlanificacionRepository TerapiaPlanificacionRepository { get; }
-        ITerapiaPlanificacionCriterioRepository TerapiaPlanificacionCriterioRepository { get; }
         ITerapiaHorarioRepository TerapiaHorarioRepository { get; }
         ITerapiaHorarioViewRepository TerapiaHorarioViewRepository { get; }
         ITerapiaTerapeutaViewRepository TerapiaTerapeutaViewRepository { get; }
         ITerapiaResumenViewRepository TerapiaResumenViewRepository { get; }
         ITerapiaParticipanteRepository TerapiaParticipanteRepository { get; }
         ITerapiaParticipanteViewRepository TerapiaParticipanteViewRepository { get; }
+        ITerapiaParticipanteResumenViewRepository TerapiaParticipanteResumenViewRepository { get; }
+        ITerapiaPeriodoResumenViewRepository TerapiaPeriodoResumenViewRepository { get; }
         ILocalViewRepository LocalViewRepository { get; }
         ISalonViewRepository SalonViewRepository { get; }
         ITarifaViewRepository TarifaViewRepository { get; }
         IServicioRepository ServicioRepository { get; }
+        IPeriodoViewRepository PeriodoViewRepository { get; }
+        ISesionRepository SesionRepository { get; }
+        ISesionCriterioRepository SesionCriterioRepository { get; }
+        ISesionCriterioViewRepository SesionCriterioViewRepository { get; }
+        ISesionCriterioActividadRepository SesionCriterioActividadRepository { get; }
+        ISesionViewRepository SesionViewRepository { get; }
+        ISesionResumenViewRepository SesionResumenViewRepository { get; }
+        ISesionTerapeutaRepository SesionTerapeutaRepository { get; }
+        ISesionTerapeutaViewRepository SesionTerapeutaViewRepository { get; }
+        ITarifaRepository TarifaRepository { get; }
+        IModeloRepository ModeloRepository { get; }
+        IAreaRepository AreaRepository { get; }
+        IAreaObjetivoRepository AreaObjetivoRepository { get; }
+        IAreaObjetivoCriterioRepository AreaObjetivoCriterioRepository { get; }
+        IAreaObjetivoCriterioViewRepository AreaObjetivoCriterioViewRepository {  get; }
+        ITerapiaPlanRepository TerapiaPlanRepository { get; }
+        ITerapiaPlanViewRepository TerapiaPlanViewRepository { get; }
+        ITerapiaPlanAreaRepository TerapiaPlanAreaRepository { get; }
+        ITerapiaPlanAreaViewRepository TerapiaPlanAreaViewRepository { get; }
+        ITerapiaPlanResumenViewRepository TerapiaPlanResumenViewRepository { get; }
+        IPuntuacionGrupoRepository PuntuacionGrupoRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
         void BeginTransaction();

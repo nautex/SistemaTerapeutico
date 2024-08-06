@@ -1,10 +1,10 @@
-﻿namespace SistemaTerapeutico.Core.DTOs
+﻿using SistemaTerapeutico.Core.Entities;
+
+namespace SistemaTerapeutico.Core.DTOs
 {
-    public class SesionCriterioDto
+    public class SesionCriterioDto : BaseEntity2Ids
     {
-        public int IdSesion { get; set; }
-        public int IdObjetivoCriterio { get; set; }
-        public int IdPuntuacionDetalle { get; set; }
-        public string UsuarioRegistro { get; set; }
+        public int IdAreaObjetivoCriterio { get; set; }
+        public int IdPuntuacionGrupo { get; set; }
     }
 }

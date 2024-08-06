@@ -4,8 +4,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface ISesionCriterioRepository : IBaseEntityTwoIdsRepository<SesionCriterio>
+    public interface ISesionCriterioRepository : IBaseEntity2IdsRepository<SesionCriterio>
     {
-        Task<IEnumerable<SesionCriterio>> GetSesionesCriteriosByIdSesion(int idSesion);
     }
 }

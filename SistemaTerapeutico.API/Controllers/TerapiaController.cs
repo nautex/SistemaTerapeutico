@@ -52,10 +52,10 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetsTerapiaResumenViewByLocalOrMemberOrTherapist")]
-        public IActionResult GetsTerapiaResumenViewByLocalOrMemberOrTherapist(string local, string member, string therapist)
+        [HttpGet("GetsTerapiaResumenViewByIdLocalOrMemberOrTherapist")]
+        public IActionResult GetsTerapiaResumenViewByIdLocalOrMemberOrTherapist(int idLocal, string member, string therapist, int idEstado)
         {
-            var list = _terapiaService.GetsTerapiaResumenViewByLocalOrMemberOrTherapist(local, member, therapist);
+            var list = _terapiaService.GetsTerapiaResumenViewByIdLocalOrMemberOrTherapist(idLocal, member, therapist, idEstado);
             var response = new ApiResponse<IEnumerable<TerapiaResumenViewDto>>(list, _mapper);
 
             return Ok(response);
@@ -64,6 +64,14 @@ namespace SistemaTerapeutico.API.Controllers
         public async Task<IActionResult> GetsTerapiaHorarioView(int idTerapia)
         {
             var list = await _terapiaService.GetsTerapiaHorarioView(idTerapia);
+            var response = new ApiResponse<IEnumerable<TerapiaHorarioViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetsTerapiaHorarioViewByWeekDay")]
+        public async Task<IActionResult> GetsTerapiaHorarioViewByWeekDay(int idTerapia, int weekDay)
+        {
+            var list = await _terapiaService.GetsTerapiaHorarioViewByWeekDay(idTerapia, weekDay);
             var response = new ApiResponse<IEnumerable<TerapiaHorarioViewDto>>(list, _mapper);
 
             return Ok(response);
@@ -77,9 +85,9 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(response);
         }
         [HttpGet("GetsTerapiaParticipanteView")]
-        public async Task<IActionResult> GetsTerapiaParticipanteView(int idTerapia)
+        public async Task<IActionResult> GetsTerapiaParticipanteView(int idTerapia, int idEstado)
         {
-            var list = await _terapiaService.GetsTerapiaParticipanteView(idTerapia);
+            var list = await _terapiaService.GetsTerapiaParticipanteView(idTerapia, idEstado);
             var response = new ApiResponse<IEnumerable<TerapiaParticipanteViewDto>>(list, _mapper);
 
             return Ok(response);
@@ -108,11 +116,11 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpPost("AddUpdateIndividualTherapyWithDetails")]
-        public async Task<IActionResult> AddUpdateIndividualTherapyWithDetails([FromBody] TerapiaDto terapiaDto)
+        [HttpPost("AddUpdateTherapyWithDetails")]
+        public async Task<IActionResult> AddUpdateTherapyWithDetails([FromBody] TerapiaDto terapiaDto)
         {
             TerapiaDto terapia = _mapper.Map<TerapiaDto>(terapiaDto);
-            int idTerapia = await _terapiaService.AddUpdateIndividualTherapyWithDetails(terapia);
+            int idTerapia = await _terapiaService.AddUpdateTherapyWithDetails(terapia);
             var Response = new ApiResponse<int>(idTerapia);
 
             return Ok(Response);
@@ -122,6 +130,69 @@ namespace SistemaTerapeutico.API.Controllers
         {
             var list = await _terapiaService.GetTerapiaParticipanteByIds(idTerapia, numero);
             var response = new ApiResponse<TerapiaParticipanteViewDto>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetsTerapiaParticipanteResumenView")]
+        public IActionResult GetsTerapiaParticipanteResumenView(int idTipoTerapia, int idEstado)
+        {
+            var list = _terapiaService.GetsTerapiaParticipanteResumenView(idTipoTerapia, idEstado);
+            var response = new ApiResponse<IEnumerable<TerapiaParticipanteResumenViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetsTerapiaPeriodoResumenView")]
+        public IActionResult GetsTerapiaPeriodoResumenView(int idPeriodo, int idTipoTerapia, string participante, int idTerapeuta, string terapeuta, int idEstado)
+        {
+            var list = _terapiaService.GetsTerapiaPeriodoResumenView(idPeriodo, idTipoTerapia, participante, idTerapeuta, terapeuta, idEstado);
+            var response = new ApiResponse<IEnumerable<TerapiaPeriodoResumenViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpPost("AddTerapiaPeriodo")]
+        public async Task<IActionResult> AddTerapiaPeriodo(int idPeriodo, int idTerapia, int numero, int idTarifa)
+        {
+            var Response = new ApiResponse<int>(await _terapiaService.AddTerapiaPeriodo(idPeriodo, idTerapia, numero, idTarifa));
+
+            return Ok(Response);
+        }
+        [HttpPost("AnnulTerapiaPeriodo")]
+        public async Task<IActionResult> AnnulTerapiaPeriodo(int idTerapiaPeriodo)
+        {
+            await _terapiaService.AnnulTerapiaPeriodo(idTerapiaPeriodo);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpPost("ActiveTerapiaPeriodo")]
+        public async Task<IActionResult> ActiveTerapiaPeriodo(int idTerapiaPeriodo)
+        {
+            await _terapiaService.ActiveTerapiaPeriodo(idTerapiaPeriodo);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpPost("AnnulTerapia")]
+        public async Task<IActionResult> AnnulTerapia(int idTerapia)
+        {
+            await _terapiaService.AnnulTerapia(idTerapia);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpPost("ActiveTerapia")]
+        public async Task<IActionResult> ActiveTerapia(int idTerapia)
+        {
+            await _terapiaService.ActiveTerapia(idTerapia);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
+        [HttpGet("GetTerapiaPeriodoResumenView")]
+        public async Task<IActionResult> GetTerapiaPeriodoResumenView(int idTerapiaPeriodo)
+        {
+            var list = await _terapiaService.GetTerapiaPeriodoResumenView(idTerapiaPeriodo);
+            var response = new ApiResponse<TerapiaPeriodoResumenViewDto>(list, _mapper);
 
             return Ok(response);
         }

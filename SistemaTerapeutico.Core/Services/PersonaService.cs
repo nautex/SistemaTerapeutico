@@ -67,8 +67,7 @@ namespace SistemaTerapeutico.Core.Services
             else
             {
                 idPersona = persona.Id;
-                persona.FechaRegistro = persona.FechaRegistro == null ? DateTime.Now : persona.FechaRegistro;
-                persona.UsuarioRegistro = persona.UsuarioRegistro == null ? usuario : persona.UsuarioRegistro;
+                persona.FechaModificacion = DateTime.Now;
                 persona.UsuarioModificacion = usuario;
                 _unitOfWork.PersonaRepository.UpdateAndSave(persona);
 
@@ -83,6 +82,7 @@ namespace SistemaTerapeutico.Core.Services
                 }
                 else
                 {
+                    persona.PersonaNatural.FechaModificacion = DateTime.Now;
                     persona.PersonaNatural.UsuarioModificacion = usuario;
                     _unitOfWork.PersonaNaturalRepository.UpdateAndSave(persona.PersonaNatural);
                 }
@@ -112,6 +112,7 @@ namespace SistemaTerapeutico.Core.Services
                         IdUbigeo = item.IdUbigeo,
                         Detalle = item.Detalle,
                         Referencia = item.Referencia,
+                        FechaModificacion = DateTime.Now,
                         UsuarioModificacion = usuario,
                     });
                 }
@@ -135,6 +136,7 @@ namespace SistemaTerapeutico.Core.Services
 
                         personaDireccion.IdTipoDireccion = item.IdTipoDireccion;
                         personaDireccion.IdDireccion = item.IdDireccion;
+                        personaDireccion.FechaModificacion = DateTime.Now;
                         personaDireccion.UsuarioModificacion = usuario;
 
                         _unitOfWork.PersonaDireccionRepository.UpdateAndSave(personaDireccion);
@@ -159,6 +161,7 @@ namespace SistemaTerapeutico.Core.Services
 
                     personaDocumento.IdTipoDocumento = item.IdTipoDocumento;
                     personaDocumento.NumeroDocumento = item.NumeroDocumento;
+                    personaDocumento.FechaModificacion = DateTime.Now;
                     personaDocumento.UsuarioModificacion = usuario;
                     _unitOfWork.PersonaDocumentoRepository.UpdateAndSave(personaDocumento);
                 }
@@ -181,6 +184,7 @@ namespace SistemaTerapeutico.Core.Services
 
                     personaContacto.IdTipoContacto = item.IdTipoContacto;
                     personaContacto.Valor = item.Valor;
+                    personaContacto.FechaModificacion = DateTime.Now;
                     personaContacto.UsuarioModificacion = usuario;
                     _unitOfWork.PersonaContactoRepository.UpdateAndSave(personaContacto);
                 }
@@ -202,6 +206,7 @@ namespace SistemaTerapeutico.Core.Services
                     PersonaVinculacion personaVinculacion = await _unitOfWork.PersonaVinculacionRepository.GetByIds(idPersona, item.IdTwo);
                     personaVinculacion.IdPersonaVinculo = item.IdPersonaVinculo;
                     personaVinculacion.IdTipoVinculo = item.IdTipoVinculo;
+                    personaVinculacion.FechaModificacion = DateTime.Now;
                     personaVinculacion.UsuarioModificacion = usuario;
                     _unitOfWork.PersonaVinculacionRepository.UpdateAndSave(item);
                 }

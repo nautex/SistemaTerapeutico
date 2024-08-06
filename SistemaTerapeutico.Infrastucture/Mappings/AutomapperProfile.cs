@@ -40,36 +40,7 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
                 .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.IdTwo))
                 .ReverseMap();
 
-            CreateMap<SesionCriterioActividad, SesionCriterioActividadDto>()
-                .ForMember(dest => dest.IdSesion, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.IdObjetivoCriterio, conf => conf.MapFrom(src => src.IdTwo))
-                .ForMember(dest => dest.IdActividad, conf => conf.MapFrom(src => src.IdThree))
-                .ReverseMap();
-
-            CreateMap<SesionCriterio, SesionCriterioDto>()
-                .ForMember(dest => dest.IdSesion, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.IdObjetivoCriterio, conf => conf.MapFrom(src => src.IdTwo))
-                .ReverseMap();
-
-            CreateMap<Sesion, SesionDto>()
-                .ForMember(dest => dest.IdSesion, conf => conf.MapFrom(src => src.Id))
-                .ReverseMap();
-
-            CreateMap<TerapiaPeriodo, TerapiaPeriodoDto>()
-                .ForMember(dest => dest.IdTerapia, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.IdPeriodo, conf => conf.MapFrom(src => src.IdTwo))
-                .ReverseMap();
-
-            CreateMap<TerapiaPlanificacion, TerapiaPlanificacionDto>()
-                .ForMember(dest => dest.IdTerapia, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.IdPeriodo, conf => conf.MapFrom(src => src.IdTwo))
-                .ReverseMap();
-
-            CreateMap<TerapiaPlanificacionCriterio, TerapiaPlanificacionCriterioDto>()
-                .ForMember(dest => dest.IdTerapia, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.IdPeriodo, conf => conf.MapFrom(src => src.IdTwo))
-                .ForMember(dest => dest.IdObjetivoCriterio, conf => conf.MapFrom(src => src.IdThree))
-                .ReverseMap();
+            CreateMap<TerapiaPeriodo, TerapiaPeriodoDto>().ReverseMap();
 
             CreateMap<Direccion, DireccionDto>()
                 .ForMember(dest => dest.IdDireccion, conf => conf.MapFrom(src => src.Id))
@@ -152,6 +123,9 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
             CreateMap<TerapiaHorarioView, TerapiaHorarioViewDto>().ReverseMap();
             CreateMap<TerapiaParticipanteView, TerapiaParticipanteViewDto>().ReverseMap();
             CreateMap<TerapiaParticipante, TerapiaParticipanteViewDto>().ReverseMap();
+            CreateMap<TerapiaParticipanteResumenView, TerapiaParticipanteResumenViewDto>().ReverseMap();
+            CreateMap<TerapiaPeriodoResumenView, TerapiaPeriodoResumenViewDto>().ReverseMap();
+            CreateMap<PeriodoView, PeriodoViewDto>().ReverseMap();
 
             CreateMap<LocalView, LocalViewDto>().ReverseMap();
 
@@ -160,6 +134,26 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
             CreateMap<TarifaView, TarifaViewDto>().ReverseMap();
 
             CreateMap<Servicio, ServicioDto>().ReverseMap();
+
+            CreateMap<Sesion, SesionDto>().ReverseMap();
+            CreateMap<SesionView, SesionViewDto>().ReverseMap();
+            CreateMap<SesionResumenView, SesionResumenViewDto>().ReverseMap();
+            CreateMap<SesionTerapeutaView, SesionTerapeutaViewDto>().ReverseMap();
+            CreateMap<SesionCriterioView, SesionCriterioViewDto>().ReverseMap();
+
+            CreateMap<Modelo, ModeloDto>().ReverseMap();
+            CreateMap<Area, AreaDto>().ReverseMap();
+            CreateMap<AreaObjetivo, AreaObjetivoDto>().ReverseMap();
+            CreateMap<AreaObjetivoCriterio, AreaObjetivoCriterioDto>().ReverseMap();
+            CreateMap<AreaObjetivoCriterioView, AreaObjetivoCriterioViewDto>().ReverseMap();
+
+            CreateMap<TerapiaPlan, TerapiaPlanDto>().ReverseMap();
+            CreateMap<TerapiaPlanView, TerapiaPlanViewDto>().ReverseMap();
+            CreateMap<TerapiaPlanArea, TerapiaPlanAreaDto>().ReverseMap();
+            CreateMap<TerapiaPlanAreaView, TerapiaPlanAreaViewDto>().ReverseMap();
+            CreateMap<TerapiaPlanResumenView, TerapiaPlanResumenViewDto>().ReverseMap();
+
+            CreateMap<PuntuacionGrupo, PuntuacionGrupoDto>().ReverseMap();
         }
     }
 }

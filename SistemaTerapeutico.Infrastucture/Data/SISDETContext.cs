@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Views;
 
@@ -30,8 +31,6 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<Terapia> Terapia { get; set; }
         public virtual DbSet<TerapiaTerapeuta> TerapiaTerapeuta { get; set; }
         public virtual DbSet<TerapiaPeriodo> TerapiaPeriodo { get; set; }
-        public virtual DbSet<TerapiaPlanificacion> TerapiaPlanificacion { get; set; }
-        public virtual DbSet<TerapiaPlanificacionCriterio> TerapiaPlanificacionCriterio { get; set; }
         public virtual DbSet<TerapiaHorario> TerapiaHorario { get; set; }
         public virtual DbSet<TerapiaParticipante> TerapiaParticipante { get; set; }
         public virtual DbSet<TerapiaView> TerapiaView { get; set; }
@@ -40,9 +39,6 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<TerapiaParticipanteView> TerapiaParticipanteView { get; set; }
         public virtual DbSet<TerapiaResumenView> TerapiaResumenView { get; set; }
         public virtual DbSet<Periodo> Periodo { get; set; }
-        public virtual DbSet<Sesion> Sesion { get; set; }
-        public virtual DbSet<SesionCriterio> SesionCriterio { get; set; }
-        public virtual DbSet<SesionCriterioActividad> SesionCriterioActividad { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<PersonaResumenView> PersonaView { get; set; }
         public virtual DbSet<ParticipanteResumenView> ParticipanteResumenView { get; set; }
@@ -65,6 +61,28 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<SalonView> SalonView { get; set; }
         public virtual DbSet<TarifaView> TarifaView { get; set; }
         public virtual DbSet<Servicio> Servicio { get; set; }
+        public virtual DbSet<TerapiaParticipanteResumenView> TerapiaParticipanteResumenView { get; set; }
+        public virtual DbSet<TerapiaPeriodoResumenView> TerapiaPeriodoResumenView { get; set; }
+        public virtual DbSet<PeriodoView> PeriodoView { get; set; }
+        public virtual DbSet<Sesion> Sesion { get; set; }
+        public virtual DbSet<SesionCriterio> SesionCriterio { get; set; }
+        public virtual DbSet<SesionCriterioView> SesionCriterioView { get; set; }
+        public virtual DbSet<SesionCriterioActividad> SesionCriterioActividad { get; set; }
+        public virtual DbSet<SesionView> SesionView { get; set; }
+        public virtual DbSet<SesionTerapeuta> SesionTerapeuta { get; set; }
+        public virtual DbSet<SesionTerapeutaView> SesionTerapeutaView { get; set; }
+        public virtual DbSet<Tarifa> Tarifa { get; set; }
+        public virtual DbSet<AreaObjetivoCriterioView> AreaObjetivoCriterioView { get; set; }
+        public virtual DbSet<TerapiaPlan> TerapiaPlan { get; set; }
+        public virtual DbSet<TerapiaPlanView> TerapiaPlanView { get; set; }
+        public virtual DbSet<TerapiaPlanArea> TerapiaPlanArea { get; set; }
+        public virtual DbSet<TerapiaPlanAreaView> TerapiaPlanAreaView { get; set; }
+        public virtual DbSet<TerapiaPlanResumenView> TerapiaPlanResumenView { get; set; }
+        public virtual DbSet<Modelo> Modelo { get; set; }
+        public virtual DbSet<Area> Area { get; set; }
+        public virtual DbSet<AreaObjetivo> AreaObjetivo { get; set; }
+        public virtual DbSet<AreaObjetivoCriterio> AreaObjetivoCriterio { get; set; }
+        public virtual DbSet<PuntuacionGrupo> PuntuacionGrupo { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
