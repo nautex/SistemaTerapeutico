@@ -212,6 +212,27 @@ namespace SistemaTerapeutico.Core.Services
                 }
             }
 
+            foreach (var item in persona.PersonaAntecedente)
+            {
+                if (item.Id == 0)
+                {
+                    if (item.IdAntecedente > 0)
+                    {
+                        item.IdAntecedente = item.IdAntecedente;
+                        item.UsuarioRegistro = usuario;
+                        await _unitOfWork.PersonaAntecedenteRepository.AddGenerateIdTwo(item);
+                    }
+                }
+                else
+                {
+                    PersonaAntecedente entity = await _unitOfWork.PersonaAntecedenteRepository.GetByIds(idPersona, item.Numero);
+                    entity.IdAntecedente = item.IdAntecedente;
+                    entity.FechaModificacion = DateTime.Now;
+                    entity.UsuarioModificacion = usuario;
+                    _unitOfWork.PersonaAntecedenteRepository.UpdateAndSave(item);
+                }
+            }
+
             //_unitOfWork.SaveChanges();
             //_unitOfWork.CommitTransaction();
 
@@ -266,6 +287,10 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.PersonaVinculacionViewRepository.GetPersonasVinculacionesViewByIdPersona(idPersona);
         }
+        public async Task<IEnumerable<PersonaAntecedenteView>> GetsPersonaAntecedenteView(int idPersona)
+        {
+            return await _unitOfWork.PersonaAntecedenteViewRepository.GetsById(idPersona);
+        }
         public IEnumerable<PersonaResumenBasicoView> GetPersonasResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
         {
             var list = _unitOfWork.PersonaResumenBasicoViewRepository.GetAll();
@@ -282,13 +307,35 @@ namespace SistemaTerapeutico.Core.Services
 
             return list.ToList();
         }
-        public IEnumerable<Lista> GetsListPersonByTypeAndName(int idType, string name)
+        public IEnumerable<Lista> GetsListNaturalPersonByTypeAndName(int idType, string name)
         {
-            var list = _unitOfWork.PersonaNaturalViewRepository.GetAll();
+            var list = _unitOfWork.PersonaResumenViewRepository.GetAll();
+
+            list = list.Where(x => x.EsEmpresa == false);
 
             if (idType >= 0)
             {
                 list = list.Where(x => x.IdTipoPersona == idType);
+            }
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                list = list.Where(x => x.Nombres.ToLower().Contains(name.ToLower()));
+            }
+
+            var query = from f in list.ToList() select new Lista { Id = f.Id, Descripcion = f.Nombres };
+
+            return query;
+        }
+        public IEnumerable<Lista> GetsListLegalPersonByTypeAndName(int idType, string name)
+        {
+            var list = _unitOfWork.PersonaResumenViewRepository.GetAll();
+
+            list = list.Where(x => x.EsEmpresa == true);
+
+            if (idType >= 0)
+            {
+                list = list.Where(x => x.IdTipoEmpresa == idType);
             }
 
             if (!string.IsNullOrEmpty(name))
@@ -331,6 +378,20 @@ namespace SistemaTerapeutico.Core.Services
         public async Task DeletePersonaVinculacion(int idPersona, int numero)
         {
             await _unitOfWork.PersonaVinculacionRepository.DeleteByIdsAndSave(idPersona, numero);
+        }
+        public async Task DeletePersonaAntecedente(int idPersona, int numero)
+        {
+            await _unitOfWork.PersonaAntecedenteRepository.DeleteByIdsAndSave(idPersona, numero);
+        }
+        public async Task AddPersonaVinculacion(PersonaVinculacion personaVinculacion)
+        {
+            IEnumerable<PersonaVinculacion> list = await _unitOfWork.PersonaVinculacionRepository.GetsPersonaVinculacionTwoPersons(personaVinculacion.Id, personaVinculacion.IdPersonaVinculo);
+
+            if (list.ToList().Count == 0)
+            {
+                await _unitOfWork.PersonaVinculacionRepository.AddGenerateIdTwo(personaVinculacion);
+                _unitOfWork.SaveChanges();
+            }
         }
     }
 }

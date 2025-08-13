@@ -28,6 +28,10 @@ namespace SistemaTerapeutico.Core.DTOs
         public string EstadoCivil { get; set; }
         public int? IdTipoPersona { get; set; }
         public string TipoPersona { get; set; }
+        public int? IdOcupacion { get; set; }
+        public string Ocupacion { get; set; }
+        public int? IdLugarTrabajo { get; set; }
+        public string LugarTrabajo { get; set; }
         public int? IdEstado { get; set; }
         public DateTime? FechaRegistro { get; set; }
         public string UsuarioRegistro { get; set; }

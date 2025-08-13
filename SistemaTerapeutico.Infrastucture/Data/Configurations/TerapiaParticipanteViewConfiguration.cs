@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SistemaTerapeutico.Core.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {

@@ -15,5 +15,9 @@ namespace SistemaTerapeutico.Core.DTOs
         public string Celular { get; set; }
         public string Email { get; set; }
         public string Direccion { get; set; }
+        public int? IdTipoEmpresa { get; set; }
+        public string TipoEmpresa { get; set; }
+        public bool? EsEmpresa { get; set; }
+        public string Empresa { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Renci.SshNet.Security.Cryptography.Ciphers.Modes;
+//using Renci.SshNet.Security.Cryptography.Ciphers.Modes;
 using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Interfaces;

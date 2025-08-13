@@ -20,5 +20,9 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.CatalogoRepository.GetCatalogosByIdPadreInLista(idPadre);
         }
+        public async Task<Catalogo> GetCatalogo(int id)
+        {
+            return await _unitOfWork.CatalogoRepository.GetById(id);
+        }
     }
 }

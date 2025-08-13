@@ -35,5 +35,13 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
+        [HttpGet("GetCatalogo")]
+        public async Task<IActionResult> GetCatalogo(int id)
+        {
+            var list = await _catalogoService.GetCatalogo(id);
+            var response = new ApiResponse<CatalogoDto>(list, _mapper);
+
+            return Ok(response);
+        }
     }
 }

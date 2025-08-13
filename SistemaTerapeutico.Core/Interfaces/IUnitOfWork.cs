@@ -11,6 +11,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         IPersonaDireccionRepository PersonaDireccionRepository { get; }
         IPersonaNaturalRepository PersonaNaturalRepository { get; }
         IPersonaDocumentoRepository PersonaDocumentoRepository { get; }
+        IPersonaAntecedenteRepository PersonaAntecedenteRepository { get; }
         ICatalogoRepository CatalogoRepository { get; }
         IDireccionRepository DireccionRepository { get; }
         IParticipanteRepository ParticipanteRepository { get; }
@@ -25,6 +26,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         IPersonaDocumentoViewRepository PersonaDocumentoViewRepository { get; }
         IPersonaContactoViewRepository PersonaContactoViewRepository { get; }
         IPersonaDireccionViewRepository PersonaDireccionViewRepository { get; }
+        IPersonaAntecedenteViewRepository PersonaAntecedenteViewRepository { get; }
         IDireccionViewRepository DireccionViewRepository { get; }
         IPersonaVinculacionViewRepository PersonaVinculacionViewRepository { get; }
         IPersonaResumenBasicoViewRepository PersonaResumenBasicoViewRepository { get; }

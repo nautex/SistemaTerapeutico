@@ -24,6 +24,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<PersonaDocumento> PersonaDocumento { get; set; }
         public virtual DbSet<PersonaNatural> PersonaNatural { get; set; }
         public virtual DbSet<PersonaVinculacion> PersonaVinculacion { get; set; }
+        public virtual DbSet<PersonaAntecedente> PersonaAntecedente { get; set; }
         public virtual DbSet<Ubigeo> Ubigeo { get; set; }
         public virtual DbSet<Direccion> Direccion { get; set; }
         public virtual DbSet<Participante> Participante { get; set; }
@@ -49,6 +50,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         //8182884858687888990919293949596979899100
         public virtual DbSet<PersonaDocumentoView> PersonaDocumentoView { get; set; }
         public virtual DbSet<PersonaDireccionView> PersonaDireccionView { get; set; }
+        public virtual DbSet<PersonaAntecedenteView> PersonaAntecedenteView { get; set; }
         public virtual DbSet<DireccionView> DireccionView { get; set; }
         public virtual DbSet<PersonaVinculacionView> PersonaVinculacionView { get; set; }
         public virtual DbSet<PersonaResumenBasicoView> PersonaResumenBasicoView { get; set; }

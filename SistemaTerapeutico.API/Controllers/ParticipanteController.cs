@@ -97,9 +97,9 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(response);
         }
         [HttpPost("AddUpdateParticipanteWithDetails")]
-        public async Task<IActionResult> AddUpdateParticipanteWithDetails([FromBody] ParticipanteDto participanteDto)
+        public async Task<IActionResult> AddUpdateParticipanteWithDetails([FromBody] ParticipanteViewDto participanteViewDto)
         {
-            Participante participante = _mapper.Map<Participante>(participanteDto);
+            Participante participante = _mapper.Map<Participante>(participanteViewDto);
             int idParticipante = await _participanteService.AddUpdateParticipanteWithDetails(participante);
             var Response = new ApiResponse<int>(idParticipante);
 

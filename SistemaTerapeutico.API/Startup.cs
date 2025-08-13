@@ -1,9 +1,10 @@
 using System;
 using System.Text;
-using FluentValidation.AspNetCore;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,8 +16,10 @@ using SistemaTerapeutico.Core.Services;
 using SistemaTerapeutico.Infrastucture.Data;
 using SistemaTerapeutico.Infrastucture.Extensions;
 using SistemaTerapeutico.Infrastucture.Filters;
+using SistemaTerapeutico.Infrastucture.Mappings;
 using SistemaTerapeutico.Infrastucture.Repositorios;
 using SistemaTerapeutico.Infrastucture.Services;
+//using AutoMapper;
 
 namespace SistemaTerapeutico.BackEnd.API
 {
@@ -37,7 +40,9 @@ namespace SistemaTerapeutico.BackEnd.API
                 options.Filters.Add<GlobalExceptionFilter>();
             });
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //services.AddAutoMapper(cfg => { }, typeof(AutomapperProfile));
+            services.AddAutoMapper(cfg => { }, AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddTransient<IParticipanteRepository, ParticipanteRepository>();
             services.AddTransient<IPersonaRepository, PersonaRepository>();
@@ -80,8 +85,18 @@ namespace SistemaTerapeutico.BackEnd.API
 
             services.AddOptions(Configuration);
 
+            //services.AddOptions();
+
+            //services.AddDbContext<SISDETContext>(options =>
+            //    options.UseMySQL(Configuration.GetConnectionString("SISDET"))
+            //);
+
+            //services.AddDbContext<SISDETContext>(options =>
+            //    options.UseMySql(Configuration.GetConnectionString("SISDET"), ServerVersion.Create(new Version(), Pomelo.EntityFrameworkCore.MySql.Infrastructure.ServerType.MySql))
+            //);
+
             services.AddDbContext<SISDETContext>(options =>
-                options.UseMySQL(Configuration.GetConnectionString("SISDET"))
+                options.UseMySql(Configuration.GetConnectionString("SISDET"), ServerVersion.AutoDetect(Configuration.GetConnectionString("SISDET")))
             );
 
             services.AddAuthentication(options =>
@@ -106,9 +121,10 @@ namespace SistemaTerapeutico.BackEnd.API
                 options.Filters.Add<ValidationFilter>()
             );
 
-            services.AddFluentValidation(options =>
-                options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
-            );
+            //services.AddFluentValidation(options =>
+            //    options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
+            //);
+
 
             services.AddCors(options =>
             {

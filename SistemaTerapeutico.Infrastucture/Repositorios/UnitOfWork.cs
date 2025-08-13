@@ -13,6 +13,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         private readonly IPersonaVinculacionRepository _personaVinculacionRepository;
         private readonly IPersonaContactoRepository _personaContactoRepository;
         private readonly IPersonaDireccionRepository _personaDireccionRepository;
+        private readonly IPersonaAntecedenteRepository _personaAntecedenteRepository;
         private readonly IPersonaNaturalRepository _personaNaturalRepository;
         private readonly IUbigeoRepository _ubigeoRepository;
         private readonly ICatalogoRepository _catalogoRepository;
@@ -77,6 +78,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         private readonly ITerapiaPlanResumenViewRepository _terapiaPlanResumenViewRepository;
 
         private readonly IPuntuacionGrupoRepository _puntuacionGrupoRepository;
+        private readonly IPersonaAntecedenteViewRepository _personaAntecedenteViewRepository;
         public UnitOfWork(SISDETContext context)
         {
             _context = context;
@@ -85,6 +87,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         public IPersonaVinculacionRepository PersonaVinculacionRepository => _personaVinculacionRepository ?? new PersonaVinculacionRepository(_context);
         public IPersonaContactoRepository PersonaContactoRepository => _personaContactoRepository ?? new PersonaContactoRepository(_context);
         public IPersonaDireccionRepository PersonaDireccionRepository => _personaDireccionRepository ?? new PersonaDireccionRepository(_context);
+        public IPersonaAntecedenteRepository PersonaAntecedenteRepository => _personaAntecedenteRepository ?? new PersonaAntecedenteRepository(_context);
         public IPersonaNaturalRepository PersonaNaturalRepository => _personaNaturalRepository ?? new PersonaNaturalRepository(_context);
         public IPersonaDocumentoRepository PersonaDocumentoRepository => _personaDocumentoRepository ?? new PersonaDocumentoRepository(_context);
         public ICatalogoRepository CatalogoRepository => _catalogoRepository ?? new CatalogoRepository(_context);
@@ -146,6 +149,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         public ITerapiaPlanAreaViewRepository TerapiaPlanAreaViewRepository => _terapiaPlanAreaViewRepository ?? new TerapiaPlanAreaViewRepository(_context);
         public ITerapiaPlanResumenViewRepository TerapiaPlanResumenViewRepository => _terapiaPlanResumenViewRepository ?? new TerapiaPlanResumenViewRepository(_context);
         public IPuntuacionGrupoRepository PuntuacionGrupoRepository => _puntuacionGrupoRepository ?? new PuntuacionGrupoRepository(_context);
+        public IPersonaAntecedenteViewRepository PersonaAntecedenteViewRepository => _personaAntecedenteViewRepository ?? new PersonaAntecedenteViewRepository(_context);
         public void Dispose()
         {
             if (_context != null)

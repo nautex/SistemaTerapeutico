@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SistemaTerapeutico.Infrastucture.Options;
 
@@ -9,7 +10,7 @@ namespace SistemaTerapeutico.Infrastucture.Extensions
         public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
         {
             //services.Configure<PasswordOptions>(Configuration.GetSection("PasswordOptions"));
-            services.Configure<PasswordOptions>(options => configuration.GetSection("PasswordOptions").Bind(options));
+            //services.Configure<PasswordOptions>(options => configuration.GetSection("PasswordOptions").Bind(options));
 
             return services;
         }

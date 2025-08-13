@@ -15,6 +15,8 @@ namespace SistemaTerapeutico.Core.DTOs
         public int? IdEstadoCivil { get; set; }
         public int? IdNacionalidad { get; set; }
         public int? IdTipoPersona { get; set; }
+        public int? IdOcupacion { get; set; }
+        public int? IdLugarTrabajo { get; set; }
         public int? IdEstado { get; set; }
     }
 }

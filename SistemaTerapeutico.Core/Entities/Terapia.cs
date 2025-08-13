@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Enumerators;
 
 namespace SistemaTerapeutico.Core.Entities
@@ -9,7 +10,7 @@ namespace SistemaTerapeutico.Core.Entities
         public Terapia()
         {
             FechaInicio = DateTime.Now;
-            TerapiaHorario = new List<TerapiaHorario>();
+            TerapiaHorario = new List<TerapiaHorarioViewDto>();
             TerapiaTerapeuta = new List<TerapiaTerapeuta>();
             TerapiaParticipante = new List<TerapiaParticipante>();
         }
@@ -23,7 +24,7 @@ namespace SistemaTerapeutico.Core.Entities
         public int IdSalon { get; set; }
         public int IdEstado { get; set; }
         public string Observaciones { get; set; }
-        public virtual List<TerapiaHorario> TerapiaHorario { get; set; }
+        public virtual List<TerapiaHorarioViewDto> TerapiaHorario { get; set; }
         public virtual List<TerapiaTerapeuta> TerapiaTerapeuta { get; set; }
         public virtual List<TerapiaParticipante> TerapiaParticipante { get; set; }
     }

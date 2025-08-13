@@ -18,6 +18,7 @@ namespace SistemaTerapeutico.Core.Entities
             PersonaDireccion = new List<PersonaDireccionView>();
             PersonaDocumento = new List<PersonaDocumento>();
             PersonaVinculacion = new List<PersonaVinculacion>();
+            PersonaAntecedente = new List<PersonaAntecedente>();
 
             //PersonaVinculacionIdPersonaVinculoNavigation = new List<PersonaVinculacion>();
         }
@@ -32,6 +33,7 @@ namespace SistemaTerapeutico.Core.Entities
         public virtual List<PersonaDireccionView> PersonaDireccion { get; set; }
         public virtual List<PersonaDocumento> PersonaDocumento { get; set; }
         public virtual List<PersonaVinculacion> PersonaVinculacion { get; set; }
+        public virtual List<PersonaAntecedente> PersonaAntecedente { get; set; }
         //public List<PersonaVinculacion> PersonaVinculacionIdPersonaVinculoNavigation { get; set; }
     }
 }

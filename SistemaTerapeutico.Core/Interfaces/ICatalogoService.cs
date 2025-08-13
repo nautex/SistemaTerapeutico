@@ -8,5 +8,6 @@ namespace SistemaTerapeutico.Core.Interfaces
     {
         Task<IEnumerable<Catalogo>> GetCatalogosByIdPadre(int idPadre);
         Task<IEnumerable<Lista>> GetCatalogosByIdPadreInLista(int idPadre);
+        Task<Catalogo> GetCatalogo(int id);
     }
 }

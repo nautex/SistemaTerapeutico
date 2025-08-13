@@ -171,13 +171,30 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetsListPersonByTypeAndName")]
+        [HttpGet("GetsListNaturalPersonByTypeAndName")]
         public IActionResult GetsListPersonByTypeAndName(int idType, string name)
         {
-            var list = _personaService.GetsListPersonByTypeAndName(idType, name);
+            var list = _personaService.GetsListNaturalPersonByTypeAndName(idType, name);
             var response = new ApiResponse<IEnumerable<ListaDto>>(list, _mapper);
 
             return Ok(response);
+        }
+        [HttpGet("GetsListLegalPersonByTypeAndName")]
+        public IActionResult GetsListLegalPersonByTypeAndName(int idType, string name)
+        {
+            var list = _personaService.GetsListLegalPersonByTypeAndName(idType, name);
+            var response = new ApiResponse<IEnumerable<ListaDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpPost("AddPersonaVinculacion")]
+        public async Task<IActionResult> AddPersonaVinculacion([FromBody] PersonaVinculacionDto personaVinculacionDto)
+        {
+            PersonaVinculacion personaVinculacion = _mapper.Map<PersonaVinculacion>(personaVinculacionDto);
+            await _personaService.AddPersonaVinculacion(personaVinculacion);
+            var Response = new ApiResponse<int>(1);
+
+            return Ok(Response);
         }
     }
 }

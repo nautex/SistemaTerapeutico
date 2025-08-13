@@ -27,11 +27,13 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task<IEnumerable<PersonaVinculacionView>> GetPersonasVinculacionesViewByIdPersona(int idPersona);
         IEnumerable<PersonaResumenBasicoView> GetPersonasResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres);
         IEnumerable<PersonaResumenView> GetPersonasResumenViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres);
-        IEnumerable<Lista> GetsListPersonByTypeAndName(int idType, string name);
+        IEnumerable<Lista> GetsListNaturalPersonByTypeAndName(int idType, string name);
         Task<int> AddPersonaNaturalWithDetails(Persona persona);
         Task DeletePersonaDireccion(int idPersona, int numero);
         Task DeletePersonaDocumento(int idPersona, int numero);
         Task DeletePersonaContacto(int idPersona, int numero);
         Task DeletePersonaVinculacion(int idPersona, int numero);
+        Task AddPersonaVinculacion(PersonaVinculacion personaVinculacion);
+        IEnumerable<Lista> GetsListLegalPersonByTypeAndName(int idType, string name);
     }
 }
