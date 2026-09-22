@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Interfaces;
-using SistemaTerapeutico.Core.Services;
+using SistemaTerapeutico.Infrastucture.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,28 +13,28 @@ namespace SistemaTerapeutico.API.Controllers
     [Route("[controller]")]
     public class ModeloController : Controller
     {
-        private readonly IModeloService _modeloService;
+        private readonly ModeloService _modeloService;
         private readonly IMapper _mapper;
-        public ModeloController(IModeloService moduloService, IMapper mapper)
+        public ModeloController(ModeloService moduloService, IMapper mapper)
         {
             _modeloService = moduloService;
             _mapper = mapper;
         }
-        [HttpGet("GetsAreaObjetivoCriterioView")]
-        public IActionResult GetsAreaObjetivoCriterioView(
+        [HttpGet("GetsAreaObjetivoCriterioResumenView")]
+        public IActionResult GetsAreaObjetivoCriterioResumenView(
             int idModelo, string codigoModelo, string modelo
             , int idArea, string codigoArea, string area
             , int idDestreza, string codigoDestreza, string destreza
-            , int idAreaObjetivo, int ordenObjetivo, string codigoObjetivo, string objetivo
+            , int idAreaObjetivo, string codigoObjetivo, string objetivo
             , int idAreaObjetivoCriterio, int valor, string descripcion, int orden)
         {
-            var list = _modeloService.GetsAreaObjetivoCriterioView(
+            var list = _modeloService.GetsAreaObjetivoCriterioResumenView(
                 idModelo, codigoModelo, modelo
                 , idArea, codigoArea, area
                 , idDestreza, codigoDestreza, destreza
-                , idAreaObjetivo, ordenObjetivo, codigoObjetivo, objetivo
+                , idAreaObjetivo, codigoObjetivo, objetivo
                 , idAreaObjetivoCriterio, valor, descripcion, orden);
-            var response = new ApiResponse<IEnumerable<AreaObjetivoCriterioViewDto>>(list, _mapper);
+            var response = new ApiResponse<IEnumerable<AreaObjetivoCriterioResumenViewDto>>(list, _mapper);
 
             return Ok(response);
         }
@@ -62,6 +62,22 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
+        [HttpGet("GetArea")]
+        public async Task<IActionResult> GetArea(int idArea)
+        {
+            var list = await _modeloService.GetArea(idArea);
+            var response = new ApiResponse<AreaViewDto>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetDestreza")]
+        public async Task<IActionResult> GetDestreza(int idDestreza)
+        {
+            var list = await _modeloService.GetDestreza(idDestreza);
+            var response = new ApiResponse<DestrezaDto>(list, _mapper);
+
+            return Ok(response);
+        }
         [HttpGet("GetsArea")]
         public IActionResult GetsArea(int idModelo)
         {
@@ -70,18 +86,18 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetsListObjetivo")]
-        public IActionResult GetsListObjetivo(int idArea)
+        [HttpGet("GetsListAreaObjetivo")]
+        public IActionResult GetsListAreaObjetivo(int idArea)
         {
-            var list = _modeloService.GetsListObjetivo(idArea);
+            var list = _modeloService.GetsListAreaObjetivo(idArea);
             var response = new ApiResponse<IEnumerable<ListaDto>>(list, _mapper);
 
             return Ok(response);
         }
-        [HttpGet("GetsObjetivo")]
-        public IActionResult GetsObjetivo(int idArea)
+        [HttpGet("GetsAreaObjetivo")]
+        public IActionResult GetsAreaObjetivo(int idArea)
         {
-            var list = _modeloService.GetsObjetivo(idArea);
+            var list = _modeloService.GetsAreaObjetivo(idArea);
             var response = new ApiResponse<IEnumerable<AreaObjetivoDto>>(list, _mapper);
 
             return Ok(response);
@@ -118,6 +134,14 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(Response);
         }
+        [HttpPost("AddUpdateDestreza")]
+        public async Task<IActionResult> AddUpdateDestreza([FromBody] DestrezaDto entityDto)
+        {
+            int id = await _modeloService.AddUpdateDestreza(entityDto);
+            var Response = new ApiResponse<int>(id);
+
+            return Ok(Response);
+        }
         [HttpPost("AddUpdateAreaObjetivo")]
         public async Task<IActionResult> AddUpdateAreaObjetivo([FromBody] AreaObjetivoDto entityDto)
         {
@@ -133,6 +157,30 @@ namespace SistemaTerapeutico.API.Controllers
             var Response = new ApiResponse<int>(id);
 
             return Ok(Response);
+        }
+        [HttpGet("GetsListDestreza")]
+        public IActionResult GetsListDestreza()
+        {
+            var list = _modeloService.GetsListDestreza();
+            var response = new ApiResponse<IEnumerable<ListaDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetAreaObjetivo")]
+        public async Task<IActionResult> GetAreaObjetivo(int idAreaObjetivo)
+        {
+            var list = await _modeloService.GetAreaObjetivo(idAreaObjetivo);
+            var response = new ApiResponse<AreaObjetivoViewDto>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetAreaObjetivoCriterio")]
+        public async Task<IActionResult> GetAreaObjetivoCriterio(int idAreaObjetivoCriterio)
+        {
+            var list = await _modeloService.GetAreaObjetivoCriterio(idAreaObjetivoCriterio);
+            var response = new ApiResponse<AreaObjetivoCriterioViewDto>(list, _mapper);
+
+            return Ok(response);
         }
     }
 }

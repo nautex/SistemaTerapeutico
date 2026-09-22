@@ -7,8 +7,9 @@ namespace SistemaTerapeutico.Core.Views
 {
     public class TerapiaView : BaseEntity
     {
-        public int IdLocal { get; set; }
-        public string Local { get; set; }
+        public int IdFilial { get; set; }
+        public string CodigoFilial { get; set; }
+        public string Filial { get; set; }
         public int IdTarifa { get; set; }
         public string CodigoServicio { get; set; }
         public string CodigoTarifa { get; set; }

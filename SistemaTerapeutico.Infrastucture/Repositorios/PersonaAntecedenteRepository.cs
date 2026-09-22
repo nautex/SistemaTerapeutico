@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class PersonaAntecedenteRepository : BaseEntity2IdsRepository<PersonaAntecedente>, IPersonaAntecedenteRepository
+    public class PersonaAntecedenteRepository : BaseEntityTwoIdsRepository<PersonaAntecedente>, IPersonaAntecedenteRepository
     {
         public PersonaAntecedenteRepository(SISDETContext context) : base(context)
         {

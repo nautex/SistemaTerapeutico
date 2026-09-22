@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Views
 {
-    public class TerapiaPlanAreaView : BaseEntity2Ids
+    public class TerapiaPlanAreaView : BaseEntityTwoIds
     {
         public TerapiaPlanAreaView()
         {

@@ -6,15 +6,16 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class AtencionController : Controller
     {
-        private readonly IAtencionService _atencionService;
+        private readonly AtencionService _atencionService;
         private readonly IMapper _mapper;
-        public AtencionController(IAtencionService atencionService, IMapper mapper)
+        public AtencionController(AtencionService atencionService, IMapper mapper)
         {
             _atencionService = atencionService;
             _mapper = mapper;

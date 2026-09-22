@@ -4,15 +4,16 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Interfaces;
 using System.Collections.Generic;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class SalonController : Controller
     {
-        private readonly ISalonService _salonService;
+        private readonly SalonService _salonService;
         private readonly IMapper _mapper;
-        public SalonController(ISalonService salonService, IMapper mapper)
+        public SalonController(SalonService salonService, IMapper mapper)
         {
             _salonService = salonService;
             _mapper = mapper;
@@ -26,10 +27,10 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(response);
 
         }
-        [HttpGet("GetsListByIdLocal")]
-        public IActionResult GetsListByIdLocal(int idLocal)
+        [HttpGet("GetsListByIdFilial")]
+        public IActionResult GetsListByIdFilial(int idFilial)
         {
-            var list = _salonService.GetsListByIdLocal(idLocal);
+            var list = _salonService.GetsListByIdFilial(idFilial);
             var response = new ApiResponse<IEnumerable<ListaDto>>(list, _mapper);
 
             return Ok(response);

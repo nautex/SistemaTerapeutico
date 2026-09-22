@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface IPersonaAntecedenteRepository : IBaseEntity2IdsRepository<PersonaAntecedente>
+    public interface IPersonaAntecedenteRepository : IBaseEntityTwoIdsRepository<PersonaAntecedente>
     {
     }
 }

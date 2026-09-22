@@ -6,16 +6,16 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
-using SistemaTerapeutico.Core.Services;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class PeriodoController : Controller
     {
-        private readonly IPeriodoService _periodoService;
+        private readonly PeriodoService _periodoService;
         private readonly IMapper _mapper;
-        public PeriodoController(IPeriodoService periodoService, IMapper mapper)
+        public PeriodoController(PeriodoService periodoService, IMapper mapper)
         {
             _periodoService = periodoService;
             _mapper = mapper;
@@ -53,9 +53,9 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(response);
         }
         [HttpGet("GetsPeriodoView")]
-        public IActionResult GetsPeriodoView(int idTipoTerapia, int idEstadoApertura, int mesesHaciaAtras, int idEstado)
+        public IActionResult GetsPeriodoView(int idFilial, int idTipoTerapia, int idEstadoApertura, int mesesHaciaAtras, int idEstado)
         {
-            var list = _periodoService.GetsPeriodoView(idTipoTerapia, idEstadoApertura, mesesHaciaAtras, idEstado);
+            var list = _periodoService.GetsPeriodoView(idFilial, idTipoTerapia, idEstadoApertura, mesesHaciaAtras, idEstado);
             var response = new ApiResponse<IEnumerable<PeriodoViewDto>>(list, _mapper);
 
             return Ok(response);

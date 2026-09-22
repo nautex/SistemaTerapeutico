@@ -5,6 +5,8 @@ namespace SistemaTerapeutico.Core.DTOs
     public class PeriodoDto
     {
         public int IdPeriodo { get; set; }
+        public int IdFilial { get; set; }
+        public string Filial { get; set; }
         public int IdTipo { get; set; }
         public int IdCategoria { get; set; }
         public string Codigo { get; set; }

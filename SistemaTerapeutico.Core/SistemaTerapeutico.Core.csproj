@@ -5,7 +5,67 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\IComprobanteDetalleRepository.cs" />
+    <Compile Remove="Interfaces\IComprobanteDetalleViewRepository.cs" />
+    <Compile Remove="Interfaces\IComprobantePagoRepository.cs" />
+    <Compile Remove="Interfaces\IComprobantePagoViewRepository.cs" />
+    <Compile Remove="Interfaces\IParticipanteAlergiaRepository.cs" />
+    <Compile Remove="Interfaces\IParticipanteAlergiaViewRepository.cs" />
+    <Compile Remove="Interfaces\IParticipanteNivelLenguajeRepository.cs" />
+    <Compile Remove="Interfaces\IParticipantePersonaAutorizadaRepository.cs" />
+    <Compile Remove="Interfaces\IParticipantePersonaAutorizadaViewRepository.cs" />
+    <Compile Remove="Interfaces\ISesionCriterioRepository.cs" />
+    <Compile Remove="Interfaces\ISesionCriterioViewRepository.cs" />
+    <Compile Remove="Interfaces\ISesionTerapeutaRepository.cs" />
+    <Compile Remove="Interfaces\ISesionTerapeutaViewRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaHorarioRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaHorarioViewRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaParticipanteRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaParticipanteResumenViewRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaParticipanteViewRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaPeriodoRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaPeriodoResumenViewRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaPlanAreaRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaPlanAreaViewRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaPlanRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaPlanResumenViewRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaPlanViewRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaResumenViewRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaTerapeutaRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaTerapeutaViewRepository.cs" />
+    <Compile Remove="Interfaces\ITerapiaViewRepository.cs" />
+    <Compile Remove="Interfaces\IUbigeoRepository.cs" />
+    <Compile Remove="Interfaces\IUbigeoViewRepository.cs" />
+    <Compile Remove="Services\AtencionService.cs" />
+    <Compile Remove="Services\AtencionTerapiaService.cs" />
+    <Compile Remove="Services\CatalogoService.cs" />
+    <Compile Remove="Services\ComprobanteService.cs" />
+    <Compile Remove="Services\DireccionService.cs" />
+    <Compile Remove="Services\FilialService.cs" />
+    <Compile Remove="Services\ModeloService.cs" />
+    <Compile Remove="Services\ParticipanteService.cs" />
+    <Compile Remove="Services\PeriodoService.cs" />
+    <Compile Remove="Services\PersonaContactoService.cs" />
+    <Compile Remove="Services\PersonaDireccionServices.cs" />
+    <Compile Remove="Services\PersonaDocumentoService.cs" />
+    <Compile Remove="Services\PersonaNaturalService.cs" />
+    <Compile Remove="Services\PersonaService.cs" />
+    <Compile Remove="Services\PersonaVinculacionService.cs" />
+    <Compile Remove="Services\PuntuacionService.cs" />
+    <Compile Remove="Services\SalonService.cs" />
+    <Compile Remove="Services\ServicioService.cs" />
+    <Compile Remove="Services\SesionService.cs" />
+    <Compile Remove="Services\TerapiaPlanService.cs" />
+    <Compile Remove="Services\TerapiaService.cs" />
+    <Compile Remove="Services\TerapiaTerapeutaService.cs" />
+    <Compile Remove="Services\UbigeoViewService.cs" />
+    <Compile Remove="Services\UsuarioService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Customs\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

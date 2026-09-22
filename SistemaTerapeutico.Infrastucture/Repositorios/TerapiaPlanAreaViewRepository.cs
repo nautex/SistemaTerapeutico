@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class TerapiaPlanAreaViewRepository : BaseEntity2IdsRepository<TerapiaPlanAreaView>, ITerapiaPlanAreaViewRepository
+    public class TerapiaPlanAreaViewRepository : BaseEntityTwoIdsRepository<TerapiaPlanAreaView>, ITerapiaPlanAreaViewRepository
     {
         public TerapiaPlanAreaViewRepository(SISDETContext context) : base(context)
         {

@@ -7,9 +7,9 @@ namespace SistemaTerapeutico.Core.DTOs
 {
     public class SalonViewDto : BaseEntity
     {
-        public int IdLocal { get; set; }
-        public string CodigoLocal { get; set; }
-        public string Local { get; set; }
+        public int IdFilial { get; set; }
+        public string CodigoFilial { get; set; }
+        public string Filial { get; set; }
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
         public int IdEstado { get; set; }

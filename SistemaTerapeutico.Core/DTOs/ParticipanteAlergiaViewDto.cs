@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.DTOs
 {
-    public class ParticipanteAlergiaViewDto : BaseEntity2Ids
+    public class ParticipanteAlergiaViewDto : BaseEntityTwoIds
     {
         public int IdTipoAlergia { get; set; }
         public string TipoAlergia { get; set; }

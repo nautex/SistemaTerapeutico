@@ -52,13 +52,13 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.TerapiaViewRepository.GetById(idTerapia);
         }
-        public IEnumerable<TerapiaResumenView> GetsTerapiaResumenViewByIdLocalOrMemberOrTherapist(int idLocal, string member, string therapist, int idEstado)
+        public IEnumerable<TerapiaResumenView> GetsTerapiaResumenViewByIdFilialOrMemberOrTherapist(int idFilial, string member, string therapist, int idEstado)
         {
             var list =  _unitOfWork.TerapiaResumenViewRepository.GetAll();
 
-            if (idLocal > 0)
+            if (idFilial > 0)
             {
-                list = list.Where(x => x.IdLocal == idLocal);
+                list = list.Where(x => x.IdFilial == idFilial);
             }
 
             if (!string.IsNullOrEmpty(member))
@@ -130,7 +130,7 @@ namespace SistemaTerapeutico.Core.Services
             {
                 Terapia terapia = new Terapia()
                 {
-                    IdLocal = terapiaDto.IdLocal,
+                    IdFilial = terapiaDto.IdFilial,
                     IdTipo = terapiaDto.IdTipo,
                     IdTarifa = terapiaDto.IdTarifa,
                     FechaInicio = terapiaDto.FechaInicio,
@@ -157,7 +157,7 @@ namespace SistemaTerapeutico.Core.Services
                 await _unitOfWork.AtencionTerapiaRepository.Add(new AtencionTerapia()
                 {
                     Id = idAtencion,
-                    IdTwo = id,
+                    Numero = id,
                 });
             }
             else
@@ -178,13 +178,13 @@ namespace SistemaTerapeutico.Core.Services
                     await _unitOfWork.AtencionTerapiaRepository.AddAndSave(new AtencionTerapia()
                     {
                         Id = idAtencion,
-                        IdTwo = id,
+                        Numero = id,
                     });
                 }
 
                 Terapia terapia = await _unitOfWork.TerapiaRepository.GetById(id);
 
-                terapia.IdLocal = terapiaDto.IdLocal;
+                terapia.IdFilial = terapiaDto.IdFilial;
                 terapia.IdTipo = terapiaDto.IdTipo;
                 terapia.IdTarifa = terapiaDto.IdTarifa;
                 terapia.FechaInicio = terapiaDto.FechaInicio;
@@ -292,10 +292,14 @@ namespace SistemaTerapeutico.Core.Services
 
             return id;
         }
-        public IEnumerable<TerapiaParticipanteResumenView> GetsTerapiaParticipanteResumenView(int idTipoTerapia, int idEstado)
+        public IEnumerable<TerapiaParticipanteResumenView> GetsTerapiaParticipanteResumenView(int idFilial, int idTipoTerapia, int idEstado)
         {
             var list = _unitOfWork.TerapiaParticipanteResumenViewRepository.GetAll();
 
+            if (idFilial > 0)
+            {
+                list = list.Where(x => x.IdFilial == idFilial || x.IdTipoTerapiaPadre == idTipoTerapia);
+            }
             if (idTipoTerapia > 0)
             {
                 list = list.Where(x => x.IdTipoTerapia == idTipoTerapia || x.IdTipoTerapiaPadre == idTipoTerapia);
@@ -311,13 +315,17 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.TerapiaPeriodoResumenViewRepository.GetById(idTerapiaPeriodo);
         }
-        public IEnumerable<TerapiaPeriodoResumenView> GetsTerapiaPeriodoResumenView(int idPeriodo, int idTipoTerapia, string participante, int idTerapeuta, string terapeuta, int idEstado)
+        public IEnumerable<TerapiaPeriodoResumenView> GetsTerapiaPeriodoResumenView(int idPeriodo, int idFilial, int idTipoTerapia, string participante, int idTerapeuta, string terapeuta, int idEstado)
         {
             var list = _unitOfWork.TerapiaPeriodoResumenViewRepository.GetAll();
 
             if (idPeriodo > 0)
             {
                 list = list.Where(x => x.IdPeriodo == idPeriodo);
+            }
+            if (idFilial > 0)
+            {
+                list = list.Where(x => x.IdFilial == idFilial);
             }
             if (idTipoTerapia > 0)
             {

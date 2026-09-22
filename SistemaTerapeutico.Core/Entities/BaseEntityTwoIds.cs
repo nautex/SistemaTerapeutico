@@ -6,6 +6,6 @@
         {
 
         }
-        public int IdTwo { get; set; }
+        public int Numero { get; set; }
     }
 }

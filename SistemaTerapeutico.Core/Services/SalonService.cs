@@ -20,11 +20,11 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.SalonViewRepository.GetAll();
         }
-        public IEnumerable<Lista> GetsListByIdLocal(int idLocal)
+        public IEnumerable<Lista> GetsListByIdFilial(int idFilial)
         {
             var list = _unitOfWork.SalonViewRepository.GetAll();
 
-            list = list.Where(x => x.IdLocal == idLocal);
+            list = list.Where(x => x.IdFilial == idFilial);
 
             var query = from f in list.ToList() select new Lista { Id = f.Id, Descripcion = f.Codigo };
 

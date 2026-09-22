@@ -7,15 +7,16 @@ using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
 using SistemaTerapeutico.Core.QueryFilters;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class DireccionController : Controller
     {
-        private readonly IDireccionService _direccionService;
+        private readonly DireccionService _direccionService;
         private readonly IMapper _mapper;
-        public DireccionController(IDireccionService direccionService, IMapper mapper)
+        public DireccionController(DireccionService direccionService, IMapper mapper)
         {
             _direccionService = direccionService;
             _mapper = mapper;

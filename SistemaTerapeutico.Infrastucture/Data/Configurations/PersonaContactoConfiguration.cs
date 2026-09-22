@@ -8,14 +8,14 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<PersonaContacto> builder)
         {
-            builder.HasKey(e => new { e.Id, e.IdTwo })
+            builder.HasKey(e => new { e.Id, e.Numero })
                     .HasName("PRIMARY");
 
             builder.Property(e => e.Id)
                 .HasColumnName("IdPersona")
                 .ValueGeneratedNever();
 
-            builder.Property(e => e.IdTwo)
+            builder.Property(e => e.Numero)
                 .HasColumnName("Numero")
                 .ValueGeneratedNever();
 

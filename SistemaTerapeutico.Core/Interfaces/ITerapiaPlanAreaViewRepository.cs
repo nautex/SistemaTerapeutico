@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface ITerapiaPlanAreaViewRepository : IBaseEntity2IdsRepository<TerapiaPlanAreaView>
+    public interface ITerapiaPlanAreaViewRepository : IBaseEntityTwoIdsRepository<TerapiaPlanAreaView>
     {
         IEnumerable<Area> GetsArea(int idTerapia);
     }

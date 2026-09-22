@@ -6,18 +6,17 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
-using SistemaTerapeutico.Core.Services;
+using SistemaTerapeutico.Infrastucture.Services;
 using SistemaTerapeutico.Core.Views;
-using SistemaTerapeutico.Infrastucture.Repositorios;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class ParticipanteController : Controller
     {
-        private readonly IParticipanteService _participanteService;
+        private readonly ParticipanteService _participanteService;
         private readonly IMapper _mapper;
-        public ParticipanteController(IParticipanteService participanteService, IMapper mapper)
+        public ParticipanteController(ParticipanteService participanteService, IMapper mapper)
         {
             _participanteService = participanteService;
             _mapper = mapper;
@@ -68,6 +67,14 @@ namespace SistemaTerapeutico.API.Controllers
         {
             var list = await _participanteService.GetsParticipantePersonaAutorizadaViewById(idParticipante);
             var response = new ApiResponse<IEnumerable<ParticipantePersonaAutorizadaViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetsParticipanteNivelLenguajeViewById")]
+        public async Task<IActionResult> GetsParticipanteNivelLenguajeViewById(int idParticipante)
+        {
+            var list = await _participanteService.GetsParticipanteNivelLenguajeViewById(idParticipante);
+            var response = new ApiResponse<IEnumerable<ParticipanteNivelLenguajeViewDto>>(list, _mapper);
 
             return Ok(response);
         }

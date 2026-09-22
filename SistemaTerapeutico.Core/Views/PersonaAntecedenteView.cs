@@ -5,9 +5,11 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Views
 {
-    public class PersonaAntecedenteView : BaseEntity2Ids
+    public class PersonaAntecedenteView : BaseEntity
     {
-        public int IdAntecedente { get; set; }
-        public string Antecedente { get; set; }
+        public int IdPersona { get; set; }
+        public int Numero { get; set; }
+        public int IdTipoAntecedente { get; set; }
+        public string TipoAntecedente { get; set; }
     }
 }

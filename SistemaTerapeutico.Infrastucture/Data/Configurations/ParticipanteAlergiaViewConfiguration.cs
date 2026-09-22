@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class ParticipanteAlergiaViewConfiguration : BaseEntity2IdsConfiguration<ParticipanteAlergiaView>, IEntityTypeConfiguration<ParticipanteAlergiaView>
+    public class ParticipanteAlergiaViewConfiguration : BaseEntityTwoIdsConfiguration<ParticipanteAlergiaView>, IEntityTypeConfiguration<ParticipanteAlergiaView>
     {
         public override void Configure(EntityTypeBuilder<ParticipanteAlergiaView> builder)
         {

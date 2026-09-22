@@ -13,16 +13,16 @@ namespace SistemaTerapeutico.Core.Interfaces
     {
         IEnumerable<Servicio> GetAll();
         IEnumerable<Lista> GetsListServicio();
-        Task<TarifaView> GetTarifaView(int idTarifa);
-        IEnumerable<Lista> GetsListTarifa();
-        IEnumerable<TarifaView> GetsTarifaView(int idServicio, int idLocal, int idTipo, int sesionesMes, int idEstado);
-        Task<int> AddTarifa(Tarifa Tarifa);
-        Task DeleteTarifa(int idTarifa);
-        Task<Tarifa> GetTarifaById(int idTarifa);
-        IEnumerable<Tarifa> GetTarifas();
-        void UpdateTarifa(Tarifa Tarifa);
-        Task AnnulTarifa(int idTarifa);
-        Task ActiveTarifa(int idTarifa);
-        Task<int> AddUpdateTarifa(TarifaViewDto tarifaViewDto);
+        Task<ConceptoCobroView> GetConceptoCobroView(int idTarifa);
+        IEnumerable<Lista> GetsListConceptoCobro();
+        IEnumerable<ConceptoCobroView> GetsConceptoCobroView(int idServicio, int idFilial, int idTipo, int sesionesMes, int idEstado);
+        Task<int> AddConceptoCobro(ConceptoCobro Tarifa);
+        Task DeleteConceptoCobro(int idTarifa);
+        Task<ConceptoCobro> GetConceptoCobroById(int idTarifa);
+        IEnumerable<ConceptoCobro> GetsConceptoCobro();
+        void UpdateConceptoCobro(ConceptoCobro Tarifa);
+        Task AnnulConceptoCobro(int idTarifa);
+        Task ActiveConceptoCobro(int idTarifa);
+        Task<int> AddUpdateConceptoCobro(ConceptoCobroViewDto tarifaViewDto);
     }
 }

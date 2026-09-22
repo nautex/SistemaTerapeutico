@@ -15,7 +15,7 @@ namespace SistemaTerapeutico.Core.Services
         }
         public async Task AddPersonaVinculacion(PersonaVinculacion personaVinculacion)
         {
-            PersonaVinculacion lPersonaVinculacion = await _unitOfWork.PersonaVinculacionRepository.GetByIds(personaVinculacion.Id, personaVinculacion.IdTwo);
+            PersonaVinculacion lPersonaVinculacion = await _unitOfWork.PersonaVinculacionRepository.GetByIds(personaVinculacion.Id, personaVinculacion.Numero);
 
             if (lPersonaVinculacion != null)
             {

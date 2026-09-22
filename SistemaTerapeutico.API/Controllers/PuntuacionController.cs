@@ -4,7 +4,7 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
-using SistemaTerapeutico.Core.Services;
+using SistemaTerapeutico.Infrastucture.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,9 +13,9 @@ namespace SistemaTerapeutico.API.Controllers
     [Route("[controller]")]
     public class PuntuacionController : Controller
     {
-        private readonly IPuntuacionService _puntuacionService;
+        private readonly PuntuacionService _puntuacionService;
         private readonly IMapper _mapper;
-        public PuntuacionController(IPuntuacionService puntuacionService, IMapper mapper)
+        public PuntuacionController(PuntuacionService puntuacionService, IMapper mapper)
         {
             _puntuacionService = puntuacionService;
             _mapper = mapper;

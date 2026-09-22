@@ -7,15 +7,16 @@ using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
 using SistemaTerapeutico.Core.QueryFilters;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class PersonaDocumentoController : Controller
     {
-        private readonly IPersonaDocumentoService _personaDocumentoService;
+        private readonly PersonaDocumentoService _personaDocumentoService;
         private readonly IMapper _mapper;
-        public PersonaDocumentoController(IPersonaDocumentoService personaDocumentoService, IMapper mapper)
+        public PersonaDocumentoController(PersonaDocumentoService personaDocumentoService, IMapper mapper)
         {
             _personaDocumentoService = personaDocumentoService;
             _mapper = mapper;

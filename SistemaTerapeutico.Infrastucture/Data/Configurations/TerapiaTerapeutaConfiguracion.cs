@@ -4,7 +4,7 @@ using SistemaTerapeutico.Core.Entities;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class TerapiaTerapeutaConfiguracion : BaseEntity2IdsConfiguration<TerapiaTerapeuta>, IEntityTypeConfiguration<TerapiaTerapeuta>
+    public class TerapiaTerapeutaConfiguracion : BaseEntityTwoIdsConfiguration<TerapiaTerapeuta>, IEntityTypeConfiguration<TerapiaTerapeuta>
     {
         public override void Configure(EntityTypeBuilder<TerapiaTerapeuta> builder)
         {

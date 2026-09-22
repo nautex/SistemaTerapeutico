@@ -7,6 +7,9 @@ namespace SistemaTerapeutico.Core.DTOs
 {
     public class PeriodoViewDto : BaseEntity
     {
+        public int IdFilial { get; set; }
+        public string CodigoFilial { get; set; }
+        public string Filial { get; set; }
         public int IdTipoTerapia { get; set; }
         public string TipoTerapia { get; set; }
         public int? IdTipoTerapiaPadre { get; set; }

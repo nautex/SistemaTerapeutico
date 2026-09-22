@@ -9,6 +9,6 @@ namespace SistemaTerapeutico.Core.Interfaces
     public interface ISalonService
     {
         IEnumerable<SalonView> GetAll();
-        IEnumerable<Lista> GetsListByIdLocal(int idLocal);
+        IEnumerable<Lista> GetsListByIdFilial(int idFilial);
     }
 }

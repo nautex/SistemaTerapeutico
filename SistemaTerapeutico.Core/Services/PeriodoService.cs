@@ -47,10 +47,14 @@ namespace SistemaTerapeutico.Core.Services
         {
             return _unitOfWork.PeriodoRepository.GetPeriodosByIdTipo(idTipo);
         }
-        public IEnumerable<PeriodoView> GetsPeriodoView(int idTipoTerapia, int idEstadoApertura, int mesesHaciaAtras, int idEstado)
+        public IEnumerable<PeriodoView> GetsPeriodoView(int idFilial, int idTipoTerapia, int idEstadoApertura, int mesesHaciaAtras, int idEstado)
         {
             var list = _unitOfWork.PeriodoViewRepository.GetAll();
 
+            if (idFilial > 0)
+            {
+                list = list.Where(x => x.IdFilial == idFilial);
+            }
             if (idTipoTerapia > 0)
             {
                 list = list.Where(x => x.IdTipoTerapia == idTipoTerapia || x.IdTipoTerapiaPadre == idTipoTerapia);
@@ -101,6 +105,7 @@ namespace SistemaTerapeutico.Core.Services
             {
                 Periodo periodo = new Periodo()
                 {
+                    IdFilial = periodoViewDto.IdFilial,
                     IdTipoTerapia = periodoViewDto.IdTipoTerapia,
                     IdCategoria = periodoViewDto.IdCategoria,
                     Codigo = periodoViewDto.Codigo,
@@ -119,6 +124,7 @@ namespace SistemaTerapeutico.Core.Services
             {
                 Periodo periodo = await _unitOfWork.PeriodoRepository.GetById(periodoViewDto.Id);
 
+                periodo.IdFilial = periodoViewDto.IdFilial;
                 periodo.IdTipoTerapia = periodoViewDto.IdTipoTerapia;
                 periodo.IdCategoria = periodoViewDto.IdCategoria;
                 periodo.Codigo = periodoViewDto.Codigo;

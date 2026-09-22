@@ -9,9 +9,9 @@ namespace SistemaTerapeutico.Core.Views
     {
         public int IdTerapia { get; set; }
         public int? IdTerapiaPlan { get; set; }
-        public int IdLocal { get; set; }
-        public string CodigoLocal { get; set; }
-        public string Local { get; set; }
+        public int IdFilial { get; set; }
+        public string CodigoFilial { get; set; }
+        public string Filial { get; set; }
         public int? IdTerapeuta { get; set; }
         public string Terapeuta { get; set; }
         public int? IdParticipante { get; set; }

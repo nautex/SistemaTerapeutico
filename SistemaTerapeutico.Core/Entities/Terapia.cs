@@ -14,7 +14,7 @@ namespace SistemaTerapeutico.Core.Entities
             TerapiaTerapeuta = new List<TerapiaTerapeuta>();
             TerapiaParticipante = new List<TerapiaParticipante>();
         }
-        public int IdLocal { get; set; }
+        public int IdFilial { get; set; }
         public int IdTarifa { get; set; }
         public DateTime FechaInicio { get; set; }
         public int IdTipo { get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Entities
 {
-    public class TerapiaPlanArea : BaseEntity2Ids
+    public class TerapiaPlanArea : BaseEntityTwoIds
     {
         public int IdArea { get; set; }
         public int Orden { get; set; }

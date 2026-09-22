@@ -16,6 +16,8 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 
             builder.Ignore(e => e.ParticipanteAlergia);
             builder.Ignore(e => e.ParticipantePersonaAutorizada);
+            builder.Ignore(e => e.ParticipanteNivelLenguaje);
+            builder.Ignore(e => e.PersonaVinculacion);
         }
     }
 }

@@ -7,16 +7,16 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
-using SistemaTerapeutico.Core.Services;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class SesionController : Controller
     {
-        private readonly ISesionService _sesionService;
+        private readonly SesionService _sesionService;
         private readonly IMapper _mapper;
-        public SesionController(ISesionService sesionService, IMapper mapper)
+        public SesionController(SesionService sesionService, IMapper mapper)
         {
             _sesionService = sesionService;
             _mapper = mapper;

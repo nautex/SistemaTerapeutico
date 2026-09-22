@@ -5,16 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[Controller]")]
     public class CatalogoController : Controller
     {
-        private readonly ICatalogoService _catalogoService;
+        private readonly CatalogoService _catalogoService;
         private readonly IMapper _mapper;
 
-        public CatalogoController(ICatalogoService catalogoService, IMapper mapper)
+        public CatalogoController(CatalogoService catalogoService, IMapper mapper)
         {
             _catalogoService = catalogoService;
             _mapper = mapper;

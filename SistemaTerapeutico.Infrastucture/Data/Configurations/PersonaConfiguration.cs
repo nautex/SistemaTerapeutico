@@ -23,6 +23,7 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
             builder.Ignore(e => e.PersonaDocumento);
             builder.Ignore(e => e.PersonaContacto);
             builder.Ignore(e => e.PersonaVinculacion);
+            builder.Ignore(e => e.PersonaAntecedente);
 
             //builder.HasOne(f => f.PersonaNatural)
             //    .WithOne()

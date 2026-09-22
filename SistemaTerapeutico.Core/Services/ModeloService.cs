@@ -18,16 +18,16 @@ namespace SistemaTerapeutico.Core.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<AreaObjetivoCriterioView> GetsAreaObjetivoCriterioView(
+        public IEnumerable<AreaObjetivoCriterioResumenView> GetsAreaObjetivoCriterioResumenView(
             int idModelo, string codigoModelo, string modelo
             , int idArea, string codigoArea, string area
             , int idDestreza, string codigoDestreza, string destreza
-            , int idAreaObjetivo, int ordenObjetivo, string codigoObjetivo, string objetivo
+            , int idAreaObjetivo, string codigoObjetivo, string objetivo
             , int idAreaObjetivoCriterio, int valor, string descripcion, int orden)
         {
-            var list = _unitOfWork.AreaObjetivoCriterioViewRepository.GetAll();
+            var list = _unitOfWork.AreaObjetivoCriterioResumenViewRepository.GetAll();
 
-            if (idModelo > 0)
+            if (idModelo >= 0)
             {
                 list = list.Where(x => x.IdModelo == idModelo);
             }
@@ -70,10 +70,6 @@ namespace SistemaTerapeutico.Core.Services
             {
                 list = list.Where(x => x.IdAreaObjetivo == idAreaObjetivo);
             }
-            if (ordenObjetivo > 0)
-            {
-                list = list.Where(x => x.OrdenObjetivo == ordenObjetivo);
-            }
             if (!string.IsNullOrEmpty(codigoObjetivo))
             {
                 list = list.Where(x => x.CodigoObjetivo.ToLower().Contains(codigoObjetivo.ToLower()));
@@ -100,7 +96,7 @@ namespace SistemaTerapeutico.Core.Services
                 list = list.Where(x => x.Orden == orden);
             }
 
-            return list.ToList();
+            return list.OrderBy(x => x.IdModelo).ThenBy(x => x.OrdenArea).ThenBy(x => x.OrdenObjetivo).ThenBy(x => x.Orden).ToList();
         }
         public IEnumerable<Lista> GetsListModelo()
         {
@@ -117,6 +113,21 @@ namespace SistemaTerapeutico.Core.Services
 
             return list.OrderBy(x => x.Nombre).ToList();
         }
+        public IEnumerable<Destreza> GetsDestreza()
+        {
+            var list = _unitOfWork.DestrezaRepository.GetAll();
+
+            return list.OrderBy(x => x.Nombre).ToList();
+        }
+        public IEnumerable<Lista> GetsListDestreza()
+        {
+            var list = _unitOfWork.DestrezaRepository.GetAll();
+
+            var query = from f in list
+                select new Lista { Id = f.Id, Descripcion = f.Nombre };
+
+            return query.OrderBy(x => x.Descripcion).ToList();
+        }
         public IEnumerable<Lista> GetsListArea(int idModelo)
         {
             var list = _unitOfWork.AreaRepository.GetAll();
@@ -127,6 +138,14 @@ namespace SistemaTerapeutico.Core.Services
 
             return query.OrderBy(x => x.Descripcion).ToList();
         }
+        public async Task<AreaView> GetArea(int idArea)
+        {
+            return await _unitOfWork.AreaViewRepository.GetById(idArea);
+        }
+        public async Task<Destreza> GetDestreza(int idDestreza)
+        {
+            return await _unitOfWork.DestrezaRepository.GetById(idDestreza);
+        }
         public IEnumerable<Area> GetsArea(int idModelo)
         {
             var list = _unitOfWork.AreaRepository.GetAll();
@@ -135,7 +154,7 @@ namespace SistemaTerapeutico.Core.Services
 
             return list.OrderBy(x => x.Orden).ToList();
         }
-        public IEnumerable<Lista> GetsListObjetivo(int idArea)
+        public IEnumerable<Lista> GetsListAreaObjetivo(int idArea)
         {
             var list = _unitOfWork.AreaObjetivoRepository.GetAll();
 
@@ -145,13 +164,17 @@ namespace SistemaTerapeutico.Core.Services
 
             return query.OrderBy(x => x.Descripcion).ToList();
         }
-        public IEnumerable<AreaObjetivo> GetsObjetivo(int idArea)
+        public IEnumerable<AreaObjetivo> GetsAreaObjetivo(int idArea)
         {
             var list = _unitOfWork.AreaObjetivoRepository.GetAll();
 
             list = list.Where(x => x.IdArea == idArea);
 
             return list.OrderBy(x => x.Orden).ToList();
+        }
+        public async Task<AreaObjetivoView> GetAreaObjetivo(int idAreaObjetivo)
+        {
+            return await _unitOfWork.AreaObjetivoViewRepository.GetById(idAreaObjetivo);
         }
         public IEnumerable<Lista> GetsListCriterio(int idAreaObjetivo)
         {
@@ -170,6 +193,10 @@ namespace SistemaTerapeutico.Core.Services
             list = list.Where(x => x.IdAreaObjetivo == idAreaObjetivo);
 
             return list.OrderBy(x => x.Orden).ToList();
+        }
+        public async Task<AreaObjetivoCriterioView> GetAreaObjetivoCriterio(int idAreaObjetivoCriterio)
+        {
+            return await _unitOfWork.AreaObjetivoCriterioViewRepository.GetById(idAreaObjetivoCriterio);
         }
         public async Task<int> AddUpdateModelo(ModeloDto modeloDto)
         {
@@ -197,8 +224,7 @@ namespace SistemaTerapeutico.Core.Services
                 entity.Nombre = modeloDto.Nombre;
                 entity.Codigo = modeloDto.Codigo;
                 entity.Descripcion = modeloDto.Descripcion;
-                entity.FechaRegistro = modeloDto.FechaRegistro == null ? DateTime.Now : modeloDto.FechaRegistro;
-                entity.UsuarioRegistro = modeloDto.UsuarioRegistro == null ? usuario : modeloDto.UsuarioRegistro;
+                entity.FechaModificacion = DateTime.Now;
                 entity.UsuarioModificacion = usuario;
 
                 _unitOfWork.ModeloRepository.UpdateAndSave(entity);
@@ -209,6 +235,45 @@ namespace SistemaTerapeutico.Core.Services
         public async Task DeleteModelo(int idEntity)
         {
             await _unitOfWork.ModeloRepository.Delete(idEntity);
+            _unitOfWork.SaveChanges();
+        }
+        public async Task<int> AddUpdateDestreza(DestrezaDto destrezaDto)
+        {
+            int id = 0;
+            string usuario = "JSOTELO";
+
+            if (destrezaDto.Id == 0)
+            {
+                Destreza entity = new Destreza()
+                {
+                    Codigo = destrezaDto.Codigo,
+                    Nombre = destrezaDto.Nombre,
+                    Descripcion = destrezaDto.Descripcion,
+                    UsuarioRegistro = usuario,
+                };
+
+                id = await _unitOfWork.DestrezaRepository.AddReturnId(entity);
+                entity.Id = id;
+            }
+            else
+            {
+                Destreza entity = await _unitOfWork.DestrezaRepository.GetById(destrezaDto.Id);
+
+                entity.Codigo = destrezaDto.Codigo;
+                entity.Nombre = destrezaDto.Nombre;
+                entity.Codigo = destrezaDto.Codigo;
+                entity.Descripcion = destrezaDto.Descripcion;
+                entity.FechaModificacion = DateTime.Now;
+                entity.UsuarioModificacion = usuario;
+
+                _unitOfWork.DestrezaRepository.UpdateAndSave(entity);
+            }
+
+            return id;
+        }
+        public async Task DeleteDestreza(int idEntity)
+        {
+            await _unitOfWork.DestrezaRepository.Delete(idEntity);
             _unitOfWork.SaveChanges();
         }
         public async Task<int> AddUpdateArea(AreaDto entityDto)
@@ -238,11 +303,9 @@ namespace SistemaTerapeutico.Core.Services
                 entity.IdModelo = entityDto.IdModelo;
                 entity.Codigo = entityDto.Codigo;
                 entity.Nombre = entityDto.Nombre;
-                entity.Codigo = entityDto.Codigo;
                 entity.Descripcion = entityDto.Descripcion;
                 entity.Orden = entityDto.Orden;
-                entity.FechaRegistro = entityDto.FechaRegistro == null ? DateTime.Now : entityDto.FechaRegistro;
-                entity.UsuarioRegistro = entityDto.UsuarioRegistro == null ? usuario : entityDto.UsuarioRegistro;
+                entity.FechaModificacion = DateTime.Now;
                 entity.UsuarioModificacion = usuario;
 
                 _unitOfWork.AreaRepository.UpdateAndSave(entity);
@@ -286,13 +349,11 @@ namespace SistemaTerapeutico.Core.Services
                 entity.IdDestreza = entityDto.IdDestreza;
                 entity.Codigo = entityDto.Codigo;
                 entity.Nombre = entityDto.Nombre;
-                entity.Codigo = entityDto.Codigo;
                 entity.Descripcion = entityDto.Descripcion;
                 entity.Orden = entityDto.Orden;
                 entity.Pregunta = entityDto.Pregunta;
                 entity.Ejemplo = entityDto.Ejemplo;
-                entity.FechaRegistro = entityDto.FechaRegistro == null ? DateTime.Now : entityDto.FechaRegistro;
-                entity.UsuarioRegistro = entityDto.UsuarioRegistro == null ? usuario : entityDto.UsuarioRegistro;
+                entity.FechaModificacion = DateTime.Now;
                 entity.UsuarioModificacion = usuario;
 
                 _unitOfWork.AreaObjetivoRepository.UpdateAndSave(entity);
@@ -332,8 +393,7 @@ namespace SistemaTerapeutico.Core.Services
                 entity.Valor = entityDto.Valor;
                 entity.Descripcion = entityDto.Descripcion;
                 entity.Orden = entityDto.Orden;
-                entity.FechaRegistro = entityDto.FechaRegistro == null ? DateTime.Now : entityDto.FechaRegistro;
-                entity.UsuarioRegistro = entityDto.UsuarioRegistro == null ? usuario : entityDto.UsuarioRegistro;
+                entity.FechaModificacion = DateTime.Now;
                 entity.UsuarioModificacion = usuario;
 
                 _unitOfWork.AreaObjetivoCriterioRepository.UpdateAndSave(entity);

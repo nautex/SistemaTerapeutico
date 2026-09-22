@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Entities
 {
-    public class TerapiaHorario : BaseEntity2Ids
+    public class TerapiaHorario : BaseEntityTwoIds
     {
         public int DiaSemana { get; set; }
         public TimeSpan HoraInicio { get; set; }

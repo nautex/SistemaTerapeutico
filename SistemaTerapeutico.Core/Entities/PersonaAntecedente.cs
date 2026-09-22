@@ -4,8 +4,8 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Entities
 {
-    public partial class PersonaAntecedente : BaseEntity2Ids
+    public partial class PersonaAntecedente : BaseEntityTwoIds
     {
-        public int? IdAntecedente { get; set; }
+        public int? IdTipoAntecedente { get; set; }
     }
 }

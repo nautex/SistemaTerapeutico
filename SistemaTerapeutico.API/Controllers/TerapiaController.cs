@@ -6,16 +6,16 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
-using SistemaTerapeutico.Core.Services;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class TerapiaController : Controller
     {
-        private readonly ITerapiaService _terapiaService;
+        private readonly TerapiaService _terapiaService;
         private readonly IMapper _mapper;
-        public TerapiaController(ITerapiaService terapiaServices, IMapper mapper)
+        public TerapiaController(TerapiaService terapiaServices, IMapper mapper)
         {
             _terapiaService = terapiaServices;
             _mapper = mapper;
@@ -52,10 +52,10 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetsTerapiaResumenViewByIdLocalOrMemberOrTherapist")]
-        public IActionResult GetsTerapiaResumenViewByIdLocalOrMemberOrTherapist(int idLocal, string member, string therapist, int idEstado)
+        [HttpGet("GetsTerapiaResumenViewByIdFilialOrMemberOrTherapist")]
+        public IActionResult GetsTerapiaResumenViewByIdFilialOrMemberOrTherapist(int idFilial, string member, string therapist, int idEstado)
         {
-            var list = _terapiaService.GetsTerapiaResumenViewByIdLocalOrMemberOrTherapist(idLocal, member, therapist, idEstado);
+            var list = _terapiaService.GetsTerapiaResumenViewByIdFilialOrMemberOrTherapist(idFilial, member, therapist, idEstado);
             var response = new ApiResponse<IEnumerable<TerapiaResumenViewDto>>(list, _mapper);
 
             return Ok(response);
@@ -134,17 +134,17 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(response);
         }
         [HttpGet("GetsTerapiaParticipanteResumenView")]
-        public IActionResult GetsTerapiaParticipanteResumenView(int idTipoTerapia, int idEstado)
+        public IActionResult GetsTerapiaParticipanteResumenView(int idFilial, int idTipoTerapia, int idEstado)
         {
-            var list = _terapiaService.GetsTerapiaParticipanteResumenView(idTipoTerapia, idEstado);
+            var list = _terapiaService.GetsTerapiaParticipanteResumenView(idFilial, idTipoTerapia, idEstado);
             var response = new ApiResponse<IEnumerable<TerapiaParticipanteResumenViewDto>>(list, _mapper);
 
             return Ok(response);
         }
         [HttpGet("GetsTerapiaPeriodoResumenView")]
-        public IActionResult GetsTerapiaPeriodoResumenView(int idPeriodo, int idTipoTerapia, string participante, int idTerapeuta, string terapeuta, int idEstado)
+        public IActionResult GetsTerapiaPeriodoResumenView(int idPeriodo, int idFilial, int idTipoTerapia, string participante, int idTerapeuta, string terapeuta, int idEstado)
         {
-            var list = _terapiaService.GetsTerapiaPeriodoResumenView(idPeriodo, idTipoTerapia, participante, idTerapeuta, terapeuta, idEstado);
+            var list = _terapiaService.GetsTerapiaPeriodoResumenView(idPeriodo, idFilial, idTipoTerapia, participante, idTerapeuta, terapeuta, idEstado);
             var response = new ApiResponse<IEnumerable<TerapiaPeriodoResumenViewDto>>(list, _mapper);
 
             return Ok(response);

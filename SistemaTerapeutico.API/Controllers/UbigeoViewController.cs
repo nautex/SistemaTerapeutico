@@ -5,15 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class UbigeoViewController : Controller
     {
-        private readonly IUbigeoViewService _ubigeoViewService;
+        private readonly UbigeoViewService _ubigeoViewService;
         private readonly IMapper _mapper;
-        public UbigeoViewController(IUbigeoViewService ubigeoViewService, IMapper mapper)
+        public UbigeoViewController(UbigeoViewService ubigeoViewService, IMapper mapper)
         {
             _ubigeoViewService = ubigeoViewService;
             _mapper = mapper;

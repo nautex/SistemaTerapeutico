@@ -22,7 +22,7 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
 
             CreateMap<PersonaVinculacion, PersonaVinculacionDto>()
                 .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.IdTwo))
+                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.Numero))
                 .ReverseMap();
 
             CreateMap<Atencion, AtencionDto>()
@@ -37,7 +37,7 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
 
             CreateMap<PersonaDocumento, PersonaDocumentoDto>()
                 .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.IdTwo))
+                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.Numero))
                 .ReverseMap();
 
             CreateMap<TerapiaPeriodo, TerapiaPeriodoDto>().ReverseMap();
@@ -54,13 +54,15 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
 
             CreateMap<AtencionTerapia, AtencionTerapiaDto>()
                 .ForMember(dest => dest.IdAtencion, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.IdTerapia, conf => conf.MapFrom(src => src.IdTwo))
+                .ForMember(dest => dest.IdTerapia, conf => conf.MapFrom(src => src.Numero))
                 .ReverseMap();
 
             CreateMap<Lista, ListaDto>()
                 .ReverseMap();
 
             CreateMap<PersonaNaturalView, PersonaNaturalViewDto>()
+                .ReverseMap();
+            CreateMap<PersonaJuridicaView, PersonaJuridicaViewDto>()
                 .ReverseMap();
 
             CreateMap<UbigeoView, UbigeoViewDto>()
@@ -85,32 +87,52 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
             CreateMap<PersonaVinculacionView, PersonaVinculacionViewDto>()
                 .ReverseMap();
 
-            CreateMap<Persona, PersonaNaturalWDDto>()
-                .ReverseMap();
+            //CreateMap<Persona, PersonaNaturalWDDto>()
+            //    .ReverseMap();
 
-            CreateMap<PersonaNatural, PersonaNaturalWDDto>()
-                .ReverseMap();
+            //CreateMap<PersonaNatural, PersonaNaturalWDDto>()
+            //    .ReverseMap();
+
+            CreateMap<Persona, PersonaNaturalWDDto>().ReverseMap();
+            CreateMap<PersonaNatural, PersonaNaturalWDDto>().ReverseMap();
+
+            CreateMap<Persona, PersonaJuridicaWDDto>().ReverseMap();
+            CreateMap<PersonaJuridica, PersonaJuridicaWDDto>().ReverseMap();
+
+            CreateMap<Cargo, CargoView>().ReverseMap();
+            CreateMap<CargoView, CargoViewDto>().ReverseMap();
 
             CreateMap<PersonaDireccion, PersonaDireccionViewDto>()
                 .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.IdTwo))
+                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.Numero))
                 .ReverseMap();
 
             CreateMap<PersonaDocumento, PersonaDocumentoViewDto>()
                 .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.IdTwo))
+                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.Numero))
                 .ReverseMap();
 
             CreateMap<PersonaContacto, PersonaContactoViewDto>()
                 .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.IdTwo))
+                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.Numero))
                 .ReverseMap();
 
             CreateMap<PersonaVinculacion, PersonaVinculacionViewDto>()
                 .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.IdTwo))
+                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.Numero))
                 .ReverseMap();
+
+            CreateMap<PersonaAntecedente, PersonaAntecedenteViewDto>()
+                .ForMember(dest => dest.IdPersona, conf => conf.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Numero, conf => conf.MapFrom(src => src.Numero))
+                .ReverseMap();
+
+            CreateMap<ParticipanteNivelLenguajeView, ParticipanteNivelLenguajeViewDto>().ReverseMap();
+
             CreateMap<PersonaAntecedenteView, PersonaAntecedenteViewDto>();
+
+            CreateMap<PersonaRepresentante, PersonaRepresentanteViewDto>().ReverseMap();
+            CreateMap<PersonaRepresentanteView, PersonaRepresentanteViewDto>().ReverseMap();
 
             CreateMap<PersonaResumenBasicoView, PersonaResumenBasicoViewDto>().ReverseMap();
             CreateMap<ParticipanteResumenView, ParticipanteResumenViewDto>().ReverseMap();
@@ -129,11 +151,11 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
             CreateMap<TerapiaPeriodoResumenView, TerapiaPeriodoResumenViewDto>().ReverseMap();
             CreateMap<PeriodoView, PeriodoViewDto>().ReverseMap();
 
-            CreateMap<LocalView, LocalViewDto>().ReverseMap();
+            CreateMap<FilialView, FilialViewDto>().ReverseMap();
 
             CreateMap<SalonView, SalonViewDto>().ReverseMap();
 
-            CreateMap<TarifaView, TarifaViewDto>().ReverseMap();
+            CreateMap<ConceptoCobroView, ConceptoCobroViewDto>().ReverseMap();
 
             CreateMap<Servicio, ServicioDto>().ReverseMap();
 
@@ -145,17 +167,28 @@ namespace SistemaTerapeutico.Infrastucture.Mappings
 
             CreateMap<Modelo, ModeloDto>().ReverseMap();
             CreateMap<Area, AreaDto>().ReverseMap();
+            CreateMap<AreaView, AreaViewDto>().ReverseMap();
             CreateMap<AreaObjetivo, AreaObjetivoDto>().ReverseMap();
+            CreateMap<AreaObjetivoView, AreaObjetivoViewDto>().ReverseMap();
             CreateMap<AreaObjetivoCriterio, AreaObjetivoCriterioDto>().ReverseMap();
             CreateMap<AreaObjetivoCriterioView, AreaObjetivoCriterioViewDto>().ReverseMap();
+            CreateMap<AreaObjetivoCriterioResumenView, AreaObjetivoCriterioResumenViewDto>().ReverseMap();
 
             CreateMap<TerapiaPlan, TerapiaPlanDto>().ReverseMap();
             CreateMap<TerapiaPlanView, TerapiaPlanViewDto>().ReverseMap();
             CreateMap<TerapiaPlanArea, TerapiaPlanAreaDto>().ReverseMap();
             CreateMap<TerapiaPlanAreaView, TerapiaPlanAreaViewDto>().ReverseMap();
             CreateMap<TerapiaPlanResumenView, TerapiaPlanResumenViewDto>().ReverseMap();
-
             CreateMap<PuntuacionGrupo, PuntuacionGrupoDto>().ReverseMap();
+            CreateMap<Destreza, DestrezaDto>().ReverseMap();
+
+            CreateMap<Comprobante, ComprobanteDto>().ReverseMap();
+            CreateMap<ComprobanteDetalle, ComprobanteDetalleDto>().ReverseMap();
+            CreateMap<ComprobantePago, ComprobantePagoDto>().ReverseMap();
+            CreateMap<ComprobanteView, ComprobanteViewDto>().ReverseMap();
+            CreateMap<ComprobanteDetalleView, ComprobanteDetalleViewDto>().ReverseMap();
+            CreateMap<ComprobantePagoView, ComprobantePagoViewDto>().ReverseMap();
+            CreateMap<ComprobanteResumenView, ComprobanteResumenViewDto>().ReverseMap();
         }
     }
 }

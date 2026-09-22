@@ -7,6 +7,6 @@ namespace SistemaTerapeutico.Core.DTOs
 {
     public class PersonaAntecenteDto : BaseEntityTwoIds
     {
-        public int? IdAntecedente { get; set; }
+        public int? IdTipoAntecedente { get; set; }
     }
 }

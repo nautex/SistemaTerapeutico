@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
@@ -16,9 +17,9 @@ namespace SistemaTerapeutico.API.Controllers
     public class TokenController : Controller
     {
         private readonly IConfiguration _configuration;
-        private readonly IUsuarioService _usuarioService;
-        private readonly IPasswordService _passwordService;
-        public TokenController(IConfiguration configuration, IUsuarioService usuarioService, IPasswordService passwordService)
+        private readonly UsuarioService _usuarioService;
+        private readonly PasswordService _passwordService;
+        public TokenController(IConfiguration configuration, UsuarioService usuarioService, PasswordService passwordService)
         {
             _configuration = configuration;
             _usuarioService = usuarioService;

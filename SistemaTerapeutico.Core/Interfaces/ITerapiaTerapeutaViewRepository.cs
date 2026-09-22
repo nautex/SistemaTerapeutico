@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Interfaces
 {
-    public interface ITerapiaTerapeutaViewRepository : IBaseEntity2IdsRepository<TerapiaTerapeutaView>
+    public interface ITerapiaTerapeutaViewRepository : IBaseEntityTwoIdsRepository<TerapiaTerapeutaView>
     {
     }
 }

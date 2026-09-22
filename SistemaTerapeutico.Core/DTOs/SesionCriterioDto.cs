@@ -2,7 +2,7 @@
 
 namespace SistemaTerapeutico.Core.DTOs
 {
-    public class SesionCriterioDto : BaseEntity2Ids
+    public class SesionCriterioDto : BaseEntityTwoIds
     {
         public int IdAreaObjetivoCriterio { get; set; }
         public int IdPuntuacionGrupo { get; set; }

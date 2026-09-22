@@ -19,7 +19,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         public async Task AddGenerateIdTwo(T entity)
         {
             entity.FechaRegistro = DateTime.Now;
-            entity.IdTwo = GetNewIdTwoById(entity.Id);
+            entity.Numero = GetNewIdTwoById(entity.Id);
             await _entities.AddAsync(entity);
 
             _context.SaveChanges();
@@ -52,7 +52,7 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
 
         public async Task<T> GetByIds(int id, int idTwo)
         {
-            return await _entities.Where(x => x.Id == id && x.IdTwo == idTwo).AsNoTracking().FirstOrDefaultAsync();
+            return await _entities.Where(x => x.Id == id && x.Numero == idTwo).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<T>> GetsById(int id)
@@ -61,14 +61,14 @@ namespace SistemaTerapeutico.Infrastucture.Repositorios
         }
         public async Task<IEnumerable<T>> GetsByIdTwo(int idTwo)
         {
-            return await _entities.Where(x => x.IdTwo == idTwo).AsNoTracking().ToListAsync();
+            return await _entities.Where(x => x.Numero == idTwo).AsNoTracking().ToListAsync();
         }
         public int GetNewIdTwoById(int id)
         {
             IQueryable<NumeroEnteroDto> listado =
                 from pd in _entities
                 where pd.Id == id
-                select new NumeroEnteroDto { Numero = pd.IdTwo };
+                select new NumeroEnteroDto { Numero = pd.Numero };
 
             NumeroEnteroDto item = listado.OrderByDescending(x => x.Numero).FirstOrDefault();
 

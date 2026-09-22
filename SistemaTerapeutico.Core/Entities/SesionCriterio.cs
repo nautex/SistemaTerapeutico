@@ -1,6 +1,6 @@
 ﻿namespace SistemaTerapeutico.Core.Entities
 {
-    public class SesionCriterio : BaseEntity2Ids
+    public class SesionCriterio : BaseEntityTwoIds
     {
         public SesionCriterio()
         {

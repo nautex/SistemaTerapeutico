@@ -31,30 +31,30 @@ namespace SistemaTerapeutico.Core.Services
 
             return query;
         }
-        public async Task<TarifaView> GetTarifaView(int idTarifa)
+        public async Task<ConceptoCobroView> GetConceptoCobroView(int idTarifa)
         {
-            return await _unitOfWork.TarifaViewRepository.GetById(idTarifa);
+            return await _unitOfWork.ConceptoCobroViewRepository.GetById(idTarifa);
         }
-        public IEnumerable<Lista> GetsListTarifa()
+        public IEnumerable<Lista> GetsListConceptoCobro()
         {
-            var list = _unitOfWork.TarifaViewRepository.GetAll();
+            var list = _unitOfWork.ConceptoCobroViewRepository.GetAll();
 
             var query = from f in list.ToList() select new Lista { Id = f.Id, Descripcion = f.Descripcion };
 
             return query;
         }
-        public IEnumerable<TarifaView> GetsTarifaView(int idServicio, int idLocal, int idTipo, int sesionesMes, int idEstado)
+        public IEnumerable<ConceptoCobroView> GetsConceptoCobroView(int idServicio, int idFilial, int idTipo, int sesionesMes, int idEstado)
         {
-            var list = _unitOfWork.TarifaViewRepository.GetAll();
+            var list = _unitOfWork.ConceptoCobroViewRepository.GetAll();
 
             if (idServicio > 0)
             {
                 list = list.Where(x => x.IdServicio == idServicio);
             }
 
-            if (idLocal > 0)
+            if (idFilial > 0)
             {
-                list = list.Where(x => x.IdLocal == idLocal || idLocal == 4);
+                list = list.Where(x => x.IdFilial == idFilial || idFilial == 4);
             }
 
             if (idTipo > 0)
@@ -74,91 +74,91 @@ namespace SistemaTerapeutico.Core.Services
 
             return list.ToList();
         }
-        public async Task<int> AddTarifa(Tarifa Tarifa)
+        public async Task<int> AddConceptoCobro(ConceptoCobro ConceptoCobro)
         {
-            return await _unitOfWork.TarifaRepository.AddReturnId(Tarifa);
+            return await _unitOfWork.ConceptoCobroRepository.AddReturnId(ConceptoCobro);
         }
 
-        public async Task DeleteTarifa(int idTarifa)
+        public async Task DeleteConceptoCobro(int idConceptoCobro)
         {
-            await _unitOfWork.TarifaRepository.Delete(idTarifa);
+            await _unitOfWork.ConceptoCobroRepository.Delete(idConceptoCobro);
             _unitOfWork.SaveChanges();
         }
 
-        public async Task<Tarifa> GetTarifaById(int idTarifa)
+        public async Task<ConceptoCobro> GetConceptoCobroById(int idConceptoCobro)
         {
-            return await _unitOfWork.TarifaRepository.GetById(idTarifa);
+            return await _unitOfWork.ConceptoCobroRepository.GetById(idConceptoCobro);
         }
 
-        public IEnumerable<Tarifa> GetTarifas()
+        public IEnumerable<ConceptoCobro> GetsConceptoCobro()
         {
-            return _unitOfWork.TarifaRepository.GetAll();
+            return _unitOfWork.ConceptoCobroRepository.GetAll();
         }
 
-        public void UpdateTarifa(Tarifa Tarifa)
+        public void UpdateConceptoCobro(ConceptoCobro ConceptoCobro)
         {
-            _unitOfWork.TarifaRepository.Update(Tarifa);
+            _unitOfWork.ConceptoCobroRepository.Update(ConceptoCobro);
             _unitOfWork.SaveChanges();
         }
-        public async Task AnnulTarifa(int idTarifa)
+        public async Task AnnulConceptoCobro(int idConceptoCobro)
         {
-            Tarifa Tarifa = await _unitOfWork.TarifaRepository.GetById(idTarifa);
+            ConceptoCobro Tarifa = await _unitOfWork.ConceptoCobroRepository.GetById(idConceptoCobro);
 
             Tarifa.IdEstado = EEstadoBasico.Anulado;
 
-            _unitOfWork.TarifaRepository.UpdateAndSave(Tarifa);
+            _unitOfWork.ConceptoCobroRepository.UpdateAndSave(Tarifa);
         }
-        public async Task ActiveTarifa(int idTarifa)
+        public async Task ActiveConceptoCobro(int idConceptoCobro)
         {
-            Tarifa Tarifa = await _unitOfWork.TarifaRepository.GetById(idTarifa);
+            ConceptoCobro Tarifa = await _unitOfWork.ConceptoCobroRepository.GetById(idConceptoCobro);
 
             Tarifa.IdEstado = EEstadoBasico.Activo;
 
-            _unitOfWork.TarifaRepository.UpdateAndSave(Tarifa);
+            _unitOfWork.ConceptoCobroRepository.UpdateAndSave(Tarifa);
         }
-        public async Task<int> AddUpdateTarifa(TarifaViewDto tarifaViewDto)
+        public async Task<int> AddUpdateConceptoCobro(ConceptoCobroViewDto conceptoCobroViewDto)
         {
             int id = 0;
             string usuario = "JSOTELO";
 
-            if (tarifaViewDto.Id == 0)
+            if (conceptoCobroViewDto.Id == 0)
             {
-                Tarifa tarifa = new Tarifa()
+                ConceptoCobro tarifa = new ConceptoCobro()
                 {
-                    Codigo = tarifaViewDto.Codigo,
-                    Descripcion = tarifaViewDto.Descripcion,
-                    IdServicio = tarifaViewDto.IdServicio,
-                    IdLocal = tarifaViewDto.IdLocal,
-                    IdTipo = tarifaViewDto.IdTipo,
-                    IdModalidad = tarifaViewDto.IdModalidad,
-                    SesionesMes = tarifaViewDto.SesionesMes,
-                    MinutosSesion = tarifaViewDto.MinutosSesion,
-                    Monto = tarifaViewDto.Monto,
-                    IdEstado = tarifaViewDto.IdEstado,
+                    Codigo = conceptoCobroViewDto.Codigo,
+                    Descripcion = conceptoCobroViewDto.Descripcion,
+                    IdServicio = conceptoCobroViewDto.IdServicio,
+                    IdFilial = conceptoCobroViewDto.IdFilial,
+                    IdTipo = conceptoCobroViewDto.IdTipo,
+                    IdModalidad = conceptoCobroViewDto.IdModalidad,
+                    SesionesMes = conceptoCobroViewDto.SesionesMes,
+                    MinutosSesion = conceptoCobroViewDto.MinutosSesion,
+                    Monto = conceptoCobroViewDto.Monto,
+                    IdEstado = conceptoCobroViewDto.IdEstado,
                     UsuarioRegistro = usuario,
                 };
 
-                id = await _unitOfWork.TarifaRepository.AddReturnId(tarifa);
+                id = await _unitOfWork.ConceptoCobroRepository.AddReturnId(tarifa);
                 tarifa.Id = id;
             }
             else
             {
-                Tarifa periodo = await _unitOfWork.TarifaRepository.GetById(tarifaViewDto.Id);
+                ConceptoCobro periodo = await _unitOfWork.ConceptoCobroRepository.GetById(conceptoCobroViewDto.Id);
 
-                periodo.Codigo = tarifaViewDto.Codigo;
-                periodo.Descripcion = tarifaViewDto.Descripcion;
-                periodo.IdServicio = tarifaViewDto.IdServicio;
-                periodo.IdLocal = tarifaViewDto.IdLocal;
-                periodo.IdTipo = tarifaViewDto.IdTipo;
-                periodo.IdModalidad = tarifaViewDto.IdModalidad;
-                periodo.SesionesMes = tarifaViewDto.SesionesMes;
-                periodo.MinutosSesion = tarifaViewDto.MinutosSesion;
-                periodo.IdEstado = tarifaViewDto.IdEstado;
-                periodo.FechaRegistro = tarifaViewDto.FechaRegistro == null ? DateTime.Now : tarifaViewDto.FechaRegistro;
-                periodo.UsuarioRegistro = tarifaViewDto.UsuarioRegistro == null ? usuario : tarifaViewDto.UsuarioRegistro;
+                periodo.Codigo = conceptoCobroViewDto.Codigo;
+                periodo.Descripcion = conceptoCobroViewDto.Descripcion;
+                periodo.IdServicio = conceptoCobroViewDto.IdServicio;
+                periodo.IdFilial = conceptoCobroViewDto.IdFilial;
+                periodo.IdTipo = conceptoCobroViewDto.IdTipo;
+                periodo.IdModalidad = conceptoCobroViewDto.IdModalidad;
+                periodo.SesionesMes = conceptoCobroViewDto.SesionesMes;
+                periodo.MinutosSesion = conceptoCobroViewDto.MinutosSesion;
+                periodo.IdEstado = conceptoCobroViewDto.IdEstado;
+                periodo.FechaRegistro = conceptoCobroViewDto.FechaRegistro == null ? DateTime.Now : conceptoCobroViewDto.FechaRegistro;
+                periodo.UsuarioRegistro = conceptoCobroViewDto.UsuarioRegistro == null ? usuario : conceptoCobroViewDto.UsuarioRegistro;
                 periodo.UsuarioModificacion = usuario;
 
-                _unitOfWork.TarifaRepository.UpdateAndSave(periodo);
+                _unitOfWork.ConceptoCobroRepository.UpdateAndSave(periodo);
             }
 
             return id;

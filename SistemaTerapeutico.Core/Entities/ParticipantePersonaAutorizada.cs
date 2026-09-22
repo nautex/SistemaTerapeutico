@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Entities
 {
-    public class ParticipantePersonaAutorizada : BaseEntity2Ids
+    public class ParticipantePersonaAutorizada : BaseEntityTwoIds
     {
         public int IdPersona { get; set; }
     }

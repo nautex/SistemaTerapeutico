@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class SesionCriterioViewConfiguration : BaseEntity2IdsConfiguration<SesionCriterioView>, IEntityTypeConfiguration<SesionCriterioView>
+    public class SesionCriterioViewConfiguration : BaseEntityTwoIdsConfiguration<SesionCriterioView>, IEntityTypeConfiguration<SesionCriterioView>
     {
         public override void Configure(EntityTypeBuilder<SesionCriterioView> builder)
         {

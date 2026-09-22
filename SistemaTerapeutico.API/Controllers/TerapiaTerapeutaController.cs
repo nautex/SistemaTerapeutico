@@ -5,15 +5,16 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class TerapiaTerapeutaController : Controller
     {
-        private readonly ITerapiaTerapeutaService _terapiaTerapeutaService;
+        private readonly TerapiaTerapeutaService _terapiaTerapeutaService;
         private readonly IMapper _mapper;
-        public TerapiaTerapeutaController(ITerapiaTerapeutaService terapiaTerapeutaService, IMapper mapper)
+        public TerapiaTerapeutaController(TerapiaTerapeutaService terapiaTerapeutaService, IMapper mapper)
         {
             _terapiaTerapeutaService = terapiaTerapeutaService;
             _mapper = mapper;

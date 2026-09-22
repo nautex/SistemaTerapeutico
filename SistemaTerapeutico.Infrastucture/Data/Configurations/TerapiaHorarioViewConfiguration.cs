@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class TerapiaHorarioViewConfiguration : BaseEntity2IdsConfiguration<TerapiaHorarioView>, IEntityTypeConfiguration<TerapiaHorarioView>
+    public class TerapiaHorarioViewConfiguration : BaseEntityTwoIdsConfiguration<TerapiaHorarioView>, IEntityTypeConfiguration<TerapiaHorarioView>
     {
         public override void Configure(EntityTypeBuilder<TerapiaHorarioView> builder)
         {

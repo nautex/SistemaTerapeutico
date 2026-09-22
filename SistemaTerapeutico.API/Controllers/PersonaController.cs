@@ -6,6 +6,7 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
@@ -13,10 +14,10 @@ namespace SistemaTerapeutico.API.Controllers
     [Route("[controller]")]
     public class PersonaController : Controller
     {
-        private readonly IPersonaService _personaService;
+        private readonly PersonaService _personaService;
         private readonly IMapper _mapper;
 
-        public PersonaController(IPersonaService personaService, IMapper mapper)
+        public PersonaController(PersonaService personaService, IMapper mapper)
         {
             _personaService = personaService;
             _mapper = mapper;
@@ -81,6 +82,14 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
+        [HttpGet("GetPersonaJuridicaViewById")]
+        public async Task<IActionResult> GetPersonaJuridicaViewById(int idPersona)
+        {
+            var entity = await _personaService.GetPersonaJuridicaViewById(idPersona);
+            var response = new ApiResponse<PersonaJuridicaViewDto>(entity, _mapper);
+
+            return Ok(response);
+        }
         [HttpPost("PostPersonaNatural")]
         public async Task<IActionResult> PostPersonaNatural(PersonaNaturalDto personaNaturalDto)
         {
@@ -122,19 +131,35 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("GetPersonasResumenBasicoViewByNumeroDocumentoYNombres")]
-        public IActionResult GetPersonasResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
+        [HttpGet("GetPersonasAntecedentesViewByIdPersona")]
+        public async Task<IActionResult> GetPersonasAntecedentesViewByIdPersona(int idPersona)
         {
-            var list = _personaService.GetPersonasResumenBasicoViewByNumeroDocumentoYNombres(numeroDocumento, nombres);
+            var list = await _personaService.GetPersonasAntecedenteViewByIdPersona(idPersona);
+            var response = new ApiResponse<IEnumerable<PersonaAntecedenteViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetsPersonaRepresentanteViewById")]
+        public async Task<IActionResult> GetsPersonaRepresentanteViewById(int idPersona)
+        {
+            var list = await _personaService.GetsPersonaRepresentanteViewById(idPersona);
+            var response = new ApiResponse<IEnumerable<PersonaRepresentanteViewDto>>(list, _mapper);
+
+            return Ok(response);
+        }
+        [HttpGet("GetPersonasResumenBasicoViewByNumeroDocumentoYNombres")]
+        public IActionResult GetPersonasResumenBasicoViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres, string empresa)
+        {
+            var list = _personaService.GetPersonasResumenBasicoViewByNumeroDocumentoYNombres(numeroDocumento, nombres, empresa);
             var response = new ApiResponse<IEnumerable<PersonaResumenBasicoViewDto>>(list, _mapper);
 
             return Ok(response);
         }
 
         [HttpGet("GetPersonasResumenViewByNumeroDocumentoYNombres")]
-        public IActionResult GetPersonasResumenViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres)
+        public IActionResult GetPersonasResumenViewByNumeroDocumentoYNombres(string numeroDocumento, string nombres, string empresa)
         {
-            var list = _personaService.GetPersonasResumenViewByNumeroDocumentoYNombres(numeroDocumento, nombres);
+            var list = _personaService.GetPersonasResumenViewByNumeroDocumentoYNombres(numeroDocumento, nombres, empresa);
             var response = new ApiResponse<IEnumerable<PersonaResumenViewDto>>(list, _mapper);
 
             return Ok(response);
@@ -171,6 +196,14 @@ namespace SistemaTerapeutico.API.Controllers
 
             return Ok(response);
         }
+        [HttpDelete("DeletePersonaAntecedente")]
+        public async Task<IActionResult> DeletePersonaAntecedente(int idPersona, int numero)
+        {
+            await _personaService.DeletePersonaAntecedente(idPersona, numero);
+            var response = new ApiResponse<bool>(true);
+
+            return Ok(response);
+        }
         [HttpGet("GetsListNaturalPersonByTypeAndName")]
         public IActionResult GetsListPersonByTypeAndName(int idType, string name)
         {
@@ -195,6 +228,23 @@ namespace SistemaTerapeutico.API.Controllers
             var Response = new ApiResponse<int>(1);
 
             return Ok(Response);
+        }
+        [HttpGet("GetPersonaResumenBasicoViewByTipoDocumentoAndNumeroDocumento")]
+        public IActionResult GetPersonaResumenBasicoViewByTipoDocumentoAndNumeroDocumento(int idTipoDocumento, string numeroDocumento)
+        {
+            var list = _personaService.GetPersonaResumenBasicoViewByTipoDocumentoAndNumeroDocumento(idTipoDocumento, numeroDocumento);
+            var response = new ApiResponse<PersonaResumenBasicoViewDto>(list, _mapper);
+
+            return Ok(response);
+        }
+
+        [HttpGet("GetsPersonaDocumentoByTipoYNumero")]
+        public async Task<IActionResult> GetsPersonaDocumentoByTipoYNumero(int idTipoDocumento, string numeroDocumento)
+        {
+            var list = await _personaService.GetsPersonaDocumentoByTipoYNumero(idTipoDocumento, numeroDocumento);
+            var response = new ApiResponse<IEnumerable<PersonaDocumentoDto>>(list, _mapper);
+
+            return Ok(response);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class TerapiaPlanAreaConfiguration : BaseEntity2IdsConfiguration<TerapiaPlanArea>, IEntityTypeConfiguration<TerapiaPlanArea>
+    public class TerapiaPlanAreaConfiguration : BaseEntityTwoIdsConfiguration<TerapiaPlanArea>, IEntityTypeConfiguration<TerapiaPlanArea>
     {
         public override void Configure(EntityTypeBuilder<TerapiaPlanArea> builder)
         {

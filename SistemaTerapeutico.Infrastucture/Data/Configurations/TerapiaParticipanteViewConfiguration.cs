@@ -4,7 +4,7 @@ using SistemaTerapeutico.Core.Views;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class TerapiaParticipanteViewConfiguration : BaseEntity2IdsConfiguration<TerapiaParticipanteView>, IEntityTypeConfiguration<TerapiaParticipanteView>
+    public class TerapiaParticipanteViewConfiguration : BaseEntityTwoIdsConfiguration<TerapiaParticipanteView>, IEntityTypeConfiguration<TerapiaParticipanteView>
     {
         public override void Configure(EntityTypeBuilder<TerapiaParticipanteView> builder)
         {

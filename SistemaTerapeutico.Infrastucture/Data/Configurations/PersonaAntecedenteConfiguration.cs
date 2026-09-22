@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class PersonaAntecedenteConfiguration : BaseEntity2IdsConfiguration<PersonaAntecedente>, IEntityTypeConfiguration<PersonaAntecedente>
+    public class PersonaAntecedenteConfiguration : BaseEntityTwoIdsConfiguration<PersonaAntecedente>, IEntityTypeConfiguration<PersonaAntecedente>
     {
         public override void Configure(EntityTypeBuilder<PersonaAntecedente> builder)
         {

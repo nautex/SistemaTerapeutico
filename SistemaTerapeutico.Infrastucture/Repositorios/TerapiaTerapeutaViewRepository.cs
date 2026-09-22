@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Repositorios
 {
-    public class TerapiaTerapeutaViewRepository : BaseEntity2IdsRepository<TerapiaTerapeutaView>, ITerapiaTerapeutaViewRepository
+    public class TerapiaTerapeutaViewRepository : BaseEntityTwoIdsRepository<TerapiaTerapeutaView>, ITerapiaTerapeutaViewRepository
     {
         public TerapiaTerapeutaViewRepository(SISDETContext context) : base(context)
         {

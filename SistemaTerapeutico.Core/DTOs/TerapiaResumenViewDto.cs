@@ -9,8 +9,8 @@ namespace SistemaTerapeutico.Core.DTOs
     {
         public int IdTerapia { get; set; }
         public int? Numero { get; set; }
-        public int IdLocal { get; set; }
-        public string Local { get; set; }
+        public int IdFilial { get; set; }
+        public string Filial { get; set; }
         public string CodigoServicio { get; set; }
         public string CodigoTarifa { get; set; }
         public int? IdParticipante { get; set; }

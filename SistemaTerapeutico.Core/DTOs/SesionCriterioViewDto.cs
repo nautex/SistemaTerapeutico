@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.DTOs
 {
-    public class SesionCriterioViewDto : BaseEntity2Ids
+    public class SesionCriterioViewDto : BaseEntityTwoIds
     {
         public int IdAreaObjetivoCriterio { get; set; }
         public int IdModelo { get; set; }
@@ -18,8 +18,8 @@ namespace SistemaTerapeutico.Core.DTOs
         public string CodigoObjetivo { get; set; }
         public string Objetivo { get; set; }
         public int OrdenObjetivo { get; set; }
-        public string PreguntaObjetivo { get; set; }
-        public string EjemploObjetivo { get; set; }
+        //public string PreguntaObjetivo { get; set; }
+        //public string EjemploObjetivo { get; set; }
         public int ValorCriterio { get; set; }
         public string Criterio { get; set; }
         public int OrdenCriterio { get; set; }

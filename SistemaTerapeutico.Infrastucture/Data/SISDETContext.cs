@@ -51,6 +51,10 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<PersonaDocumentoView> PersonaDocumentoView { get; set; }
         public virtual DbSet<PersonaDireccionView> PersonaDireccionView { get; set; }
         public virtual DbSet<PersonaAntecedenteView> PersonaAntecedenteView { get; set; }
+        public virtual DbSet<PersonaRepresentante> PersonaRepresentante { get; set; }
+        public virtual DbSet<PersonaRepresentanteView> PersonaRepresentanteView { get; set; }
+        public virtual DbSet<Cargo> Cargo { get; set; }
+        public virtual DbSet<CargoView> CargoView { get; set; }
         public virtual DbSet<DireccionView> DireccionView { get; set; }
         public virtual DbSet<PersonaVinculacionView> PersonaVinculacionView { get; set; }
         public virtual DbSet<PersonaResumenBasicoView> PersonaResumenBasicoView { get; set; }
@@ -59,9 +63,9 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<ParticipantePersonaAutorizada> ParticipantePersonaAutorizada { get; set; }
         public virtual DbSet<ParticipantePersonaAutorizadaView> ParticipantePersonaAutorizadaView { get; set; }
         public virtual DbSet<ParticipanteView> ParticipanteView { get; set; }
-        public virtual DbSet<LocalView> LocalView { get; set; }
+        public virtual DbSet<FilialView> FilialView { get; set; }
         public virtual DbSet<SalonView> SalonView { get; set; }
-        public virtual DbSet<TarifaView> TarifaView { get; set; }
+        public virtual DbSet<ConceptoCobroView> ConceptoCobroView { get; set; }
         public virtual DbSet<Servicio> Servicio { get; set; }
         public virtual DbSet<TerapiaParticipanteResumenView> TerapiaParticipanteResumenView { get; set; }
         public virtual DbSet<TerapiaPeriodoResumenView> TerapiaPeriodoResumenView { get; set; }
@@ -73,7 +77,7 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<SesionView> SesionView { get; set; }
         public virtual DbSet<SesionTerapeuta> SesionTerapeuta { get; set; }
         public virtual DbSet<SesionTerapeutaView> SesionTerapeutaView { get; set; }
-        public virtual DbSet<Tarifa> Tarifa { get; set; }
+        public virtual DbSet<ConceptoCobro> ConceptoCobro { get; set; }
         public virtual DbSet<AreaObjetivoCriterioView> AreaObjetivoCriterioView { get; set; }
         public virtual DbSet<TerapiaPlan> TerapiaPlan { get; set; }
         public virtual DbSet<TerapiaPlanView> TerapiaPlanView { get; set; }
@@ -85,6 +89,12 @@ namespace SistemaTerapeutico.Infrastucture.Data
         public virtual DbSet<AreaObjetivo> AreaObjetivo { get; set; }
         public virtual DbSet<AreaObjetivoCriterio> AreaObjetivoCriterio { get; set; }
         public virtual DbSet<PuntuacionGrupo> PuntuacionGrupo { get; set; }
+        public virtual DbSet<Comprobante> Comprobante { get; set; }
+        public virtual DbSet<ComprobanteDetalle> ComprobanteDetalle { get; set; }
+        public virtual DbSet<ComprobanteDetalleView> ComprobanteDetalleView { get; set; }
+        public virtual DbSet<ComprobantePago> ComprobantePago { get; set; }
+        public virtual DbSet<ComprobantePagoView> ComprobantePagoView { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Views
 {
-    public class ParticipantePersonaAutorizadaView : BaseEntity2Ids
+    public class ParticipantePersonaAutorizadaView : BaseEntityTwoIds
     {
         public int IdPersona { get; set; }
         public string Persona { get; set; }

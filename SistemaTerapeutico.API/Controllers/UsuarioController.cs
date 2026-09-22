@@ -5,6 +5,7 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
@@ -12,10 +13,10 @@ namespace SistemaTerapeutico.API.Controllers
     [Route("[controller]")]
     public class UsuarioController : Controller
     {
-        private readonly IUsuarioService _usuarioService;
+        private readonly UsuarioService _usuarioService;
         private readonly IMapper _mapper;
-        private readonly IPasswordService _passwordService;
-        public UsuarioController(IUsuarioService usuarioService, IMapper mapper, IPasswordService passwordService)
+        private readonly PasswordService _passwordService;
+        public UsuarioController(UsuarioService usuarioService, IMapper mapper, PasswordService passwordService)
         {
             _usuarioService = usuarioService;
             _mapper = mapper;

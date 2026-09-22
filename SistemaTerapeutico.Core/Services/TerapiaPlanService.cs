@@ -52,13 +52,13 @@ namespace SistemaTerapeutico.Core.Services
         {
             return await _unitOfWork.TerapiaPlanViewRepository.GetById(idTerapiaPlan);
         }
-        public IEnumerable<TerapiaPlanResumenView> GetsTerapiaPlanResumenView(int idLocal, string member, string therapist, int idEstadoVigencia, int idEstado)
+        public IEnumerable<TerapiaPlanResumenView> GetsTerapiaPlanResumenView(int idFilial, string member, string therapist, int idEstadoVigencia, int idEstado)
         {
             var list = _unitOfWork.TerapiaPlanResumenViewRepository.GetAll();
 
-            if (idLocal > 0)
+            if (idFilial > 0)
             {
-                list = list.Where(x => x.IdLocal == idLocal);
+                list = list.Where(x => x.IdFilial == idFilial);
             }
 
             if (!string.IsNullOrEmpty(member))

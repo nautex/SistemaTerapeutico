@@ -6,15 +6,16 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
+using SistemaTerapeutico.Infrastucture.Services;
 
 namespace SistemaTerapeutico.API.Controllers
 {
     [Route("[controller]")]
     public class PersonaVinculacionController : Controller
     {
-        private readonly IPersonaVinculacionService _personaVinculacionService;
+        private readonly PersonaVinculacionService _personaVinculacionService;
         private readonly IMapper _mapper;
-        public PersonaVinculacionController(IPersonaVinculacionService personaVinculacionService, IMapper mapper)
+        public PersonaVinculacionController(PersonaVinculacionService personaVinculacionService, IMapper mapper)
         {
             _personaVinculacionService = personaVinculacionService;
             _mapper = mapper;

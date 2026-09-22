@@ -150,7 +150,7 @@ namespace SistemaTerapeutico.Core.Services
                 }
                 else
                 {
-                    SesionCriterio sesionCriterio = await _unitOfWork.SesionCriterioRepository.GetByIds(id, item.Numero);
+                    SesionCriterio sesionCriterio = await _unitOfWork.SesionCriterioRepository.GetByIds(item.Id, item.Numero);
 
                     sesionCriterio.IdAreaObjetivoCriterio = item.IdAreaObjetivoCriterio;
                     sesionCriterio.IdPuntuacionGrupo = item.IdPuntuacionGrupo;
@@ -178,7 +178,7 @@ namespace SistemaTerapeutico.Core.Services
                 }
                 else
                 {
-                    SesionTerapeuta sesionTerapeuta = await _unitOfWork.SesionTerapeutaRepository.GetByIds(id, item.Numero);
+                    SesionTerapeuta sesionTerapeuta = await _unitOfWork.SesionTerapeutaRepository.GetByIds(item.Id, item.Numero);
 
                     sesionTerapeuta.IdTerapeuta = item.IdTerapeuta;
                     sesionTerapeuta.IdTipoCargo = item.IdTipoCargo;

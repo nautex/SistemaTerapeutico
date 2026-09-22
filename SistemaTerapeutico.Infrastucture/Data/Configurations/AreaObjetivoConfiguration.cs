@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SistemaTerapeutico.Core.Entities;
-using SistemaTerapeutico.Core.Interfaces;
-using SistemaTerapeutico.Infrastucture.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Text;

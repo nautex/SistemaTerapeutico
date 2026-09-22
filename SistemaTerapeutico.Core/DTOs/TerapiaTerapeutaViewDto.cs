@@ -3,7 +3,7 @@ using System;
 
 namespace SistemaTerapeutico.Core.DTOs
 {
-    public class TerapiaTerapeutaViewDto : BaseEntity2Ids
+    public class TerapiaTerapeutaViewDto : BaseEntityTwoIds
     {
         public int IdTerapeuta { get; set; }
         public string Terapeuta { get; set; }

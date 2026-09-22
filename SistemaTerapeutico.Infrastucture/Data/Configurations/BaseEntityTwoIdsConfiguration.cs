@@ -12,8 +12,8 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
-            builder.HasKey(e => new { e.Id, e.IdTwo }).HasName("PRIMARY");
-            builder.Property(e => e.IdTwo).HasColumnName("Numero");
+            builder.HasKey(e => new { e.Id, e.Numero }).HasName("PRIMARY");
+            builder.Property(e => e.Numero).HasColumnName("Numero");
         }
     }
 }

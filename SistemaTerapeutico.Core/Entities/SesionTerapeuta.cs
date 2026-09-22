@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Entities
 {
-    public class SesionTerapeuta : BaseEntity2Ids
+    public class SesionTerapeuta : BaseEntityTwoIds
     {
         public int IdTerapeuta { get; set; }
         public int IdTipoCargo { get; set; }

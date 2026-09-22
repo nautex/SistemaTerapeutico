@@ -7,13 +7,12 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class PersonaAntecedenteViewConfiguration : BaseEntity2IdsConfiguration<PersonaAntecedenteView>, IEntityTypeConfiguration<PersonaAntecedenteView>
+    public class PersonaAntecedenteViewConfiguration : IEntityTypeConfiguration<PersonaAntecedenteView>
     {
-        public override void Configure(EntityTypeBuilder<PersonaAntecedenteView> builder)
+        public void Configure(EntityTypeBuilder<PersonaAntecedenteView> builder)
         {
-            base.Configure(builder);
+            builder.HasKey(x => x.Id);
             builder.ToTable("vw_personaantecedente");
-            builder.Property(x => x.Id).HasColumnName("IdPersona");
         }
     }
 }

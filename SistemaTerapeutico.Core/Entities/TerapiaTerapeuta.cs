@@ -3,7 +3,7 @@ using SistemaTerapeutico.Core.Enumerators;
 
 namespace SistemaTerapeutico.Core.Entities
 {
-    public class TerapiaTerapeuta : BaseEntity2Ids
+    public class TerapiaTerapeuta : BaseEntityTwoIds
     {
         public TerapiaTerapeuta()
         {

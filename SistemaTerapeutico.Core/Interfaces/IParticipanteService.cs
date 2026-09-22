@@ -12,6 +12,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         IEnumerable<ParticipanteResumenView> GetsParticipantesResumenView();
         IEnumerable<ParticipanteResumenView> GetsParticipantesResumenViewByMemberOrRelative(string member, string relative);
         Task<IEnumerable<ParticipanteAlergiaView>> GetsParticipanteAlergiaViewById(int idParticipante);
+        Task<IEnumerable<ParticipanteNivelLenguajeView>> GetsParticipanteNivelLenguajeViewById(int idParticipante);
         Task<IEnumerable<ParticipantePersonaAutorizadaView>> GetsParticipantePersonaAutorizadaViewById(int idParticipante);
         Task<int> AddUpdateParticipanteWithDetails(Participante participante);
         Task<ParticipanteView> GetParticipanteViewById(int idParticipante);

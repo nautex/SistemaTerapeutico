@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Views
 {
-    public class TerapiaHorarioView : BaseEntity2Ids
+    public class TerapiaHorarioView : BaseEntityTwoIds
     {
         public int DiaSemana { get; set; }
         public string Dia { get; set; }

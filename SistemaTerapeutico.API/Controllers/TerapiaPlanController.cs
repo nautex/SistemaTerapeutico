@@ -4,7 +4,7 @@ using SistemaTerapeutico.API.Response;
 using SistemaTerapeutico.Core.DTOs;
 using SistemaTerapeutico.Core.Entities;
 using SistemaTerapeutico.Core.Interfaces;
-using SistemaTerapeutico.Core.Services;
+using SistemaTerapeutico.Infrastucture.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,9 +13,9 @@ namespace SistemaTerapeutico.API.Controllers
     [Route("[controller]")]
     public class TerapiaPlanController : Controller
     {
-        private readonly ITerapiaPlanService _terapiaPlanService;
+        private readonly TerapiaPlanService _terapiaPlanService;
         private readonly IMapper _mapper;
-        public TerapiaPlanController(ITerapiaPlanService terapiaPlanService, IMapper mapper)
+        public TerapiaPlanController(TerapiaPlanService terapiaPlanService, IMapper mapper)
         {
             _terapiaPlanService = terapiaPlanService;
             _mapper = mapper;
@@ -53,9 +53,9 @@ namespace SistemaTerapeutico.API.Controllers
             return Ok(response);
         }
         [HttpGet("GetsTerapiaPlanResumenView")]
-        public IActionResult GetsTerapiaPlanResumenView(int idLocal, string member, string therapist, int idEstadoVigencia, int idEstado)
+        public IActionResult GetsTerapiaPlanResumenView(int idFilial, string member, string therapist, int idEstadoVigencia, int idEstado)
         {
-            var list = _terapiaPlanService.GetsTerapiaPlanResumenView(idLocal, member, therapist, idEstadoVigencia, idEstado);
+            var list = _terapiaPlanService.GetsTerapiaPlanResumenView(idFilial, member, therapist, idEstadoVigencia, idEstado);
             var response = new ApiResponse<IEnumerable<TerapiaPlanResumenViewDto>>(list, _mapper);
 
             return Ok(response);

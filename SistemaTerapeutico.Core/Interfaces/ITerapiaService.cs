@@ -16,7 +16,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task DeleteTerapia(int idTerapia);
         IEnumerable<TerapiaResumenView> GetsTerapiaResumenViewAll();
         Task<TerapiaView> GetTerapiaView(int idTerapia);
-        IEnumerable<TerapiaResumenView> GetsTerapiaResumenViewByIdLocalOrMemberOrTherapist(int idLocal, string member, string therapist, int idEstado);
+        IEnumerable<TerapiaResumenView> GetsTerapiaResumenViewByIdFilialOrMemberOrTherapist(int idFilial, string member, string therapist, int idEstado);
         Task<IEnumerable<TerapiaHorarioView>> GetsTerapiaHorarioView(int idTerapia);
         Task<IEnumerable<TerapiaTerapeutaView>> GetsTerapiaTerapeutaView(int idTerapia);
         Task<IEnumerable<TerapiaParticipanteView>> GetsTerapiaParticipanteView(int idTerapia, int idEstado);
@@ -25,8 +25,8 @@ namespace SistemaTerapeutico.Core.Interfaces
         Task DeteleTerapiaParticipante(int idTerapia, int idParticipante);
         Task<int> AddUpdateTherapyWithDetails(TerapiaDto terapiaDto);
         Task<TerapiaParticipante> GetTerapiaParticipanteByIds(int idTerapia, int numero);
-        IEnumerable<TerapiaParticipanteResumenView> GetsTerapiaParticipanteResumenView(int idTipoTerapia, int idEstado);
-        IEnumerable<TerapiaPeriodoResumenView> GetsTerapiaPeriodoResumenView(int idPeriodo, int idTipoTerapia, string participante, int idTerapeuta, string terapeuta, int idEstado);
+        IEnumerable<TerapiaParticipanteResumenView> GetsTerapiaParticipanteResumenView(int idFilial, int idTipoTerapia, int idEstado);
+        IEnumerable<TerapiaPeriodoResumenView> GetsTerapiaPeriodoResumenView(int idPeriodo, int idFilial, int idTipoTerapia, string participante, int idTerapeuta, string terapeuta, int idEstado);
         Task<int> AddTerapiaPeriodo(int idPeriodo, int idTerapia, int numero, int idTarifa);
         Task AnnulTerapiaPeriodo(int idTerapiaPeriodo);
         Task ActiveTerapiaPeriodo(int idTerapiaPeriodo);

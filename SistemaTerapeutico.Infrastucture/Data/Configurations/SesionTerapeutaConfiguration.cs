@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class SesionTerapeutaConfiguration : BaseEntity2IdsConfiguration<SesionTerapeuta>, IEntityTypeConfiguration<SesionTerapeuta>
+    public class SesionTerapeutaConfiguration : BaseEntityTwoIdsConfiguration<SesionTerapeuta>, IEntityTypeConfiguration<SesionTerapeuta>
     {
         public override void Configure(EntityTypeBuilder<SesionTerapeuta> builder)
         {

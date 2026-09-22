@@ -7,7 +7,7 @@ using SistemaTerapeutico.Infrastucture.Options;
 
 namespace SistemaTerapeutico.Infrastucture.Services
 {
-    public class PasswordService : IPasswordService
+    public class PasswordService
     {
         private readonly PasswordOptions _options;
         public PasswordService(IOptions<PasswordOptions> options)

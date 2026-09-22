@@ -19,7 +19,7 @@ namespace SistemaTerapeutico.Core.Interfaces
         IEnumerable<TerapiaPlanResumenView> GetsTerapiaPlanResumenViewAll();
         Task<TerapiaPlanView> GetTerapiaPlanView(int idTerapiaPlan);
         IEnumerable<Area> GetsArea(int idTerapia);
-        IEnumerable<TerapiaPlanResumenView> GetsTerapiaPlanResumenView(int idLocal, string member, string therapist, int idEstadoVigencia, int idEstado);
+        IEnumerable<TerapiaPlanResumenView> GetsTerapiaPlanResumenView(int idFilial, string member, string therapist, int idEstadoVigencia, int idEstado);
         Task<IEnumerable<TerapiaPlanAreaView>> GetsTerapiaPlanAreaView(int idTerapiaPlan);
         Task DeleteTerapiaPlanArea(int idTerapiaPlan, int numero);
         Task<int> AddUpdateTerapiaPlanWithDetails(TerapiaPlanDto terapiaPlanDto);

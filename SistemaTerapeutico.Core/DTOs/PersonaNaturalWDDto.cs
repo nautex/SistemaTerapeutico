@@ -41,5 +41,6 @@ namespace SistemaTerapeutico.Core.DTOs
         public List<PersonaDocumentoViewDto> PersonaDocumento { get; set; }
         public List<PersonaContactoViewDto> PersonaContacto { get; set; }
         public List<PersonaVinculacionViewDto> PersonaVinculacion { get; set; }
+        public List<PersonaAntecedenteViewDto> PersonaAntecedente { get; set; }
     }
 }

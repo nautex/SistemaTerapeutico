@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.DTOs
 {
-    public class ParticipantePersonaAutorizadaViewDto : BaseEntity2Ids
+    public class ParticipantePersonaAutorizadaViewDto : BaseEntityTwoIds
     {
         public int IdPersona { get; set; }
         public string Persona { get; set; }

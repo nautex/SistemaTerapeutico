@@ -7,12 +7,12 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class ParticipanteAlergiaConfiguration : BaseEntity2IdsConfiguration<ParticipanteAlergia>, IEntityTypeConfiguration<ParticipanteAlergia>
+    public class ParticipanteAlergiaConfiguration : BaseEntityTwoIdsConfiguration<ParticipanteAlergia>, IEntityTypeConfiguration<ParticipanteAlergia>
     {
         public override void Configure(EntityTypeBuilder<ParticipanteAlergia> builder)
         {
             base.Configure(builder);
-            builder.Property(x => x.Id).HasColumnName("IdParticipante");
+            builder.Property(x => x.Id).HasColumnName("IdParticipante").ValueGeneratedNever();
         }
     }
 }

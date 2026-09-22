@@ -19,5 +19,6 @@ namespace SistemaTerapeutico.Core.Views
         public string TipoEmpresa { get; set; }
         public bool? EsEmpresa { get; set; }
         public string Empresa { get; set; }
+        public DateTime FechaRegistro { get; set; }
     }
 }

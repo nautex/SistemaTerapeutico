@@ -8,9 +8,9 @@ namespace SistemaTerapeutico.Infrastucture.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<AtencionTerapia> builder)
         {
-            builder.HasKey(x => new { x.Id, x.IdTwo });
+            builder.HasKey(x => new { x.Id, x.Numero });
             builder.Property(x => x.Id).HasColumnName("IdAtencion");
-            builder.Property(x => x.IdTwo).HasColumnName("IdTerapia");
+            builder.Property(x => x.Numero).HasColumnName("IdTerapia");
         }
     }
 }

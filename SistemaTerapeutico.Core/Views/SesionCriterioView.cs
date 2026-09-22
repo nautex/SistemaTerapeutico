@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Core.Views
 {
-    public class SesionCriterioView : BaseEntity2Ids
+    public class SesionCriterioView : BaseEntityTwoIds
     {
         public SesionCriterioView()
         {
@@ -23,8 +23,8 @@ namespace SistemaTerapeutico.Core.Views
         public string CodigoObjetivo { get; set; }
         public string Objetivo { get; set; }
         public int OrdenObjetivo { get; set; }
-        public string PreguntaObjetivo { get; set; }
-        public string EjemploObjetivo { get; set; }
+        //public string PreguntaObjetivo { get; set; }
+        //public string EjemploObjetivo { get; set; }
         public int ValorCriterio { get; set; }
         public string Criterio { get; set; }
         public int OrdenCriterio { get; set; }

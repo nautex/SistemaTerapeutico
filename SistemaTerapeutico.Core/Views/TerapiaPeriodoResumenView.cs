@@ -10,6 +10,9 @@ namespace SistemaTerapeutico.Core.Views
         public int IdTerapia { get; set; }
         public int Numero { get; set; }
         public int IdPeriodo { get; set; }
+        public int IdFilial { get; set; }
+        public string CodigoFilial { get; set; }
+        public string Filial { get; set; }
         public int IdTipoTerapia { get; set; }
         public string TipoTerapia { get; set; }
         public DateTime FechaInicio { get; set; }

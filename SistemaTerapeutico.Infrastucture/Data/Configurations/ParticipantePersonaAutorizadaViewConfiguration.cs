@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SistemaTerapeutico.Infrastucture.Data.Configurations
 {
-    public class ParticipantePersonaAutorizadaViewConfiguration : BaseEntity2IdsConfiguration<ParticipantePersonaAutorizadaView>, IEntityTypeConfiguration<ParticipantePersonaAutorizadaView>
+    public class ParticipantePersonaAutorizadaViewConfiguration : BaseEntityTwoIdsConfiguration<ParticipantePersonaAutorizadaView>, IEntityTypeConfiguration<ParticipantePersonaAutorizadaView>
     {
         public override void Configure(EntityTypeBuilder<ParticipantePersonaAutorizadaView> builder)
         {
